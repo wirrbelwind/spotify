@@ -2,9 +2,10 @@ export type Nullable<T> = T | null
 
 // TODO:
 export interface Entity {
-
+	id: string
+	type: string
 }
-export interface SimplifiedArtistObject {
+export interface SimplifiedArtistObject extends Entity {
 	external_urls: {
 		spotify: string
 	}
@@ -32,7 +33,7 @@ export interface ImageObject {
 	width: Nullable<number>
 }
 
-export interface AlbumObject {
+export interface AlbumObject extends Entity {
 	album_type: "album" | "single" | "compilation"
 	total_tracks: number
 	available_markets: string[]
@@ -40,7 +41,6 @@ export interface AlbumObject {
 		spotify: string
 	}
 	href: string
-	id: string
 	images: ImageObject[]
 	name: string
 	release_date: string
@@ -80,7 +80,7 @@ export interface PageObject<T> {
 	items: T[]
 }
 
-export interface User {
+export interface User extends Entity{
 	/** 
 	 * @description 
 	 * The country of the user, as set in the user's account profile. An ISO 3166-1 alpha-2 country code. This field is only available when the current user has granted access to the user-read-private scope.
@@ -110,7 +110,6 @@ export interface User {
 		total: number
 	}
 	href: string
-	id: string
 	images: ImageObject[]
 	/** @description
 	 * The user's Spotify subscription level: "premium", "free", etc. (The subscription level "open" can be considered the same as "free".) This field is only available when the current user has granted access to the user-read-private scope.
@@ -120,7 +119,7 @@ export interface User {
 	uri: string
 }
 
-export interface TrackObject {
+export interface TrackObject extends Entity{
 	album: AlbumObject
 	artists: SimplifiedArtistObject[]
 	available_markets: string[]
@@ -136,7 +135,6 @@ export interface TrackObject {
 		spotify: string
 	}
 	href: string
-	id: string
 	is_playable: boolean
 	linked_from: unknown
 	restrictions: {
@@ -157,13 +155,12 @@ export interface SavedTrackObject {
 	track: TrackObject
 }
 
-export interface AudioFeaturesObject {
+export interface AudioFeaturesObject extends Entity{
 	acousticness: number
 	analysis_url: string
 	danceability: number
 	duration_ms: number
 	energy: number
-	id: string
 	instrumentalness: number
 	key: number
 	liveness: number
@@ -178,21 +175,19 @@ export interface AudioFeaturesObject {
 	valence: number
 }
 
-export interface SimplifiedPlaylistObject {
+export interface SimplifiedPlaylistObject extends Entity{
 	collaborative: boolean
 	description: Nullable<string>
 	external_urls: {
 		spotify: string
 	}
 	href: string
-	id: string
 	images: ImageObject[]
 	name: string
 	owner: User
 	public: Nullable<boolean>
 	snapshot_id: string
 	tracks: PageObject<TrackObject>
-	type: 'playlist'
 	uri: string
 }
 
