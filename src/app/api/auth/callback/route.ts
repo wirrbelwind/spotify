@@ -65,6 +65,7 @@ export const GET = async (request: Request) => {
 	const targetUrlAfterAuth = cookie.get('target-page-after-login')?.value
 
 	if (targetUrlAfterAuth) {
+		cookie.delete('target-page-after-login')
 		redirect(targetUrlAfterAuth)
 	}
 	else {
