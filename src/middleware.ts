@@ -1,9 +1,7 @@
-import axios from 'axios'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { MiddlewareConfig, NextRequest } from 'next/server'
-
-const $axios = axios.create()
+import { $axios } from './utils/$axios'
 
 const refreshTokens = async (refreshToken: string) => {
 	const cookie = await cookies()
@@ -15,20 +13,14 @@ const refreshTokens = async (refreshToken: string) => {
 	}, {
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
-			// 'Authorization': 'Basic <base64 encoded client_id:client_secret>',
-			'Authorization': `Basic ${window.btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)}`,
+			'Authorization': `Basic ${btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)}`,
 		},
 	})
 
 	if (refreshTokenResponse.status >= 400) {
-		// return error
 		throw new Error('refresh token error', {
 			cause: refreshTokenResponse.data
 		})
-		// {
-		// 	error_description: string
-		// 	error: string
-		// }
 	}
 
 	const tokens = refreshTokenResponse.data as {
@@ -39,13 +31,21 @@ const refreshTokens = async (refreshToken: string) => {
 		scope: string
 	}
 
+	const accessTokenExpiresAt = Date.now() + tokens.expires_in
+
 	cookie.set('spotify-api:access-token', tokens.access_token)
-	cookie.set('spotify-api:access-token-expires-at', tokens.expires_in.toString())
+	cookie.set('spotify-api:access-token-expires-at', accessTokenExpiresAt.toString())
 	cookie.set('spotify-api:refresh-token', tokens.refresh_token)
 
 	return tokens
 }
 $axios.interceptors.request.use(async config => {
+	const isRefreshTokenRequest = config?.data?.grant_type === 'refresh_token'
+
+	if (isRefreshTokenRequest) {
+		return config
+	}
+
 	const cookie = await cookies()
 
 	let accessToken = cookie.get('spotify-api:access-token')?.value
@@ -101,7 +101,7 @@ $axios.interceptors.response.use(async response => {
 	return response
 })
 
-export const getUser = async () => {
+export const getUser = async (): Promise<User> => {
 	const cookie = await cookies()
 
 	let accessToken = cookie.get('spotify-api:access-token')?.value
@@ -116,8 +116,6 @@ export const getUser = async () => {
 	const now = Date.now()
 
 	if (now >= accessTokenExpiresAt) {
-		// try to predict deprecated access token
-		// refresh tokens
 		await refreshTokens(refreshToken)
 	}
 
@@ -132,20 +130,17 @@ export const getUser = async () => {
 		name: string
 		id: number
 	}
-	//allow axios to handle the rest of logic
-	//if axios got error 401 about deprecated access token, then interceptor refreshes token and repeats request
-	// if error again or another error code then redirect user
-	//redirect should be on middleware.ts level and on interceptor level
-	//remember the url user tried to open and open it after auth
 }
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
 	try {
 		await getUser()
 		return NextResponse.next()
 	}
 	catch (error) {
+		const cookie = await cookies()
+
+		cookie.set('target-page-after-login', request.url)
 		return NextResponse.redirect('http://localhost:3000/auth')
 	}
 }
@@ -159,6 +154,6 @@ export const config: MiddlewareConfig = {
 		 * - _next/image (image optimization files)
 		 * - favicon.ico, sitemap.xml, robots.txt (metadata files)
 		 */
-		'/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|auth).*)',
+		'/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|sitemap.xml|robots.txt|auth).*)',
 	],
 }
