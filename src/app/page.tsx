@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { getUser } from "../middleware";
-import { User } from "./types";
+import { getUser } from "@/utils/getUser";
 
 export default async function HomePage() {
   const user = await getUser()
