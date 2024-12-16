@@ -6,7 +6,8 @@ export default async function HomePage() {
 	
 	return <div>
 		{JSON.stringify(user)}
-
+		<h1>{user.display_name}</h1>
+		<p>{user.followers.total} followers</p>
 		<Image 
 			alt=""
 			src={user.images[0].url}
