@@ -34,15 +34,14 @@ export const GET = async (request: Request) => {
 
 	try {
 		const tokensResponse = await $axios.post('https://accounts.spotify.com/api/token', {
+			grant_type: 'authorization_code',
+			code: codeParam,
+			redirect_uri: process.env.SPOTIFY_REDIRECT_URI
+		}, {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
-				'Authorization': authHeader
+				'Authorization': `Basic ${authHeader}`
 			},
-			body: {
-				grant_type: 'authorization_code',
-				code: codeParam,
-				redirect_uri: process.env.SPOTIFY_REDIRECT_URI
-			}
 		})
 
 		const tokens = tokensResponse.data as {
@@ -53,22 +52,22 @@ export const GET = async (request: Request) => {
 			refresh_token: string
 		}
 
-		const accessTokenExpiresAt = Date.now() + tokens.expires_in
+		const accessTokenExpiresAt = Date.now() + tokens.expires_in * 1000
 
 		cookie.set('spotify-api:access-token', tokens.access_token)
 		cookie.set('spotify-api:access-token-expires-at', accessTokenExpiresAt.toString())
 		cookie.set('spotify-api:refresh-token', tokens.refresh_token)
-
-		const targetUrlAfterAuth = cookie.get('target-url-after-auth')?.value
-
-		if (targetUrlAfterAuth) {
-			redirect(targetUrlAfterAuth)
-		}
-		else {
-			redirect('/')
-		}
 	}
 	catch (error) {
 		throw error
+	}
+
+	const targetUrlAfterAuth = cookie.get('target-page-after-login')?.value
+
+	if (targetUrlAfterAuth) {
+		redirect(targetUrlAfterAuth)
+	}
+	else {
+		redirect('/')
 	}
 }
