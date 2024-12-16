@@ -5,7 +5,7 @@ import { refreshTokens } from "./refreshTokens";
 export const $axios = axios.create()
 
 $axios.interceptors.request.use(async config => {
-	const isRefreshTokenRequest = config?.data?.grant_type === 'refresh_token'
+	const isRefreshTokenRequest = config?.data?.grant_type === 'refresh_token' || config?.data?.grant_type === 'authorization_code'
 
 	if (isRefreshTokenRequest) {
 		return config
@@ -19,7 +19,7 @@ $axios.interceptors.request.use(async config => {
 	let accessTokenExpiresAt = Number(cookie.get('spotify-api:access-token-expires-at')?.value)
 
 	if (!accessToken || !refreshToken || !accessTokenExpiresAt || isNaN(accessTokenExpiresAt)) {
-		throw new Error('no tokens')
+		throw new Error(`no tokens | request ${accessToken} ${refreshToken} ${accessTokenExpiresAt}`)
 	}
 
 	const now = Date.now()
@@ -50,7 +50,7 @@ $axios.interceptors.response.use(async response => {
 	let accessTokenExpiresAt = Number(cookie.get('spotify-api:access-token-expires-at')?.value)
 
 	if (!accessToken || !refreshToken || !accessTokenExpiresAt || isNaN(accessTokenExpiresAt)) {
-		throw new Error('no tokens')
+		throw new Error(`no tokens | response ${accessToken} ${refreshToken} ${accessTokenExpiresAt}`)
 	}
 
 	const now = Date.now()
