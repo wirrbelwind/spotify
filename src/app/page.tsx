@@ -2,16 +2,7 @@ import Image from "next/image";
 import { getUser } from "@/utils/getUser";
 
 export default async function HomePage() {
-  const user = await getUser()
-  
-  return <div>
-    {JSON.stringify(user)}
-
-    <Image 
-      alt=""
-      src={user.images[0].url}
-      width={user.images[0].width}
-      height={user.images[0].height}
-    />
-  </div>;
+  return (
+    <h1>home</h1>
+  )
 }
