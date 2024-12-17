@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
 import { $axios } from "../../../../utils/$axios"
 import { redirect } from 'next/navigation'
+import { COOKIE_KEYS } from "@/constants"
 
 //TODO: handle callback from spotify auth
 export const GET = async (request: Request) => {
@@ -8,7 +9,7 @@ export const GET = async (request: Request) => {
 	const params = new URL(request.url).searchParams
 
 	const stateFromParams = params.get('state')
-	const clientSavedState = cookie.get('spotify-api:state')?.value
+	const clientSavedState = cookie.get(COOKIE_KEYS.STATE)?.value
 
 	if (!stateFromParams) {
 		throw new Error('parameter code is null')
@@ -54,18 +55,18 @@ export const GET = async (request: Request) => {
 
 		const accessTokenExpiresAt = Date.now() + tokens.expires_in * 1000
 
-		cookie.set('spotify-api:access-token', tokens.access_token)
-		cookie.set('spotify-api:access-token-expires-at', accessTokenExpiresAt.toString())
-		cookie.set('spotify-api:refresh-token', tokens.refresh_token)
+		cookie.set(COOKIE_KEYS.ACCESS_TOKEN, tokens.access_token)
+		cookie.set(COOKIE_KEYS.ACCESS_TOKEN_EXPIRES_AT, accessTokenExpiresAt.toString())
+		cookie.set(COOKIE_KEYS.REFRESH_TOKEN, tokens.refresh_token)
 	}
 	catch (error) {
 		throw error
 	}
 
-	const targetUrlAfterAuth = cookie.get('target-page-after-login')?.value
+	const targetUrlAfterAuth = cookie.get(COOKIE_KEYS.TARGET_PAGE_AFTER_LOGIN)?.value
 
 	if (targetUrlAfterAuth) {
-		cookie.delete('target-page-after-login')
+		cookie.delete(COOKIE_KEYS.TARGET_PAGE_AFTER_LOGIN)
 		redirect(targetUrlAfterAuth)
 	}
 	else {

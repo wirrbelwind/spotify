@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { Avatar, Box, Card, Flex, Image, Stack, Text } from '@mantine/core'
 import Link from "next/link";
 import React from "react";
+import { COOKIE_KEYS } from "@/constants";
 
 export default async function HomePage() {
 	const user = await getUser()
@@ -17,7 +18,7 @@ export default async function HomePage() {
 
 
 	const cookie = await cookies()
-	const accessToken = cookie.get('spotify-api:access-token')?.value
+	const accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
 
 	return (<Box>
 		<Flex align={"center"}>

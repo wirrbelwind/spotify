@@ -4,6 +4,7 @@ import type { MiddlewareConfig, NextRequest } from 'next/server'
 import { $axios } from './utils/$axios'
 import { User } from './app/types'
 import { getUser } from './utils/getUser'
+import { COOKIE_KEYS } from './constants'
 
 export async function middleware(request: NextRequest) {
 	try {
@@ -13,7 +14,7 @@ export async function middleware(request: NextRequest) {
 	catch (error) {
 		const cookie = await cookies()
 
-		cookie.set('target-page-after-login', request.url)
+		cookie.set(COOKIE_KEYS.TARGET_PAGE_AFTER_LOGIN, request.url)
 		return NextResponse.redirect('http://localhost:3000/auth')
 	}
 }

@@ -2,14 +2,15 @@ import { User } from "@/app/types"
 import { cookies } from "next/headers"
 import { refreshTokens } from "./refreshTokens"
 import { $axios } from "./$axios"
+import { COOKIE_KEYS } from "@/constants"
 
 export const getUser = async (): Promise<User> => {
 	const cookie = await cookies()
 
-	let accessToken = cookie.get('spotify-api:access-token')?.value
-	let refreshToken = cookie.get('spotify-api:refresh-token')?.value
+	let accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
+	let refreshToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
 
-	let accessTokenExpiresAt = Number(cookie.get('spotify-api:access-token-expires-at')?.value)
+	let accessTokenExpiresAt = Number(cookie.get(COOKIE_KEYS.ACCESS_TOKEN_EXPIRES_AT)?.value)
 
 	if (!accessToken || !refreshToken || !accessTokenExpiresAt || isNaN(accessTokenExpiresAt)) {
 		throw new Error('tokens are not in cookie')

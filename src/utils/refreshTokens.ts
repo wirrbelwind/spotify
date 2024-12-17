@@ -1,5 +1,6 @@
 import { cookies } from "next/headers"
 import { $axios } from "./$axios"
+import { COOKIE_KEYS } from "@/constants"
 
 export const refreshTokens = async (refreshToken: string) => {
 	const cookie = await cookies()
@@ -31,9 +32,9 @@ export const refreshTokens = async (refreshToken: string) => {
 
 	const accessTokenExpiresAt = Date.now() + tokens.expires_in
 
-	cookie.set('spotify-api:access-token', tokens.access_token)
-	cookie.set('spotify-api:access-token-expires-at', accessTokenExpiresAt.toString())
-	cookie.set('spotify-api:refresh-token', tokens.refresh_token)
+	cookie.set(COOKIE_KEYS.ACCESS_TOKEN, tokens.access_token)
+	cookie.set(COOKIE_KEYS.ACCESS_TOKEN_EXPIRES_AT, accessTokenExpiresAt.toString())
+	cookie.set(COOKIE_KEYS.REFRESH_TOKEN, tokens.refresh_token)
 
 	return tokens
 }
