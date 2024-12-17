@@ -2,6 +2,8 @@ import Image from "next/image";
 import { getUser } from "@/utils/getUser";
 import { $axios } from "@/utils/$axios";
 import { PageObject, TrackObject } from "../types";
+import { Player } from "@/ui/Player";
+import { cookies } from "next/headers";
 
 export default async function HomePage() {
 	const user = await getUser()
@@ -10,6 +12,9 @@ export default async function HomePage() {
 	const top = topResponse.data
 
 	const topTrack = top.items[0]
+
+	const cookie = await cookies()
+	const accessToken = cookie.get('spotify-api:access-token')?.value
 
 	return <div>
 		<h1>{user.display_name}</h1>
@@ -24,9 +29,11 @@ export default async function HomePage() {
 		<p>{topTrack.name}</p>
 		<p>{topTrack.artists.map(artist => artist.name)}</p>
 		<p>{topTrack.album.name}</p>
+		<p>{topTrack.uri}</p>
 		{topTrack.is_playable && (
 			<p>playable</p>
 		)}
 
+		<Player accessToken={accessToken} />
 	</div>;
 }
