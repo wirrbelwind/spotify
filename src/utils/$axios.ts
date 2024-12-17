@@ -5,9 +5,9 @@ import { refreshTokens } from "./refreshTokens";
 export const $axios = axios.create()
 
 $axios.interceptors.request.use(async config => {
-	const isRefreshTokenRequest = config?.data?.grant_type === 'refresh_token' || config?.data?.grant_type === 'authorization_code'
+	const isAuthRequest = config.url?.startsWith('https://accounts.spotify.com')
 
-	if (isRefreshTokenRequest) {
+	if (isAuthRequest) {
 		return config
 	}
 
@@ -32,5 +32,7 @@ $axios.interceptors.request.use(async config => {
 		}
 	}
 
+	config.headers.Authorization = `Bearer ${cookie.get('spotify-api:access-token')?.value}`
+	
 	return config
 })
