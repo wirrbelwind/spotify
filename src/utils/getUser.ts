@@ -22,11 +22,7 @@ export const getUser = async (): Promise<User> => {
 	}
 
 	//request user profile
-	const userResponse = await $axios.get<User>('https://api.spotify.com/v1/me', {
-		headers: {
-			Authorization: `Bearer ${cookie.get('spotify-api:access-token')?.value}`
-		}
-	})
+	const userResponse = await $axios.get<User>('https://api.spotify.com/v1/me')
 
 	return userResponse.data
 }
