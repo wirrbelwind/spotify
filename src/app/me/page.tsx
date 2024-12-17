@@ -12,7 +12,6 @@ export default async function HomePage() {
 	const topTrack = top.items[0]
 
 	return <div>
-		{JSON.stringify(user)}
 		<h1>{user.display_name}</h1>
 		<p>{user.followers.total} followers</p>
 		<Image
