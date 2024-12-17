@@ -34,6 +34,6 @@ export default async function HomePage() {
 			<p>playable</p>
 		)}
 
-		<Player accessToken={accessToken} />
+		{/* <Player accessToken={accessToken} /> */}
 	</div>;
 }
