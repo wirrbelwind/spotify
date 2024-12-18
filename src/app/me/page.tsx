@@ -3,10 +3,10 @@ import { $axios } from "@/utils/$axios";
 import { ArtistObject, PageObject, TrackObject } from "../types";
 import { Player } from "@/ui/Player";
 import { cookies } from "next/headers";
-import { Avatar, Box, Card, Flex, Image, Stack, Text } from '@mantine/core'
 import Link from "next/link";
 import React from "react";
 import { COOKIE_KEYS } from "@/constants";
+import { Button} from "@nextui-org/button";
 
 export default async function HomePage() {
 	const user = await getUser()
@@ -20,8 +20,20 @@ export default async function HomePage() {
 	const cookie = await cookies()
 	const accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
 
-	return (<Box>
-		<Flex align={"center"}>
+	return (
+	<div>
+		<Button>page button</Button>
+		 {/* <Accordion>
+      <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
+        123
+      </AccordionItem>
+      <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
+        123
+      </AccordionItem>
+      
+    </Accordion> */}
+
+		{/* <Flex align={"center"}>
 			<Avatar
 				variant="filled"
 				radius="9999px"
@@ -94,7 +106,7 @@ export default async function HomePage() {
 					<Text>{artist.name}</Text>
 				</Card>
 			))}
-		</Flex>
+		</Flex> */}
 		<Player accessToken={accessToken} />
-	</Box>);
+	</div>);
 }

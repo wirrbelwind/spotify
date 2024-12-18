@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { usePlaybackState, usePlayerDevice, useSpotifyPlayer, WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 import { playCarlyRaeJepsen } from "./player-actions";
 import { pause, play } from "@/entities/player";
+import { Button } from "@nextui-org/button";
 
 interface PlayerProps {
 	accessToken: string
@@ -26,6 +27,8 @@ export const Player: React.FC<PlayerProps> = ({ accessToken }) => {
 
 			connectOnInitialized={true}
 		>
+		<Button>button</Button>
+
 			<PlayerContent />
 		</WebPlaybackSDK>
 	);
