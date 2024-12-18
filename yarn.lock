@@ -618,7 +618,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/spotify-web-playback-sdk@npm:^0.1.19":
+"@types/spotify-web-playback-sdk@npm:^0.1.12, @types/spotify-web-playback-sdk@npm:^0.1.19":
   version: 0.1.19
   resolution: "@types/spotify-web-playback-sdk@npm:0.1.19"
   checksum: 10c0/a7c06495c97e643a3a93c9594a19d6775b97c7841f709048e78f7fdde410fec10f621d12e020849663be138e83d2907353e37613bf84f1560a99b988caf1f532
@@ -2850,6 +2850,7 @@ __metadata:
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     react-spotify-web-playback: "npm:^0.14.6"
+    react-spotify-web-playback-sdk: "npm:^3.0.2"
     typescript: "npm:5.5.2"
     zod: "npm:^3.24.1"
   languageName: unknown
@@ -3509,6 +3510,20 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/c5881c537477d986e8d25d2588a9b6f7fe1254e05946fb4f4b55baeead502b0e1875fc3c42bb6f82736772cd96a50266e41d84e3c4cd25e9525bdfe2d838e96d
+  languageName: node
+  linkType: hard
+
+"react-spotify-web-playback-sdk@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "react-spotify-web-playback-sdk@npm:3.0.2"
+  dependencies:
+    "@types/spotify-web-playback-sdk": "npm:^0.1.12"
+  peerDependencies:
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/5c3dfdd27391791cd64c22bf91ca735b20c33dc064e5ba868627f808083e62e5167cbb79a5af2f25ea09268ad40248de8c544f4dcb64396dc6c99427d402492e
   languageName: node
   linkType: hard
 
