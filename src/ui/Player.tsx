@@ -4,6 +4,7 @@ import { usePlaybackState, usePlayerDevice, useSpotifyPlayer, WebPlaybackSDK } f
 import { Button } from "@nextui-org/button";
 import { useMemo } from "react";
 import { Image } from "@nextui-org/image";
+import PlayerEntity from "@/entities/player";
 
 export const Player = () => {
 	const player = useSpotifyPlayer()
@@ -48,6 +49,10 @@ export const Player = () => {
 		player?.nextTrack()
 	}
 
+	const handleShuffle = () => {
+		PlayerEntity.shuffle(!playback?.shuffle, device?.device_id)
+	}
+	
 	return (
 		<div>
 			{!player && (<div>loading</div>)}
@@ -56,6 +61,15 @@ export const Player = () => {
 					{/* <Button type="submit">
 						Play Carly Rae Jepsen
 					</Button> */}
+					<Button
+						onPress={handleShuffle}
+						isDisabled={!isDeviceAvailable}
+						isIconOnly
+						className=" bg-none"
+					>
+						{playback?.shuffle ? 'shuffle on' : 'shuffle off'}
+					</Button>
+
 					<Button
 						onPress={handlePrev}
 						isDisabled={!isDeviceAvailable}
@@ -88,7 +102,7 @@ export const Player = () => {
 					{playback?.position}
 				</form>
 
-				<p>{playback?.track_window.current_track.name}</p>
+				<p>{String(playback?.shuffle)}</p>
 			</div>)}
 		</div>
 	)
