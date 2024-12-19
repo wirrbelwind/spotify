@@ -12,7 +12,7 @@ export default async function LibraryPage() {
 
 	return (
 		<div>
-			
+
 			<Player accessToken={auth.tokens.accessToken} />
 			<div
 				className={`
@@ -24,14 +24,18 @@ export default async function LibraryPage() {
 				{playlists.items.map(playlist => (
 					<div
 						key={playlist.id}
+
 					>
-						<Image
-							src={playlist.images[0].url}
-							width={160}
-							height={160}
-						/>
-						
-						<PlayButton uri={playlist.uri}/>
+						<div className="relative">
+							<Image
+								src={playlist.images[0].url}
+								width={160}
+								height={160}
+							/>
+
+							<PlayButton uri={playlist.uri} />
+						</div>
+
 						<p>{playlist.name}</p>
 					</div>
 				))}

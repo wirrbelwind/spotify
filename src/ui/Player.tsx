@@ -40,9 +40,6 @@ export const Player = () => {
 				</form>
 
 				<p>{playback?.track_window.current_track.name}</p>
-				{/* <p>playback id: {playback?.playback_id}</p> */}
-				<p>uri: {playback?.context.uri}</p>
-				<p>isDeviceAvailable: {String(isDeviceAvailable)}</p>
 			</div>)}
 		</div>
 	)

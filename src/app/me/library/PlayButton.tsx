@@ -2,6 +2,7 @@
 
 import PlayerEntity from "@/entities/player"
 import { Button } from "@nextui-org/button"
+import Image from "next/image"
 import { usePlaybackState, usePlayerDevice, useSpotifyPlayer } from "react-spotify-web-playback-sdk"
 
 interface PlayButtonProps {
@@ -13,9 +14,11 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 	const playback = usePlaybackState(true, 1000)
 	const player = useSpotifyPlayer()
 
+	const isCurrentPlayback = playback?.context.uri === uri
+
 	const handlePlay = () => {
 		if (device?.status === 'ready' && device.device_id) {
-			if (playback?.context.uri === uri) {
+			if (isCurrentPlayback) {
 				// toggle pause play
 				player?.togglePlay()
 			}
@@ -26,24 +29,17 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 	}
 
 	return (
-		<div>
-			<Button
-				onPress={handlePlay}
-			>
-				{device?.device_id} | {uri}
-			</Button>
-			{/* 
-			<input
-				type="hidden"
-				name="uri"
-				defaultValue={uri}
-			/>
+		<Button
+			onPress={handlePlay}
+			isIconOnly
+			className="bg-green-600 w-14 h-14 rounded-full absolute bottom-0 right-0 z-10"
+		>
+			{(!isCurrentPlayback || (isCurrentPlayback && playback.paused)) ? (
+				<Image src="/play.svg" width={30} height={30} alt="" />
+			) : (
+				<Image src="/pause.svg" width={30} height={30} alt="" />
+			)}
 
-			<input
-				type="hidden"
-				name="device-id"
-				defaultValue={device?.device_id}
-			/> */}
-		</div>
+		</Button>
 	)
 }
