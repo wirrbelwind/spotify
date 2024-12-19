@@ -90,6 +90,7 @@ export default async function HomePage() {
 			<div className={`
 			flex
 			gap-2
+			flex-wrap
 				`}>
 				{topArtistList.items.map(artist => (
 					<div
@@ -97,8 +98,8 @@ export default async function HomePage() {
 					>
 						<Image
 							src={artist.images?.[0]?.url}
-							width={180}
-							height={180}
+							
+							className="rounded-full w-40 h-40"
 						/>
 						<p>{artist.name}</p>
 					</div>
