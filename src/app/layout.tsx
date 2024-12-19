@@ -1,6 +1,6 @@
 import React from "react";
 import '../global-styles.css'
-import { Providers } from "@/Providers";
+import { AllProviders } from "@/providers/AllProviders";
 
 export const metadata = {
   title: "Spotify",
@@ -18,9 +18,9 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <Providers>
+        <AllProviders>
           {children}
-        </Providers>
+        </AllProviders>
       </body>
     </html>
   );
