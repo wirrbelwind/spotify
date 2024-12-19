@@ -8,13 +8,13 @@ export const Player = () => {
 	const player = useSpotifyPlayer()
 	const playback = usePlaybackState(true, 1000)
 	const device = usePlayerDevice()
-	
+
 	const isDeviceAvailable = useMemo(() => {
-		if (device?.status === 'ready' && device?.device_id) {
+		if (device?.status === 'ready' && device?.device_id && playback?.context.uri) {
 			return true
 		}
 		return false
-	}, [device?.status, device?.device_id])
+	}, [device?.status, device?.device_id, playback?.context.uri])
 
 	const handlePlay = () => {
 		if (!isDeviceAvailable) {
@@ -33,7 +33,7 @@ export const Player = () => {
 					</Button> */}
 					<Button
 						onPress={handlePlay}
-						disabled={!isDeviceAvailable}
+						isDisabled={!isDeviceAvailable}
 					>
 						{playback?.paused ? 'play' : 'pause'}
 					</Button>
@@ -42,6 +42,7 @@ export const Player = () => {
 				<p>{playback?.track_window.current_track.name}</p>
 				{/* <p>playback id: {playback?.playback_id}</p> */}
 				<p>uri: {playback?.context.uri}</p>
+				<p>isDeviceAvailable: {String(isDeviceAvailable)}</p>
 			</div>)}
 		</div>
 	)

@@ -20,7 +20,7 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 				player?.togglePlay()
 			}
 			else {
-				PlayerEntity.actions.startAudio(uri, device.device_id)
+				PlayerEntity.startAudio(uri, device.device_id)
 			}
 		}
 	}

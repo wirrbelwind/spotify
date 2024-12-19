@@ -3,10 +3,7 @@
 import { startAudio } from "./actions/startAudio"
 
 const PlayerEntity = {
-	actions: {
-		startAudio,
-		// pause
-	}
+	startAudio
 }
 
 export default PlayerEntity
