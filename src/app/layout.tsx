@@ -1,7 +1,4 @@
-// import "@mantine/core/styles.css";
 import React from "react";
-// import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { theme } from "../../theme";
 import '../global-styles.css'
 import { Providers } from "@/Providers";
 
@@ -23,9 +20,7 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <Providers>
-          {/* <MantineProvider theme={theme}> */}
           {children}
-          {/* </MantineProvider> */}
         </Providers>
       </body>
     </html>
