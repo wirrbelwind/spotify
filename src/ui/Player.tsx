@@ -5,6 +5,8 @@ import { Button } from "@nextui-org/button";
 import { useMemo } from "react";
 import { Image } from "@nextui-org/image";
 import PlayerEntity from "@/entities/player";
+import { Slider } from "@nextui-org/slider";
+import { millisecondsToTime } from "@/utils/millisecondsToTime";
 
 export const Player = () => {
 	const player = useSpotifyPlayer()
@@ -31,8 +33,8 @@ export const Player = () => {
 		}
 
 		// player?.previousTrack()
-		
-		if(playback?.position > 3000) {
+
+		if (playback?.position > 3000) {
 			player?.seek(0)
 		} else {
 			player?.previousTrack()
@@ -44,7 +46,7 @@ export const Player = () => {
 			throw new Error(`Player's device is null, but action "prev" is still callable`)
 		}
 
-		
+
 		// player?.previousTrack()
 		player?.nextTrack()
 	}
@@ -52,7 +54,11 @@ export const Player = () => {
 	const handleShuffle = () => {
 		PlayerEntity.shuffle(!playback?.shuffle, device?.device_id)
 	}
-	
+
+	const handleRewind = (newValue: number) => {
+		player?.seek(newValue)
+	}
+
 	return (
 		<div>
 			{!player && (<div>loading</div>)}
@@ -101,9 +107,24 @@ export const Player = () => {
 					>
 						next
 					</Button>
-					{playback?.position}
+					
 				</div>
-			</div>)}
+
+				<div className="flex items-center justify-center gap-2">
+				<p>{millisecondsToTime(playback?.position)}</p>
+				<Slider
+					className="max-w-md"
+					value={playback?.position}
+					maxValue={playback?.duration}
+					minValue={0}
+					step={1}
+					onChangeEnd={handleRewind}
+				/>
+				<p>{millisecondsToTime(playback?.duration)}</p>
+				
+				</div>
+				
+				</div>)}
 		</div>
 	)
 }
