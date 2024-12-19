@@ -16,27 +16,29 @@ export default async function LibraryPage() {
 			<Player accessToken={auth.tokens.accessToken} />
 			<div
 				className={`
-					flex
-					gap-2
-					flex-wrap
+					grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-4
 					`}
 			>
 				{playlists.items.map(playlist => (
 					<div
 						key={playlist.id}
-
+						className="bg-slate-400"
 					>
-						<div className="relative">
+						<div className="relative ">
 							<Image
 								src={playlist.images[0].url}
 								width={160}
 								height={160}
+								classNames={{
+									img: "object-cover",
+									wrapper: 'mx-auto'
+								}}
 							/>
 
 							<PlayButton uri={playlist.uri} />
 						</div>
 
-						<p>{playlist.name}</p>
+						<p className="mt-3">{playlist.name}</p>
 					</div>
 				))}
 			</div>
