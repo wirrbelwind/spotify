@@ -22,15 +22,16 @@ export default async function LibraryPage() {
 				{playlists.items.map(playlist => (
 					<div
 						key={playlist.id}
-						className="bg-slate-400"
+						className="hover:bg-slate-400 h-56 p-2 group "
 					>
-						<div className="relative ">
+						<div className="relative overflow-hidden">
 							<Image
 								src={playlist.images[0].url}
-								width={160}
-								height={160}
+								// width={160}
+								// height={160}
+
 								classNames={{
-									img: "object-cover",
+									img: "object-cover w-40 h-40",
 									wrapper: 'mx-auto'
 								}}
 							/>
@@ -38,7 +39,7 @@ export default async function LibraryPage() {
 							<PlayButton uri={playlist.uri} />
 						</div>
 
-						<p className="mt-3">{playlist.name}</p>
+						<p className="mt-3 truncate">{playlist.name}</p>
 					</div>
 				))}
 			</div>

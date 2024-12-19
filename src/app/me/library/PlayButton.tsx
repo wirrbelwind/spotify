@@ -32,7 +32,7 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 		<Button
 			onPress={handlePlay}
 			isIconOnly
-			className="bg-green-600 w-14 h-14 rounded-full absolute bottom-0 right-0 z-10"
+			className="bg-green-600 w-14 h-14 rounded-full absolute bottom-0 right-0 z-10 translate-x-full group-hover:translate-x-0 transition-transform ease-in-out delay-150 duration-300"
 		>
 			{(!isCurrentPlayback || (isCurrentPlayback && playback.paused)) ? (
 				<Image src="/play.svg" width={30} height={30} alt="" />
