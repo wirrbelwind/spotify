@@ -1486,7 +1486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nextui-org/slider@npm:2.4.5":
+"@nextui-org/slider@npm:2.4.5, @nextui-org/slider@npm:^2.4.5":
   version: 2.4.5
   resolution: "@nextui-org/slider@npm:2.4.5"
   dependencies:
@@ -6090,6 +6090,7 @@ __metadata:
     "@nextui-org/button": "npm:^2.2.7"
     "@nextui-org/image": "npm:^2.2.3"
     "@nextui-org/react": "npm:^2.6.8"
+    "@nextui-org/slider": "npm:^2.4.5"
     "@nextui-org/system": "npm:^2.4.4"
     "@nextui-org/theme": "npm:^2.4.3"
     "@types/node": "npm:20.14.8"
