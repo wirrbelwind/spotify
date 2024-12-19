@@ -59,6 +59,8 @@ export const Player = () => {
 		player?.seek(newValue)
 	}
 
+	const test = useMemo(() => Math.random(), [])
+
 	return (
 		<div>
 			{!player && (<div>loading</div>)}
@@ -66,6 +68,7 @@ export const Player = () => {
 				<div
 					className="flex gap-4  items-center justify-center"
 				>
+					{test}
 					{/* <Button type="submit">
 						Play Carly Rae Jepsen
 					</Button> */}
@@ -107,24 +110,24 @@ export const Player = () => {
 					>
 						next
 					</Button>
-					
+
 				</div>
 
 				<div className="flex items-center justify-center gap-2">
-				<p>{millisecondsToTime(playback?.position)}</p>
-				<Slider
-					className="max-w-md"
-					value={playback?.position}
-					maxValue={playback?.duration}
-					minValue={0}
-					step={1}
-					onChangeEnd={handleRewind}
-				/>
-				<p>{millisecondsToTime(playback?.duration)}</p>
-				
+					<p>{millisecondsToTime(playback?.position)}</p>
+					<Slider
+						className="max-w-md"
+						value={playback?.position}
+						maxValue={playback?.duration}
+						minValue={0}
+						step={1}
+						onChangeEnd={handleRewind}
+					/>
+					<p>{millisecondsToTime(playback?.duration)}</p>
+
 				</div>
-				
-				</div>)}
+
+			</div>)}
 		</div>
 	)
 }

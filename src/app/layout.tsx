@@ -1,12 +1,17 @@
 import React from "react";
 import '../global-styles.css'
 import { AllProviders } from "@/providers/AllProviders";
+import { Player } from "@/ui/Player";
+import UserEntity from "@/entities/user";
+import Link from "next/link";
 
 export const metadata = {
   title: "Spotify",
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default async function RootLayout({ children }: { children: any }) {
+  const auth = await UserEntity.authService()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -19,6 +24,12 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <AllProviders>
+          <div className="flex gap-4">
+            <Link href="/">Home</Link>
+            <Link href="/me">Profile</Link>
+            <Link href="/me/library">Library</Link>
+          </div>
+          <Player accessToken={auth.tokens.accessToken} />
           {children}
         </AllProviders>
       </body>

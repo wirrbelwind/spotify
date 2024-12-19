@@ -14,7 +14,7 @@ export default async function LibraryPage() {
 	return (
 		<div>
 
-			<Player accessToken={auth.tokens.accessToken} />
+			{/* <Player accessToken={auth.tokens.accessToken} /> */}
 			<div
 				className={`
 					grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-4
