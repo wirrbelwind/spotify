@@ -22,7 +22,7 @@ export default async function LibraryPage() {
 				{playlists.items.map(playlist => (
 					<div
 						key={playlist.id}
-						className="hover:bg-slate-400 h-56 p-2 group "
+						className="hover:bg-slate-400 h-56 p-2 group rounded-md"
 					>
 						<div className="relative overflow-hidden">
 							<Image
