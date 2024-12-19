@@ -131,6 +131,6 @@ export default async function HomePage() {
 					</Card>
 				))}
 			</Flex> */}
-			<Player accessToken={accessToken} />
+			<Player />
 		</div>);
 }

@@ -1,40 +1,13 @@
 'use client'
 
 import { $axios } from "@/utils/$axios";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { usePlaybackState, usePlayerDevice, useSpotifyPlayer, WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 import { playCarlyRaeJepsen } from "./player-actions";
 import { pause, play } from "@/entities/player";
 import { Button } from "@nextui-org/button";
 
-interface PlayerProps {
-	accessToken: string
-}
-
-export const Player: React.FC<PlayerProps> = ({ accessToken }) => {
-
-
-	const getOAuthToken = useCallback(callback => {
-		callback(accessToken);
-	}, []);
-
-	return (
-		<WebPlaybackSDK
-
-			initialDeviceName="My Spotify App"
-			getOAuthToken={getOAuthToken}
-			initialVolume={0.5}
-
-			connectOnInitialized={true}
-		>
-		<Button>button</Button>
-
-			<PlayerContent />
-		</WebPlaybackSDK>
-	);
-}
-
-export const PlayerContent = () => {
+export const Player = () => {
 	const player = useSpotifyPlayer()
 	const playback = usePlaybackState(true, 1000)
 	const device = usePlayerDevice()
