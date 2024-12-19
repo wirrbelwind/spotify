@@ -3,6 +3,7 @@
 import { usePlaybackState, usePlayerDevice, useSpotifyPlayer, WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 import { Button } from "@nextui-org/button";
 import { useMemo } from "react";
+import { Image } from "@nextui-org/image";
 
 export const Player = () => {
 	const player = useSpotifyPlayer()
@@ -23,6 +24,30 @@ export const Player = () => {
 		player?.togglePlay()
 	}
 
+	const handlePrev = () => {
+		if (!isDeviceAvailable) {
+			throw new Error(`Player's device is null, but action "prev" is still callable`)
+		}
+
+		// player?.previousTrack()
+		
+		if(playback?.position > 3000) {
+			player?.seek(0)
+		} else {
+			player?.previousTrack()
+		}
+	}
+
+	const handleNext = () => {
+		if (!isDeviceAvailable) {
+			throw new Error(`Player's device is null, but action "prev" is still callable`)
+		}
+
+		
+		// player?.previousTrack()
+		player?.nextTrack()
+	}
+
 	return (
 		<div>
 			{!player && (<div>loading</div>)}
@@ -32,11 +57,35 @@ export const Player = () => {
 						Play Carly Rae Jepsen
 					</Button> */}
 					<Button
+						onPress={handlePrev}
+						isDisabled={!isDeviceAvailable}
+						isIconOnly
+						className=" bg-none"
+					>
+						prev
+					</Button>
+
+					<Button
 						onPress={handlePlay}
 						isDisabled={!isDeviceAvailable}
+						isIconOnly
+						className=" bg-none"
 					>
-						{playback?.paused ? 'play' : 'pause'}
+						{playback?.paused ? (
+							<Image src="/play.svg" className="w-10 h-10" alt="" />
+						) : (
+							<Image src="/pause.svg" alt="" className="w-10 h-10" />
+						)}
 					</Button>
+					<Button
+						onPress={handleNext}
+						isDisabled={!isDeviceAvailable}
+						isIconOnly
+						className=" bg-none"
+					>
+						next
+					</Button>
+					{playback?.position}
 				</form>
 
 				<p>{playback?.track_window.current_track.name}</p>
