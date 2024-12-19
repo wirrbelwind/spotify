@@ -1,27 +1,19 @@
-import { getUser } from "@/entities/user/getUser";
 import { $axios } from "@/utils/$axios";
 import { ArtistObject, PageObject, TrackObject } from "../types";
 import { Player } from "@/ui/Player";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
-import { COOKIE_KEYS } from "@/constants";
-import { Button } from "@nextui-org/button";
 import { Avatar } from "@nextui-org/avatar";
-import NextImage from "next/image";
 import { Image } from "@nextui-org/image";
+import UserEntity from "@/entities/user";
 
 export default async function HomePage() {
-	const user = await getUser()
-
+	const user = await UserEntity.getCurrentUser()
+	
 	const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
 	const topTrackList = topResponse.data
 
 	const topArtistList = (await $axios.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
-
-
-	const cookie = await cookies()
-	const accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
 
 	return (
 		<div>
@@ -55,9 +47,7 @@ export default async function HomePage() {
 				{topTrackList.items.map((track, index) => (
 					<div
 						key={track.id}
-						gap="2rem"
-						align="center"
-						bd="1px solid black"
+						
 						className={`
 						flex
 						gap-2

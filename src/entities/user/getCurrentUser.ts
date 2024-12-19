@@ -3,7 +3,7 @@ import { refreshTokens } from "../../utils/refreshTokens"
 import { $axios } from "../../utils/$axios"
 import { authService } from "./authService"
 
-export const getUser = async (): Promise<User> => {
+export const getCurrentUser = async (): Promise<User> => {
 	const auth = await authService()
 
 	if (!auth.tokens.isValidTokenData) {

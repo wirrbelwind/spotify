@@ -3,16 +3,14 @@
 import { PropsWithChildren, useCallback } from 'react'
 import { NextUIProvider } from './providers/next-ui';
 import { SpotifyPlayerProvider } from './providers/spotify-player';
-import { cookies } from 'next/headers';
-import { COOKIE_KEYS } from './constants';
+import UserEntity from './entities/user';
 
 export const Providers: React.FC<PropsWithChildren> = async ({ children }) => {
-	const cookie = await cookies()
-	const accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
+	const auth = await UserEntity.authService()
 
 	return (
 		<NextUIProvider>
-			<SpotifyPlayerProvider accessToken={accessToken}>
+			<SpotifyPlayerProvider accessToken={auth.tokens.accessToken}>
 				{children}
 			</SpotifyPlayerProvider>
 		</NextUIProvider>

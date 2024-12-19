@@ -1,16 +1,14 @@
-import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { MiddlewareConfig, NextRequest } from 'next/server'
-import { getUser } from './entities/user/getUser'
-import { authService } from './entities/user/authService'
+import User from './entities/user'
 
 export async function middleware(request: NextRequest) {
 	try {
-		await getUser()
+		await User.getCurrentUser()
 		return NextResponse.next()
 	}
 	catch (error) {
-		const auth = await authService()
+		const auth = await User.authService()
 		auth.process.targetPageAfterLogin = request.url
 
 		return NextResponse.redirect('http://localhost:3000/auth')

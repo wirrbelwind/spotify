@@ -1,24 +1,13 @@
 'use server'
 
-import { COOKIE_KEYS } from "@/constants"
 import { $axios } from "@/utils/$axios"
-import { cookies } from "next/headers"
-import { spotifyApi } from "react-spotify-web-playback"
+import UserEntity from "../user"
 
 export const play = async (formData: FormData) => {
-	const cookie = await cookies()
-	const accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
+	const auth = await UserEntity.authService()
 
-	// const devices = (await spotifyApi.getDevices(accessToken)).devices
-	// console.log(devices)
 	const deviceId = formData.get('device-id')
-	// const deviceId = devices.fin
 	const uri = formData.get('uri')
-
-
-	console.log('----------------')
-	console.log(uri, deviceId)
-	console.log('----------------')
 
 	const body = {}
 
@@ -33,7 +22,6 @@ export const play = async (formData: FormData) => {
 	}
 	catch (error) {
 		console.log('error', error.message, error.name, error.response.data)
-		// console.log(error.data.error)
 	}
 }
 

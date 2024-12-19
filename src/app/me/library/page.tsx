@@ -1,24 +1,19 @@
 import { PageObject, SimplifiedPlaylistObject } from "@/app/types"
-import { COOKIE_KEYS } from "@/constants";
-import { play } from "@/entities/player";
 import { Player } from "@/ui/Player";
 import { $axios } from "@/utils/$axios"
-import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
-import { cookies } from "next/headers";
 import { PlayButton } from "./PlayButton";
-
+import UserEntity from "@/entities/user";
 
 export default async function LibraryPage() {
 	const playlists = await (await $axios.get<PageObject<SimplifiedPlaylistObject>>('https://api.spotify.com/v1/me/playlists')).data
 
-	const cookie = await cookies()
-	const accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
+	const auth = await UserEntity.authService()
 
 	return (
 		<div>
 			
-			<Player accessToken={accessToken} />
+			<Player accessToken={auth.tokens.accessToken} />
 			<div
 				className={`
 					flex

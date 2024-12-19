@@ -1,7 +1,7 @@
 import axios from "axios";
 import { cookies } from "next/headers";
 import { refreshTokens } from "./refreshTokens";
-import { COOKIE_KEYS } from "@/constants";
+import UserEntity from "@/entities/user";
 
 export const $axios = axios.create()
 
@@ -12,28 +12,23 @@ $axios.interceptors.request.use(async config => {
 		return config
 	}
 
-	const cookie = await cookies()
+	const auth = await UserEntity.authService()
 
-	let accessToken = cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value
-	let refreshToken = cookie.get(COOKIE_KEYS.REFRESH_TOKEN)?.value
-
-	let accessTokenExpiresAt = Number(cookie.get(COOKIE_KEYS.ACCESS_TOKEN_EXPIRES_AT)?.value)
-
-	if (!accessToken || !refreshToken || !accessTokenExpiresAt || isNaN(accessTokenExpiresAt)) {
-		throw new Error(`no tokens | request ${accessToken} ${refreshToken} ${accessTokenExpiresAt}`)
+	if (!auth.tokens.isValidTokenData) {
+		throw new Error(`no tokens | request ${auth.tokens.accessToken} ${auth.tokens.refreshToken} ${auth.tokens.accessTokenExpiresAt}`)
 	}
 
 	const now = Date.now()
 
-	if (accessTokenExpiresAt <= now) {
-		const tokens = await refreshTokens(refreshToken)
+	if (auth.tokens.accessTokenExpiresAt <= now) {
+		const tokens = await refreshTokens(auth.tokens.refreshToken)
 
 		if (tokens.error) {
 			throw new Error('cant refresh tokens')
 		}
 	}
 
-	config.headers.Authorization = `Bearer ${cookie.get(COOKIE_KEYS.ACCESS_TOKEN)?.value}`
+	config.headers.Authorization = `Bearer ${auth.tokens.accessToken}`
 	
 	return config
 })

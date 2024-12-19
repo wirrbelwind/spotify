@@ -1,8 +1,8 @@
-import { authService } from "@/entities/user/authService"
+import UserEntity from "@/entities/user"
 import { $axios } from "./$axios"
 
 export const refreshTokens = async () => {
-	const auth = await authService()
+	const auth = await UserEntity.authService()
 
 	const refreshTokenResponse = await $axios.post('https://accounts.spotify.com/api/token', {
 		grant_type: 'refresh_token',
