@@ -1,4 +1,4 @@
-import { getUser } from "@/utils/getUser";
+import { getUser } from "@/entities/user/getUser";
 import { $axios } from "@/utils/$axios";
 import { ArtistObject, PageObject, TrackObject } from "../types";
 import { Player } from "@/ui/Player";
@@ -101,7 +101,7 @@ export default async function HomePage() {
 			flex
 			gap-2
 				`}>
-					{topArtistList.items.map(artist => (
+				{topArtistList.items.map(artist => (
 					<div
 						key={artist.id}
 					>
@@ -112,7 +112,7 @@ export default async function HomePage() {
 						/>
 						<p>{artist.name}</p>
 					</div>
-					))}
+				))}
 			</div>
 			{/* 
 			<Flex

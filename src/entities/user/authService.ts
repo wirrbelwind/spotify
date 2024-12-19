@@ -1,7 +1,7 @@
-import { COOKIE_KEYS } from "@/constants"
 import { cookies } from "next/headers"
+import { COOKIE_KEYS } from "./constants"
 
-export const auth = async () => {
+export const authService = async () => {
 	const cookie = await cookies()
 
 	return {
@@ -23,9 +23,16 @@ export const auth = async () => {
 					throw new Error(`Not valid value in "auth() -> set accessToken()"`)
 				},
 				get accessTokenExpiresAt() {
-					return cookie.get(COOKIE_KEYS.ACCESS_TOKEN_EXPIRES_AT)?.value ?? null
+					const token = cookie.get(COOKIE_KEYS.ACCESS_TOKEN_EXPIRES_AT)?.value
+
+					if (token) {
+						return Number(token)
+					}
+					else {
+						return null
+					}
 				},
-				set accessTokenExpiresAt(value: string | number | null) {
+				set accessTokenExpiresAt(value: number | null) {
 					const isValidValue = typeof value === 'string' || typeof value === 'number'
 
 					if (isValidValue) {
@@ -52,6 +59,18 @@ export const auth = async () => {
 						return
 					}
 					throw new Error(`Not valid value in "auth() -> set refreshToken()"`)
+				},
+				get isValidTokenData() {
+					if (this.accessToken
+						&&
+						this.refreshToken
+						&&
+						this.accessTokenExpiresAt
+						&&
+						!isNaN(this.accessTokenExpiresAt)) {
+						return true
+					}
+					return false
 				}
 			}
 		},
@@ -84,7 +103,8 @@ export const auth = async () => {
 						cookie.delete(COOKIE_KEYS.TARGET_PAGE_AFTER_LOGIN)
 						return
 					}
-					throw new Error(`Not valid value in "auth() -> set targetPageAfterLogin()"`)				}
+					throw new Error(`Not valid value in "auth() -> set targetPageAfterLogin()"`)
+				}
 			}
 		}
 	}

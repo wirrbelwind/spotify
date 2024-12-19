@@ -1,10 +1,8 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { MiddlewareConfig, NextRequest } from 'next/server'
-import { $axios } from './utils/$axios'
-import { User } from './app/types'
-import { getUser } from './utils/getUser'
-import { COOKIE_KEYS } from './constants'
+import { getUser } from './entities/user/getUser'
+import { authService } from './entities/user/authService'
 
 export async function middleware(request: NextRequest) {
 	try {
@@ -12,9 +10,9 @@ export async function middleware(request: NextRequest) {
 		return NextResponse.next()
 	}
 	catch (error) {
-		const cookie = await cookies()
+		const auth = await authService()
+		auth.process.targetPageAfterLogin = request.url
 
-		cookie.set(COOKIE_KEYS.TARGET_PAGE_AFTER_LOGIN, request.url)
 		return NextResponse.redirect('http://localhost:3000/auth')
 	}
 }

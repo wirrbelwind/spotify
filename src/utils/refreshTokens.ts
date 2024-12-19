@@ -1,13 +1,12 @@
-import { cookies } from "next/headers"
+import { authService } from "@/entities/user/authService"
 import { $axios } from "./$axios"
-import { COOKIE_KEYS } from "@/constants"
 
-export const refreshTokens = async (refreshToken: string) => {
-	const cookie = await cookies()
+export const refreshTokens = async () => {
+	const auth = await authService()
 
 	const refreshTokenResponse = await $axios.post('https://accounts.spotify.com/api/token', {
 		grant_type: 'refresh_token',
-		refresh_token: refreshToken,
+		refresh_token: auth.tokens.refreshToken,
 		client_id: process.env.SPOTIFY_CLIENT_ID
 	}, {
 		headers: {
@@ -32,9 +31,9 @@ export const refreshTokens = async (refreshToken: string) => {
 
 	const accessTokenExpiresAt = Date.now() + tokens.expires_in
 
-	cookie.set(COOKIE_KEYS.ACCESS_TOKEN, tokens.access_token)
-	cookie.set(COOKIE_KEYS.ACCESS_TOKEN_EXPIRES_AT, accessTokenExpiresAt.toString())
-	cookie.set(COOKIE_KEYS.REFRESH_TOKEN, tokens.refresh_token)
+	auth.tokens.accessToken = tokens.access_token
+	auth.tokens.accessTokenExpiresAt = accessTokenExpiresAt
+	auth.tokens.refreshToken = tokens.refresh_token
 
 	return tokens
 }
