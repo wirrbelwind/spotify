@@ -59,72 +59,83 @@ export const Player = () => {
 		player?.seek(newValue)
 	}
 
-	const test = useMemo(() => Math.random(), [])
 
 	return (
 		<div>
 			{!player && (<div>loading</div>)}
 			{player && (<div>
-				<div
-					className="flex gap-4  items-center justify-center"
-				>
-					{test}
-					{/* <Button type="submit">
+				<div className="flex">
+					<div>
+						<Image
+							src={playback?.track_window.current_track.album.images[0].url}
+							className="w-20 h-20"
+						/>
+						<p>{playback?.track_window.current_track.name}</p>
+						<p>{playback?.track_window.current_track.artists.map(artist => `${artist.name},`)}</p>
+					</div>
+
+					<div className="basis-full">
+						<div
+							className="flex gap-4  items-center justify-center"
+						>
+							{/* <Button type="submit">
 						Play Carly Rae Jepsen
 					</Button> */}
-					<Button
-						onPress={handleShuffle}
-						isDisabled={!isDeviceAvailable}
-						isIconOnly
-						className=" bg-none"
-					>
-						{playback?.shuffle ? 'shuffle on' : 'shuffle off'}
-					</Button>
+							<Button
+								onPress={handleShuffle}
+								isDisabled={!isDeviceAvailable}
+								isIconOnly
+								className=" bg-none"
+							>
+								{playback?.shuffle ? 'shuffle on' : 'shuffle off'}
+							</Button>
 
-					<Button
-						onPress={handlePrev}
-						isDisabled={!isDeviceAvailable}
-						isIconOnly
-						className=" bg-none"
-					>
-						prev
-					</Button>
+							<Button
+								onPress={handlePrev}
+								isDisabled={!isDeviceAvailable}
+								isIconOnly
+								className=" bg-none"
+							>
+								prev
+							</Button>
 
-					<Button
-						onPress={handlePlay}
-						isDisabled={!isDeviceAvailable}
-						isIconOnly
-						className=""
-					>
-						{playback?.paused ? (
-							<Image src="/play.svg" className="w-10 h-10" alt="" />
-						) : (
-							<Image src="/pause.svg" alt="" className="w-10 h-10" />
-						)}
-					</Button>
-					<Button
-						onPress={handleNext}
-						isDisabled={!isDeviceAvailable}
-						isIconOnly
-						className=" bg-none"
-					>
-						next
-					</Button>
+							<Button
+								onPress={handlePlay}
+								isDisabled={!isDeviceAvailable}
+								isIconOnly
+								className=""
+							>
+								{playback?.paused ? (
+									<Image src="/play.svg" className="w-10 h-10" alt="" />
+								) : (
+									<Image src="/pause.svg" alt="" className="w-10 h-10" />
+								)}
+							</Button>
+							<Button
+								onPress={handleNext}
+								isDisabled={!isDeviceAvailable}
+								isIconOnly
+								className=" bg-none"
+							>
+								next
+							</Button>
 
-				</div>
+						</div>
 
-				<div className="flex items-center justify-center gap-2">
-					<p>{millisecondsToTime(playback?.position)}</p>
-					<Slider
-						className="max-w-md"
-						value={playback?.position}
-						maxValue={playback?.duration}
-						minValue={0}
-						step={1}
-						onChangeEnd={handleRewind}
-					/>
-					<p>{millisecondsToTime(playback?.duration)}</p>
+						<div className="flex items-center justify-center gap-2">
+							<p>{millisecondsToTime(playback?.position)}</p>
+							<Slider
+								className="max-w-md"
+								value={playback?.position}
+								maxValue={playback?.duration}
+								minValue={0}
+								step={1}
+								onChangeEnd={handleRewind}
+							/>
+							<p>{millisecondsToTime(playback?.duration)}</p>
 
+						</div>
+					</div>
 				</div>
 
 			</div>)}
