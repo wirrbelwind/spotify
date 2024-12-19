@@ -3,8 +3,7 @@ import '../global-styles.css'
 import { Providers } from "@/Providers";
 
 export const metadata = {
-  title: "Mantine Next.js template",
-  description: "I am using Mantine with Next.js!",
+  title: "Spotify",
 };
 
 export default function RootLayout({ children }: { children: any }) {
