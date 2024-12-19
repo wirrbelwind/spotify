@@ -1,8 +1,8 @@
 'use client'
 
-import { play } from "@/entities/player"
+import PlayerEntity from "@/entities/player"
 import { Button } from "@nextui-org/button"
-import { usePlayerDevice } from "react-spotify-web-playback-sdk"
+import { usePlaybackState, usePlayerDevice, useSpotifyPlayer } from "react-spotify-web-playback-sdk"
 
 interface PlayButtonProps {
 	uri: string
@@ -10,14 +10,29 @@ interface PlayButtonProps {
 
 export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 	const device = usePlayerDevice()
+	const playback = usePlaybackState(true, 1000)
+	const player = useSpotifyPlayer()
+
+	const handlePlay = () => {
+		if (device?.status === 'ready' && device.device_id) {
+			if (playback?.context.uri === uri) {
+				// toggle pause play
+				player?.togglePlay()
+			}
+			else {
+				PlayerEntity.actions.startAudio(uri, device.device_id)
+			}
+		}
+	}
+
 	return (
-		<form action={play}>
+		<div>
 			<Button
-				type="submit"
+				onPress={handlePlay}
 			>
 				{device?.device_id} | {uri}
 			</Button>
-
+			{/* 
 			<input
 				type="hidden"
 				name="uri"
@@ -28,7 +43,7 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 				type="hidden"
 				name="device-id"
 				defaultValue={device?.device_id}
-			/>
-		</form>
+			/> */}
+		</div>
 	)
 }
