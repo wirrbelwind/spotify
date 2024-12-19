@@ -57,7 +57,9 @@ export const Player = () => {
 		<div>
 			{!player && (<div>loading</div>)}
 			{player && (<div>
-				<form>
+				<div
+					className="flex gap-4  items-center justify-center"
+				>
 					{/* <Button type="submit">
 						Play Carly Rae Jepsen
 					</Button> */}
@@ -83,7 +85,7 @@ export const Player = () => {
 						onPress={handlePlay}
 						isDisabled={!isDeviceAvailable}
 						isIconOnly
-						className=" bg-none"
+						className=""
 					>
 						{playback?.paused ? (
 							<Image src="/play.svg" className="w-10 h-10" alt="" />
@@ -100,9 +102,7 @@ export const Player = () => {
 						next
 					</Button>
 					{playback?.position}
-				</form>
-
-				<p>{String(playback?.shuffle)}</p>
+				</div>
 			</div>)}
 		</div>
 	)
