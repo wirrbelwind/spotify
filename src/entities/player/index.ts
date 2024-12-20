@@ -1,10 +1,8 @@
+export { usePlayer } from './model/usePlayer'
+import { shuffleAction } from './model/actions/shuffleAction' 
+import { startAudioAction } from './model/actions/startAudioAction'
 
-import { shuffle } from "./actions/shuffle"
-import { startAudio } from "./actions/startAudio"
-
-const PlayerEntity = {
-	startAudio,
-	shuffle
+export const playerServerActions = {
+	startAudioAction,
+	shuffleAction
 }
-
-export default PlayerEntity

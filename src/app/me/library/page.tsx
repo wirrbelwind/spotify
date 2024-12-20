@@ -1,5 +1,5 @@
 import { PageObject, SimplifiedPlaylistObject } from "@/app/types"
-import { Player } from "@/ui/Player";
+import { Player } from "@/entities/player/ui/Player";
 import { $axios } from "@/utils/$axios"
 import { Image } from "@nextui-org/image";
 import { PlayButton } from "./PlayButton";

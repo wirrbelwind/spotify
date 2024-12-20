@@ -2,7 +2,7 @@
 
 import { $axios } from "@/utils/$axios"
 
-export const startAudio = async (deviceId: string, contextUri?: string, audioUris?: string[], offset?: string) => {
+export const startAudioAction = async (deviceId: string, contextUri?: string, audioUris?: string[], offset?: string) => {
 	try {
 		await $axios.put(`https://api.spotify.com/v1/me/player/play`, {
 			context_uri: contextUri,
