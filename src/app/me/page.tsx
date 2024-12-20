@@ -1,16 +1,16 @@
 import { $axios } from "@/utils/$axios";
 import { ArtistObject, PageObject, TrackObject } from "../types";
-import { Player } from "@/ui/Player";
+import { Player } from "@/entities/player/ui/Player";
 import Link from "next/link";
 import React from "react";
 import { Avatar } from "@nextui-org/avatar";
 import { Image } from "@nextui-org/image";
 import UserEntity from "@/entities/user";
-import  {TrackList}  from "@/entities/track/ui/TrackList";
+import { TrackList } from "@/entities/track/ui/TrackList";
 
 export default async function HomePage() {
 	const user = await UserEntity.getCurrentUser()
-	
+
 	const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
 	const topTrackList = topResponse.data
 
@@ -38,8 +38,8 @@ export default async function HomePage() {
 			</div>
 
 			<p>Top tracks</p>
-			<TrackList tracks={topTrackList.items}/>
-			
+			<TrackList tracks={topTrackList.items} />
+
 
 			<p>Top Artists</p>
 			<div className={`
@@ -53,7 +53,7 @@ export default async function HomePage() {
 					>
 						<Image
 							src={artist.images?.[0]?.url}
-							
+
 							className="rounded-full w-40 h-40"
 						/>
 						<p>{artist.name}</p>

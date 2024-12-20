@@ -1,6 +1,6 @@
 'use client'
 
-import PlayerEntity from "@/entities/player"
+import { playerServerActions } from "@/entities/player"
 import { Button } from "@nextui-org/button"
 import Image from "next/image"
 import { usePlaybackState, usePlayerDevice, useSpotifyPlayer } from "react-spotify-web-playback-sdk"
@@ -23,7 +23,7 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 				player?.togglePlay()
 			}
 			else {
-				PlayerEntity.startAudio(device.device_id, uri)
+				playerServerActions.startAudioAction(device.device_id, uri)
 			}
 		}
 	}
