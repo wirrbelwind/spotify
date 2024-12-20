@@ -7,18 +7,19 @@ import { CurrentTrackInfo } from "./CurrentTrackInfo";
 import { ActionButtons } from "./ActionButtons";
 import { TrackTimeline } from "./TrackTimeline";
 import { LinksTextListProps } from "@/ui/LinksTextList";
+import { getIdFromUri } from "@/utils/getIdFromUri";
 
 export const Player = () => {
 	const player = usePlayer()
 
-	const artistLinks: LinksTextListProps | null = useMemo(() => {
-		if (!playback?.track_window.current_track.artists.length) {
+	const artistLinks: LinksTextListProps['links'] | null = useMemo(() => {
+		if (!player._library.playback?.track_window.current_track.artists.length) {
 			return null
 		}
 
-		return playback.track_window.current_track.artists.map(artist => ({
+		return player._library.playback.track_window.current_track.artists.map(artist => ({
 			label: artist.name,
-			url: artist.url
+			url: `/artist/${getIdFromUri(artist.uri, 'artist')}`
 		}))
 
 	}, [player._library.playback?.track_window.current_track])

@@ -3,6 +3,9 @@
 import { Button } from "@nextui-org/button"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 import { usePlayer } from "../model/usePlayer"
+import { playerServerActions } from ".."
+import NextImage from "next/image"
+import { Image } from "@nextui-org/image"
 
 interface ActionButtonsProps {
 	elementsProps?: {
@@ -23,7 +26,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				isIconOnly
 				className=" bg-none"
 			>
-				{player._library.playback.shuffle ? 'shuffle on' : 'shuffle off'}
+				{player._library.playback?.shuffle ? 'shuffle on' : 'shuffle off'}
 			</Button>
 
 			<Button
@@ -39,12 +42,24 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				onPress={player.actions.togglePause}
 				isDisabled={!player.isSomethingPlaying}
 				isIconOnly
-				className=""
 			>
-				{player._library.playback.paused ? (
-					<Image src="/play.svg" className="w-10 h-10" alt="" />
+				{player._library.playback?.paused ? (
+					<Image
+						src="/play.svg"
+						className="w-10 h-10"
+						alt=""
+						as={NextImage}
+						width={40}
+						height={40} />
 				) : (
-					<Image src="/pause.svg" alt="" className="w-10 h-10" />
+					<Image
+						src="/pause.svg"
+						alt=""
+						className="w-10 h-10"
+						as={NextImage}
+						width={40}
+						height={40} />
+
 				)}
 			</Button>
 			<Button

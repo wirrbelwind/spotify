@@ -9,7 +9,6 @@ export const usePlayer = () => {
 	const device = usePlayerDevice()
 
 	const isPlayerReady = useMemo(() => {
-		console.log(device?.status, device?.device_id)
 		if (device?.status === 'ready' && device?.device_id) {
 			return true
 		}

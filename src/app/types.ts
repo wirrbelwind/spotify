@@ -3,7 +3,7 @@ export type Nullable<T> = T | null
 // TODO:
 export interface Entity {
 	id: string
-	type: string
+	type: 'artist' | 'album' | 'user' | 'track' | 'audio_features'
 }
 export interface SimplifiedArtistObject extends Entity {
 	external_urls: {

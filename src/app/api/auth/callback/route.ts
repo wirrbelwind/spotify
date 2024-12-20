@@ -14,9 +14,6 @@ export const GET = async (request: Request) => {
 	}
 
 	if (auth.process.state !== stateFromParams) {
-		console.log('------------------------')
-		console.log(auth.process.state, stateFromParams)
-		console.log('------------------------')
 		throw new Error('states are not the same')
 	}
 

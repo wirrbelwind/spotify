@@ -12,7 +12,6 @@ export interface LinksTextListProps {
 }
 
 export const LinksTextList: React.FC<LinksTextListProps> = ({ links, linkProps }) => {
-
 	return (
 		<>
 			{links.map((link, index) => (<>
