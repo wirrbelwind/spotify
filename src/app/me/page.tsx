@@ -18,7 +18,6 @@ export default async function HomePage() {
 
 	return (
 		<div>
-			<TrackList tracks={topTrackList.items}/>
 			<div className={`
 			flex
 			items-center
@@ -39,54 +38,8 @@ export default async function HomePage() {
 			</div>
 
 			<p>Top tracks</p>
-			<div
-				className={`
-				flex
-				flex-col
-				gap-3
-				`}
-			>
-				{topTrackList.items.map((track, index) => (
-					<div
-						key={track.id}
-						
-						className={`
-						flex
-						gap-2
-						items-center
-						border-solid 
-						border-2 
-						border-black
-							`}
-					>
-						<p>{index + 1}</p>
-						<Image
-							src={track.album.images[0].url}
-							alt=""
-							width={60}
-							height={60}
-						/>
-						<div>
-							<p>{track.name}</p>
-							<p>
-								{track.artists.map((artist, index) => (
-									<React.Fragment key={artist.id}>
-										<Link href={artist.href}>{artist.name}</Link>
-										{index !== track.artists.length - 1 && ', '}
-									</React.Fragment>
-								))}
-							</p>
-						</div>
-						<Link href={track.album.href}>
-							{track.album.name}
-						</Link>
-
-						<p>
-							{track.duration_ms / 1000 / 60}
-						</p>
-					</div>
-				))}
-			</div>
+			<TrackList tracks={topTrackList.items}/>
+			
 
 			<p>Top Artists</p>
 			<div className={`
@@ -124,6 +77,5 @@ export default async function HomePage() {
 					</Card>
 				))}
 			</Flex> */}
-			<Player />
 		</div>);
 }

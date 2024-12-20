@@ -24,13 +24,25 @@ export default async function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <AllProviders>
-          <div className="flex gap-4">
-            <Link href="/">Home</Link>
-            <Link href="/me">Profile</Link>
-            <Link href="/me/library">Library</Link>
-          </div>
-          <Player accessToken={auth.tokens.accessToken} />
-          {children}
+          <main className="
+          h-dvh 
+          overflow-hidden
+          flex
+          flex-col
+          
+          ">
+            <div className="basis-11/12 overflow-y-scroll">
+              <div className="flex gap-4">
+              <Link href="/">Home</Link>
+              <Link href="/me">Profile</Link>
+              <Link href="/me/library">Library</Link>
+              </div>
+              {children}
+            </div>
+            <div>
+              <Player accessToken={auth.tokens.accessToken} />
+            </div>
+          </main>
         </AllProviders>
       </body>
     </html>
