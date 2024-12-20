@@ -6,6 +6,7 @@ import React from "react";
 import { Avatar } from "@nextui-org/avatar";
 import { Image } from "@nextui-org/image";
 import UserEntity from "@/entities/user";
+import  {TrackList}  from "@/entities/track/ui/TrackList";
 
 export default async function HomePage() {
 	const user = await UserEntity.getCurrentUser()
@@ -17,6 +18,7 @@ export default async function HomePage() {
 
 	return (
 		<div>
+			<TrackList tracks={topTrackList.items}/>
 			<div className={`
 			flex
 			items-center

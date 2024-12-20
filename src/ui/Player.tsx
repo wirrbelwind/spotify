@@ -14,11 +14,12 @@ export const Player = () => {
 	const device = usePlayerDevice()
 
 	const isDeviceAvailable = useMemo(() => {
-		if (device?.status === 'ready' && device?.device_id && playback?.context.uri) {
+		console.log(device?.status,device?.device_id)
+		if (device?.status === 'ready' && device?.device_id) {
 			return true
 		}
 		return false
-	}, [device?.status, device?.device_id, playback?.context.uri])
+	}, [device?.status, device?.device_id])
 
 	const handlePlay = () => {
 		if (!isDeviceAvailable) {
