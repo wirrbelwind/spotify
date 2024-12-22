@@ -1,10 +1,9 @@
-
 interface GetBestFitImageArgs {
-	images: Array<{
+	images: {
 		url: string
 		width: number
 		height: number
-	}>
+	}[]
 
 	preferredSize: {
 		width: number
@@ -26,7 +25,7 @@ interface GetBestFitImageReturn {
 
 export const getBestFitImage = ({ images, preferredSize }: GetBestFitImageArgs) => {
 	if (!images.length) {
-		throw new Error(`Array of images has zero elements`)
+		return null
 	}
 
 	const firstImage = images[0]

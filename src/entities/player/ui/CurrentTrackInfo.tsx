@@ -2,24 +2,30 @@ import { LinksTextList } from "@/ui/LinksTextList"
 import NextImage from "next/image"
 import { Image } from "@nextui-org/image"
 import React from "react"
+import { Nullable } from "@/app/types"
 
 interface PlayerCurrentTrackProps {
 	name: string
-	imageUrl?: string
-	artists?: Array<{
+	image: {
+		url: string
+		width: number
+		height: number
+	}
+	artists?: Nullable<{
 		label: string
 		url: string
-	}> | null
+	}[]>
 }
 
-export const CurrentTrackInfo: React.FC<PlayerCurrentTrackProps> = ({ artists, name, imageUrl }) => {
+export const CurrentTrackInfo: React.FC<PlayerCurrentTrackProps> = ({ artists, name, image }) => {
+
 	return (
 		<div>
 			<Image
 				as={NextImage}
-				src={imageUrl}
-				width={80}
-				height={80}
+				src={image.url}
+				width={image.width}
+				height={image.height}
 				className="w-20 h-20"
 				alt=""
 			/>

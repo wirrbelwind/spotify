@@ -8,6 +8,8 @@ import { ActionButtons } from "./ActionButtons";
 import { TrackTimeline } from "./TrackTimeline";
 import { LinksTextListProps } from "@/ui/LinksTextList";
 import { getIdFromUri } from "@/utils/getIdFromUri";
+import { getBestFitImage } from "@/utils/getBestFitImage";
+import { FALLBACK_TRACK_IMAGE_URL, TRACK_IMAGE_HEIGHT, TRACK_IMAGE_WIDTH } from "../model/constants";
 
 export const Player = () => {
 	const player = usePlayer()
@@ -22,6 +24,29 @@ export const Player = () => {
 			url: `/artist/${getIdFromUri(artist.uri, 'artist')}`
 		}))
 
+	}, [player._library.playback?.track_window.current_track])
+
+	const trackImageUrl = useMemo(() => {
+		const imageList = player._library.playback?.track_window.current_track.album.images
+		.filter(image => image.height && image.width)
+		
+		if(!imageList || !imageList.length) {
+			return FALLBACK_TRACK_IMAGE_URL
+		}
+
+		const image = getBestFitImage({
+			images: imageList,
+			preferredSize: {
+				width: TRACK_IMAGE_WIDTH,
+				height: TRACK_IMAGE_HEIGHT
+			}
+		})
+
+		if(!image) {
+			return FALLBACK_TRACK_IMAGE_URL
+		}
+
+		return image.url
 	}, [player._library.playback?.track_window.current_track])
 
 	return (
@@ -39,7 +64,11 @@ export const Player = () => {
 						{player.isSomethingPlaying && (
 							<CurrentTrackInfo
 								name={player._library.playback?.track_window.current_track.name as string}
-								imageUrl={player._library.playback?.track_window.current_track.album.images[0].url}
+								image={{
+									url: trackImageUrl,
+									width: TRACK_IMAGE_WIDTH,
+									height: TRACK_IMAGE_HEIGHT,
+								}}
 								artists={artistLinks}
 							/>
 						)}
