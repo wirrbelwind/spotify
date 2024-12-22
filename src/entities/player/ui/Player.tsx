@@ -28,9 +28,9 @@ export const Player = () => {
 
 	const trackImageUrl = useMemo(() => {
 		const imageList = player._library.playback?.track_window.current_track.album.images
-		.filter(image => image.height && image.width)
-		
-		if(!imageList || !imageList.length) {
+			.filter(image => image.height && image.width)
+
+		if (!imageList || !imageList.length) {
 			return FALLBACK_TRACK_IMAGE_URL
 		}
 
@@ -42,7 +42,7 @@ export const Player = () => {
 			}
 		})
 
-		if(!image) {
+		if (!image) {
 			return FALLBACK_TRACK_IMAGE_URL
 		}
 
@@ -59,39 +59,36 @@ export const Player = () => {
 				/>
 			)}
 			{player.isPlayerReady && (
-				<div>
-					<div className="flex">
-						{player.isSomethingPlaying && (
-							<CurrentTrackInfo
-								name={player._library.playback?.track_window.current_track.name as string}
-								image={{
-									url: trackImageUrl,
-									width: TRACK_IMAGE_WIDTH,
-									height: TRACK_IMAGE_HEIGHT,
-								}}
-								artists={artistLinks}
-							/>
-						)}
+				<div className="flex">
+					{player.isSomethingPlaying && (
+						<CurrentTrackInfo
+							name={player._library.playback?.track_window.current_track.name as string}
+							image={{
+								url: trackImageUrl,
+								width: TRACK_IMAGE_WIDTH,
+								height: TRACK_IMAGE_HEIGHT,
+							}}
+							artists={artistLinks}
+						/>
+					)}
 
-						<div className="basis-full">
-							<ActionButtons
-								elementsProps={{
-									wrapper: {
-										className: 'flex gap-4  items-center justify-center'
-									}
-								}}
-							/>
+					<div className="basis-full">
+						<ActionButtons
+							elementsProps={{
+								wrapper: {
+									className: 'flex gap-4  items-center justify-center'
+								}
+							}}
+						/>
 
-							<TrackTimeline
-								elementsProps={{
-									wrapper: {
-										className: "flex items-center justify-center gap-2"
-									}
-								}}
-							/>
-						</div>
+						<TrackTimeline
+							elementsProps={{
+								wrapper: {
+									className: "flex items-center justify-center gap-2"
+								}
+							}}
+						/>
 					</div>
-
 				</div>
 			)}
 		</div>
