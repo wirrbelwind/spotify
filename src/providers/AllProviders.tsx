@@ -2,7 +2,7 @@
 
 import { PropsWithChildren } from 'react'
 import { NextUIProvider } from './next-ui';
-import { SpotifyPlayerProvider } from './react-spotify-web-playback-sdk';
+import { SpotifyPlayerProvider } from './spotify-player';
 import UserEntity from '@/entities/user';
 
 export const AllProviders: React.FC<PropsWithChildren> = async ({ children }) => {
