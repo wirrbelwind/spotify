@@ -14,6 +14,7 @@ export default async function HomePage() {
 	const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
 	const topTrackList = topResponse.data
 
+
 	const topArtistList = (await $axios.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
 
 	return (
