@@ -14,8 +14,7 @@ export default async function LibraryPage() {
 	return (
 		<div>
 
-			{/* <Player accessToken={auth.tokens.accessToken} /> */}
-			<div
+			{/* <div
 				className={`
 					grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-4
 					`}
@@ -47,7 +46,7 @@ export default async function LibraryPage() {
 						<p className="mt-3 truncate">{playlist.name}</p>
 					</div>
 				))}
-			</div>
+			</div> */}
 		</div>
 	)
 

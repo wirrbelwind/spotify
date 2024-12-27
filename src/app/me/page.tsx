@@ -18,7 +18,7 @@ export default async function HomePage() {
 
 	return (
 		<div>
-			<div className={`
+			{/* <div className={`
 			flex
 			items-center
 			`}>
@@ -59,23 +59,6 @@ export default async function HomePage() {
 						<p>{artist.name}</p>
 					</div>
 				))}
-			</div>
-			{/* 
-			<Flex
-				gap="2rem"
-			>
-				{topArtistList.items.map(artist => (
-					<Card
-						key={artist.id}
-					>
-						<Image
-							src={artist.images?.[0]?.url}
-							width={180}
-							height={180}
-						/>
-						<Text>{artist.name}</Text>
-					</Card>
-				))}
-			</Flex> */}
+			</div> */}
 		</div>);
 }

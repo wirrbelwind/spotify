@@ -39,7 +39,8 @@ export default async function RootLayout({ children }: { children: any }) {
               {children}
             </div>
             <div className="basis-1/12 overflow-hidden">
-              <Player accessToken={auth.tokens.accessToken} />
+              {/* <Player accessToken={auth.tokens.accessToken} /> */}
+              player was here
             </div>
           </main>
         </AllProviders>
