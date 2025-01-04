@@ -28,7 +28,12 @@ const nextConfig = {
         pathname: '/image/**'
       },
     ]
-  }
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 export default nextConfig;
