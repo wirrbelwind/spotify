@@ -25,6 +25,7 @@
     "react-dom": "18.3.1",
     "react-spotify-web-playback": "^0.14.6",
     "react-spotify-web-playback-sdk": "^3.0.2",
+    "server-only": "^0.0.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {
