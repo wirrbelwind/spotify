@@ -5991,13 +5991,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ky@npm:^1.7.4":
-  version: 1.7.4
-  resolution: "ky@npm:1.7.4"
-  checksum: 10c0/8b28b85cbee6d3e073ff796b92661f4bf155ec9b9a131411de1c34fb2f89f8507e67ff3df369e3c6d18714134774e8735e88cba72b19d005a09112b800d14474
-  languageName: node
-  linkType: hard
-
 "language-subtag-registry@npm:^0.3.20":
   version: 0.3.22
   resolution: "language-subtag-registry@npm:0.3.22"
@@ -6130,7 +6123,6 @@ __metadata:
     eslint: "npm:8.57.0"
     eslint-config-next: "npm:14.2.4"
     framer-motion: "npm:^11.15.0"
-    ky: "npm:^1.7.4"
     next: "npm:15.0.1"
     postcss: "npm:^8.4.49"
     postcss-simple-vars: "npm:^7.0.1"
