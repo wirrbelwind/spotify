@@ -1,5 +1,3 @@
-import { PageObject, TrackObject } from "@/app/types"
-import { $axios } from "@/utils/$axios"
 import { queryOptions } from "@tanstack/react-query"
 import { getUserTopTracks } from "./getUserTopTracks"
 

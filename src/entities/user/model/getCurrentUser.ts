@@ -2,8 +2,8 @@
 import 'server-only'
 
 import { User } from "@/app/types"
-import { refreshTokens } from "../../utils/refreshTokens"
-import { $axios } from "../../utils/$axios"
+import { refreshTokens } from "../../../utils/refreshTokens"
+import { $axios } from "../../../utils/$axios"
 import { authService } from "./authService"
 
 export const getCurrentUser = async (): Promise<User> => {

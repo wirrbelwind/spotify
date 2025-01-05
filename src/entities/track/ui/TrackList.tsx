@@ -1,5 +1,5 @@
 'use client'
-import { userTopTracksOptions } from "@/api/userTopTracks";
+import { userTopTracksOptions } from "@/api/userTopTracksOptions";
 import { TrackObject } from "@/app/types";
 import { millisecondsToTime } from "@/utils/millisecondsToTime";
 import { Button, Image, Link } from "@nextui-org/react";

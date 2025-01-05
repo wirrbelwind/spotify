@@ -8,11 +8,15 @@ import { Image } from "@nextui-org/image";
 import UserEntity from "@/entities/user";
 import { TrackList } from "@/entities/track/ui/TrackList";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { userTopTracksOptions } from "@/api/userTopTracks";
+import { userTopTracksOptions } from "@/api/userTopTracksOptions";
+import { userOptions } from "@/api/userOptions";
+import { Profile } from "@/entities/user/ui/Profile";
 
 export default async function HomePage() {
 	const queryClient = new QueryClient()
-	await queryClient.prefetchQuery(userTopTracksOptions(10))
+
+	queryClient.prefetchQuery(userTopTracksOptions(10))
+	queryClient.prefetchQuery(userOptions())
 
 	// const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
 	// const topTrackList = topResponse.data
@@ -20,12 +24,13 @@ export default async function HomePage() {
 	// const topArtistList = (await $axios.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
 
 	return (
-		// <HydrationBoundary state={dehydrate(queryClient)}>
+		<HydrationBoundary state={dehydrate(queryClient)}>
 			<div>
+				<Profile/>
 				<p>Top tracks</p>
 				<TrackList />
 			</div>
-		// </HydrationBoundary>
+		</HydrationBoundary>
 	);
 }
 

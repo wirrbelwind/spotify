@@ -1,5 +1,5 @@
-import { authService } from "./authService";
-import { getCurrentUser } from "./getCurrentUser";
+import { authService } from "./model/authService";
+import { getCurrentUser } from "./model/getCurrentUser";
 
 const UserEntity = {
 	authService,
