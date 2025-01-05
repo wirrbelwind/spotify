@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: any }) {
-  const auth = await UserEntity.authService()
+  // const auth = await UserEntity.authService()
 
   return (
     <html lang="en" suppressHydrationWarning>

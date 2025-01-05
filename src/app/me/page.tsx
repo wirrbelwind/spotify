@@ -7,18 +7,29 @@ import { Avatar } from "@nextui-org/avatar";
 import { Image } from "@nextui-org/image";
 import UserEntity from "@/entities/user";
 import { TrackList } from "@/entities/track/ui/TrackList";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { userTopTracksOptions } from "@/api/userTopTracks";
 
 export default async function HomePage() {
-	const user = await UserEntity.getCurrentUser()
+	const queryClient = new QueryClient()
+	await queryClient.prefetchQuery(userTopTracksOptions(10))
 
-	const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
-	const topTrackList = topResponse.data
+	// const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
+	// const topTrackList = topResponse.data
 
-	const topArtistList = (await $axios.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
+	// const topArtistList = (await $axios.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
 
 	return (
-		<div>
-			{/* <div className={`
+		// <HydrationBoundary state={dehydrate(queryClient)}>
+			<div>
+				<p>Top tracks</p>
+				<TrackList />
+			</div>
+		// </HydrationBoundary>
+	);
+}
+
+{/* <div className={`
 			flex
 			items-center
 			`}>
@@ -36,10 +47,6 @@ export default async function HomePage() {
 					</p>
 				</div>
 			</div>
-
-			<p>Top tracks</p>
-			<TrackList tracks={topTrackList.items} />
-
 
 			<p>Top Artists</p>
 			<div className={`
@@ -60,5 +67,3 @@ export default async function HomePage() {
 					</div>
 				))}
 			</div> */}
-		</div>);
-}

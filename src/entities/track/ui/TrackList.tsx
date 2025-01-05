@@ -1,15 +1,11 @@
 'use client'
+import { userTopTracksOptions } from "@/api/userTopTracks";
 import { TrackObject } from "@/app/types";
-import PlayerEntity from "@/entities/player";
 import { millisecondsToTime } from "@/utils/millisecondsToTime";
 import { Button, Image, Link } from "@nextui-org/react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { usePlaybackState, usePlayerDevice, useSpotifyPlayer } from "react-spotify-web-playback-sdk";
-
-interface TrackListProps {
-	tracks: TrackObject[]
-}
 
 type ColumnType = 'order' | 'avatar' | 'name' | 'album' | 'liked' | 'duration'
 
@@ -41,24 +37,24 @@ const columns: { key: ColumnType, label: string }[] = [
 ];
 
 export const OrderCell: React.FC = ({ track, allTracks }) => {
-	const device = usePlayerDevice()
-	const playback = usePlaybackState(true, 1000)
-	const player = useSpotifyPlayer()
+	// const device = usePlayerDevice()
+	// const playback = usePlaybackState(true, 1000)
+	// const player = useSpotifyPlayer()
 
 	const uriList = allTracks.map(otherTrack => otherTrack.uri)
 
-	const isCurrentPlayback = playback?.context.uri === track.uri
+	// const isCurrentPlayback = playback?.context.uri === track.uri
 
 	const handlePlay = () => {
-		if (device?.status === 'ready' && device.device_id) {
-			if (isCurrentPlayback) {
-				// toggle pause play
-				player?.togglePlay()
-			}
-			else {
-				PlayerEntity.startAudio(device.device_id, null, uriList, track.uri)
-			}
-		}
+		// if (device?.status === 'ready' && device.device_id) {
+		// 	if (isCurrentPlayback) {
+		// 		// toggle pause play
+		// 		player?.togglePlay()
+		// 	}
+		// 	else {
+		// 		PlayerEntity.startAudio(device.device_id, null, uriList, track.uri)
+		// 	}
+		// }
 	}
 
 	return (
@@ -74,11 +70,11 @@ export const OrderCell: React.FC = ({ track, allTracks }) => {
 				src="/play.svg"
 				className="hidden group-hover:block"
 			/> */}
-			{(!isCurrentPlayback || (isCurrentPlayback && playback.paused)) ? (
+			{/* {(!isCurrentPlayback || (isCurrentPlayback && playback.paused)) ? (
 				<Image src="/play.svg" width={30} height={30} alt="" className="hidden group-hover:block" />
 			) : (
 				<Image src="/pause.svg" width={30} height={30} alt="" className="hidden group-hover:block" />
-			)}
+			)} */}
 		</Button>
 	)
 }
@@ -138,37 +134,53 @@ const columnComponentMap: Record<ColumnType, React.FC> = {
 	'duration': DurationCell
 }
 
-export const TrackList: React.FC<TrackListProps> = ({ tracks }) => {
-	const trackList = tracks.map((track, index) => ({
-		...track,
-		order: index + 1
-	}))
+/**
+ * @type client component
+ */
+export const TrackList = () => {
+	// const trackList = tracks.map((track, index) => ({
+	// 	...track,
+	// 	order: index + 1
+	// }))
+	const trackList = useQuery(userTopTracksOptions(10))
 
 	return (
-		<Table aria-label="Example static collection table" >
-			<TableHeader columns={columns}>
-				{(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-			</TableHeader>
+		<>
+			{trackList.isLoading && (
+				<div>loading</div>
+			)}
 
-			<TableBody items={trackList}>
-				{(track) => (
-					<TableRow
-						key={track.id}
-						className="hover:bg-gray-400 group"
-					>
-						{(columnKey) => {
-							const CellComponent = columnComponentMap[columnKey]
+			{trackList.isError && (
+				<div>error</div>
+			)}
 
-							return (
-								<TableCell>
-									<CellComponent track={track} allTracks={trackList}/>
-								</TableCell>
-							)
-						}}
-					</TableRow>
-				)}
+			{trackList.isSuccess && (
+				<Table>
+					<TableHeader columns={columns}>
+						{(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+					</TableHeader>
 
-			</TableBody>
-		</Table>
+					<TableBody items={trackList.data.items}>
+						{(track) => (
+							<TableRow
+								key={track.id}
+								className="hover:bg-gray-400 group"
+							>
+								{(columnKey) => {
+									const CellComponent = columnComponentMap[columnKey]
+
+									return (
+										<TableCell>
+											<CellComponent track={track} allTracks={trackList.data.items} />
+										</TableCell>
+									)
+								}}
+							</TableRow>
+						)}
+
+					</TableBody>
+				</Table>
+			)}
+		</>
 	);
 }

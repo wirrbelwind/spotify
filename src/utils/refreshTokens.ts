@@ -1,3 +1,4 @@
+'use server'
 import UserEntity from "@/entities/user"
 import { $axios } from "./$axios"
 

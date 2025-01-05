@@ -1,3 +1,6 @@
+'use server'
+import 'server-only'
+
 import { User } from "@/app/types"
 import { refreshTokens } from "../../utils/refreshTokens"
 import { $axios } from "../../utils/$axios"
