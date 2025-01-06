@@ -1,9 +1,15 @@
 'use server'
 
 import { $axios } from "@/utils/$axios"
+import { cookies } from "next/headers"
+import { COOKIE_KEYS } from "../../constants"
 
-export const startAudioAction = async (deviceId: string, contextUri?: string, audioUris?: string[], offset?: string) => {
+export const startAudioAction = async (contextUri?: string, audioUris?: string[], offset?: string) => {
 	try {
+		const cookie = await cookies()
+
+		const deviceId = cookie.get(COOKIE_KEYS.DEVICE_ID)
+
 		await $axios.put(`https://api.spotify.com/v1/me/player/play`, {
 			context_uri: contextUri,
 			uris: audioUris ?? null,
