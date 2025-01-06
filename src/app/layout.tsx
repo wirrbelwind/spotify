@@ -5,6 +5,7 @@ import { Player } from "@/entities/player/ui/Player";
 import UserEntity from "@/entities/user";
 import Link from "next/link";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { PlayerInit } from "@/entities/player/ui/PlayerInit";
 
 export const metadata = {
   title: "Spotify",
@@ -42,7 +43,8 @@ export default async function RootLayout({ children }: { children: any }) {
             </div>
             <div className="basis-3/12 overflow-hidden">
               <HydrationBoundary state={dehydrate(queryClient)}>
-                <Player token={auth.tokens.accessToken} />
+                <PlayerInit token={auth.tokens.accessToken}/>
+                <Player />
               </HydrationBoundary>
             </div>
           </main>

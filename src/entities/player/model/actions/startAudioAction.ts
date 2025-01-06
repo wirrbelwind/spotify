@@ -8,8 +8,7 @@ export const startAudioAction = async (contextUri?: string, audioUris?: string[]
 	try {
 		const cookie = await cookies()
 
-		const deviceId = cookie.get(COOKIE_KEYS.DEVICE_ID)
-
+		const deviceId = cookie.get(COOKIE_KEYS.DEVICE_ID)?.value
 		await $axios.put(`https://api.spotify.com/v1/me/player/play`, {
 			context_uri: contextUri,
 			uris: audioUris ?? null,
