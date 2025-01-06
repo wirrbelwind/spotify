@@ -2,7 +2,7 @@
 
 import { Button } from "@nextui-org/button"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
-import { usePlayer } from "../model/usePlayer"
+import { usePlayer } from "../model/_usePlayer"
 import { playerServerActions } from ".."
 import NextImage from "next/image"
 import { Image } from "@nextui-org/image"

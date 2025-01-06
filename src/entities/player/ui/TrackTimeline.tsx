@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react"
-import { usePlayer } from "../model/usePlayer"
+import { usePlayer } from "../model/_usePlayer"
 import { millisecondsToTime } from "@/utils/millisecondsToTime"
 import { Slider } from "@nextui-org/slider"
 

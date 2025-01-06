@@ -4,6 +4,7 @@ import { AllProviders } from "@/providers/AllProviders";
 import { Player } from "@/entities/player/ui/Player";
 import UserEntity from "@/entities/user";
 import Link from "next/link";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
 export const metadata = {
   title: "Spotify",
@@ -11,6 +12,8 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: any }) {
   const auth = await UserEntity.authService()
+
+  const queryClient = new QueryClient()
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -37,8 +40,10 @@ export default async function RootLayout({ children }: { children: any }) {
               </div>
               {children}
             </div>
-            <div className="basis-1/12 overflow-hidden">
-              <Player token={auth.tokens.accessToken}/>
+            <div className="basis-3/12 overflow-hidden">
+              <HydrationBoundary state={dehydrate(queryClient)}>
+                <Player token={auth.tokens.accessToken} />
+              </HydrationBoundary>
             </div>
           </main>
         </AllProviders>
