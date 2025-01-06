@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: any }) {
-  // const auth = await UserEntity.authService()
+  const auth = await UserEntity.authService()
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -38,8 +38,7 @@ export default async function RootLayout({ children }: { children: any }) {
               {children}
             </div>
             <div className="basis-1/12 overflow-hidden">
-              {/* <Player accessToken={auth.tokens.accessToken} /> */}
-              player was here
+              <Player token={auth.tokens.accessToken}/>
             </div>
           </main>
         </AllProviders>
