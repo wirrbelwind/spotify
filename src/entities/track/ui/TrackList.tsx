@@ -1,34 +1,38 @@
 'use client'
 import { userTopTracksOptions } from "@/api/userTopTracksOptions";
 import { TrackObject } from "@/app/types";
+import { startAudioAction } from "@/entities/player/model/actions/startAudioAction";
+import { usePlayerState } from "@/entities/player/model/usePlayerState";
+import { usePlayerController } from "@/providers/spotify-player";
+import { EqualizerIcon } from "@/ui/EqualizerIcon";
 import { millisecondsToTime } from "@/utils/millisecondsToTime";
 import { Button, Image, Link } from "@nextui-org/react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
 type ColumnType = 'order' | 'avatar' | 'name' | 'album' | 'liked' | 'duration'
 
 const columns: { key: ColumnType, label: string }[] = [
 	{
 		key: "order",
-		label: "ORDER",
+		label: "#",
 	},
 	{
 		key: "avatar",
-		label: "AVATAR",
+		label: "Title",
 	},
 	{
 		key: "name",
-		label: "NAME",
+		label: "",
 	},
 	{
 		key: "album",
-		label: "ALBUM",
+		label: "Album",
 	},
 	{
 		key: "liked",
-		label: "LIKED",
+		label: "",
 	},
 	{
 		key: "duration",
@@ -40,41 +44,50 @@ export const OrderCell: React.FC = ({ track, allTracks }) => {
 	// const device = usePlayerDevice()
 	// const playback = usePlaybackState(true, 1000)
 	// const player = useSpotifyPlayer()
+	const controllerContext = usePlayerController()
+	const player = usePlayerState()
 
 	const uriList = allTracks.map(otherTrack => otherTrack.uri)
 
 	// const isCurrentPlayback = playback?.context.uri === track.uri
 
 	const handlePlay = () => {
-		// if (device?.status === 'ready' && device.device_id) {
-		// 	if (isCurrentPlayback) {
-		// 		// toggle pause play
-		// 		player?.togglePlay()
-		// 	}
-		// 	else {
-		// 		PlayerEntity.startAudio(device.device_id, null, uriList, track.uri)
-		// 	}
-		// }
+		if (player.data?.track_window.current_track.uri === track.uri && !player.data?.paused) {
+			controllerContext?.controller?.pause()
+		}
+		else {
+			startAudioAction({
+				audioUris: uriList,
+				offset: track.uri
+			})
+		}
 	}
 
 	return (
 		<Button
 			isIconOnly
 			className=""
+			variant="light"
 			onPress={handlePlay}
 		>
-			<p className="group-hover:hidden">
-				{track.order}
-			</p>
-			{/* <Image
-				src="/play.svg"
-				className="hidden group-hover:block"
-			/> */}
-			{/* {(!isCurrentPlayback || (isCurrentPlayback && playback.paused)) ? (
-				<Image src="/play.svg" width={30} height={30} alt="" className="hidden group-hover:block" />
+			<div className="group-hover/track:hidden">
+				{player.data?.track_window.current_track.uri === track.uri ? (
+					<EqualizerIcon />
+				) : (<p
+
+				>
+					{track.order}
+				</p>)
+				}
+			</div>
+
+
+
+			{(player.data?.track_window.current_track.uri === track.uri && !player.data?.paused) ? (
+				<Image src="/pause.svg" width={30} height={30} alt="" className="hidden group-hover/track:block" />
 			) : (
-				<Image src="/pause.svg" width={30} height={30} alt="" className="hidden group-hover:block" />
-			)} */}
+				<Image src="/play.svg" width={30} height={30} alt="" className="hidden group-hover/track:block" />
+			)}
 		</Button>
 	)
 }
@@ -134,15 +147,38 @@ const columnComponentMap: Record<ColumnType, React.FC> = {
 	'duration': DurationCell
 }
 
+export const TextColumnHeader: React.FC<{
+	column: {
+		key: ColumnType;
+		label: string;
+	}
+}> = ({ column }) => {
+	return (
+		<p>{column.label}</p>
+	)
+}
+
+const columnHeadComponentMap: Record<ColumnType, React.FC<{
+	column: {
+		key: ColumnType;
+		label: string;
+	}
+}>> = {
+	'order': TextColumnHeader,
+	'avatar': TextColumnHeader,
+	'name': TextColumnHeader,
+	'album': TextColumnHeader,
+	'liked': TextColumnHeader,
+	'duration': () => <Image src="/time.svg" width={20} height={20} />
+}
+
 /**
  * @type client component
  */
 export const TrackList = () => {
-	// const trackList = tracks.map((track, index) => ({
-	// 	...track,
-	// 	order: index + 1
-	// }))
 	const trackList = useQuery(userTopTracksOptions(10))
+
+	const player = usePlayerState()
 
 	return (
 		<>
@@ -157,14 +193,29 @@ export const TrackList = () => {
 			{trackList.isSuccess && (
 				<Table>
 					<TableHeader columns={columns}>
-						{(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+						{(column) => {
+							const HeaderComponent = columnHeadComponentMap[column.key]
+
+							return (
+								<TableColumn key={column.key}>
+									<HeaderComponent column={column}/>
+								</TableColumn>
+							)
+						}}
 					</TableHeader>
 
-					<TableBody items={trackList.data.items}>
+					<TableBody items={trackList.data.items.map((track, index) => ({
+						...track,
+						order: index + 1
+					}))}>
 						{(track) => (
 							<TableRow
 								key={track.id}
-								className="hover:bg-gray-400 group"
+								className={`
+									hover:bg-gray-400
+									group/track
+									${player.data?.track_window.current_track.id === track.id && 'text-green-600'}
+									`}
 							>
 								{(columnKey) => {
 									const CellComponent = columnComponentMap[columnKey]
@@ -177,7 +228,6 @@ export const TrackList = () => {
 								}}
 							</TableRow>
 						)}
-
 					</TableBody>
 				</Table>
 			)}
