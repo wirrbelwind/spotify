@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
 import { rememberDeviceId } from "../model/actions/rememberDeviceId"
 import { usePlayerController } from "@/providers/spotify-player"
+import { TrackTimeline } from "./TrackTimeline"
 
 // import { useMemo } from "react";
 // import { usePlayer } from "@/entities/player";
@@ -122,7 +123,13 @@ export const Player = () => {
 			}}>first time</Button>
 
 			<h1>{playerQuery.data?.position} / {playerQuery.data?.duration}</h1>
-			<h1>isRefetching: {String(playerQuery.isRefetching)}</h1>
+			<TrackTimeline
+				elementsProps={{
+					wrapper: {
+						className: "flex items-center justify-center gap-2"
+					}
+				}}
+			/>
 		</>
 	)
 }
