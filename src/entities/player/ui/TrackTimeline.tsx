@@ -6,6 +6,7 @@ import { Slider } from "@nextui-org/slider"
 import { useQuery } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
 import { usePlayerController } from "@/providers/spotify-player"
+import { usePlayerState } from "../model/usePlayerState"
 
 interface TrackTimelineProps {
 	elementsProps?: {
@@ -15,25 +16,33 @@ interface TrackTimelineProps {
 
 export const TrackTimeline: React.FC<TrackTimelineProps> = ({ elementsProps }) => {
 	const playerContext = usePlayerController()
-	const playerQuery = useQuery(playerStateOptions(playerContext?.controller))
+	const player = usePlayerState()
+
+	const isActionsDisabled = !player.data
 
 	return (
 		<div {...elementsProps?.wrapper}>
 			<p>
-				{millisecondsToTime(playerQuery.data?.position ?? 0)}
+				{millisecondsToTime(player.data?.position ?? 0)}
 			</p>
 			<Slider
-				className="max-w-md"
-				value={playerQuery.data?.position}
-				maxValue={playerQuery.data?.duration}
+				classNames={{
+					base: "max-w-md group/timeline",
+					thumb: 'opacity-0 group-hover/timeline:opacity-100 ease-in duration-100',
+
+				}}
+				// className="opacity-100"
+				value={player.data?.position}
+				maxValue={player.data?.duration}
 				minValue={0}
 				step={1}
 				onChangeEnd={newPosition => {
 					console.log(newPosition)
 					playerContext?.controller?.seek(newPosition[0] ?? newPosition)
 				}}
+				isDisabled={isActionsDisabled}
 			/>
-			<p>{millisecondsToTime(playerQuery.data?.duration ?? 0)}</p>
+			<p>{millisecondsToTime(player.data?.duration ?? 0)}</p>
 
 		</div>
 	)

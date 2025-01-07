@@ -4,7 +4,13 @@ import { $axios } from "@/utils/$axios"
 import { cookies } from "next/headers"
 import { COOKIE_KEYS } from "../../constants"
 
-export const startAudioAction = async (contextUri?: string, audioUris?: string[], offset?: string) => {
+interface StartAudioArgs {
+	contextUri?: string
+	audioUris?: string[]
+	offset?: string
+}
+
+export const startAudioAction = async ({ audioUris, contextUri, offset }: StartAudioArgs) => {
 	try {
 		const cookie = await cookies()
 
@@ -18,7 +24,6 @@ export const startAudioAction = async (contextUri?: string, audioUris?: string[]
 				device_id: deviceId
 			}
 		})
-
 	}
 	catch (error) {
 		console.log('error', error.message, error.name, error.response.data)

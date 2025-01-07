@@ -2,10 +2,13 @@
 
 import { Button } from "@nextui-org/button"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
-import { usePlayer } from "../model/_usePlayer"
 import { playerServerActions } from ".."
 import NextImage from "next/image"
 import { Image } from "@nextui-org/image"
+import { useQuery } from "@tanstack/react-query"
+import { playerStateOptions } from "../model/playerStateOptions"
+import { usePlayerController } from "@/providers/spotify-player"
+import { usePlayerState } from "../model/usePlayerState"
 
 interface ActionButtonsProps {
 	elementsProps?: {
@@ -14,36 +17,45 @@ interface ActionButtonsProps {
 }
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) => {
-	const player = usePlayer()
+	const player = usePlayerState()
+	const controllerContext = usePlayerController()
+
+	const isActionsDisabled = !player.data
+	
+	console.log(controllerContext?.shuffle)
 
 	return (
 		<div
 			{...elementsProps?.wrapper}
 		>
-			<Button
-				onPress={player.actions.handleShuffle}
-				isDisabled={!player.isSomethingPlaying}
+			<h1>prev: {player.data?.track_window.previous_tracks.length}</h1>
+			<h1>next: {player.data?.track_window.next_tracks.length}</h1>
+			{/* <Button
+				// onPress={playerContext?.controller}
+				// isDisabled={!player.isSomethingPlaying}
 				isIconOnly
 				className=" bg-none"
 			>
 				{player._library.playback?.shuffle ? 'shuffle on' : 'shuffle off'}
-			</Button>
-
+			</Button> */}
+	
 			<Button
-				onPress={player.actions.handlePrev}
-				isDisabled={!player.isSomethingPlaying}
+				onPress={() => controllerContext?.controller?.previousTrack()}
+				isDisabled={isActionsDisabled}
 				isIconOnly
 				className=" bg-none"
 			>
-				prev
+				{'<'}
 			</Button>
 
 			<Button
-				onPress={player.actions.togglePause}
-				isDisabled={!player.isSomethingPlaying}
+				onPress={() => {
+					controllerContext?.controller?.togglePlay()
+				}}
+				isDisabled={isActionsDisabled}
 				isIconOnly
 			>
-				{player._library.playback?.paused ? (
+				{player.data && player.data?.paused ? (
 					<Image
 						src="/play.svg"
 						className="w-10 h-10"
@@ -63,12 +75,12 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				)}
 			</Button>
 			<Button
-				onPress={player.actions.handleNext}
-				isDisabled={!player.isSomethingPlaying}
+				onPress={() => controllerContext?.controller?.nextTrack()}
+				isDisabled={isActionsDisabled}
 				isIconOnly
 				className=" bg-none"
 			>
-				next
+				{'>'}
 			</Button>
 
 		</div>

@@ -9,6 +9,7 @@ import { playerStateOptions } from "../model/playerStateOptions"
 import { rememberDeviceId } from "../model/actions/rememberDeviceId"
 import { usePlayerController } from "@/providers/spotify-player"
 import { TrackTimeline } from "./TrackTimeline"
+import { ActionButtons } from "./ActionButtons"
 
 // import { useMemo } from "react";
 // import { usePlayer } from "@/entities/player";
@@ -106,15 +107,12 @@ import { TrackTimeline } from "./TrackTimeline"
 // }
 
 export const Player = () => {
-	const playerContext = usePlayerController()
-	const playerQuery = useQuery(playerStateOptions(playerContext?.controller))
-	// console.log('test',playerQuery.data?.position)
 	const queryClient = useQueryClient()
 
 	return (
 		<>
 			<Button onPress={async () => {
-				await playerContext?.controller?.pause()
+				// await playerContext?.controller?.pause()
 				await startAudioAction('spotify:album:5ht7ItJgpBH7W6vJ5BqpPr')
 				setTimeout(() => {
 					queryClient.invalidateQueries({
@@ -123,11 +121,18 @@ export const Player = () => {
 				}, 1000)
 			}}>first time</Button>
 
-			<h1>{playerQuery.data?.position} / {playerQuery.data?.duration}</h1>
 			<TrackTimeline
 				elementsProps={{
 					wrapper: {
 						className: "flex items-center justify-center gap-2"
+					}
+				}}
+			/>
+
+			<ActionButtons
+				elementsProps={{
+					wrapper: {
+						className: 'flex gap-4  items-center justify-center'
 					}
 				}}
 			/>
