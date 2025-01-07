@@ -114,6 +114,7 @@ export const Player = () => {
 	return (
 		<>
 			<Button onPress={async () => {
+				await playerContext?.controller?.pause()
 				await startAudioAction('spotify:album:5ht7ItJgpBH7W6vJ5BqpPr')
 				setTimeout(() => {
 					queryClient.invalidateQueries({
