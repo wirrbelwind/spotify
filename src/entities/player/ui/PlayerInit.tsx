@@ -40,7 +40,10 @@ export const PlayerInit: React.FC<PlayerInitProps> = ({ token }) => {
 			}
 		};
 
-		return 
+		return () => {
+			playerContext?.controller?.disconnect()
+			playerContext?.setController(null)
+		}
 	}, [token])
 
 	return (
