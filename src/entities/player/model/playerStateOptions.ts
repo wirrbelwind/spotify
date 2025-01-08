@@ -10,5 +10,13 @@ export const playerStateOptions = (controller?: Spotify.Player | null) => {
 		queryFn: async () => {
 			return controller?.getCurrentState()
 		},
+		// refetchInterval(query) {
+		// 	if (query.state.data?.paused) {
+		// 		return false
+		// 	}
+		// 	else {
+		// 		return 1000
+		// 	}
+		// },
 	})
 }

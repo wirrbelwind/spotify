@@ -35,6 +35,8 @@ export const PlayerInit: React.FC<PlayerInitProps> = ({ token }) => {
 			});
 
 			controller.addListener('player_state_changed', changedState => {
+			// console.log('fetch')
+
 				queryClient.setQueryData(playerStateOptions().queryKey, changedState)
 			})
 			const isPlayerConnected = await controller.connect()

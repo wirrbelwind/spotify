@@ -1,12 +1,13 @@
 'use client'
 
-import { DetailedHTMLProps, HTMLAttributes } from "react"
+import { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useRef, useState } from "react"
 import { millisecondsToTime } from "@/utils/millisecondsToTime"
 import { Slider } from "@nextui-org/slider"
 import { useQuery } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
 import { usePlayerController } from "@/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
+import { debounce } from "@/utils/debounce"
 
 interface TrackTimelineProps {
 	elementsProps?: {
@@ -20,10 +21,39 @@ export const TrackTimeline: React.FC<TrackTimelineProps> = ({ elementsProps }) =
 
 	const isActionsDisabled = !player.data
 
+	const [position, setPosition] = useState<number | null>(null)
+	const intervalRef = useRef<null | number>(null)
+
+	const handleChange = useCallback(
+		debounce(
+			(newState?: Spotify.PlaybackState | null) => {
+				if (intervalRef.current) {
+					clearInterval(intervalRef.current)
+				}
+
+				if (!newState) {
+					setPosition(null)
+				}
+				else if (!newState.paused) {
+					console.log('new counter')
+					setPosition(newState.position + 1000)
+
+					intervalRef.current = setInterval(() => {
+						setPosition(prev => prev + 1000)
+					}, 1000) as number
+				}
+			}
+			, 1000)
+		, [])
+
+	useEffect(() => {
+		handleChange(player.data)
+	}, [player.data])
+
 	return (
 		<div {...elementsProps?.wrapper}>
 			<p>
-				{millisecondsToTime(player.data?.position ?? 0)}
+				{millisecondsToTime(position ?? 0)}
 			</p>
 			<Slider
 				classNames={{
@@ -32,7 +62,7 @@ export const TrackTimeline: React.FC<TrackTimelineProps> = ({ elementsProps }) =
 
 				}}
 				// className="opacity-100"
-				value={player.data?.position}
+				value={position}
 				maxValue={player.data?.duration}
 				minValue={0}
 				step={1}

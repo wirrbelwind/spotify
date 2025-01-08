@@ -110,21 +110,13 @@ import { usePlayerState } from "../model/usePlayerState"
 export const Player = () => {
 	const queryClient = useQueryClient()
 	const player = usePlayerState()
+	const controllerContext = usePlayerController()
 
 	return (
 		<>
-		<p>
+			<p>
 			{player.data?.track_window.current_track.name}
 		</p>
-			<Button onPress={async () => {
-				// await playerContext?.controller?.pause()
-				await startAudioAction('spotify:album:5ht7ItJgpBH7W6vJ5BqpPr')
-				setTimeout(() => {
-					queryClient.invalidateQueries({
-						queryKey: ['player', 'state']
-					})
-				}, 1000)
-			}}>first time</Button>
 
 			<TrackTimeline
 				elementsProps={{
