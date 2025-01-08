@@ -4,6 +4,8 @@ import { usePlayerController } from "@/providers/spotify-player"
 import Script from "next/script"
 import { useEffect } from "react"
 import { rememberDeviceId } from "../model/actions/rememberDeviceId"
+import { useQueryClient } from "@tanstack/react-query"
+import { playerStateOptions } from "../model/playerStateOptions"
 
 interface PlayerInitProps {
 	token: string
@@ -11,6 +13,7 @@ interface PlayerInitProps {
 
 export const PlayerInit: React.FC<PlayerInitProps> = ({ token }) => {
 	const playerContext = usePlayerController()
+	const queryClient = useQueryClient()
 
 	useEffect(() => {
 		window.onSpotifyWebPlaybackSDKReady = async () => {
@@ -31,7 +34,8 @@ export const PlayerInit: React.FC<PlayerInitProps> = ({ token }) => {
 				console.log('Device ID has gone offline', device_id);
 			});
 
-			controller.addListener('player_state_changed', qwe => {
+			controller.addListener('player_state_changed', changedState => {
+				queryClient.setQueryData(playerStateOptions().queryKey, changedState)
 			})
 			const isPlayerConnected = await controller.connect()
 

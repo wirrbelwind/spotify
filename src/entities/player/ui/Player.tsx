@@ -10,6 +10,7 @@ import { rememberDeviceId } from "../model/actions/rememberDeviceId"
 import { usePlayerController } from "@/providers/spotify-player"
 import { TrackTimeline } from "./TrackTimeline"
 import { ActionButtons } from "./ActionButtons"
+import { usePlayerState } from "../model/usePlayerState"
 
 // import { useMemo } from "react";
 // import { usePlayer } from "@/entities/player";
@@ -108,9 +109,13 @@ import { ActionButtons } from "./ActionButtons"
 
 export const Player = () => {
 	const queryClient = useQueryClient()
+	const player = usePlayerState()
 
 	return (
 		<>
+		<p>
+			{player.data?.track_window.current_track.name}
+		</p>
 			<Button onPress={async () => {
 				// await playerContext?.controller?.pause()
 				await startAudioAction('spotify:album:5ht7ItJgpBH7W6vJ5BqpPr')
