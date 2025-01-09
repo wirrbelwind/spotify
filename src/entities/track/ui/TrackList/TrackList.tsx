@@ -28,10 +28,6 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
 
 	return (
 		<>
-			{trackList.isLoading && (
-				<div>loading</div>
-			)}
-
 			{trackList.isError && (
 				<div>error</div>
 			)}
@@ -50,10 +46,13 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
 						}}
 					</TableHeader>
 
-					<TableBody items={trackList.data.items.map((track, index) => ({
+					<TableBody 
+					items={trackList.data.items.map((track, index) => ({
 						...track,
 						order: index + 1
-					}))}>
+					}))}
+					isLoading={trackList.isLoading}
+					>
 						{(track) => (
 							<TableRow
 								key={track.id}

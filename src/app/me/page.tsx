@@ -27,7 +27,8 @@ export default async function HomePage() {
 		<HydrationBoundary state={dehydrate(queryClient)}>
 			<div>
 				<Profile />
-				<p>Top tracks</p>
+				<p className="text-4xl">Top tracks this month</p>
+				<p className="mt-2">Only visible for you</p>
 				<TrackList
 					hideHeader
 					columns={[

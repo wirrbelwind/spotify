@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: any }) {
           flex
           flex-col
           ">
-            <div className="basis-full overflow-y-scroll">
+            <div className="basis-full overflow-y-scroll px-4 py-2">
               <div className="flex gap-4">
                 <Link href="/">Home</Link>
                 <Link href="/me">Profile</Link>
