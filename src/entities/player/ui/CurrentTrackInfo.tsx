@@ -30,7 +30,7 @@ export const CurrentTrackInfo: React.FC<PlayerCurrentTrackProps> = ({ artists, n
 				alt=""
 			/>
 
-			<div className="w-36">
+			<div className="">
 				<p className="truncate">
 					{name ?? 'No track name'}
 				</p>
