@@ -3,7 +3,7 @@ import { userTopTracksOptions } from "@/api/userTopTracksOptions";
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
 import { useQuery } from "@tanstack/react-query";
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, useState } from "react";
 import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType } from "./types";
 
@@ -24,8 +24,11 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
 	const columnsDefinition = allColumnsDefinitions
 		.filter(columnDef => columns.includes(columnDef.key))
 
+	const [selectedTracks, setSelectedTracks] = useState<string[]>([])
+
 	return (
 		<>
+			{JSON.stringify(selectedTracks)}
 			{trackList.isLoading && (
 				<div>loading</div>
 			)}
@@ -59,7 +62,22 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
 									hover:bg-gray-400
 									group/track
 									${player.data?.track_window.current_track.id === track.id && 'text-green-600'}
+									cursor-pointer
+									${selectedTracks.includes(track.id) && 'bg-gray-500'}
 									`}
+								onClick={(event) => {
+									if (event.shiftKey) {
+										if (selectedTracks.includes(track.id)) {
+											setSelectedTracks(prev => prev.filter(item => item !== track.id))
+										}
+										else {
+											setSelectedTracks(prev => [...prev, track.id])
+										}
+									}
+									else {
+										setSelectedTracks([track.id])
+									}
+								}}
 							>
 								{(columnKey) => {
 									const CellComponent = cellsMap[columnKey as ColumnType]
