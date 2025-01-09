@@ -29,8 +29,12 @@ export default async function HomePage() {
 				<Profile />
 				<p className="text-4xl">Top tracks this month</p>
 				<p className="mt-2">Only visible for you</p>
+
 				<TrackList
 					hideHeader
+					classNames={{
+						wrapper: 'mt-2'
+					}}
 					columns={[
 						'order',
 						'avatar',
