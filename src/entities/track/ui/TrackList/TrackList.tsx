@@ -62,6 +62,7 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
 									${player.data?.track_window.current_track.id === track.id && 'text-green-600'}
 									cursor-pointer
 									${selectedTracks.includes(track.id) && 'bg-gray-500'}
+									max-h-14
 									`}
 								onClick={(event) => {
 									if (event.shiftKey) {

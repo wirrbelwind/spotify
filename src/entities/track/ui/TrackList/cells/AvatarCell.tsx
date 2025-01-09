@@ -5,8 +5,8 @@ export const AvatarCell: React.FC<CellProps> = ({ track }) => {
 	return (
 		<Image
 			src={track.album.images[0].url}
-			width={60}
-			height={60}
+			width={40}
+			height={40}
 			alt={`Image of album ${track.album.name}`}
 		/>
 	)
