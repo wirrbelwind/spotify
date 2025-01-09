@@ -15,7 +15,7 @@ import { Profile } from "@/entities/user/ui/Profile";
 export default async function HomePage() {
 	const queryClient = new QueryClient()
 
-	queryClient.prefetchQuery(userTopTracksOptions(10))
+	queryClient.prefetchQuery(userTopTracksOptions(5))
 	queryClient.prefetchQuery(userOptions())
 
 	// const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')

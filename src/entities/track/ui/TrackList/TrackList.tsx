@@ -17,7 +17,7 @@ interface TrackListProps {
 }
 
 export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
-	const trackList = useQuery(userTopTracksOptions(10))
+	const trackList = useQuery(userTopTracksOptions(5))
 
 	const player = usePlayerState()
 

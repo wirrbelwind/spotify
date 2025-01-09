@@ -1,5 +1,4 @@
 import { queryOptions } from "@tanstack/react-query"
-import { getUserTopTracks } from "./getUserTopTracks"
 import { getCurrentUser } from "@/entities/user/model/getCurrentUser"
 
 export const userOptions = () => {
