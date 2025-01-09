@@ -28,7 +28,6 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
 
 	return (
 		<>
-			{JSON.stringify(selectedTracks)}
 			{trackList.isLoading && (
 				<div>loading</div>
 			)}
