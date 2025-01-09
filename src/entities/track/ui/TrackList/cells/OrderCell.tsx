@@ -5,8 +5,9 @@ import { usePlayerController } from "@/providers/spotify-player"
 import { EqualizerIcon } from "@/ui/EqualizerIcon"
 import { Button } from "@nextui-org/button"
 import Image from "next/image"
+import { CellProps } from "../types"
 
-export const OrderCell: React.FC = ({ track, allTracks }) => {
+export const OrderCell: React.FC<CellProps> = ({ track, allTracks }) => {
 	const controllerContext = usePlayerController()
 	const player = usePlayerState()
 

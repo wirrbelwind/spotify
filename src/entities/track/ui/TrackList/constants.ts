@@ -6,8 +6,8 @@ import { NameCell } from "./cells/NameCell";
 import { OrderCell } from "./cells/OrderCell";
 import { DurationHeader } from "./column-headers/DurationHeader";
 import { TextHeader } from "./column-headers/TextHeader";
+import { CellProps, ColumnType } from "./types";
 
-type ColumnType = 'order' | 'avatar' | 'name' | 'album' | 'liked' | 'duration'
 
 export const columnsDefinitions: { key: ColumnType, label: string }[] = [
 	{
@@ -50,7 +50,7 @@ export const headersMap: Record<ColumnType, React.FC<{
 	'duration': DurationHeader
 }
 
-export const cellsMap: Record<ColumnType, React.FC> = {
+export const cellsMap: Record<ColumnType, React.FC<CellProps>> = {
 	'order': OrderCell,
 	'avatar': AvatarCell,
 	'name': NameCell,

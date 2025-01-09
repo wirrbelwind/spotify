@@ -1,11 +1,13 @@
 import Image from "next/image"
+import { CellProps } from "../types"
 
-export const AvatarCell: React.FC = ({ track }) => {
+export const AvatarCell: React.FC<CellProps> = ({ track }) => {
 	return (
 		<Image
 			src={track.album.images[0].url}
 			width={60}
 			height={60}
+			alt={`Image of album ${track.album.name}`}
 		/>
 	)
 }

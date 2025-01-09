@@ -3,13 +3,19 @@ import { userTopTracksOptions } from "@/api/userTopTracksOptions";
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
 import { useQuery } from "@tanstack/react-query";
-import React, { PropsWithChildren } from "react";
-import { cellsMap, columnsDefinitions } from "./constants";
+import React, { FC, PropsWithChildren } from "react";
+import { cellsMap, columnsDefinitions, headersMap } from "./constants";
+import { ColumnType } from "./types";
 
 /**
  * @type client component
  */
-export const TrackList = () => {
+
+interface TrackListProps {
+
+}
+
+export const TrackList: FC<TrackListProps> = ({ }) => {
 	const trackList = useQuery(userTopTracksOptions(10))
 
 	const player = usePlayerState()
@@ -32,7 +38,7 @@ export const TrackList = () => {
 
 							return (
 								<TableColumn key={column.key}>
-									<HeaderComponent column={column}/>
+									<HeaderComponent column={column} />
 								</TableColumn>
 							)
 						}}
@@ -52,7 +58,7 @@ export const TrackList = () => {
 									`}
 							>
 								{(columnKey) => {
-									const CellComponent = cellsMap[columnKey]
+									const CellComponent = cellsMap[columnKey as ColumnType]
 
 									return (
 										<TableCell>

@@ -1,7 +1,8 @@
 import Link from "next/link"
 import React from "react"
+import { CellProps } from "../types"
 
-export const NameCell: React.FC = ({ track }) => {
+export const NameCell: React.FC<CellProps> = ({ track }) => {
 	return (
 		<div>
 			<p>{track.name}</p>
