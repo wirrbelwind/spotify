@@ -3,12 +3,12 @@
 import { Button } from "@nextui-org/button"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 import { playerServerActions } from ".."
-import NextImage from "next/image"
-import { Image } from "@nextui-org/image"
+import Image from "next/image"
 import { useQuery } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
 import { usePlayerController } from "@/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
+import { shuffleAction } from "../model/actions/shuffleAction"
 
 interface ActionButtonsProps {
 	elementsProps?: {
@@ -21,31 +21,40 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 	const controllerContext = usePlayerController()
 
 	const isActionsDisabled = !player.data
-	
-	console.log(controllerContext?.shuffle)
 
 	return (
 		<div
 			{...elementsProps?.wrapper}
 		>
-			<h1>prev: {player.data?.track_window.previous_tracks.length}</h1>
-			<h1>next: {player.data?.track_window.next_tracks.length}</h1>
-			{/* <Button
-				// onPress={playerContext?.controller}
-				// isDisabled={!player.isSomethingPlaying}
+			<Button
+				onPress={() => {
+					shuffleAction(!player.data?.shuffle)
+				}}
+				isDisabled={isActionsDisabled}
 				isIconOnly
-				className=" bg-none"
+				className=""
 			>
-				{player._library.playback?.shuffle ? 'shuffle on' : 'shuffle off'}
-			</Button> */}
-	
+				<Image
+					src="/shuffle.svg"
+					alt="Shuffle playback"
+					width={35}
+					height={35}
+				/>
+				
+			</Button>
+
 			<Button
 				onPress={() => controllerContext?.controller?.previousTrack()}
 				isDisabled={isActionsDisabled}
 				isIconOnly
-				className=" bg-none"
+				className=""
 			>
-				{'<'}
+				<Image
+					src="/play-skip-back.svg"
+					alt="Playback skip backward"
+					width={35}
+					height={35}
+				/>
 			</Button>
 
 			<Button
@@ -54,33 +63,39 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				}}
 				isDisabled={isActionsDisabled}
 				isIconOnly
+			// variant=""
 			>
-				{player.data && player.data?.paused ? (
+				{!player.data || player.data?.paused ? (
 					<Image
 						src="/play.svg"
-						className="w-10 h-10"
-						alt=""
-						as={NextImage}
-						width={40}
-						height={40} />
+						alt="Play"
+						width={35}
+						height={35}
+					/>
 				) : (
 					<Image
 						src="/pause.svg"
 						alt=""
-						className="w-10 h-10"
-						as={NextImage}
-						width={40}
-						height={40} />
+						width={35}
+						height={35}
 
+						className="Pause"
+					/>
 				)}
 			</Button>
 			<Button
 				onPress={() => controllerContext?.controller?.nextTrack()}
 				isDisabled={isActionsDisabled}
 				isIconOnly
-				className=" bg-none"
+				className=""
 			>
-				{'>'}
+				<Image
+					src="/play-skip-back.svg"
+					alt="Playback skip forward"
+					width={35}
+					height={35}
+					className="rotate-180"
+				/>
 			</Button>
 
 		</div>
