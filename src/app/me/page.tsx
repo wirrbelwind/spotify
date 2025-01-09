@@ -11,6 +11,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { userTopTracksOptions } from "@/api/userTopTracksOptions";
 import { userOptions } from "@/api/userOptions";
 import { Profile } from "@/entities/user/ui/Profile";
+import { TopTracks } from "@/widget/TopTracks";
 
 export default async function HomePage() {
 	const queryClient = new QueryClient()
@@ -27,23 +28,7 @@ export default async function HomePage() {
 		<HydrationBoundary state={dehydrate(queryClient)}>
 			<div>
 				<Profile />
-				<p className="text-4xl">Top tracks this month</p>
-				<p className="mt-2">Only visible for you</p>
-
-				<TrackList
-					hideHeader
-					classNames={{
-						wrapper: 'mt-2'
-					}}
-					columns={[
-						'order',
-						'avatar',
-						'name',
-						'album',
-						'liked',
-						'duration'
-					]}
-				/>
+				<TopTracks />
 			</div>
 		</HydrationBoundary>
 	);

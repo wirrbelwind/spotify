@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/button"
 import Image from "next/image"
 import { CellProps } from "../types"
 
-export const OrderCell: React.FC<CellProps> = ({ track, allTracks }) => {
+export const OrderCell: React.FC<CellProps> = ({ track, allTracks, trackIndex }) => {
 	const controllerContext = usePlayerController()
 	const player = usePlayerState()
 
@@ -37,7 +37,7 @@ export const OrderCell: React.FC<CellProps> = ({ track, allTracks }) => {
 					<EqualizerIcon />
 				) : (
 					<p>
-						{track.order}
+						{trackIndex + 1}
 					</p>)
 				}
 			</div>

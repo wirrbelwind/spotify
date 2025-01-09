@@ -2,9 +2,26 @@
 
 import { Button } from "@nextui-org/button"
 import { CellProps } from "../types"
+import { Spinner } from "@nextui-org/spinner"
 
-export const LikedCell: React.FC<CellProps> = ({ track }) => {
+export const LikedCell: React.FC<CellProps> = ({ track, likes, trackIndex }) => {
+	const isLiked = likes?.[trackIndex]
+
+	// console.log(likes)
+
 	return (
-		<Button>coming soon</Button>
+		<Button>
+			{/* {isLiked ? JSON.stringify(likes) : 'loading'} */}
+			{
+				!likes && (
+					<Spinner />
+				)
+			}
+			{
+				likes && (
+					JSON.stringify(isLiked)
+				)
+			}
+		</Button>
 	)
 }
