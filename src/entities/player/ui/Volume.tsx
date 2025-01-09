@@ -58,24 +58,8 @@ export const Volume = () => {
 						alt="Unmute"
 					/>
 				)}
-
-
 			</Button>
-
-			{/* <Slider
-				ref={sliderRef}
-				classNames={{
-					base: 'w-36'
-				}}
-				defaultValue={INITIAL_VOLUME}
-				step={0.01}
-				maxValue={1}
-				onChangeEnd={newValue => {
-					volume.mutate({
-						newValue
-					})
-				}}
-			/> */}
+			
 			<input
 				type="range"
 				defaultValue={INITIAL_VOLUME}
