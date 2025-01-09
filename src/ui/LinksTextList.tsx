@@ -16,6 +16,7 @@ export const LinksTextList: React.FC<LinksTextListProps> = ({ links, linkProps }
 		<>
 			{links.map((link, index) => (<>
 				<Link
+					key={link.url}
 					as={LinkNext}
 					href={link.url}
 					{...linkProps}

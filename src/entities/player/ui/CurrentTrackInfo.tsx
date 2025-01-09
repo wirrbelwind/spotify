@@ -20,27 +20,29 @@ interface PlayerCurrentTrackProps {
 export const CurrentTrackInfo: React.FC<PlayerCurrentTrackProps> = ({ artists, name, image }) => {
 
 	return (
-		<div>
+		<div className="flex gap-2">
 			<Image
 				as={NextImage}
 				src={image.url}
 				width={image.width}
 				height={image.height}
-				className="w-20 h-20"
+				className="w-14 h-14"
 				alt=""
 			/>
 
-			<p>
-				{name ?? 'No track name'}
-			</p>
+			<div className="w-36">
+				<p className="truncate">
+					{name ?? 'No track name'}
+				</p>
 
-			<p>
-				{artists ?
-					(<LinksTextList links={artists} />)
-					:
-					'No artists'
-				}
-			</p>
+				<p>
+					{artists ?
+						(<LinksTextList links={artists} />)
+						:
+						'No artists'
+					}
+				</p>
+			</div>
 		</div>
 	)
 }

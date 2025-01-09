@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { rememberDeviceId } from "../model/actions/rememberDeviceId"
 import { useQueryClient } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
+import { INITIAL_VOLUME, PLAYER_NAME } from "../constants"
 
 interface PlayerInitProps {
 	token: string
@@ -18,9 +19,9 @@ export const PlayerInit: React.FC<PlayerInitProps> = ({ token }) => {
 	useEffect(() => {
 		window.onSpotifyWebPlaybackSDKReady = async () => {
 			const controller = new window.Spotify.Player({
-				name: 'Web Playback SDK',
+				name: PLAYER_NAME,
 				getOAuthToken: cb => cb(token),
-				volume: 0.5
+				volume: INITIAL_VOLUME
 			});
 
 			playerContext?.setController(controller);

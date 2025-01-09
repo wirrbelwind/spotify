@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: any }) {
           flex
           flex-col
           ">
-            <div className="basis-11/12 overflow-y-scroll">
+            <div className="basis-full overflow-y-scroll">
               <div className="flex gap-4">
                 <Link href="/">Home</Link>
                 <Link href="/me">Profile</Link>
@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: { children: any }) {
               </div>
               {children}
             </div>
-            <div className="basis-3/12 overflow-hidden">
+            <div className="basis-20 overflow-hidden">
               <HydrationBoundary state={dehydrate(queryClient)}>
                 <PlayerInit token={auth.tokens.accessToken}/>
                 <Player />
