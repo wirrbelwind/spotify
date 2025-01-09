@@ -6,7 +6,7 @@ import React from "react";
 import { Avatar } from "@nextui-org/avatar";
 import { Image } from "@nextui-org/image";
 import UserEntity from "@/entities/user";
-import { TrackList } from "@/entities/track/ui/TrackList";
+import { TrackList } from "@/entities/track/ui/TrackList/TrackList";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { userTopTracksOptions } from "@/api/userTopTracksOptions";
 import { userOptions } from "@/api/userOptions";
