@@ -26,9 +26,19 @@ export default async function HomePage() {
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
 			<div>
-				<Profile/>
+				<Profile />
 				<p>Top tracks</p>
-				<TrackList />
+				<TrackList
+					hideHeader
+					columns={[
+						'order',
+						'avatar',
+						'name',
+						'album',
+						'liked',
+						'duration'
+					]}
+				/>
 			</div>
 		</HydrationBoundary>
 	);

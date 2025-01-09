@@ -9,7 +9,7 @@ import { TextHeader } from "./column-headers/TextHeader";
 import { CellProps, ColumnType } from "./types";
 
 
-export const columnsDefinitions: { key: ColumnType, label: string }[] = [
+export const allColumnsDefinitions: { key: ColumnType, label: string }[] = [
 	{
 		key: "order",
 		label: "#",

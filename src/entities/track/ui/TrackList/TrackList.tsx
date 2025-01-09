@@ -4,7 +4,7 @@ import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren } from "react";
-import { cellsMap, columnsDefinitions, headersMap } from "./constants";
+import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType } from "./types";
 
 /**
@@ -12,13 +12,17 @@ import { ColumnType } from "./types";
  */
 
 interface TrackListProps {
-
+	columns: ColumnType[]
+	hideHeader?: boolean
 }
 
-export const TrackList: FC<TrackListProps> = ({ }) => {
+export const TrackList: FC<TrackListProps> = ({ columns, hideHeader }) => {
 	const trackList = useQuery(userTopTracksOptions(10))
 
 	const player = usePlayerState()
+
+	const columnsDefinition = allColumnsDefinitions
+		.filter(columnDef => columns.includes(columnDef.key))
 
 	return (
 		<>
@@ -31,8 +35,8 @@ export const TrackList: FC<TrackListProps> = ({ }) => {
 			)}
 
 			{trackList.isSuccess && (
-				<Table>
-					<TableHeader columns={columnsDefinitions}>
+				<Table hideHeader={hideHeader}>
+					<TableHeader columns={columnsDefinition}>
 						{(column) => {
 							const HeaderComponent = headersMap[column.key]
 
