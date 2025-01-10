@@ -1,6 +1,6 @@
 import 'server-only'
 import { cookies } from "next/headers"
-import { COOKIE_KEYS } from "./constants"
+import { COOKIE_KEYS } from "../config"
 
 export const authService = async () => {
 	const cookie = await cookies()

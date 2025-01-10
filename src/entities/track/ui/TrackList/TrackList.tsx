@@ -9,7 +9,7 @@ import { ColumnType } from "./types";
 import { Spinner } from "@nextui-org/spinner";
 import { SlotsToClasses } from "@nextui-org/theme";
 import { spotifyApi } from "@/shared/api";
-import { checkLikesOptions } from "@/api/checkLikesOptions";
+import { checkLikesOptions } from "../../api/check-like/checkLikesOptions";
 
 /**
  * @type client component
@@ -42,33 +42,32 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames 
 	}))
 
 	return (
-		<>
-			<Table
-				hideHeader={hideHeader}
-				classNames={classNames}
+		<Table
+			hideHeader={hideHeader}
+			classNames={classNames}
+		>
+			<TableHeader columns={columnsDefinition}>
+				{(column) => {
+					const HeaderComponent = headersMap[column.key]
+
+					return (
+						<TableColumn key={column.key}>
+							<HeaderComponent column={column} />
+						</TableColumn>
+					)
+				}}
+			</TableHeader>
+
+			<TableBody
+				isLoading={trackList.isLoading}
+				loadingContent={<Spinner />}
 			>
-				<TableHeader columns={columnsDefinition}>
-					{(column) => {
-						const HeaderComponent = headersMap[column.key]
+				{
 
-						return (
-							<TableColumn key={column.key}>
-								<HeaderComponent column={column} />
-							</TableColumn>
-						)
-					}}
-				</TableHeader>
-
-				<TableBody
-					isLoading={trackList.isLoading}
-					loadingContent={<Spinner />}
-				>
-					{
-
-						trackList.data?.items.map((track, trackIndex) => (
-							<TableRow
-								key={track.id}
-								className={`
+					trackList.data?.items.map((track, trackIndex) => (
+						<TableRow
+							key={track.id}
+							className={`
 							hover:bg-gray-400
 							group/track
 							${player.data?.track_window.current_track.id === track.id && 'text-green-600'}
@@ -76,42 +75,41 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames 
 							${selectedTracks.includes(track.id) && 'bg-gray-500'}
 							max-h-14
 							`}
-								onClick={(event) => {
-									if (event.shiftKey) {
-										if (selectedTracks.includes(track.id)) {
-											setSelectedTracks(prev => prev.filter(item => item !== track.id))
-										}
-										else {
-											setSelectedTracks(prev => [...prev, track.id])
-										}
+							onClick={(event) => {
+								if (event.shiftKey) {
+									if (selectedTracks.includes(track.id)) {
+										setSelectedTracks(prev => prev.filter(item => item !== track.id))
 									}
 									else {
-										setSelectedTracks([track.id])
+										setSelectedTracks(prev => [...prev, track.id])
 									}
-								}}
-							>
-								{
-									columnsDefinition.map(column => {
-										const CellComponent = cellsMap[column.key]
-
-										return (
-											<TableCell key={`${track.id}:${column.key}`}>
-												<CellComponent
-													trackIndex={trackIndex}
-													track={track}
-													allTracks={trackList.data.items}
-													likes={likes.data}
-												/>
-											</TableCell>
-										)
-									})
 								}
-							</TableRow>
-							// Conditional expression below provides type safety for <Table />
-						)) ?? []
-					}
-				</TableBody>
-			</Table>
-		</>
+								else {
+									setSelectedTracks([track.id])
+								}
+							}}
+						>
+							{
+								columnsDefinition.map(column => {
+									const CellComponent = cellsMap[column.key]
+
+									return (
+										<TableCell key={`${track.id}:${column.key}`}>
+											<CellComponent
+												trackIndex={trackIndex}
+												track={track}
+												allTracks={trackList.data.items}
+												likes={likes.data}
+											/>
+										</TableCell>
+									)
+								})
+							}
+						</TableRow>
+						// Conditional expression below provides type safety for <Table />
+					)) ?? []
+				}
+			</TableBody>
+		</Table>
 	);
 }
