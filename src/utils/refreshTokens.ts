@@ -1,6 +1,6 @@
 'use server'
 import UserEntity from "@/entities/user"
-import { spotifyApi } from "./spotifyApi"
+import { spotifyApi } from "@/shared/api"
 
 export const refreshTokens = async () => {
 	const auth = await UserEntity.authService()
