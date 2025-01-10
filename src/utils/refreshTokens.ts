@@ -1,11 +1,11 @@
 'use server'
 import UserEntity from "@/entities/user"
-import { $axios } from "./$axios"
+import { spotifyApi } from "./spotifyApi"
 
 export const refreshTokens = async () => {
 	const auth = await UserEntity.authService()
 
-	const refreshTokenResponse = await $axios.post('https://accounts.spotify.com/api/token', {
+	const refreshTokenResponse = await spotifyApi.post('https://accounts.spotify.com/api/token', {
 		grant_type: 'refresh_token',
 		refresh_token: auth.tokens.refreshToken,
 		client_id: process.env.SPOTIFY_CLIENT_ID

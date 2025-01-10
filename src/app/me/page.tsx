@@ -1,4 +1,4 @@
-import { $axios } from "@/utils/$axios";
+import { spotifyApi } from "@/shared/api";
 import { ArtistObject, PageObject, TrackObject } from "../types";
 import { Player } from "@/entities/player/ui/Player";
 import Link from "next/link";
@@ -19,10 +19,10 @@ export default async function HomePage() {
 	queryClient.prefetchQuery(userTopTracksOptions(5))
 	queryClient.prefetchQuery(userOptions())
 
-	// const topResponse = await $axios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
+	// const topResponse = await spotifyApi.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
 	// const topTrackList = topResponse.data
 
-	// const topArtistList = (await $axios.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
+	// const topArtistList = (await spotifyApi.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

@@ -1,9 +1,9 @@
 'use server'
 
-import { $axios } from "@/utils/$axios"
+import { spotifyApi } from "@/shared/api"
 
 export const getPlayerState = async () => {
-	const response = await $axios.get('https://api.spotify.com/v1/me/player', {
+	const response = await spotifyApi.get('https://api.spotify.com/v1/me/player', {
 		params: {
 			market: 'ES'
 		}

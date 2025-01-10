@@ -1,5 +1,5 @@
 import UserEntity from "@/entities/user"
-import { $axios } from "../../../../utils/$axios"
+import { spotifyApi } from "../../../../utils/spotifyApi"
 import { redirect } from 'next/navigation'
 
 //TODO: handle callback from spotify auth
@@ -32,7 +32,7 @@ export const GET = async (request: Request) => {
 	const authHeader = btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)
 
 	try {
-		const tokensResponse = await $axios.post('https://accounts.spotify.com/api/token', {
+		const tokensResponse = await spotifyApi.post('https://accounts.spotify.com/api/token', {
 			grant_type: 'authorization_code',
 			code: codeParam,
 			redirect_uri: process.env.SPOTIFY_REDIRECT_URI

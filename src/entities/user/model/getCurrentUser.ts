@@ -3,7 +3,7 @@ import 'server-only'
 
 import { User } from "@/app/types"
 import { refreshTokens } from "../../../utils/refreshTokens"
-import { $axios } from "../../../utils/$axios"
+import { spotifyApi } from "../../../utils/spotifyApi"
 import { authService } from "./authService"
 
 export const getCurrentUser = async (): Promise<User> => {
@@ -21,7 +21,7 @@ export const getCurrentUser = async (): Promise<User> => {
 	}
 
 	//request user profile
-	const userResponse = await $axios.get<User>('https://api.spotify.com/v1/me')
+	const userResponse = await spotifyApi.get<User>('https://api.spotify.com/v1/me')
 
 	return userResponse.data
 }

@@ -8,7 +8,7 @@ import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType } from "./types";
 import { Spinner } from "@nextui-org/spinner";
 import { SlotsToClasses } from "@nextui-org/theme";
-import { $axios } from "@/utils/$axios";
+import { spotifyApi } from "@/shared/api";
 import { checkLikesOptions } from "@/api/checkLikesOptions";
 
 /**
