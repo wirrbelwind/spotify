@@ -22,12 +22,8 @@ spotifyApi.interceptors.request.use(async config => {
 
 	const now = Date.now()
 
-	if (auth.tokens.accessTokenExpiresAt <= now) {
-		const tokens = await refreshTokens(auth.tokens.refreshToken)
-
-		if (tokens.error) {
-			throw new Error('cant refresh tokens')
-		}
+	if (auth.tokens.accessTokenExpiresAt! <= now) {
+		const tokens = await refreshTokens()
 	}
 
 	config.headers.Authorization = `Bearer ${auth.tokens.accessToken}`
