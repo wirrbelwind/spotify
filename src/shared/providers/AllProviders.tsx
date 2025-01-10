@@ -11,10 +11,10 @@ export const AllProviders: React.FC<PropsWithChildren> = async ({ children }) =>
 
 	return (
 		<NextUIProvider>
-			<SpotifyPlayerProvider>
-			<TanstackQueryProvider>
-				{children}
-			</TanstackQueryProvider>
+			<SpotifyPlayerProvider accessToken={auth.tokens.accessToken}>
+				<TanstackQueryProvider>
+					{children}
+				</TanstackQueryProvider>
 			</SpotifyPlayerProvider>
 		</NextUIProvider>
 	)

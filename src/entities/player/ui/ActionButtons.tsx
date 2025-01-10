@@ -2,12 +2,9 @@
 
 import { Button } from "@nextui-org/button"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
-import { playerServerActions } from ".."
 import Image from "next/image"
-import { useQuery } from "@tanstack/react-query"
-import { playerStateOptions } from "../model/playerStateOptions"
-import { usePlayerController } from "@/shared/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
+import { usePlayerController } from "@/shared/providers/spotify-player"
 import { shuffle } from "../model/shuffle"
 
 interface ActionButtonsProps {
@@ -18,9 +15,9 @@ interface ActionButtonsProps {
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) => {
 	const player = usePlayerState()
-	const controllerContext = usePlayerController()
+	const controller = usePlayerController()
 
-	const isActionsDisabled = !player.data
+	const isActionsDisabled = !player.data || !controller
 
 	return (
 		<div
@@ -44,7 +41,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 			</Button>
 
 			<Button
-				onPress={() => controllerContext?.controller?.previousTrack()}
+				onPress={() => controller?.previousTrack()}
 				isDisabled={isActionsDisabled}
 				isIconOnly
 				className=""
@@ -59,7 +56,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 
 			<Button
 				onPress={() => {
-					controllerContext?.controller?.togglePlay()
+					controller?.togglePlay()
 				}}
 				isDisabled={isActionsDisabled}
 				isIconOnly
@@ -84,7 +81,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				)}
 			</Button>
 			<Button
-				onPress={() => controllerContext?.controller?.nextTrack()}
+				onPress={() => controller?.nextTrack()}
 				isDisabled={isActionsDisabled}
 				isIconOnly
 				className=""

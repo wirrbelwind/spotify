@@ -1,21 +1,21 @@
 'use client'
-import { startAudio } from "@/entities/player/model/startAudio"
 import { usePlayerState } from "@/entities/player/model/usePlayerState"
 import { usePlayerController } from "@/shared/providers/spotify-player"
 import { EqualizerIcon } from "@/ui/EqualizerIcon"
 import { Button } from "@nextui-org/button"
 import Image from "next/image"
 import { CellProps } from "../types"
+import { startAudio } from "@/entities/player"
 
 export const OrderCell: React.FC<CellProps> = ({ track, allTracks, trackIndex }) => {
-	const controllerContext = usePlayerController()
+	const controller = usePlayerController()
 	const player = usePlayerState()
 
 	const uriList = allTracks.map(otherTrack => otherTrack.uri)
 
 	const handlePlay = () => {
 		if (player.data?.track_window.current_track.uri === track.uri && !player.data?.paused) {
-			controllerContext?.controller?.pause()
+			controller?.pause()
 		}
 		else {
 			startAudio({

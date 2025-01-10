@@ -1,7 +1,7 @@
 import { usePlayerController } from "@/shared/providers/spotify-player"
 import { queryOptions, useQuery } from "@tanstack/react-query"
 
-const playerStateOptions = (controller?: Spotify.Player | null) => {
+export const playerStateOptions = (controller?: Spotify.Player | null) => {
 	return queryOptions({
 		enabled: Boolean(controller),
 		queryKey: ['player', 'state'],
@@ -11,6 +11,6 @@ const playerStateOptions = (controller?: Spotify.Player | null) => {
 
 
 export const usePlayerState = () => {
-	const playerContext = usePlayerController()
-	return useQuery(playerStateOptions(playerContext?.controller))
+	const controller = usePlayerController()
+	return useQuery(playerStateOptions(controller))
 }

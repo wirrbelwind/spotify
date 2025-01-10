@@ -1,29 +1,58 @@
 'use client'
 
-import { createContext, PropsWithChildren, use, useRef } from "react";
+import { rememberDevice } from "@/entities/player";
+import { INITIAL_VOLUME, PLAYER_NAME } from "@/entities/player/constants";
+import { playerStateOptions } from "@/entities/player/model/usePlayerState";
+import { useQueryClient } from "@tanstack/react-query";
+import Script from "next/script";
+import { createContext, PropsWithChildren, use, useEffect, useRef } from "react";
 
-interface PlayerControllerContextValue {
-	controller: Spotify.Player | null
-	setController: (value: null | Spotify.Player) => void
+const PlayerControllerContext = createContext<Spotify.Player | null>(null)
+
+interface SpotifyPlayerProviderProps extends PropsWithChildren {
+	accessToken: string | null
 }
 
-const PlayerControllerContext = createContext<null | PlayerControllerContextValue>(null)
+export const SpotifyPlayerProvider: React.FC<SpotifyPlayerProviderProps> = ({ children, accessToken }) => {
+	const controller = useRef<Spotify.Player | null>(null)
 
+	const queryClient = useQueryClient()
 
-export const SpotifyPlayerProvider: React.FC<PropsWithChildren> = ({ children }) => {
-	const playerRef = useRef<Spotify.Player | null>(null)
+	useEffect(() => {
+		window.onSpotifyWebPlaybackSDKReady = async () => {
+			if(!accessToken) {
+				throw new Error('no access token to initialize player instance')
+			}
 
-	const setController = (value: null | Spotify.Player) => {
-		playerRef.current = value
-	}
+			controller.current = new window.Spotify.Player({
+				name: PLAYER_NAME,
+				getOAuthToken: cb => cb(accessToken),
+				volume: INITIAL_VOLUME
+			});
 
-	const contextValue: PlayerControllerContextValue = {
-		controller: playerRef.current,
-		setController
-	}
+			controller.current.addListener('ready', (ctx) => {
+				console.log('Ready with Device ID', ctx);
+				rememberDevice(ctx.device_id)
+			});
+
+			controller.current.addListener('not_ready', ({ device_id }) => {
+				console.log('Device ID has gone offline', device_id);
+			});
+
+			controller.current.addListener('player_state_changed', changedState => {
+				queryClient.setQueryData(playerStateOptions().queryKey, changedState)
+			})
+			const isPlayerConnected = await controller.current.connect()
+		};
+
+		return () => {
+			controller.current?.disconnect()
+		}
+	}, [accessToken])
 
 	return (
-		<PlayerControllerContext.Provider value={contextValue}>
+		<PlayerControllerContext.Provider value={controller.current}>
+			<Script src="https://sdk.scdn.co/spotify-player.js" />
 			{children}
 		</PlayerControllerContext.Provider>
 	)

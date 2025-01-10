@@ -1,9 +1,7 @@
 'use client'
 
 import { useMemo } from "react"
-import { useQueryClient } from "@tanstack/react-query"
-import { usePlayerController } from "@/shared/providers/spotify-player"
-import { TrackTimeline } from "./Timeline"
+import { Timeline } from "./Timeline"
 import { ActionButtons } from "./ActionButtons"
 import { usePlayerState } from "../model/usePlayerState"
 import { CurrentTrackInfo } from "./CurrentTrackInfo"
@@ -14,9 +12,7 @@ import { getIdFromUri } from "@/shared/lib/getIdFromUri"
 import { Volume } from "./Volume"
 
 export const Player = () => {
-	const queryClient = useQueryClient()
 	const player = usePlayerState()
-	const controllerContext = usePlayerController()
 
 	const trackImageUrl = useMemo(() => {
 		console.log(player.data?.context)
@@ -81,7 +77,7 @@ export const Player = () => {
 					}}
 				/>
 
-				<TrackTimeline
+				<Timeline
 					elementsProps={{
 						wrapper: {
 							className: "flex items-center justify-center gap-2"
