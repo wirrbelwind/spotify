@@ -1,10 +1,14 @@
 import 'server-only'
 import { spotifyAxios } from './axios'
 import { PageObject, TrackObject, User } from '../spotify-types'
+import { DATA_API_URL } from './constants'
 
+// write interface for client
 export const client = {
 	user() {
-		return spotifyAxios.get<User>('https://api.spotify.com/v1/me')
+		return spotifyAxios.get<User>('/me', {
+			baseURL: DATA_API_URL,
+		})
 	},
 	player: {
 		play({
@@ -27,7 +31,7 @@ export const client = {
 				resolvedOffset = { uri: offset }
 			}
 
-			return spotifyAxios.put(`https://api.spotify.com/v1/me/player/play`, {
+			return spotifyAxios.put(`/me/player/play`, {
 				context_uri: contextUri,
 				uris: audioUris ?? null,
 				// use zod
@@ -35,33 +39,37 @@ export const client = {
 			}, {
 				params: {
 					device_id: deviceId
-				}
+				},
+				baseURL: DATA_API_URL,
 			})
 		},
 		shuffle({ state, deviceId }: { state: boolean, deviceId: string }) {
 			return spotifyAxios.put(
-				'https://api.spotify.com/v1/me/player/shuffle',
+				'/me/player/shuffle',
 				{},
 				{
 					params: {
 						state,
 						device_id: deviceId
-					}
+					},
+					baseURL: DATA_API_URL,
 				})
 		}
 	},
 	checkLikes({ idList }: { idList: string[] }) {
-		return spotifyAxios.get('https://api.spotify.com/v1/me/tracks/contains', {
+		return spotifyAxios.get('/me/tracks/contains', {
 			params: {
 				ids: idList.join(',')
-			}
+			},
+			baseURL: DATA_API_URL,
 		})
 	},
 	userTopTracks({ quantity }: { quantity: number }) {
-		return spotifyAxios.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks', {
+		return spotifyAxios.get<PageObject<TrackObject>>('/me/top/tracks', {
 			params: {
 				limit: quantity
-			}
+			},
+			baseURL: DATA_API_URL,
 		})
 	}
 }
