@@ -17,7 +17,6 @@ export default async function HomePage() {
 	const queryClient = new QueryClient()
 
 	queryClient.prefetchQuery(userTopTracksOptions(5))
-	queryClient.prefetchQuery(userOptions())
 
 	// const topResponse = await spotifyApi.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
 	// const topTrackList = topResponse.data
