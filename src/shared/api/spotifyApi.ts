@@ -7,7 +7,7 @@ import { refreshTokens } from "@/utils/refreshTokens";
 
 export const spotifyApi = axios.create()
 
-$spotifyApi.interceptors.request.use(async config => {
+spotifyApi.interceptors.request.use(async config => {
 	const isAuthRequest = config.url?.startsWith('https://accounts.spotify.com')
 
 	if (isAuthRequest) {
