@@ -2,6 +2,7 @@
 
 import { PageObject, TrackObject } from '@/shared/api/spotify-types'
 import { spotifyApi } from "@/shared/api"
+import { spotifyClient } from '@/shared/api/spotify-client'
 
 /**
  * @param quantity min = 1, max = 50
@@ -11,11 +12,7 @@ export const getUserTopTracks = async (quantity: number) => {
 		throw new Error('Exceeded limit. Quantity must be in range of 1-50')
 	}
 
-	const response = await spotifyApi.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks', {
-		params: {
-			limit: quantity
-		}
-	})
+	const response = await spotifyClient.userTopTracks({quantity})
 
 	return response.data
 }

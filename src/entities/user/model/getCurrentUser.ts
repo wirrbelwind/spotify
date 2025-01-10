@@ -5,6 +5,7 @@ import { refreshTokens } from "./refreshTokens"
 import { authService } from "./authService"
 import { spotifyApi } from '@/shared/api'
 import { User } from '@/shared/api/spotify-types'
+import { spotifyClient } from '@/shared/api/spotify-client'
 
 export const getCurrentUser = async (): Promise<User> => {
 	const auth = await authService()
@@ -21,7 +22,7 @@ export const getCurrentUser = async (): Promise<User> => {
 	}
 
 	//request user profile
-	const userResponse = await spotifyApi.get<User>('https://api.spotify.com/v1/me')
+	const userResponse = await spotifyClient.user()
 
 	return userResponse.data
 }

@@ -4,9 +4,9 @@ import axios, { AxiosError } from "axios";
 import { refreshTokens } from '@/entities/user/model/refreshTokens';
 import { authService } from '@/entities/user';
 
-export const spotifyApi = axios.create()
+export const spotifyAxios = axios.create()
 
-spotifyApi.interceptors.request.use(async config => {
+spotifyAxios.interceptors.request.use(async config => {
 	const isAuthRequest = config.url?.startsWith('https://accounts.spotify.com')
 
 	if (isAuthRequest) {
@@ -30,7 +30,7 @@ spotifyApi.interceptors.request.use(async config => {
 	return config
 })
 
-spotifyApi.interceptors.response.use(
+spotifyAxios.interceptors.response.use(
 	response => {
 		return response
 	},
@@ -38,7 +38,7 @@ spotifyApi.interceptors.response.use(
 		try {
 			if (responseError.status === 401) {
 				await refreshTokens()
-				return spotifyApi(responseError.request)
+				return spotifyAxios(responseError.request)
 			}
 
 			return responseError

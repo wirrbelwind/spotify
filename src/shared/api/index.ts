@@ -1,1 +1,1 @@
-export { spotifyApi } from './spotifyApi'
+export { spotifyApi } from './spotify-client/axios'
