@@ -1,7 +1,7 @@
 import { queryOptions } from "@tanstack/react-query"
-import { getUserTopTracks } from "../entities/track/api/getUserTopTracks"
+import { getUserTopTracks } from "./getUserTopTracks"
 
-export const userTopTracksOptions = (quantity: number) => {
+export const getUserTopTracksOptions = (quantity: number) => {
   return queryOptions({
     queryKey: ['me', 'top', 'tracks', quantity],
     queryFn: () => getUserTopTracks(quantity),

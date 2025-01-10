@@ -11,12 +11,12 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { userOptions } from "@/entities/user/model/userOptions";
 import { Profile } from "@/entities/user/ui/Profile";
 import { TopTracks } from "@/widget/TopTracks";
-import { userTopTracksOptions } from "@/entities/track/api/top-tracks/userTopTracksOptions";
+import { getUserTopTracksOptions } from "@/entities/track/api/top-tracks/getgetUserTopTracksOptions";
 
 export default async function HomePage() {
 	const queryClient = new QueryClient()
 
-	queryClient.prefetchQuery(userTopTracksOptions(5))
+	queryClient.prefetchQuery(getUserTopTracksOptions(5))
 
 	// const topResponse = await spotifyApi.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
 	// const topTrackList = topResponse.data

@@ -1,12 +1,12 @@
 import { queryOptions, useQuery } from "@tanstack/react-query"
 import { checkLikedTracks } from "./checkLikedTracks"
 
-interface CheckLikesOptionsArgs {
+interface GetCheckLikedTracksOptionsArgs {
 	enabled: boolean
 	idList?: string[]
 }
 
-export const checkLikesOptions = ({ enabled, idList }: CheckLikesOptionsArgs) => {
+export const getCheckLikedTracksOptions = ({ enabled, idList }: GetCheckLikedTracksOptionsArgs) => {
 
 	return queryOptions({
 		enabled: enabled && Boolean(idList),

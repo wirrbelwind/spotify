@@ -1,5 +1,5 @@
 'use client'
-import { userTopTracksOptions } from "@/api/userTopTracksOptions";
+import { getUserTopTracksOptions } from "@/api/getUserTopTracksOptions";
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableProps } from "@nextui-org/table";
 import { useQuery } from "@tanstack/react-query";
@@ -9,7 +9,7 @@ import { ColumnType } from "./types";
 import { Spinner } from "@nextui-org/spinner";
 import { SlotsToClasses } from "@nextui-org/theme";
 import { spotifyApi } from "@/shared/api";
-import { checkLikesOptions } from "../../api/check-like/checkLikesOptions";
+import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
 
 /**
  * @type client component
@@ -22,7 +22,7 @@ interface TrackListProps {
 }
 
 export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames }) => {
-	const trackList = useQuery(userTopTracksOptions(5))
+	const trackList = useQuery(getUserTopTracksOptions(5))
 
 	const player = usePlayerState()
 
@@ -36,7 +36,7 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames 
 
 	const isLikesColumn = Boolean(columnsDefinition.find(item => item.key === 'liked'))
 
-	const likes = useQuery(checkLikesOptions({
+	const likes = useQuery(getCheckLikedTracksOptions({
 		enabled: isLikesColumn,
 		idList: trackList.data?.items.map(item => item.id)
 	}))
