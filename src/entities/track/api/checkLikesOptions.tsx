@@ -1,5 +1,5 @@
 import { queryOptions, useQuery } from "@tanstack/react-query"
-import { checkLikedTracks } from "./checkLikedTracks"
+import { checkLikedTracks } from "../entities/track/api/checkLikedTracks"
 
 interface CheckLikesOptionsArgs {
 	enabled: boolean

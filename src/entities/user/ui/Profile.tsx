@@ -1,6 +1,6 @@
 'use client'
 
-import { userOptions } from "@/api/userOptions"
+import { userOptions } from "@/entities/user/model/userOptions"
 import { Avatar } from "@nextui-org/avatar"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"

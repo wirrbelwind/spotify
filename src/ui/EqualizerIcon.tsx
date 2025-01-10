@@ -1,11 +1,6 @@
 export const EqualizerIcon = () => {
 	return (
 		<div className="flex gap-[1px] w-6 h-6 items-end">
-			{/* {[1,2,3,4].map((item, index) => (
-				<div key={index} 
-				className="bg-green-600 w-1/2 animate-equalizer items-end"
-				></div>
-			))} */}
 			<div
 				className="bg-green-600 w-1/2 animate-equalizer"
 				style={{

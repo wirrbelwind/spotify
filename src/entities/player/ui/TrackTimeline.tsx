@@ -1,13 +1,13 @@
 'use client'
 
 import { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useRef, useState } from "react"
-import { millisecondsToTime } from "@/utils/millisecondsToTime"
+import { millisecondsToTime } from "@/shared/lib/millisecondsToTime"
 import { Slider } from "@nextui-org/slider"
 import { useQuery } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
 import { usePlayerController } from "@/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
-import { debounce } from "@/utils/debounce"
+import { debounce } from "@/shared/lib/debounce"
 
 interface TrackTimelineProps {
 	elementsProps?: {

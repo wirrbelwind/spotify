@@ -1,5 +1,5 @@
 import UserEntity from "@/entities/user"
-import { spotifyApi } from "../../../../utils/spotifyApi"
+import { spotifyApi } from "@/shared/api"
 import { redirect } from 'next/navigation'
 
 //TODO: handle callback from spotify auth

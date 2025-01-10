@@ -9,7 +9,7 @@ import UserEntity from "@/entities/user";
 import { TrackList } from "@/entities/track/ui/TrackList/TrackList";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { userTopTracksOptions } from "@/api/userTopTracksOptions";
-import { userOptions } from "@/api/userOptions";
+import { userOptions } from "@/entities/user/model/userOptions";
 import { Profile } from "@/entities/user/ui/Profile";
 import { TopTracks } from "@/widget/TopTracks";
 

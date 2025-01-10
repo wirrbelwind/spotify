@@ -2,7 +2,7 @@
 import 'server-only'
 
 import { User } from "@/app/types"
-import { refreshTokens } from "../../../utils/refreshTokens"
+import { refreshTokens } from "./refreshTokens"
 import { spotifyApi } from "../../../utils/spotifyApi"
 import { authService } from "./authService"
 

@@ -3,7 +3,7 @@ import 'server-only'
 import axios, { AxiosError } from "axios";
 import { cookies } from "next/headers";
 import UserEntity from "@/entities/user";
-import { refreshTokens } from "@/utils/refreshTokens";
+import { refreshTokens } from '@/entities/user/model/refreshTokens';
 
 export const spotifyApi = axios.create()
 

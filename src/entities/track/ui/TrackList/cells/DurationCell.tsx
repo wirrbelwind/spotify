@@ -1,4 +1,4 @@
-import { millisecondsToTime } from "@/utils/millisecondsToTime"
+import { millisecondsToTime } from "@/shared/lib/millisecondsToTime"
 import { CellProps } from "../types"
 
 export const DurationCell: React.FC<CellProps> = ({ track }) => {
