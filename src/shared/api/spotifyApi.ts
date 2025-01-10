@@ -1,6 +1,6 @@
 import 'server-only'
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { cookies } from "next/headers";
 import UserEntity from "@/entities/user";
 import { refreshTokens } from "@/utils/refreshTokens";
@@ -31,6 +31,25 @@ spotifyApi.interceptors.request.use(async config => {
 	}
 
 	config.headers.Authorization = `Bearer ${auth.tokens.accessToken}`
-	
+
 	return config
 })
+
+spotifyApi.interceptors.response.use(
+	response => {
+		return response
+	},
+	async (responseError: AxiosError) => {
+		try {
+			if (responseError.status === 401) {
+				await refreshTokens()
+				return spotifyApi(responseError.request)
+			}
+
+			return responseError
+		}
+		catch {
+			return responseError
+		}
+	}
+)
