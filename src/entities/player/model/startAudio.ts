@@ -2,7 +2,7 @@
 
 import { spotifyApi } from "@/shared/api"
 import { cookies } from "next/headers"
-import { COOKIE_KEYS } from "../../constants"
+import { COOKIE_KEYS } from "../constants"
 
 interface StartAudioArgs {
 	contextUri?: string
@@ -10,7 +10,7 @@ interface StartAudioArgs {
 	offset?: string
 }
 
-export const startAudioAction = async ({ audioUris, contextUri, offset }: StartAudioArgs) => {
+export const startAudio = async ({ audioUris, contextUri, offset }: StartAudioArgs) => {
 	try {
 		const cookie = await cookies()
 

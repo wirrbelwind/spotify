@@ -3,19 +3,17 @@
 import { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useRef, useState } from "react"
 import { millisecondsToTime } from "@/shared/lib/millisecondsToTime"
 import { Slider } from "@nextui-org/slider"
-import { useQuery } from "@tanstack/react-query"
-import { playerStateOptions } from "../model/playerStateOptions"
-import { usePlayerController } from "@/providers/spotify-player"
+import { usePlayerController } from "@/shared/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
 import { debounce } from "@/shared/lib/debounce"
 
-interface TrackTimelineProps {
+interface TimelineProps {
 	elementsProps?: {
 		wrapper: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 	}
 }
 
-export const TrackTimeline: React.FC<TrackTimelineProps> = ({ elementsProps }) => {
+export const Timeline: React.FC<TimelineProps> = ({ elementsProps }) => {
 	const playerContext = usePlayerController()
 	const player = usePlayerState()
 
@@ -38,6 +36,7 @@ export const TrackTimeline: React.FC<TrackTimelineProps> = ({ elementsProps }) =
 					console.log('new counter')
 					setPosition(newState.position + 1000)
 
+					// @ts-expect-error 
 					intervalRef.current = setInterval(() => {
 						setPosition(prev => prev + 1000)
 					}, 1000) as number

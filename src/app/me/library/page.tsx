@@ -1,8 +1,8 @@
-import { PageObject, SimplifiedPlaylistObject } from "@/app/types"
+import { PageObject, SimplifiedPlaylistObject } from '@/shared/api/spotify-types'
 import { Player } from "@/entities/player/ui/Player";
 import { spotifyApi } from "@/shared/api"
 import { Image } from "@nextui-org/image";
-import { PlayButton } from "./PlayButton";
+import { PlayButton } from "../../../entities/track/ui/PlayButton";
 import UserEntity from "@/entities/user";
 import Link from "next/link";
 

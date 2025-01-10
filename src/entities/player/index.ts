@@ -1,8 +1,8 @@
 export { usePlayer } from './model/_usePlayer'
-import { shuffleAction } from './model/actions/shuffleAction'
-import { startAudioAction } from './model/actions/startAudioAction'
+import { shuffle } from './model/shuffle'
+import { startAudio } from './model/startAudio'
 
 export const playerServerActions = {
-	startAudioAction,
-	shuffleAction
+	startAudio,
+	shuffle
 }

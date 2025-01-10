@@ -1,7 +1,7 @@
 'use client'
-import { startAudioAction } from "@/entities/player/model/actions/startAudioAction"
+import { startAudio } from "@/entities/player/model/startAudio"
 import { usePlayerState } from "@/entities/player/model/usePlayerState"
-import { usePlayerController } from "@/providers/spotify-player"
+import { usePlayerController } from "@/shared/providers/spotify-player"
 import { EqualizerIcon } from "@/ui/EqualizerIcon"
 import { Button } from "@nextui-org/button"
 import Image from "next/image"
@@ -18,7 +18,7 @@ export const OrderCell: React.FC<CellProps> = ({ track, allTracks, trackIndex })
 			controllerContext?.controller?.pause()
 		}
 		else {
-			startAudioAction({
+			startAudio({
 				audioUris: uriList,
 				offset: track.uri
 			})

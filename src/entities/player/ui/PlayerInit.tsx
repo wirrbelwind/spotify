@@ -1,9 +1,9 @@
 'use client'
 
-import { usePlayerController } from "@/providers/spotify-player"
+import { usePlayerController } from "@/shared/providers/spotify-player"
 import Script from "next/script"
 import { useEffect } from "react"
-import { rememberDeviceId } from "../model/actions/rememberDeviceId"
+import { rememberDevice } from "../model/rememberDevice"
 import { useQueryClient } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
 import { INITIAL_VOLUME, PLAYER_NAME } from "../constants"
@@ -28,7 +28,7 @@ export const PlayerInit: React.FC<PlayerInitProps> = ({ token }) => {
 
 			controller.addListener('ready', (ctx) => {
 				console.log('Ready with Device ID', ctx);
-				rememberDeviceId(ctx.device_id)
+				rememberDevice(ctx.device_id)
 			});
 
 			controller.addListener('not_ready', ({ device_id }) => {
@@ -36,7 +36,7 @@ export const PlayerInit: React.FC<PlayerInitProps> = ({ token }) => {
 			});
 
 			controller.addListener('player_state_changed', changedState => {
-			// console.log('fetch')
+				// console.log('fetch')
 
 				queryClient.setQueryData(playerStateOptions().queryKey, changedState)
 			})

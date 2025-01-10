@@ -1,13 +1,10 @@
 'use client'
 
-import { usePlayerController } from "@/providers/spotify-player"
-import { Slider } from "@nextui-org/slider"
 import { useChangeVolume } from "../model/useChangeVolume"
 import { INITIAL_VOLUME } from "../constants"
 import { Button } from "@nextui-org/button"
 import Image from "next/image"
-import { MouseEvent, MouseEventHandler, use, useRef, useState } from "react"
-import { usePlayerState } from "../model/usePlayerState"
+import { MouseEventHandler, useRef, useState } from "react"
 
 export const Volume = () => {
 	const volume = useChangeVolume()
@@ -16,6 +13,10 @@ export const Volume = () => {
 	const [muted, setMuted] = useState(false)
 
 	const handleToggleVolume = () => {
+		if (!sliderRef.current) {
+			throw new Error('sliderRef is not connected to html element')
+		}
+
 		const currentVolume = sliderRef.current.value
 
 		if (currentVolume && currentVolume > 0) {
@@ -33,8 +34,8 @@ export const Volume = () => {
 	}
 
 	const handleChangeVolume: MouseEventHandler<HTMLInputElement> = (e) => {
-		const newValue = e.currentTarget.value
-		volume.mutate({newValue})
+		const newValue = Number(e.currentTarget.value)
+		volume.mutate({ newValue })
 	}
 
 	return (
@@ -59,7 +60,7 @@ export const Volume = () => {
 					/>
 				)}
 			</Button>
-			
+
 			<input
 				type="range"
 				defaultValue={INITIAL_VOLUME}

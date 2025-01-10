@@ -1,9 +1,9 @@
 'use server'
 import { spotifyApi } from "@/shared/api"
 import { cookies } from "next/headers"
-import { COOKIE_KEYS } from "../../constants"
+import { COOKIE_KEYS } from "../constants"
 
-export const shuffleAction = async (value: boolean) => {
+export const shuffle = async (value: boolean) => {
 	const cookie = await cookies()
 
 	const deviceId = cookie.get(COOKIE_KEYS.DEVICE_ID)?.value

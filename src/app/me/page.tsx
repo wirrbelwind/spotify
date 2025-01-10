@@ -1,5 +1,5 @@
 import { spotifyApi } from "@/shared/api";
-import { ArtistObject, PageObject, TrackObject } from "../types";
+import { ArtistObject, PageObject, TrackObject } from "@/shared/api/spotify-types";
 import { Player } from "@/entities/player/ui/Player";
 import Link from "next/link";
 import React from "react";
@@ -8,10 +8,10 @@ import { Image } from "@nextui-org/image";
 import UserEntity from "@/entities/user";
 import { TrackList } from "@/entities/track/ui/TrackList/TrackList";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { userTopTracksOptions } from "@/api/userTopTracksOptions";
 import { userOptions } from "@/entities/user/model/userOptions";
 import { Profile } from "@/entities/user/ui/Profile";
 import { TopTracks } from "@/widget/TopTracks";
+import { userTopTracksOptions } from "@/entities/track/api/userTopTracksOptions";
 
 export default async function HomePage() {
 	const queryClient = new QueryClient()

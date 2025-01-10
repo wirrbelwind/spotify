@@ -1,7 +1,9 @@
-import UserEntity from "@/entities/user"
+'use server'
+
+import UserEntity from ".."
 import { redirect } from "next/navigation"
 
-export const GET = async (request: Request) => {
+export const signIn = async () => {
 	const auth = await UserEntity.authService()
 	auth.process.state = Math.random().toString()
 

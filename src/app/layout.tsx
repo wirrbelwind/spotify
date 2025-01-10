@@ -1,6 +1,6 @@
 import React from "react";
 import '../global-styles.css'
-import { AllProviders } from "@/providers/AllProviders";
+import { AllProviders } from "@/shared/providers/AllProviders";
 import { Player } from "@/entities/player/ui/Player";
 import UserEntity from "@/entities/user";
 import Link from "next/link";
@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: { children: any }) {
             </div>
             <div className="basis-20 overflow-hidden">
               <HydrationBoundary state={dehydrate(queryClient)}>
-                <PlayerInit token={auth.tokens.accessToken}/>
+                <PlayerInit token={auth.tokens.accessToken} />
                 <Player />
               </HydrationBoundary>
             </div>

@@ -6,9 +6,9 @@ import { playerServerActions } from ".."
 import Image from "next/image"
 import { useQuery } from "@tanstack/react-query"
 import { playerStateOptions } from "../model/playerStateOptions"
-import { usePlayerController } from "@/providers/spotify-player"
+import { usePlayerController } from "@/shared/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
-import { shuffleAction } from "../model/actions/shuffleAction"
+import { shuffle } from "../model/shuffle"
 
 interface ActionButtonsProps {
 	elementsProps?: {
@@ -28,7 +28,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 		>
 			<Button
 				onPress={() => {
-					shuffleAction(!player.data?.shuffle)
+					shuffle(!player.data?.shuffle)
 				}}
 				isDisabled={isActionsDisabled}
 				isIconOnly
@@ -40,7 +40,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 					width={35}
 					height={35}
 				/>
-				
+
 			</Button>
 
 			<Button

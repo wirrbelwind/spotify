@@ -1,10 +1,10 @@
 'use server'
 import 'server-only'
 
-import { User } from "@/app/types"
 import { refreshTokens } from "./refreshTokens"
-import { spotifyApi } from "../../../utils/spotifyApi"
 import { authService } from "./authService"
+import { spotifyApi } from '@/shared/api'
+import { User } from '@/shared/api/spotify-types'
 
 export const getCurrentUser = async (): Promise<User> => {
 	const auth = await authService()
@@ -15,7 +15,7 @@ export const getCurrentUser = async (): Promise<User> => {
 
 	const now = Date.now()
 
-	if (now >= auth.tokens.accessTokenExpiresAt) {
+	if (now >= auth.tokens.accessTokenExpiresAt!) {
 		const newTokens = await refreshTokens()
 
 	}

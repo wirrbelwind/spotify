@@ -1,12 +1,12 @@
-import { usePlayerController } from "@/providers/spotify-player"
+import { usePlayerController } from "@/shared/providers/spotify-player"
 import { useMutation } from "@tanstack/react-query"
 
 export const useChangeVolume = () => {
-const controllerCtx = usePlayerController()
+	const controllerCtx = usePlayerController()
 
-	return useMutation<unknown, unknown, {newValue: number}>({
-		mutationKey:  ['player', 'volume'],
-		mutationFn: async ({newValue}) => {
+	return useMutation<unknown, unknown, { newValue: number }>({
+		mutationKey: ['player', 'volume'],
+		mutationFn: async ({ newValue }) => {
 			await controllerCtx?.controller?.setVolume(newValue)
 		}
 	})

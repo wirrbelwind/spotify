@@ -1,4 +1,4 @@
-import { Entity } from "@/app/types";
+import { Entity } from '@/shared/api/spotify-types';
 
 export const getIdFromUri = (uri: string, entityType: Entity['type']) => {
 	const uriSeparator = ':'

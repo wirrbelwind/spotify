@@ -1,6 +1,6 @@
 'use server'
 
-import { PageObject, TrackObject } from "@/app/types"
+import { PageObject, TrackObject } from '@/shared/api/spotify-types'
 import { spotifyApi } from "@/shared/api"
 
 /**
