@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
 import type { MiddlewareConfig, NextRequest } from 'next/server'
-import User from './entities/user'
+import { authService, getCurrentUser } from './entities/user'
 
 export async function middleware(request: NextRequest) {
 	try {
-		await User.getCurrentUser()
+		await getCurrentUser()
 		return NextResponse.next()
 	}
 	catch (error) {
-		const auth = await User.authService()
+		const auth = await authService()
 		auth.process.targetPageAfterLogin = request.url
 
 		return NextResponse.redirect('http://localhost:3000/auth')

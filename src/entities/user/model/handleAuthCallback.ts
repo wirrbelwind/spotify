@@ -3,6 +3,7 @@
 import { spotifyApi } from "@/shared/api"
 import { redirect } from "next/navigation"
 import { authService } from "./authService"
+import { spotifyClient } from "@/shared/api/spotify-client"
 
 export const handleAuthCallback = async (request: Request) => {
 	const auth = await authService()
@@ -33,15 +34,9 @@ export const handleAuthCallback = async (request: Request) => {
 	const authHeader = btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)
 
 	try {
-		const tokensResponse = await spotifyApi.post('https://accounts.spotify.com/api/token', {
-			grant_type: 'authorization_code',
+		const tokensResponse = await spotifyClient.auth.tokens({
 			code: codeParam,
-			redirect_uri: process.env.SPOTIFY_REDIRECT_URI
-		}, {
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Authorization': `Basic ${authHeader}`
-			},
+			base64Credentials: authHeader
 		})
 
 		const tokens = tokensResponse.data as {

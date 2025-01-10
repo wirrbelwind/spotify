@@ -1,19 +1,16 @@
 'use server'
-import { spotifyApi } from "@/shared/api"
 import { authService } from "./authService"
+import { spotifyClient } from "@/shared/api/spotify-client"
 
 export const refreshTokens = async () => {
 	const auth = await authService()
 
-	const refreshTokenResponse = await spotifyApi.post('https://accounts.spotify.com/api/token', {
-		grant_type: 'refresh_token',
-		refresh_token: auth.tokens.refreshToken,
-		client_id: process.env.SPOTIFY_CLIENT_ID
-	}, {
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			'Authorization': `Basic ${btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)}`,
-		},
+	if (!auth.tokens.refreshToken) {
+		throw new Error('cookies has no refresh token data')
+	}
+
+	const refreshTokenResponse = await spotifyClient.auth.refreshTokens({
+		refreshToken: auth.tokens.refreshToken
 	})
 
 	if (refreshTokenResponse.status >= 400) {

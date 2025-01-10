@@ -1,9 +1,10 @@
 import 'server-only'
 import { spotifyAxios } from './axios'
 import { PageObject, TrackObject, User } from '../spotify-types'
-import { DATA_API_URL } from './constants'
+import { AUTH_API_URL, DATA_API_URL } from './constants'
+import { spotifyClient } from '.'
 
-// write interface for client
+// TODO: write interface for client
 export const client = {
 	user() {
 		return spotifyAxios.get<User>('/me', {
@@ -71,5 +72,35 @@ export const client = {
 			},
 			baseURL: DATA_API_URL,
 		})
+	},
+	auth: {
+		tokens({
+			code,
+			base64Credentials
+		}: { code: string, base64Credentials: string }) {
+			return spotifyAxios.post('/api/token', {
+				grant_type: 'authorization_code',
+				code,
+				redirect_uri: process.env.SPOTIFY_REDIRECT_URI
+			}, {
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Authorization': `Basic ${base64Credentials}`
+				},
+				baseURL: AUTH_API_URL
+			})
+		},
+		refreshTokens({ refreshToken }: { refreshToken: string }) {
+			return spotifyClient.post('https://accounts.spotify.com/api/token', {
+				grant_type: 'refresh_token',
+				refresh_token: refreshToken,
+				client_id: process.env.SPOTIFY_CLIENT_ID
+			}, {
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Authorization': `Basic ${btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)}`,
+				},
+			})
+		}
 	}
 }
