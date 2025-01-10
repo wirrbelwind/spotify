@@ -2,14 +2,13 @@ import { PageObject, SimplifiedPlaylistObject } from '@/shared/api/spotify-types
 import { Player } from "@/entities/player/ui/Player";
 import { spotifyApi } from "@/shared/api"
 import { Image } from "@nextui-org/image";
-import { PlayButton } from "../../../entities/track/ui/PlayButton";
-import UserEntity from "@/entities/user";
 import Link from "next/link";
+import { authService } from '@/entities/user';
 
 export default async function LibraryPage() {
 	const playlists = await (await spotifyApi.get<PageObject<SimplifiedPlaylistObject>>('https://api.spotify.com/v1/me/playlists')).data
 
-	const auth = await UserEntity.authService()
+	const auth = await authService()
 
 	return (
 		<div>

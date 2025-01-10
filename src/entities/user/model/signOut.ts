@@ -1,11 +1,12 @@
 'use server'
-import UserEntity from ".."
+
+import { authService } from "./authService"
 
 export const signOut = async () => {
-	const authService = await UserEntity.authService()
+	const auth = await authService()
 
-	authService.tokens.accessToken = null
-	authService.tokens.accessTokenExpiresAt = null
+	auth.tokens.accessToken = null
+	auth.tokens.accessTokenExpiresAt = null
 
-	authService.tokens.refreshToken = null
+	auth.tokens.refreshToken = null
 }

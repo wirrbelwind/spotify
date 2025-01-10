@@ -1,11 +1,11 @@
 'use server'
 
 import { spotifyApi } from "@/shared/api"
-import UserEntity from ".."
 import { redirect } from "next/navigation"
+import { authService } from "./authService"
 
 export const handleAuthCallback = async (request: Request) => {
-	const auth = await UserEntity.authService()
+	const auth = await authService()
 	const params = new URL(request.url).searchParams
 
 	const stateFromParams = params.get('state')

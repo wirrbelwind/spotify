@@ -5,13 +5,12 @@ import Link from "next/link";
 import React from "react";
 import { Avatar } from "@nextui-org/avatar";
 import { Image } from "@nextui-org/image";
-import UserEntity from "@/entities/user";
 import { TrackList } from "@/entities/track/ui/TrackList/TrackList";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { userOptions } from "@/entities/user/model/userOptions";
 import { Profile } from "@/entities/user/ui/Profile";
 import { TopTracks } from "@/widget/TopTracks";
-import { getUserTopTracksOptions } from "@/entities/track/api/top-tracks/getgetUserTopTracksOptions";
+import { getUserTopTracksOptions } from "@/entities/track";
 
 export default async function HomePage() {
 	const queryClient = new QueryClient()

@@ -1,10 +1,10 @@
 'use server'
 
-import UserEntity from ".."
 import { redirect } from "next/navigation"
+import { authService } from "./authService"
 
 export const signIn = async () => {
-	const auth = await UserEntity.authService()
+	const auth = await authService()
 	auth.process.state = Math.random().toString()
 
 	const scopeList = `ugc-image-upload user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control streaming playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-follow-modify user-follow-read user-read-playback-position user-top-read user-read-recently-played user-library-modify user-library-read user-read-email user-read-private`

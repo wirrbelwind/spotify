@@ -2,17 +2,16 @@ import React from "react";
 import '../global-styles.css'
 import { AllProviders } from "@/shared/providers/AllProviders";
 import { Player } from "@/entities/player/ui/Player";
-import UserEntity from "@/entities/user";
 import Link from "next/link";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { PlayerInit } from "@/entities/player/ui/PlayerInit";
+import { authService } from "@/entities/user";
 
 export const metadata = {
   title: "Spotify",
 };
 
 export default async function RootLayout({ children }: { children: any }) {
-  const auth = await UserEntity.authService()
+  const auth = await authService()
 
   const queryClient = new QueryClient()
 
@@ -43,7 +42,6 @@ export default async function RootLayout({ children }: { children: any }) {
             </div>
             <div className="basis-20 overflow-hidden">
               <HydrationBoundary state={dehydrate(queryClient)}>
-                <PlayerInit token={auth.tokens.accessToken} />
                 <Player />
               </HydrationBoundary>
             </div>

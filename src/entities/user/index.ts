@@ -1,9 +1,3 @@
-import { authService } from "./model/authService";
-import { getCurrentUser } from "./model/getCurrentUser";
-
-const UserEntity = {
-	authService,
-	getCurrentUser,
-}
-
-export default UserEntity
+export { Profile } from "./ui/Profile";
+export { authService } from "./model/authService";
+export { getCurrentUser } from "./model/getCurrentUser";

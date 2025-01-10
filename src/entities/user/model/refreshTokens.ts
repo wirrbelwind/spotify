@@ -1,9 +1,9 @@
 'use server'
-import UserEntity from "@/entities/user"
 import { spotifyApi } from "@/shared/api"
+import { authService } from "./authService"
 
 export const refreshTokens = async () => {
-	const auth = await UserEntity.authService()
+	const auth = await authService()
 
 	const refreshTokenResponse = await spotifyApi.post('https://accounts.spotify.com/api/token', {
 		grant_type: 'refresh_token',

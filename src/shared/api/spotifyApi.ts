@@ -1,9 +1,8 @@
 import 'server-only'
 
 import axios, { AxiosError } from "axios";
-import { cookies } from "next/headers";
-import UserEntity from "@/entities/user";
 import { refreshTokens } from '@/entities/user/model/refreshTokens';
+import { authService } from '@/entities/user';
 
 export const spotifyApi = axios.create()
 
@@ -14,7 +13,7 @@ spotifyApi.interceptors.request.use(async config => {
 		return config
 	}
 
-	const auth = await UserEntity.authService()
+	const auth = await authService()
 
 	if (!auth.tokens.isValidTokenData) {
 		throw new Error(`no tokens | request ${auth.tokens.accessToken} ${auth.tokens.refreshToken} ${auth.tokens.accessTokenExpiresAt}`)
