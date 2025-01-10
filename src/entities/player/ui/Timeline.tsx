@@ -3,6 +3,7 @@
 import { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useRef, useState } from "react"
 import { millisecondsToTime } from "@/shared/lib/millisecondsToTime"
 import { Slider } from "@nextui-org/slider"
+import { usePlayerController } from "@/shared/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
 import { debounce } from "@/shared/lib/debounce"
 
@@ -13,6 +14,7 @@ interface TimelineProps {
 }
 
 export const Timeline: React.FC<TimelineProps> = ({ elementsProps }) => {
+	const controller = usePlayerController()
 	const player = usePlayerState()
 
 	const isActionsDisabled = !player.data
@@ -65,7 +67,7 @@ export const Timeline: React.FC<TimelineProps> = ({ elementsProps }) => {
 				step={1}
 				onChangeEnd={newPosition => {
 					console.log(newPosition)
-					playerContext?.controller?.seek(newPosition[0] ?? newPosition)
+					controller?.seek(newPosition[0] ?? newPosition)
 				}}
 				isDisabled={isActionsDisabled}
 			/>
