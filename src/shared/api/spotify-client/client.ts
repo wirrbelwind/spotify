@@ -36,7 +36,7 @@ export const client = {
 				context_uri: contextUri,
 				uris: audioUris ?? null,
 				// use zod
-				offset: typeof offset === 'number' ? { "uri": offset } : null
+				offset: resolvedOffset
 			}, {
 				params: {
 					device_id: deviceId
