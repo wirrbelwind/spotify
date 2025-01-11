@@ -5,7 +5,7 @@ export const playerStateOptions = (controller?: Spotify.Player | null) => {
 	return queryOptions({
 		enabled: Boolean(controller),
 		queryKey: ['player', 'state'],
-		queryFn: controller!.getCurrentState
+		queryFn: controller?.getCurrentState
 	})
 }
 

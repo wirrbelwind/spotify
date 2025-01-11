@@ -47,6 +47,8 @@ export const handleAuthCallback = async (request: Request) => {
 			refresh_token: string
 		}
 
+		console.log('tokens', tokens)
+
 		auth.tokens.accessTokenExpiresAt = Date.now() + tokens.expires_in * 1000
 		auth.tokens.accessToken = tokens.access_token
 		auth.tokens.refreshToken = tokens.refresh_token

@@ -3,11 +3,12 @@ import 'server-only'
 import axios, { AxiosError } from "axios";
 import { refreshTokens } from '@/entities/user/model/refreshTokens';
 import { authService } from '@/entities/user';
+import { AUTH_API_URL } from './constants';
 
 export const spotifyAxios = axios.create()
 
 spotifyAxios.interceptors.request.use(async config => {
-	const isAuthRequest = config.url?.startsWith('https://accounts.spotify.com')
+	const isAuthRequest = config.baseURL === AUTH_API_URL
 
 	if (isAuthRequest) {
 		return config

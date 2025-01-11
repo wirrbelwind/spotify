@@ -1,5 +1,4 @@
 'use client'
-import { getUserTopTracksOptions } from "@/api/getUserTopTracksOptions";
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableProps } from "@nextui-org/table";
 import { useQuery } from "@tanstack/react-query";
@@ -10,6 +9,7 @@ import { Spinner } from "@nextui-org/spinner";
 import { SlotsToClasses } from "@nextui-org/theme";
 import { spotifyApi } from "@/shared/api";
 import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
+import { getUserTopTracksOptions } from "../../api/top-tracks/getUserTopTracksOptions";
 
 /**
  * @type client component
