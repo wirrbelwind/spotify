@@ -32,7 +32,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				className=""
 			>
 				<Image
-					src="/shuffle.svg"
+					src="icons/shuffle.svg"
 					alt="Shuffle playback"
 					width={35}
 					height={35}
@@ -47,7 +47,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				className=""
 			>
 				<Image
-					src="/play-skip-back.svg"
+					src="icons//play-skip-back.svg"
 					alt="Playback skip backward"
 					width={35}
 					height={35}
@@ -64,14 +64,14 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 			>
 				{!player.data || player.data?.paused ? (
 					<Image
-						src="/play.svg"
+						src="/icons/play.svg"
 						alt="Play"
 						width={35}
 						height={35}
 					/>
 				) : (
 					<Image
-						src="/pause.svg"
+						src="/icons/pause.svg"
 						alt=""
 						width={35}
 						height={35}
@@ -87,7 +87,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				className=""
 			>
 				<Image
-					src="/play-skip-back.svg"
+					src="/icons/play-skip-back.svg"
 					alt="Playback skip forward"
 					width={35}
 					height={35}

@@ -45,9 +45,9 @@ export const OrderCell: React.FC<CellProps> = ({ track, allTracks, trackIndex })
 
 
 			{(player.data?.track_window.current_track.uri === track.uri && !player.data?.paused) ? (
-				<Image src="/pause.svg" width={26} height={26} alt="" className="hidden group-hover/track:block" />
+				<Image src="/icons/pause.svg" width={26} height={26} alt="" className="hidden group-hover/track:block" />
 			) : (
-				<Image src="/play.svg" width={26} height={26} alt="" className="hidden group-hover/track:block" />
+				<Image src="/icons/play.svg" width={26} height={26} alt="" className="hidden group-hover/track:block" />
 			)}
 		</Button>
 	)

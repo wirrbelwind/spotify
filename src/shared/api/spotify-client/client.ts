@@ -91,7 +91,7 @@ export const client = {
 			})
 		},
 		refreshTokens({ refreshToken }: { refreshToken: string }) {
-			return spotifyClient.post('https://accounts.spotify.com/api/token', {
+			return spotifyAxios.post('/api/token', {
 				grant_type: 'refresh_token',
 				refresh_token: refreshToken,
 				client_id: process.env.SPOTIFY_CLIENT_ID
@@ -100,6 +100,7 @@ export const client = {
 					'Content-Type': 'application/x-www-form-urlencoded',
 					'Authorization': `Basic ${btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)}`,
 				},
+				baseURL: AUTH_API_URL
 			})
 		}
 	}

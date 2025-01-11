@@ -46,14 +46,14 @@ export const Volume = () => {
 			>
 				{muted ? (
 					<Image
-						src="/mute.svg"
+						src="/icons/mute.svg"
 						width={35}
 						height={35}
 						alt="Mute"
 					/>
 				) : (
 					<Image
-						src="/unmute.svg"
+						src="/icons/unmute.svg"
 						width={35}
 						height={35}
 						alt="Unmute"

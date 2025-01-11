@@ -7,22 +7,25 @@ import { spotifyApi } from '@/shared/api'
 import { User } from '@/shared/api/spotify-types'
 import { spotifyClient } from '@/shared/api/spotify-client'
 
-export const getCurrentUser = async (): Promise<User> => {
+export const getCurrentUser = async (): Promise<User | null> => {
 	const auth = await authService()
 
 	if (!auth.tokens.isValidTokenData) {
-		throw new Error('tokens are not in cookie')
+		return null
 	}
 
-	const now = Date.now()
+	const isAccessTokenExpired = Date.now() >= auth.tokens.accessTokenExpiresAt!
 
-	if (now >= auth.tokens.accessTokenExpiresAt!) {
-		const newTokens = await refreshTokens()
-
+	if (isAccessTokenExpired) {
+		await refreshTokens()
 	}
 
 	//request user profile
-	const userResponse = await spotifyClient.user()
+	try {
+		const userResponse = await spotifyClient.user()
 
-	return userResponse.data
+		return userResponse.data
+	} catch {
+		return null
+	}
 }
