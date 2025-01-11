@@ -18,8 +18,8 @@ export const LikedCell: React.FC<CellProps> = ({ track, likes, trackIndex }) => 
 				)
 			}
 			{
-				likes && (
-					JSON.stringify(isLiked)
+				(likes && isLiked) && (
+					'liked'
 				)
 			}
 		</Button>
