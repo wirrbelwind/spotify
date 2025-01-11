@@ -14,16 +14,6 @@ export async function middleware(request: NextRequest) {
 
 		return NextResponse.redirect('http://localhost:3000/auth')
 	}
-	// try {
-	// 	const user = await getCurrentUser()
-	// 	return NextResponse.next()
-	// }
-	// catch (error) {
-	// 	const auth = await authService()
-	// 	auth.process.targetPageAfterLogin = request.url
-
-	// 	return NextResponse.redirect('http://localhost:3000/auth')
-	// }
 }
 
 export const config: MiddlewareConfig = {
