@@ -4,7 +4,7 @@ import { TrackList } from "@/entities/track/ui/TrackList/TrackList"
 export const TopTracks = () => {
 	return (
 		<section>
-			<p className="text-4xl">Top tracks this month</p>
+			<p className="text-4xl">Top tracks of the semester</p>
 			<p className="mt-2">Only visible for you</p>
 
 			<TrackList
