@@ -1,6 +1,6 @@
 import 'server-only'
 import { spotifyAxios } from './axios'
-import { PageObject, TrackObject, User } from '../spotify-types'
+import { PageObject, SimplifiedPlaylistObject, TrackObject, User } from '../spotify-types'
 import { AUTH_API_URL, DATA_API_URL } from './constants'
 import { spotifyClient } from '.'
 
@@ -103,5 +103,10 @@ export const client = {
 				baseURL: AUTH_API_URL
 			})
 		}
+	},
+	userPlaylists() {
+		return spotifyAxios.get<PageObject<SimplifiedPlaylistObject>>('/me/playlists', {
+			baseURL: DATA_API_URL,
+		})
 	}
 }
