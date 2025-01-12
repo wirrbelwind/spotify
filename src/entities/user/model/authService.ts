@@ -59,7 +59,7 @@ export const authService = async () => {
 						cookie.delete(COOKIE_KEYS.REFRESH_TOKEN)
 						return
 					}
-					throw new Error(`Not valid value in "auth() -> set refreshToken()"`)
+					throw new Error(`Not valid value in "auth() -> set refreshToken(): ${value}`)
 				},
 				get isValidTokenData() {
 					if (this.accessToken

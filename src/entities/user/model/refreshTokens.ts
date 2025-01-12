@@ -31,7 +31,9 @@ export const refreshTokens = async () => {
 
 	auth.tokens.accessToken = tokens.access_token
 	auth.tokens.accessTokenExpiresAt = accessTokenExpiresAt
-	auth.tokens.refreshToken = tokens.refresh_token
+	if(tokens.refresh_token) {
+		auth.tokens.refreshToken = tokens.refresh_token
+	}
 
 	return tokens
 }
