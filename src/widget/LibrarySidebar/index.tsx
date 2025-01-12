@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import { PlayButton } from "./PlayButton";
+import { Header } from "./Header";
 
 interface LibrarySidebarProps extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
 
@@ -16,17 +17,17 @@ export const LibrarySidebar: FC<LibrarySidebarProps> = async (props) => {
 			className="self-stretch basis-96 overflow-y-scroll shrink-0 rounded-md  scrollbar-hide"
 			{...props}
 		>
-			<p>Your library</p>
+			<Header />
 			<div className="grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-4">
 				{playlists.data?.items.map(playlist => (
 					<div
 						key={playlist.id}
 						className="hover:bg-slate-400 h-56 p-2 group rounded-md relative"
 					>
-						{/* <Link
+						<Link
 							href={`/playlist/${playlist.id}`}
 							className="w-full h-full absolute top-0 bottom-0 left-0 right-0 z-20"
-						></Link> */}
+						></Link>
 						<div className="relative overflow-hidden">
 							<Image
 								src={playlist.images[0].url}

@@ -36,7 +36,7 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
 		<Button
 			onPress={handlePlay}
 			isIconOnly
-			className="bg-green-600 w-14 h-14 rounded-full absolute bottom-0 right-0 z-30 translate-x-full group-hover:translate-x-0 transition-transform ease-in-out delay-150 duration-300"
+			className="bg-green-600 w-14 h-14 rounded-full absolute bottom-0 right-0 z-30 translate-x-full group-hover:-translate-x-4 group-hover:-translate-y-2 transition-transform ease-in-out delay-150 duration-300"
 			isDisabled={isDisabled}
 		>
 			{(!isCurrentPlayback || (isCurrentPlayback && player.data?.paused)) ? (
