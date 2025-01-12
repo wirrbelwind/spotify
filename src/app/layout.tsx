@@ -35,10 +35,10 @@ export default async function RootLayout({ children }: { children: any }) {
           flex
           flex-col
           ">
-            <div className="basis-full overflow-y-hidden px-4 py-2 flex gap-2 items-start">
+            <div className="basis-full overflow-y-hidden px-4 py-2 flex gap-6 items-start">
               <LibrarySidebar />
 
-              <main>
+              <main className="basis-full">
                 <div className="flex gap-4">
                   <Link href="/">Home</Link>
                   <Link href="/me">Profile</Link>

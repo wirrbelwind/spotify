@@ -91,6 +91,7 @@ export const Player = () => {
 			<div>
 				<Volume />
 			</div>
+			{/* {JSON.stringify(player.data)} */}
 		</div>
 	)
 }
