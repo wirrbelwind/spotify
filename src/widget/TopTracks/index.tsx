@@ -1,5 +1,4 @@
-
-import { TrackList } from "@/entities/track/ui/TrackList/TrackList"
+import { TrackListWrapper } from "./TrackListWrapper"
 
 export const TopTracks = () => {
 	return (
@@ -7,20 +6,7 @@ export const TopTracks = () => {
 			<p className="text-4xl">Top tracks of the semester</p>
 			<p className="mt-2">Only visible for you</p>
 
-			<TrackList
-				hideHeader
-				classNames={{
-					wrapper: 'mt-2'
-				}}
-				columns={[
-					'order',
-					'avatar',
-					'name',
-					'album',
-					'liked',
-					'duration'
-				]}
-			/>
+			<TrackListWrapper />
 		</section>
 	)
 }
