@@ -1,7 +1,7 @@
 'use client'
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableProps } from "@nextui-org/table";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useMemo, useRef, useState } from "react";
 import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType } from "./types";
@@ -10,6 +10,7 @@ import { SlotsToClasses } from "@nextui-org/theme";
 import { spotifyApi } from "@/shared/api";
 import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
 import { getUserTopTracksOptions } from "../../api/top-tracks/getUserTopTracksOptions";
+import { PageObject, TrackObject } from "@/shared/api/spotify-types";
 
 /**
  * @type client component
@@ -19,11 +20,10 @@ interface TrackListProps {
 	columns: ColumnType[]
 	hideHeader?: boolean
 	classNames?: TableProps['classNames']
+	tracksQuery: UseQueryResult<PageObject<TrackObject>>
 }
 
-export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames }) => {
-	const trackList = useQuery(getUserTopTracksOptions(5))
-
+export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames, tracksQuery }) => {
 	const player = usePlayerState()
 
 	const columnsDefinition = useMemo(
@@ -38,7 +38,7 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames 
 
 	const likes = useQuery(getCheckLikedTracksOptions({
 		enabled: isLikesColumn,
-		idList: trackList.data?.items.map(item => item.id)
+		idList: tracksQuery.data?.items.map(item => item.id)
 	}))
 
 	return (
@@ -59,12 +59,12 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames 
 			</TableHeader>
 
 			<TableBody
-				isLoading={trackList.isLoading}
+				isLoading={tracksQuery.isLoading}
 				loadingContent={<Spinner />}
 			>
 				{
 
-					trackList.data?.items.map((track, trackIndex) => (
+					tracksQuery.data?.items.map((track, trackIndex) => (
 						<TableRow
 							key={track.id}
 							className={`
@@ -98,7 +98,7 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames 
 											<CellComponent
 												trackIndex={trackIndex}
 												track={track}
-												allTracks={trackList.data.items}
+												allTracks={tracksQuery.data.items}
 												likes={likes.data}
 											/>
 										</TableCell>
