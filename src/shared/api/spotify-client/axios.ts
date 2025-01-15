@@ -1,4 +1,3 @@
-import 'server-only'
 
 import axios, { AxiosError } from "axios";
 import { refreshTokens } from '@/entities/user/model/refreshTokens';

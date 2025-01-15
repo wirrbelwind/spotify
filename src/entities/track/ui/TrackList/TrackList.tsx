@@ -20,10 +20,14 @@ interface TrackListProps {
 	columns: ColumnType[]
 	hideHeader?: boolean
 	classNames?: TableProps['classNames']
-	tracksQuery: UseQueryResult<PageObject<TrackObject>>
+	tracks: {
+		data?: PageObject<TrackObject>
+		isLoading: boolean
+		isError: boolean
+	}
 }
 
-export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames, tracksQuery }) => {
+export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames, tracks }) => {
 	const player = usePlayerState()
 
 	const columnsDefinition = useMemo(
@@ -38,7 +42,7 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 
 	const likes = useQuery(getCheckLikedTracksOptions({
 		enabled: isLikesColumn,
-		idList: tracksQuery.data?.items.map(item => item.id)
+		idList: tracks.data?.items.map(item => item.id)
 	}))
 
 	return (
@@ -59,12 +63,12 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 			</TableHeader>
 
 			<TableBody
-				isLoading={tracksQuery.isLoading}
+				isLoading={tracks.isLoading}
 				loadingContent={<Spinner />}
 			>
 				{
 
-					tracksQuery.data?.items.map((track, trackIndex) => (
+					tracks.data?.items.map((track, trackIndex) => (
 						<TableRow
 							key={track.id}
 							className={`
@@ -97,8 +101,8 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 										<TableCell key={`${track.id}:${column.key}`}>
 											<CellComponent
 												trackIndex={trackIndex}
-												track={track}
-												allTracks={tracksQuery.data.items}
+												track={track?.track ?? track}
+												allTracks={tracks.data.items}
 												likes={likes.data}
 											/>
 										</TableCell>

@@ -4,7 +4,6 @@ import { AllProviders } from "@/shared/providers/AllProviders";
 import { Player } from "@/entities/player/ui/Player";
 import Link from "next/link";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { authService, getCurrentUser } from "@/entities/user";
 import { LibrarySidebar } from "@/widget/LibrarySidebar";
 
 export const metadata = {
@@ -12,11 +11,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: any }) {
-  const auth = await authService()
 
   const queryClient = new QueryClient()
-
-  const user = await getCurrentUser()
 
   return (
     <html lang="en" suppressHydrationWarning>
