@@ -42,6 +42,7 @@
     "postcss": "^8.4.49",
     "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3.4.17",
+    "ts-to-zod": "^3.15.0",
     "typescript": "5.5.2"
   },
   "packageManager": "yarn@4.5.2"
