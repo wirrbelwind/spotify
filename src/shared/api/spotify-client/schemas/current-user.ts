@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { COUNRTRY_ISO_ALPHA_2, SPOTIFY_URI } from "../constants";
+import { COUNTRY_ISO_ALPHA_2, SPOTIFY_URI } from "../constants";
 import { createEntity } from "../createEntity";
 import { imageSchema } from "./image";
 
 export const currentUserSchema = createEntity('user', {
-	country: z.string().regex(COUNRTRY_ISO_ALPHA_2),
+	country: z.string().regex(COUNTRY_ISO_ALPHA_2),
 	display_name: z.string().max(32).nonempty().nullable(),
 	email: z.string().email(),
 	explicit_content: z.object({

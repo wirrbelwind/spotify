@@ -2,15 +2,7 @@ import { z } from "zod"
 import { createEntity } from "../createEntity"
 import { SPOTIFY_URI } from "../constants"
 import { imageSchema } from "./image"
-
-export const simplifiedArtistSchema = createEntity('artist', {
-	external_urls: z.object({
-		spotify: z.string().url()
-	}),
-	href: z.string().url(),
-	name: z.string().nonempty(),
-	uri: z.string().regex(SPOTIFY_URI)
-})
+import { simplifiedArtistSchema } from "./simplified-artist"
 
 export const artist = simplifiedArtistSchema.extend({
 	followers: z.object({

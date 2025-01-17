@@ -2,14 +2,19 @@
 import { spotifyAxios } from './axios'
 import { PageObject, PlaylistObject, SimplifiedPlaylistObject, TrackObject, User } from '../spotify-types'
 import { AUTH_API_URL, DATA_API_URL } from './constants'
-import { spotifyClient } from '.'
+import { currentUserSchema } from './schemas/current-user'
 
 // TODO: write interface for client
 export const client = {
-	user() {
-		return spotifyAxios.get<User>('/me', {
+	async user() {
+		const response = await  spotifyAxios.get<User>('/me', {
 			baseURL: DATA_API_URL,
 		})
+
+		const json = response.data
+
+		const user = currentUserSchema.parse(json)
+		return user
 	},
 	player: {
 		play({
