@@ -18,8 +18,10 @@ export const simplifiedPlaylistSchema = createEntity('playlist', {
 	owner: currentUserSchema,
 	public: z.boolean().nullable(),
 	snapshot_id: z.string(),
-	// todo: page
-	tracks: pageWith(trackSchema),
+	tracks: z.object({
+		href: z.string().url(),
+		total: z.number().int().nonnegative()
+	}),
 	uri: z.string().regex(SPOTIFY_URI)
 })
 
