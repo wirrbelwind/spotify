@@ -4,6 +4,7 @@ import { imageSchema } from "./image";
 import { pageWith } from "./page";
 import { SPOTIFY_URI } from "../constants";
 import { playlistTrackSchema } from "./playlist-track";
+import { anotherUserSchema } from "./another-user";
 
 export const playlistSchema = createEntity('playlist', {
 	collaborative: z.boolean(),
@@ -18,8 +19,7 @@ export const playlistSchema = createEntity('playlist', {
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),
-	// create schema of another user
-	owner: z.object({}),
+	owner: anotherUserSchema,
 	public: z.boolean().nullable(),
 	snapshot_id: z.string(),
 	tracks: pageWith(playlistTrackSchema),

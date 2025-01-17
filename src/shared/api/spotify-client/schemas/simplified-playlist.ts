@@ -3,6 +3,7 @@ import { createEntity } from "../createEntity";
 import { currentUserSchema } from "./current-user";
 import { imageSchema } from "./image";
 import { SPOTIFY_URI } from "../constants";
+import { anotherUserSchema } from "./another-user";
 
 export const simplifiedPlaylistSchema = createEntity('playlist', {
 	collaborative: z.boolean(),
@@ -13,7 +14,7 @@ export const simplifiedPlaylistSchema = createEntity('playlist', {
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),
-	owner: currentUserSchema,
+	owner: anotherUserSchema,
 	public: z.boolean().nullable(),
 	snapshot_id: z.string(),
 	tracks: z.object({
