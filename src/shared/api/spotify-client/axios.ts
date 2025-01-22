@@ -41,10 +41,10 @@ spotifyAxios.interceptors.response.use(
 				return spotifyAxios(responseError.request)
 			}
 
-			return responseError
+			throw responseError
 		}
 		catch {
-			return responseError
+			throw responseError
 		}
 	}
 )
