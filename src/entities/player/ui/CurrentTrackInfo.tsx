@@ -1,8 +1,8 @@
-import { LinksTextList } from "@/ui/LinksTextList"
 import NextImage from "next/image"
 import { Image } from "@nextui-org/image"
 import React from "react"
 import { Nullable } from "@/shared/lib/Nullable"
+import { LinksTextList } from "@/shared/ui/LinksTextList"
 
 interface PlayerCurrentTrackProps {
 	name: string
