@@ -1,33 +1,41 @@
 'use client'
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableProps } from "@nextui-org/table";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import React, { FC, PropsWithChildren, useMemo, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, useMemo, useRef, useState } from "react";
 import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType } from "./types";
 import { Spinner } from "@nextui-org/spinner";
-import { SlotsToClasses } from "@nextui-org/theme";
-import { spotifyApi } from "@/shared/api";
 import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
-import { getUserTopTracksOptions } from "../../api/top-tracks/getUserTopTracksOptions";
-import { PageObject, TrackObject } from "@/shared/api/spotify-types";
+import { PagePlaylistTracks, PageTracks } from "@/shared/api/spotify-client/schemas/pages";
 
 /**
  * @type client component
  */
 
-interface TrackListProps {
+type TrackListProps = {
+	fromPlaylist: false
 	columns: ColumnType[]
 	hideHeader?: boolean
 	classNames?: TableProps['classNames']
 	tracks: {
-		data?: PageObject<TrackObject>
+		data?: PageTracks
+		isLoading: boolean
+		isError: boolean
+	}
+} | {
+	fromPlaylist: true
+	columns: ColumnType[]
+	hideHeader?: boolean
+	classNames?: TableProps['classNames']
+	tracks: {
+		data?: PagePlaylistTracks
 		isLoading: boolean
 		isError: boolean
 	}
 }
 
-export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames, tracks }) => {
+export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames, tracks, fromPlaylist }) => {
 	const player = usePlayerState()
 
 	const columnsDefinition = useMemo(
