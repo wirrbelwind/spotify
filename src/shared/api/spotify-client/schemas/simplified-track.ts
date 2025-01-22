@@ -29,3 +29,5 @@ export const simplifiedTrackSchema = createEntity('track', {
 	uri: z.string().regex(SPOTIFY_URI),
 	is_local: z.boolean()
 })
+
+export type SimplifiedTrack = z.output<typeof simplifiedTrackSchema>

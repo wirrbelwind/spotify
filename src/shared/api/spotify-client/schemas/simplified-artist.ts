@@ -10,3 +10,5 @@ export const simplifiedArtistSchema = createEntity('artist', {
 	name: z.string().nonempty(),
 	uri: z.string().regex(SPOTIFY_URI)
 })
+
+export type SimplifiedArtist = z.output<typeof simplifiedArtistSchema>

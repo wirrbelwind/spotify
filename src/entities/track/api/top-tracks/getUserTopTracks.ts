@@ -1,7 +1,5 @@
 'use server'
 
-import { PageObject, TrackObject } from '@/shared/api/spotify-types'
-import { spotifyApi } from "@/shared/api"
 import { spotifyClient } from '@/shared/api/spotify-client'
 
 /**
@@ -14,5 +12,5 @@ export const getUserTopTracks = async (quantity: number) => {
 
 	const response = await spotifyClient.userTopTracks({quantity})
 
-	return response.data
+	return response
 }

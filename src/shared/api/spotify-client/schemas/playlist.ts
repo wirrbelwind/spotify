@@ -25,3 +25,6 @@ export const playlistSchema = createEntity('playlist', {
 	tracks: pageWith(playlistTrackSchema),
 	uri: z.string().regex(SPOTIFY_URI)
 })
+
+
+export type Image = z.output<typeof playlistSchema>

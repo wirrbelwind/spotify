@@ -5,3 +5,5 @@ export const imageSchema = z.object({
   height: z.number().nullable(),
   width: z.number().nullable()
 })
+
+export type Image = z.output<typeof imageSchema>

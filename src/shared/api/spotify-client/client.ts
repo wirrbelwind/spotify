@@ -1,13 +1,19 @@
 // import 'server-only'
+import { z } from 'zod'
 import { spotifyAxios } from './axios'
-import { PageObject, PlaylistObject, SimplifiedPlaylistObject, TrackObject, User } from '../spotify-types'
 import { AUTH_API_URL, DATA_API_URL } from './constants'
+import { savedTracksSchema } from './schemas/check-saved-tracks'
 import { currentUserSchema } from './schemas/current-user'
+import { pageWith } from './schemas/page'
+import { playlistSchema } from './schemas/playlist'
+import { trackSchema } from './schemas/track'
+import { simplifiedPlaylistSchema } from './schemas/simplified-playlist'
+import { recommendationsSchema } from './schemas/recommendations'
 
 // TODO: write interface for client
 export const client = {
 	async user() {
-		const response = await  spotifyAxios.get<User>('/me', {
+		const response = await spotifyAxios.get('/me', {
 			baseURL: DATA_API_URL,
 		})
 
@@ -17,7 +23,7 @@ export const client = {
 		return user
 	},
 	player: {
-		play({
+		async play({
 			contextUri,
 			audioUris,
 			offset,
@@ -37,7 +43,7 @@ export const client = {
 				resolvedOffset = { uri: offset }
 			}
 
-			return spotifyAxios.put(`/me/player/play`, {
+			await spotifyAxios.put(`/me/player/play`, {
 				context_uri: contextUri,
 				uris: audioUris ?? null,
 				// use zod
@@ -49,8 +55,8 @@ export const client = {
 				baseURL: DATA_API_URL,
 			})
 		},
-		shuffle({ state, deviceId }: { state: boolean, deviceId: string }) {
-			return spotifyAxios.put(
+		async shuffle({ state, deviceId }: { state: boolean, deviceId: string }) {
+			return await spotifyAxios.put(
 				'/me/player/shuffle',
 				{},
 				{
@@ -62,28 +68,44 @@ export const client = {
 				})
 		}
 	},
-	checkLikes({ idList }: { idList: string[] }) {
-		return spotifyAxios.get('/me/tracks/contains', {
+	async checkLikes({ idList }: { idList: string[] }) {
+		const response = await spotifyAxios.get('/me/tracks/contains', {
 			params: {
 				ids: idList.join(',')
 			},
 			baseURL: DATA_API_URL,
 		})
+
+		const json = response.data
+
+		return savedTracksSchema.parse(json)
 	},
-	userTopTracks({ quantity }: { quantity: number }) {
-		return spotifyAxios.get<PageObject<TrackObject>>('/me/top/tracks', {
+	async userTopTracks({ quantity }: { quantity: number }) {
+		const response = await spotifyAxios.get('/me/top/tracks', {
 			params: {
 				limit: quantity
 			},
 			baseURL: DATA_API_URL,
 		})
+
+		const json = response.data
+		const parser = pageWith(trackSchema)
+
+		return parser.parse(json)
 	},
 	auth: {
-		tokens({
+		async tokens({
 			code,
 			base64Credentials
 		}: { code: string, base64Credentials: string }) {
-			return spotifyAxios.post('/api/token', {
+			const parser = z.object({
+				access_token: z.string(),
+				token_type: z.string(),
+				scope: z.string(),
+				expires_in: z.number(),
+				refresh_token: z.string(),
+			})
+			const response = await spotifyAxios.post('/api/token', {
 				grant_type: 'authorization_code',
 				code,
 				redirect_uri: process.env.SPOTIFY_REDIRECT_URI
@@ -94,9 +116,21 @@ export const client = {
 				},
 				baseURL: AUTH_API_URL
 			})
+
+			const json = response.data
+
+			return parser.parse(json)
 		},
-		refreshTokens({ refreshToken }: { refreshToken: string }) {
-			return spotifyAxios.post('/api/token', {
+		async refreshTokens({ refreshToken }: { refreshToken: string }) {
+			const parser = z.object({
+				access_token: z.string(),
+				token_type: z.string(),
+				scope: z.string(),
+				expires_in: z.number(),
+				refresh_token: z.string(),
+			})
+
+			const response = await spotifyAxios.post('/api/token', {
 				grant_type: 'refresh_token',
 				refresh_token: refreshToken,
 				client_id: process.env.SPOTIFY_CLIENT_ID
@@ -107,19 +141,46 @@ export const client = {
 				},
 				baseURL: AUTH_API_URL
 			})
+
+			const json = response.data
+			return parser.parse(json)
 		}
 	},
-	userPlaylists() {
-		return spotifyAxios.get<PageObject<SimplifiedPlaylistObject>>('/me/playlists', {
+	async userPlaylists() {
+		const parser = pageWith(simplifiedPlaylistSchema)
+
+		const response = await spotifyAxios.get('/me/playlists', {
 			baseURL: DATA_API_URL,
 		})
+		const json = response.data
+
+		return parser.parse(json)
 	},
-	playlist({ id }: { id: string }) {
-		return spotifyAxios.get<PlaylistObject>(`/playlists/${id}`, {
+	async playlist({ id }: { id: string }) {
+		const response = await spotifyAxios.get(`/playlists/${id}`, {
 			params: {
 				playlist_id: id,
 			},
 			baseURL: DATA_API_URL,
 		})
+
+		const json = response.data
+		const playlist = playlistSchema.parse(json)
+
+		return playlist
 	},
+	async recommendations() {
+		const response = await spotifyAxios.get('/recommendations', {
+			baseURL: DATA_API_URL,
+			params: {
+				seed_artists: "4NHQUGzhtTLFvgF5SZesLK",
+				seed_genres: "classical,country",
+				seed_tracks: "0c6xIDDpzE81m2q797ordA"
+			}
+		})
+
+		const json = response.data
+
+		return recommendationsSchema.parse(json)
+	}
 }

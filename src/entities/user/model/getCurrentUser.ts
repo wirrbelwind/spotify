@@ -3,11 +3,9 @@ import 'server-only'
 
 import { refreshTokens } from "./refreshTokens"
 import { authService } from "./authService"
-import { spotifyApi } from '@/shared/api'
-import { User } from '@/shared/api/spotify-types'
 import { spotifyClient } from '@/shared/api/spotify-client'
 
-export const getCurrentUser = async (): Promise<User | null> => {
+export const getCurrentUser = async () => {
 	const auth = await authService()
 
 	if (!auth.tokens.isValidTokenData) {
@@ -24,7 +22,7 @@ export const getCurrentUser = async (): Promise<User | null> => {
 	try {
 		const userResponse = await spotifyClient.user()
 
-		return userResponse.data
+		return userResponse
 	} catch {
 		return null
 	}

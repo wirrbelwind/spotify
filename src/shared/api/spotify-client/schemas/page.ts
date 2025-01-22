@@ -1,6 +1,6 @@
 import { z, ZodType } from "zod"
 
-const pageSchema = z.object({
+export const pageSchema = z.object({
 	href: z.string().url(),
 	limit: z.number().nonnegative(),
 	prev: z.string().url().nullable(),
@@ -9,7 +9,7 @@ const pageSchema = z.object({
 	total: z.number().nonnegative(),
 })
 
-export const pageWith = (item: ZodType) => {
+export const pageWith = <T extends ZodType>(item: T) => {
 	return pageSchema.extend({
 		items: item.array()
 	})

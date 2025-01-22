@@ -21,7 +21,7 @@ export const albumSchema = createEntity('album', {
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),
-	release_date: z.date(),
+	release_date: z.string().date(),
 	release_date_precision: z.union([
 		z.literal("year"),
 		z.literal("month"),
@@ -49,9 +49,4 @@ export const albumSchema = createEntity('album', {
 	popularity: z.number().min(0).max(100)
 })
 
-
-
-
-
-
-
+export type Album = z.output<typeof albumSchema>

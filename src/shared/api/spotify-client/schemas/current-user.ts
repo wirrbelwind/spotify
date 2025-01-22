@@ -27,3 +27,5 @@ export const currentUserSchema = createEntity('user', {
 	]),
 	uri: z.string().regex(SPOTIFY_URI)
 })
+
+export type CurrentUser = z.output<typeof currentUserSchema>

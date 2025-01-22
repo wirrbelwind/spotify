@@ -16,3 +16,5 @@ export const anotherUserSchema = createEntity('user', {
 	images: imageSchema.array(),
 	uri: z.string().regex(SPOTIFY_URI)
 })
+
+export type AnotherUser = z.output<typeof anotherUserSchema>

@@ -13,3 +13,5 @@ export const artist = simplifiedArtistSchema.extend({
 	images: imageSchema.array(),
 	popularity: z.number().min(0).max(100)
 })
+
+export type SimplifiedArtist = z.output<typeof simplifiedArtistSchema>

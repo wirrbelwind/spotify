@@ -7,3 +7,5 @@ export const copyrightSchema = z.object({
 		z.literal('P')
 	])
 })
+
+export type Copyright = z.output<typeof copyrightSchema>

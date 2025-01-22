@@ -23,3 +23,6 @@ export const showSchema = createEntity('show', {
 	uri: z.string().regex(SPOTIFY_URI),
 	total_episodes: z.number().int()
 })
+
+
+export type Show = z.output<typeof showSchema>

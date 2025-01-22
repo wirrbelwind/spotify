@@ -23,3 +23,5 @@ export const simplifiedPlaylistSchema = createEntity('playlist', {
 	}),
 	uri: z.string().regex(SPOTIFY_URI)
 })
+
+export type SimplifiedPlaylist = z.output<typeof simplifiedPlaylistSchema>

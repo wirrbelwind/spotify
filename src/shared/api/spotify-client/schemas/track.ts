@@ -37,3 +37,5 @@ export const trackSchema = createEntity('track', {
 	uri: z.string().regex(SPOTIFY_URI),
 	is_local: z.boolean()
 })
+
+export type Track = z.output<typeof trackSchema>
