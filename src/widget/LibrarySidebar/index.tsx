@@ -19,7 +19,7 @@ export const LibrarySidebar: FC<LibrarySidebarProps> = async (props) => {
 		>
 			<Header />
 			<div className="grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-4">
-				{playlists.data?.items.map(playlist => (
+				{playlists?.items.map(playlist => (
 					<div
 						key={playlist.id}
 						className="hover:bg-slate-400 h-56 p-2 group rounded-md relative"
