@@ -1,11 +1,11 @@
 'use client'
 import { usePlayerState } from "@/entities/player/model/usePlayerState"
 import { usePlayerController } from "@/shared/providers/spotify-player"
-import { EqualizerIcon } from "@/ui/EqualizerIcon"
 import { Button } from "@nextui-org/button"
 import Image from "next/image"
 import { CellProps } from "../types"
 import { startAudio } from "@/entities/player"
+import { EqualizerIcon } from "@/shared/ui/EqualizerIcon"
 
 export const OrderCell: React.FC<CellProps> = ({ track, allTracks, trackIndex, }) => {
 	

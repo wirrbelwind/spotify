@@ -1,7 +1,7 @@
 import Link from "next/link"
 import React from "react"
 import { CellProps } from "../types"
-import { LinksTextList } from "@/ui/LinksTextList"
+import { LinksTextList } from "@/shared/ui/LinksTextList"
 
 export const NameCell: React.FC<CellProps> = ({ track }) => {
 	const artists = track.artists.map(artist => ({

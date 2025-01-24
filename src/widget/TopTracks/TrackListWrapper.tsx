@@ -20,7 +20,12 @@ export const TrackListWrapper = () => {
 				'liked',
 				'duration'
 			]}
-			tracksQuery={trackList}
+			fromPlaylist={false}
+			tracks={{
+				data: trackList.data,
+				isError: trackList.isError,
+				isLoading: trackList.isLoading
+			}}
 		/>
 	)
 }

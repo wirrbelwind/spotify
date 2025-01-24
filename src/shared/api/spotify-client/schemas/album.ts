@@ -14,7 +14,7 @@ export const albumSchema = createEntity('album', {
 		z.literal("compilation"),
 	]),
 	total_tracks: z.number().nonnegative(),
-	available_markets: z.string().array().element.regex(COUNTRY_ISO_ALPHA_2),
+	available_markets: z.string().regex(COUNTRY_ISO_ALPHA_2).array(),
 	external_urls: z.object({
 		spotify: z.string().url()
 	}),
@@ -39,9 +39,9 @@ export const albumSchema = createEntity('album', {
 	tracks: pageWith(simplifiedTrackSchema),
 	copyrights: copyrightSchema,
 	external_ids: z.object({
-		ISRC: z.string().regex(ISRC),
-		ean: z.string().regex(EAN),
-		UPC: z.string().regex(UPC)
+		ISRC: z.string().regex(ISRC).optional(),
+		ean: z.string().regex(EAN).optional(),
+		UPC: z.string().regex(UPC).optional()
 	}),
 
 	genres: z.string().array().max(0),

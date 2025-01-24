@@ -7,14 +7,14 @@ import { simplifiedArtistSchema } from "./simplified-artist"
 export const trackSchema = createEntity('track', {
 	album: albumSchema,
 	artists: simplifiedArtistSchema.array(),
-	available_markets: z.string().array().element.regex(COUNTRY_ISO_ALPHA_2),
+	available_markets: z.string().regex(COUNTRY_ISO_ALPHA_2).array(),
 	disc_number: z.number().positive(),
 	duration_ms: z.number().nonnegative(),
 	explicit: z.boolean(),
 	external_ids: z.object({
-		isrc: z.string().regex(ISRC),
-		ean: z.string().regex(EAN),
-		upc: z.string().regex(UPC),
+		isrc: z.string().regex(ISRC).optional(),
+		ean: z.string().regex(EAN).optional(),
+		upc: z.string().regex(UPC).optional(),
 	}),
 	external_urls: z.object({
 		spotify: z.string().url()
@@ -29,7 +29,7 @@ export const trackSchema = createEntity('track', {
 			z.literal('explicit'),
 			z.unknown(),
 		])
-	}),
+	}).optional(),
 	name: z.string().nonempty(),
 	popularity: z.number().min(0).max(100),
 	preview_url: z.string().url().describe('Deprecated. Always is null').nullable(),

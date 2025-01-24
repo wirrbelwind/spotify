@@ -10,7 +10,7 @@ export const metadata = {
   title: "Spotify",
 };
 
-export default async function RootLayout({ children }: { children: any }) {
+export default async function DashboardLayout({ children }: { children: any }) {
 
   const queryClient = new QueryClient()
 
@@ -25,32 +25,7 @@ export default async function RootLayout({ children }: { children: any }) {
       </head>
       <body className="dark text-foreground bg-background">
         <AllProviders>
-          <main className="
-          h-dvh 
-          overflow-hidden
-          flex
-          flex-col
-          ">
-            <div className="basis-full overflow-y-hidden px-4 py-2 flex gap-6 items-start">
-              <LibrarySidebar />
-
-              <main className="basis-full">
-                <div className="flex gap-4">
-                  <Link href="/">Home</Link>
-                  <Link href="/me">Profile</Link>
-                  <Link href="/me/library">Library</Link>
-                </div>
-                {children}
-              </main>
-            </div>
-
-            <div className="basis-20 overflow-hidden">
-              <HydrationBoundary state={dehydrate(queryClient)}>
-                <Player />
-              </HydrationBoundary>
-            </div>
-
-          </main>
+         {children}
         </AllProviders>
       </body>
     </html>

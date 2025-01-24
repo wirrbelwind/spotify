@@ -1,7 +1,9 @@
-/**
- * Copied from library react-spotify-web-playback-sdk,
- * and edited.
- */
+// /**
+//  * Copied from library react-spotify-web-playback-sdk,
+//  * and edited.
+//  */
+
+import { Track } from "../track";
 
 type ErrorTypes = "account_error" | "authentication_error" | "initialization_error" | "playback_error";
 
@@ -61,3 +63,4 @@ declare global {
 		}
 	}
 }
+

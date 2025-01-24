@@ -109,8 +109,8 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 										<TableCell key={`${track.id}:${column.key}`}>
 											<CellComponent
 												trackIndex={trackIndex}
-												track={track?.track ?? track}
-												allTracks={tracks.data.items}
+												track={track}
+												allTracks={tracks.data?.items}
 												likes={likes.data}
 											/>
 										</TableCell>

@@ -1,8 +1,10 @@
+import { TrackList } from "@/entities/track"
 import { getPlaylistOptions } from "@/entities/track/api/playlist/getPlaylistOptions"
 import { spotifyClient } from "@/shared/api/spotify-client"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
-import { PlaylistTemplate } from "@/ui/PlaylistTemplate"
+import { PlaylistTemplate } from "@/shared/ui/PlaylistTemplate"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
+import { TrackListWrapper } from "./TrackListWrapper"
 
 interface PlaylistPageProps {
 	params: Promise<{
@@ -19,11 +21,14 @@ export default async function PlaylistPage({ params }: PlaylistPageProps) {
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
-		<PlaylistTemplate
+			{/* <PlaylistTemplate
 			// name={playlist.data.name}
 			// image={getBestFitImage({images: playlist.data.images, preferredSize: {height: 144, width: 144}})}
-			playlistId={playlistId}
-		/>
+			// playlistId={playlistId}
+			isNativePlayList={true}
+
+		/> */}
+			<TrackListWrapper />
 		</HydrationBoundary>
 	)
 }

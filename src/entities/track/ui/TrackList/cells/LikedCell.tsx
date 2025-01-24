@@ -11,7 +11,7 @@ export const LikedCell: React.FC<CellProps> = ({ likes, trackIndex }) => {
 
 	return (
 		<Button>
-			{/* {isLiked ? JSON.stringify(likes) : 'loading'} */}
+			
 			{
 				!likes && (
 					<Spinner />

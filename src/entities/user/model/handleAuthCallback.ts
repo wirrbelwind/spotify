@@ -1,6 +1,5 @@
 'use server'
 
-import { spotifyApi } from "@/shared/api"
 import { redirect } from "next/navigation"
 import { authService } from "./authService"
 import { spotifyClient } from "@/shared/api/spotify-client"
@@ -34,18 +33,11 @@ export const handleAuthCallback = async (request: Request) => {
 	const authHeader = btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)
 
 	try {
-		const tokensResponse = await spotifyClient.auth.tokens({
+		const tokens = await spotifyClient.auth.tokens({
 			code: codeParam,
 			base64Credentials: authHeader
 		})
 
-		const tokens = tokensResponse.data as {
-			access_token: string
-			token_type: string
-			scope: string
-			expires_in: number
-			refresh_token: string
-		}
 
 		console.log('tokens', tokens)
 

@@ -19,6 +19,10 @@ export const SpotifyPlayerProvider: React.FC<SpotifyPlayerProviderProps> = ({ ch
 	const queryClient = useQueryClient()
 
 	useEffect(() => {
+		if(!accessToken) {
+			return 
+		}
+
 		window.onSpotifyWebPlaybackSDKReady = async () => {
 			if(!accessToken) {
 				throw new Error('no access token to initialize player instance')
@@ -49,6 +53,10 @@ export const SpotifyPlayerProvider: React.FC<SpotifyPlayerProviderProps> = ({ ch
 			controller.current?.disconnect()
 		}
 	}, [accessToken])
+
+	if(!accessToken) {
+		return children
+	}
 
 	return (
 		<PlayerControllerContext.Provider value={controller.current}>

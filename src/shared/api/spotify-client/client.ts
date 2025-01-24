@@ -9,6 +9,10 @@ import { playlistSchema } from './schemas/playlist'
 import { trackSchema } from './schemas/track'
 import { simplifiedPlaylistSchema } from './schemas/simplified-playlist'
 import { recommendationsSchema } from './schemas/recommendations'
+import { albumSchema } from './schemas/album'
+import { anotherUserSchema } from './schemas/another-user'
+import { playlistTrackSchema } from './schemas/playlist-track'
+import { simplifiedArtistSchema } from './schemas/simplified-artist'
 
 // TODO: write interface for client
 export const client = {
@@ -89,8 +93,19 @@ export const client = {
 		})
 
 		const json = response.data
-		const parser = pageWith(trackSchema)
 
+		const track = trackSchema.merge(z.object({
+			album: albumSchema.omit({
+				copyrights: true,
+				external_ids: true,
+				genres: true,
+				label: true,
+				popularity: true,
+				tracks: true,
+
+			})
+		}))
+		const parser = pageWith(track)
 		return parser.parse(json)
 	},
 	auth: {
@@ -147,13 +162,22 @@ export const client = {
 		}
 	},
 	async userPlaylists() {
-		const parser = pageWith(simplifiedPlaylistSchema)
+		const parser = pageWith(simplifiedPlaylistSchema.merge(z.object({
+			tracks: z.object({
+				href: z.string().url(),
+				total: z.number().int()
+			}),
+			owner: anotherUserSchema.omit({
+				followers: true,
+				images: true
+			})
+		})))
 
 		const response = await spotifyAxios.get('/me/playlists', {
 			baseURL: DATA_API_URL,
 		})
 		const json = response.data
-
+		console.log(json.items[0].owner)
 		return parser.parse(json)
 	},
 	async playlist({ id }: { id: string }) {
@@ -165,7 +189,30 @@ export const client = {
 		})
 
 		const json = response.data
-		const playlist = playlistSchema.parse(json)
+		const playlist = playlistSchema.merge(z.object({
+			tracks:pageWith(playlistTrackSchema).merge(z.object({
+				items: playlistTrackSchema.merge(z.object({
+					track: trackSchema.merge(z.object({
+						album: albumSchema.omit({
+							
+						})
+					}))
+				})).array()
+			}))
+		}))
+			// .transform(value => {
+			// 	return {
+			// 		...value.track,
+			// 		meta: {
+			// 			playlist: {
+			// 				addedAt: value.added_at,
+			// 				addedBy: value.added_by,
+			// 				isLocal: value.is_local
+			// 			}
+			// 		}
+			// 	}
+			// })
+			.parse(json)
 
 		return playlist
 	},
