@@ -5,6 +5,7 @@ import { createEntity } from "../createEntity"
 import { simplifiedArtistSchema } from "./simplified-artist"
 import { externalUrlsSchema } from "./external-urls"
 import { restrictionsSchema } from "./restrictions"
+import { externalIdsSchema } from "./externalIds"
 
 export const trackSchema = createEntity('track', {
 	// album: albumSchema,
@@ -13,11 +14,7 @@ export const trackSchema = createEntity('track', {
 	disc_number: z.number().positive(),
 	duration_ms: z.number().nonnegative(),
 	explicit: z.boolean(),
-	// external_ids: z.object({
-	// 	isrc: z.string().regex(ISRC).optional(),
-	// 	ean: z.string().regex(EAN).optional(),
-	// 	upc: z.string().regex(UPC).optional(),
-	// }),
+	external_ids: externalIdsSchema,
 	external_urls: externalUrlsSchema,
 	href: z.string().url(),
 	is_playable: z.boolean(),

@@ -8,6 +8,7 @@ import { simplifiedArtistSchema } from "./simplified-artist";
 import { simplifiedTrackSchema } from "./simplified-track";
 import { externalUrlsSchema } from "./external-urls";
 import { restrictionsSchema } from "./restrictions";
+import { externalIdsSchema } from "./externalIds";
 
 export const albumSchema = createEntity('album', {
 	album_type: z.union([
@@ -32,12 +33,7 @@ export const albumSchema = createEntity('album', {
 	// artists: simplifiedArtistSchema.array(),
 	// tracks: pageWith(simplifiedTrackSchema),
 	copyrights: copyrightSchema,
-	// external_ids: z.object({
-	// 	ISRC: z.string().regex(ISRC).optional(),
-	// 	ean: z.string().regex(EAN).optional(),
-	// 	UPC: z.string().regex(UPC).optional()
-	// }),
-
+	external_ids: externalIdsSchema,
 	genres: z.string().array().max(0),
 	label: z.string().nonempty(),
 	popularity: z.number().min(0).max(100)
