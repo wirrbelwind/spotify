@@ -26,10 +26,10 @@ export const episodeSchema = createEntity('episode', {
 		z.literal('month'),
 		z.literal('day'),
 	]),
-	// resume_point: z.object({
-	// 	fully_played: z.boolean(),
-	// 	resume_position_ms: z.number()
-	// }).optional(),
+	resume_point: z.object({
+		fully_played: z.boolean(),
+		resume_position_ms: z.number()
+	}).optional(),
 	uri: z.string().regex(SPOTIFY_URI),
 	restrictions: restrictionsSchema.optional(),
 	// show: showSchema
