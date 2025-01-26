@@ -3,6 +3,7 @@ import { createEntity } from "../createEntity";
 import { simplifiedArtistSchema } from "./simplified-artist";
 import { SPOTIFY_URI } from "../constants";
 import { externalUrlsSchema } from "./external-urls";
+import { restrictionsSchema } from "./restrictions";
 
 export const simplifiedTrackSchema = createEntity('track', {
 	// artists: simplifiedArtistSchema.array(),
@@ -14,14 +15,7 @@ export const simplifiedTrackSchema = createEntity('track', {
 	href: z.string().url(),
 	is_playable: z.boolean(),
 	linked_from: z.unknown(),
-	// restrictions: z.object({
-	// 	reason: z.union([
-	// 		z.literal('market'),
-	// 		z.literal('product'),
-	// 		z.literal('explicit'),
-	// 		z.unknown(),
-	// 	])
-	// }),
+	restrictions: restrictionsSchema.optional(),
 	name: z.string().nonempty(),
 	preview_url: z.string().url().describe('Deprecated. Always is null').nullable(),
 	track_number: z.number().nonnegative(),

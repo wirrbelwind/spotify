@@ -4,6 +4,7 @@ import { imageSchema } from "./image";
 import { SPOTIFY_URI } from "../constants";
 import { showSchema } from "./show";
 import { externalUrlsSchema } from "./external-urls";
+import { restrictionsSchema } from "./restrictions";
 
 export const episodeSchema = createEntity('episode', {
 	audio_preview_url: z.string().url().nullable().describe("A URL to a 30 second preview (MP3 format) of the episode. null if not available."),
@@ -30,14 +31,7 @@ export const episodeSchema = createEntity('episode', {
 	// 	resume_position_ms: z.number()
 	// }).optional(),
 	uri: z.string().regex(SPOTIFY_URI),
-	// restrictions: z.object({
-	// 	reason: z.union([
-	// 		z.literal('market'),
-	// 		z.literal('product'),
-	// 		z.literal('explicit'),
-	// 		z.unknown(),
-	// 	])
-	// }),
+	restrictions: restrictionsSchema.optional(),
 	// show: showSchema
 })
 

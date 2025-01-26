@@ -7,6 +7,7 @@ import { pageWith } from "./page";
 import { simplifiedArtistSchema } from "./simplified-artist";
 import { simplifiedTrackSchema } from "./simplified-track";
 import { externalUrlsSchema } from "./external-urls";
+import { restrictionsSchema } from "./restrictions";
 
 export const albumSchema = createEntity('album', {
 	album_type: z.union([
@@ -26,13 +27,7 @@ export const albumSchema = createEntity('album', {
 		z.literal("month"),
 		z.literal("day"),
 	]),
-	// restrictions: z.object({
-	// 	reason: z.union([
-	// 		z.literal("market"),
-	// 		z.literal("product"),
-	// 		z.literal("explicit"),
-	// 	]),
-	// }).optional(),
+	restrictions: restrictionsSchema.optional(),
 	uri: z.string().regex(SPOTIFY_URI),
 	// artists: simplifiedArtistSchema.array(),
 	// tracks: pageWith(simplifiedTrackSchema),

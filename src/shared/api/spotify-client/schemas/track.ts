@@ -4,6 +4,7 @@ import { albumSchema } from "./album"
 import { createEntity } from "../createEntity"
 import { simplifiedArtistSchema } from "./simplified-artist"
 import { externalUrlsSchema } from "./external-urls"
+import { restrictionsSchema } from "./restrictions"
 
 export const trackSchema = createEntity('track', {
 	// album: albumSchema,
@@ -21,14 +22,7 @@ export const trackSchema = createEntity('track', {
 	href: z.string().url(),
 	is_playable: z.boolean(),
 	linked_from: z.unknown(),
-	// restrictions: z.object({
-	// 	reason: z.union([
-	// 		z.literal('market'),
-	// 		z.literal('product'),
-	// 		z.literal('explicit'),
-	// 		z.unknown(),
-	// 	])
-	// }).optional(),
+	restrictions: restrictionsSchema.optional(),
 	name: z.string().nonempty(),
 	popularity: z.number().min(0).max(100),
 	preview_url: z.string().url().describe('Deprecated. Always is null').nullable(),
