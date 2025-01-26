@@ -2,7 +2,6 @@
 import { z } from 'zod'
 import { spotifyAxios } from './axios-instance'
 import { AUTH_API_URL, DATA_API_URL } from './constants'
-import { savedTracksSchema } from './schemas/check-saved-tracks'
 import { currentUserSchema } from './schemas/current-user'
 import { pageWith } from './schemas/page'
 import { playlistSchema } from './schemas/playlist'
