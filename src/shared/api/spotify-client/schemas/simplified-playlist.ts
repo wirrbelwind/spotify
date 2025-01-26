@@ -4,13 +4,12 @@ import { currentUserSchema } from "./current-user";
 import { imageSchema } from "./image";
 import { SPOTIFY_URI } from "../constants";
 import { anotherUserSchema } from "./another-user";
+import { externalUrlsSchema } from "./external-urls";
 
 export const simplifiedPlaylistSchema = createEntity('playlist', {
 	collaborative: z.boolean(),
 	description: z.string().nullable(),
-	// external_urls: z.object({
-	// 	spotify: z.string().url()
-	// }),
+	external_urls: externalUrlsSchema,
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),

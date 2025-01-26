@@ -6,6 +6,7 @@ import { copyrightSchema } from "./copyright";
 import { pageWith } from "./page";
 import { simplifiedArtistSchema } from "./simplified-artist";
 import { simplifiedTrackSchema } from "./simplified-track";
+import { externalUrlsSchema } from "./external-urls";
 
 export const albumSchema = createEntity('album', {
 	album_type: z.union([
@@ -15,9 +16,7 @@ export const albumSchema = createEntity('album', {
 	]),
 	total_tracks: z.number().nonnegative(),
 	available_markets: z.string().regex(COUNTRY_ISO_ALPHA_2).array(),
-	// external_urls: z.object({
-	// 	spotify: z.string().url()
-	// }),
+	external_urls: externalUrlsSchema,
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),

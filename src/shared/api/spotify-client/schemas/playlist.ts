@@ -5,13 +5,12 @@ import { pageWith } from "./page";
 import { SPOTIFY_URI } from "../constants";
 import { playlistTrackSchema } from "./playlist-track";
 import { anotherUserSchema } from "./another-user";
+import { externalUrlsSchema } from "./external-urls";
 
 export const playlistSchema = createEntity('playlist', {
 	collaborative: z.boolean(),
 	description: z.string().nullable(),
-	external_urls: z.object({
-		spotify: z.string().url()
-	}),
+	external_urls: externalUrlsSchema,
 	// followers: z.object({
 	// 	href: z.string().url().nullable(),
 	// 	total: z.number().int().nonnegative()

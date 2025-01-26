@@ -2,6 +2,7 @@ import { z } from "zod";
 import { COUNTRY_ISO_ALPHA_2, SPOTIFY_URI } from "../constants";
 import { createEntity } from "../createEntity";
 import { imageSchema } from "./image";
+import { externalUrlsSchema } from "./external-urls";
 
 export const currentUserSchema = createEntity('user', {
 	country: z.string().regex(COUNTRY_ISO_ALPHA_2),
@@ -11,9 +12,7 @@ export const currentUserSchema = createEntity('user', {
 	// 	filter_enabled: z.boolean(),
 	// 	filter_locked: z.boolean()
 	// }).optional(),
-	// external_urls: z.object({
-	// 	spotify: z.string().url()
-	// }),
+	external_urls: externalUrlsSchema,
 	// followers: z.object({
 	// 	href: z.string().url().nullable(),
 	// 	total: z.number().nonnegative()

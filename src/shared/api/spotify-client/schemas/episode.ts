@@ -3,6 +3,7 @@ import { createEntity } from "../createEntity";
 import { imageSchema } from "./image";
 import { SPOTIFY_URI } from "../constants";
 import { showSchema } from "./show";
+import { externalUrlsSchema } from "./external-urls";
 
 export const episodeSchema = createEntity('episode', {
 	audio_preview_url: z.string().url().nullable().describe("A URL to a 30 second preview (MP3 format) of the episode. null if not available."),
@@ -10,9 +11,7 @@ export const episodeSchema = createEntity('episode', {
 	html_description: z.string(),
 	duration_ms: z.number().nonnegative(),
 	explicit: z.boolean(),
-	// external_urls: z.object({
-	// 	spotify: z.string().url()
-	// }),
+	external_urls: externalUrlsSchema,
 	href: z.string().url(),
 	images: imageSchema.array(),
 	is_externally_hosted: z.boolean(),

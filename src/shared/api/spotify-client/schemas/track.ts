@@ -3,6 +3,7 @@ import { COUNTRY_ISO_ALPHA_2, EAN, ISRC, SPOTIFY_URI, UPC } from "../constants"
 import { albumSchema } from "./album"
 import { createEntity } from "../createEntity"
 import { simplifiedArtistSchema } from "./simplified-artist"
+import { externalUrlsSchema } from "./external-urls"
 
 export const trackSchema = createEntity('track', {
 	// album: albumSchema,
@@ -16,9 +17,7 @@ export const trackSchema = createEntity('track', {
 	// 	ean: z.string().regex(EAN).optional(),
 	// 	upc: z.string().regex(UPC).optional(),
 	// }),
-	// external_urls: z.object({
-	// 	spotify: z.string().url()
-	// }),
+	external_urls: externalUrlsSchema,
 	href: z.string().url(),
 	is_playable: z.boolean(),
 	linked_from: z.unknown(),

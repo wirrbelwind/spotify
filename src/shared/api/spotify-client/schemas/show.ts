@@ -3,6 +3,7 @@ import { createEntity } from "../createEntity";
 import { COUNTRY_ISO_ALPHA_2, SPOTIFY_URI } from "../constants";
 import { copyrightSchema } from "./copyright";
 import { imageSchema } from "./image";
+import { externalUrlsSchema } from "./external-urls";
 
 export const showSchema = createEntity('show', {
 	available_markets: z.string().regex(COUNTRY_ISO_ALPHA_2).array(),
@@ -10,9 +11,7 @@ export const showSchema = createEntity('show', {
 	description: z.string(),
 	html_description: z.string(),
 	explicit: z.boolean(),
-	// external_urls: z.object({
-	// 	spotify: z.string().url()
-	// }),
+	external_urls: externalUrlsSchema,
 	href: z.string().url(),
 	images: imageSchema.array(),
 	is_externally_hosted: z.boolean(),

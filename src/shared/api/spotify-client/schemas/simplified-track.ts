@@ -2,6 +2,7 @@ import { z } from "zod";
 import { createEntity } from "../createEntity";
 import { simplifiedArtistSchema } from "./simplified-artist";
 import { SPOTIFY_URI } from "../constants";
+import { externalUrlsSchema } from "./external-urls";
 
 export const simplifiedTrackSchema = createEntity('track', {
 	// artists: simplifiedArtistSchema.array(),
@@ -9,9 +10,7 @@ export const simplifiedTrackSchema = createEntity('track', {
 	disc_number: z.number().int(),
 	duration_ms: z.number().nonnegative(),
 	explicit: z.boolean(),
-	// external_urls: z.object({
-	// 	spotify: z.string().url()
-	// }),
+	external_urls: externalUrlsSchema,
 	href: z.string().url(),
 	is_playable: z.boolean(),
 	linked_from: z.unknown(),

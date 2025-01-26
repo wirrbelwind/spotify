@@ -2,12 +2,11 @@ import { z } from "zod";
 import { COUNTRY_ISO_ALPHA_2, SPOTIFY_URI } from "../constants";
 import { createEntity } from "../createEntity";
 import { imageSchema } from "./image";
+import { externalUrlsSchema } from "./external-urls";
 
 export const anotherUserSchema = createEntity('user', {
 	display_name: z.string().max(32).nonempty().nullable(),
-	external_urls: z.object({
-		spotify: z.string().url()
-	}),
+	external_urls: externalUrlsSchema,
 	// followers: z.object({
 	// 	href: z.string().url().nullable(),
 	// 	total: z.number().nonnegative()
