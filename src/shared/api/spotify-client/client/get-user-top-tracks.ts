@@ -23,20 +23,7 @@ const getParser = () => {
 
 	return pageWithTracks
 }
-// Or:
-// const getParser = () => {
-// 	// use some schema as a base
-// 	currentUserSchema
-// 	// omit some fields
-// 	.omit({
-// 		email: true,
-// 		images: true
-// 	})
-// 	// add/override some fields
-// 	.merge(z.object({
-// 		additionalData: z.literal(true)
-// 	}))
-// }
+
 
 export const getUserTopTracks = async () => {
 	// define request url
