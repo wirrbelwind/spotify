@@ -3,14 +3,12 @@ import { COUNTRY_ISO_ALPHA_2, SPOTIFY_URI } from "../constants";
 import { createEntity } from "../createEntity";
 import { imageSchema } from "./image";
 import { externalUrlsSchema } from "./external-urls";
+import { followersSchema } from "./followers";
 
 export const anotherUserSchema = createEntity('user', {
 	display_name: z.string().max(32).nonempty().nullable(),
 	external_urls: externalUrlsSchema,
-	// followers: z.object({
-	// 	href: z.string().url().nullable(),
-	// 	total: z.number().nonnegative()
-	// }),
+	followers: followersSchema,
 	href: z.string().url(),
 	images: imageSchema.array(),
 	uri: z.string().regex(SPOTIFY_URI)

@@ -6,15 +6,13 @@ import { SPOTIFY_URI } from "../constants";
 import { playlistTrackSchema } from "./playlist-track";
 import { anotherUserSchema } from "./another-user";
 import { externalUrlsSchema } from "./external-urls";
+import { followersSchema } from "./followers";
 
 export const playlistSchema = createEntity('playlist', {
 	collaborative: z.boolean(),
 	description: z.string().nullable(),
 	external_urls: externalUrlsSchema,
-	// followers: z.object({
-	// 	href: z.string().url().nullable(),
-	// 	total: z.number().int().nonnegative()
-	// }),
+	followers: followersSchema,
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),

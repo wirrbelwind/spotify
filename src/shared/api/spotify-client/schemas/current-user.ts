@@ -3,6 +3,7 @@ import { COUNTRY_ISO_ALPHA_2, SPOTIFY_URI } from "../constants";
 import { createEntity } from "../createEntity";
 import { imageSchema } from "./image";
 import { externalUrlsSchema } from "./external-urls";
+import { followersSchema } from "./followers";
 
 export const currentUserSchema = createEntity('user', {
 	country: z.string().regex(COUNTRY_ISO_ALPHA_2),
@@ -13,10 +14,7 @@ export const currentUserSchema = createEntity('user', {
 	// 	filter_locked: z.boolean()
 	// }).optional(),
 	external_urls: externalUrlsSchema,
-	// followers: z.object({
-	// 	href: z.string().url().nullable(),
-	// 	total: z.number().nonnegative()
-	// }),
+	followers: followersSchema,
 	href: z.string().url(),
 	images: imageSchema.array(),
 	product: z.union([
