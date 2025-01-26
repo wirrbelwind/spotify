@@ -10,9 +10,9 @@ export const episodeSchema = createEntity('episode', {
 	html_description: z.string(),
 	duration_ms: z.number().nonnegative(),
 	explicit: z.boolean(),
-	external_urls: z.object({
-		spotify: z.string().url()
-	}),
+	// external_urls: z.object({
+	// 	spotify: z.string().url()
+	// }),
 	href: z.string().url(),
 	images: imageSchema.array(),
 	is_externally_hosted: z.boolean(),
@@ -26,20 +26,20 @@ export const episodeSchema = createEntity('episode', {
 		z.literal('month'),
 		z.literal('day'),
 	]),
-	resume_point: z.object({
-		fully_played: z.boolean(),
-		resume_position_ms: z.number()
-	}).optional(),
+	// resume_point: z.object({
+	// 	fully_played: z.boolean(),
+	// 	resume_position_ms: z.number()
+	// }).optional(),
 	uri: z.string().regex(SPOTIFY_URI),
-	restrictions: z.object({
-		reason: z.union([
-			z.literal('market'),
-			z.literal('product'),
-			z.literal('explicit'),
-			z.unknown(),
-		])
-	}),
-	show: showSchema
+	// restrictions: z.object({
+	// 	reason: z.union([
+	// 		z.literal('market'),
+	// 		z.literal('product'),
+	// 		z.literal('explicit'),
+	// 		z.unknown(),
+	// 	])
+	// }),
+	// show: showSchema
 })
 
 export type Episode = z.output<typeof episodeSchema>

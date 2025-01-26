@@ -7,17 +7,17 @@ export const currentUserSchema = createEntity('user', {
 	country: z.string().regex(COUNTRY_ISO_ALPHA_2),
 	display_name: z.string().max(32).nonempty().nullable(),
 	email: z.string().email(),
-	explicit_content: z.object({
-		filter_enabled: z.boolean(),
-		filter_locked: z.boolean()
-	}).optional(),
-	external_urls: z.object({
-		spotify: z.string().url()
-	}),
-	followers: z.object({
-		href: z.string().url().nullable(),
-		total: z.number().nonnegative()
-	}),
+	// explicit_content: z.object({
+	// 	filter_enabled: z.boolean(),
+	// 	filter_locked: z.boolean()
+	// }).optional(),
+	// external_urls: z.object({
+	// 	spotify: z.string().url()
+	// }),
+	// followers: z.object({
+	// 	href: z.string().url().nullable(),
+	// 	total: z.number().nonnegative()
+	// }),
 	href: z.string().url(),
 	images: imageSchema.array(),
 	product: z.union([

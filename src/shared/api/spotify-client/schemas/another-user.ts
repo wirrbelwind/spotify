@@ -8,10 +8,10 @@ export const anotherUserSchema = createEntity('user', {
 	external_urls: z.object({
 		spotify: z.string().url()
 	}),
-	followers: z.object({
-		href: z.string().url().nullable(),
-		total: z.number().nonnegative()
-	}),
+	// followers: z.object({
+	// 	href: z.string().url().nullable(),
+	// 	total: z.number().nonnegative()
+	// }),
 	href: z.string().url(),
 	images: imageSchema.array(),
 	uri: z.string().regex(SPOTIFY_URI)

@@ -15,9 +15,9 @@ export const albumSchema = createEntity('album', {
 	]),
 	total_tracks: z.number().nonnegative(),
 	available_markets: z.string().regex(COUNTRY_ISO_ALPHA_2).array(),
-	external_urls: z.object({
-		spotify: z.string().url()
-	}),
+	// external_urls: z.object({
+	// 	spotify: z.string().url()
+	// }),
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),
@@ -27,22 +27,22 @@ export const albumSchema = createEntity('album', {
 		z.literal("month"),
 		z.literal("day"),
 	]),
-	restrictions: z.object({
-		reason: z.union([
-			z.literal("market"),
-			z.literal("product"),
-			z.literal("explicit"),
-		]),
-	}).optional(),
+	// restrictions: z.object({
+	// 	reason: z.union([
+	// 		z.literal("market"),
+	// 		z.literal("product"),
+	// 		z.literal("explicit"),
+	// 	]),
+	// }).optional(),
 	uri: z.string().regex(SPOTIFY_URI),
-	artists: simplifiedArtistSchema.array(),
-	tracks: pageWith(simplifiedTrackSchema),
-	copyrights: copyrightSchema,
-	external_ids: z.object({
-		ISRC: z.string().regex(ISRC).optional(),
-		ean: z.string().regex(EAN).optional(),
-		UPC: z.string().regex(UPC).optional()
-	}),
+	// artists: simplifiedArtistSchema.array(),
+	// tracks: pageWith(simplifiedTrackSchema),
+	// copyrights: copyrightSchema,
+	// external_ids: z.object({
+	// 	ISRC: z.string().regex(ISRC).optional(),
+	// 	ean: z.string().regex(EAN).optional(),
+	// 	UPC: z.string().regex(UPC).optional()
+	// }),
 
 	genres: z.string().array().max(0),
 	label: z.string().nonempty(),

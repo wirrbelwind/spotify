@@ -5,10 +5,9 @@ import { anotherUserSchema } from "./another-user";
 
 export const playlistTrackSchema = z.object({
 	added_at: z.string().date().nullable(),
-	added_by: anotherUserSchema.nullable(),
+	// added_by: anotherUserSchema.nullable(),
 	is_local: z.boolean(),
-	track: trackSchema,
+	// track: trackSchema,
 })
 
 export type PlaylistTrack = z.output<typeof playlistTrackSchema>
-// type Test = PlaylistTrack['a']

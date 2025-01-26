@@ -5,10 +5,10 @@ import { imageSchema } from "./image"
 import { simplifiedArtistSchema } from "./simplified-artist"
 
 export const artist = simplifiedArtistSchema.extend({
-	followers: z.object({
-		href: z.string().url().optional(),
-		total: z.number().nonnegative(),
-	}),
+	// followers: z.object({
+	// 	href: z.string().url().optional(),
+	// 	total: z.number().nonnegative(),
+	// }),
 	genres: z.string().array(),
 	images: imageSchema.array(),
 	popularity: z.number().min(0).max(100)

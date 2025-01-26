@@ -12,17 +12,17 @@ export const playlistSchema = createEntity('playlist', {
 	external_urls: z.object({
 		spotify: z.string().url()
 	}),
-	followers: z.object({
-		href: z.string().url().nullable(),
-		total: z.number().int().nonnegative()
-	}),
+	// followers: z.object({
+	// 	href: z.string().url().nullable(),
+	// 	total: z.number().int().nonnegative()
+	// }),
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),
-	owner: anotherUserSchema,
+	// owner: anotherUserSchema,
 	public: z.boolean().nullable(),
 	snapshot_id: z.string(),
-	tracks: pageWith(playlistTrackSchema),
+	// tracks: pageWith(playlistTrackSchema),
 	uri: z.string().regex(SPOTIFY_URI)
 })
 
