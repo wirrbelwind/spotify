@@ -7,7 +7,7 @@ import { externalUrlsSchema } from "./external-urls";
 
 export const showSchema = createEntity('show', {
 	available_markets: z.string().regex(COUNTRY_ISO_ALPHA_2).array(),
-	// copyrights: copyrightSchema,
+	copyrights: copyrightSchema,
 	description: z.string(),
 	html_description: z.string(),
 	explicit: z.boolean(),
