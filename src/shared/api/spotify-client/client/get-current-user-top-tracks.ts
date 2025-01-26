@@ -25,7 +25,7 @@ const getParser = () => {
 }
 
 
-export const getUserTopTracks = async () => {
+export const getCurrentUserTopTracks = async () => {
 	// define request url
 	const url = '/me/top/tracks'
 
