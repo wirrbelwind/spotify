@@ -5,6 +5,8 @@ import { getCurrentUserTopTracks } from "./requests/get-current-user-top-tracks"
 import { getPlaylist } from "./requests/get-playlist";
 import { getRecommendations } from "./requests/get-recommendations";
 import { getTokensByCode } from "./requests/get-tokens-by-code";
+import { play } from "./requests/player/play";
+import { shuffle } from "./requests/player/shuffle";
 import { refreshTokens } from "./requests/refresh-tokens";
 
 export const spotifyClient = {
@@ -16,4 +18,8 @@ export const spotifyClient = {
 	getRecommendations,
 	getTokensByCode,
 	refreshTokens,
+	player: {
+		play,
+		shuffle
+	}
 }
