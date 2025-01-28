@@ -1,5 +1,4 @@
 'use server'
-import { spotifyApi } from "@/shared/api"
 import { cookies } from "next/headers"
 import { COOKIE_KEYS } from "../constants"
 import { spotifyClient } from "@/shared/api/spotify-client"
