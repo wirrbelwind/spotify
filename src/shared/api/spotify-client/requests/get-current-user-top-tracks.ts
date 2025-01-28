@@ -24,13 +24,19 @@ const getParser = () => {
 	return pageWithTracks
 }
 
+interface GetCurrentUserTopTracks {
+	quantity: number
+}
 
-export const getCurrentUserTopTracks = async () => {
+export const getCurrentUserTopTracks = async ({quantity}: GetCurrentUserTopTracks) => {
 	// define request url
 	const url = '/me/top/tracks'
 
 	const response = await spotifyAxios.get(url, {
 		baseURL: DATA_API_URL,
+		params: {
+			limit: quantity
+		},
 	})
 
 	const json = response.data

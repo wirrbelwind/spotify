@@ -30,14 +30,13 @@ export const handleAuthCallback = async (request: Request) => {
 		throw new Error('code param is null')
 	}
 
-	const authHeader = btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)
+	const base64Credentials = btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)
 
 	try {
-		const tokens = await spotifyClient.auth.tokens({
+		const tokens = await spotifyClient.getTokensByCode({
 			code: codeParam,
-			base64Credentials: authHeader
+			base64Credentials
 		})
-
 
 		console.log('tokens', tokens)
 

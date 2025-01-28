@@ -5,7 +5,7 @@ export const getPlaylistOptions = (id: string) => {
 	return queryOptions({
 		queryKey: ['playlist', id],
 		queryFn: async () => {
-			const response = await spotifyClient.playlist({ id })
+			const response = await spotifyClient.getPlaylist({ id })
 			return response
 		}
 	})

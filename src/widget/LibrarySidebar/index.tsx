@@ -10,7 +10,7 @@ interface LibrarySidebarProps extends DetailedHTMLProps<HTMLAttributes<HTMLEleme
 }
 
 export const LibrarySidebar: FC<LibrarySidebarProps> = async (props) => {
-	const playlists = await spotifyClient.userPlaylists()
+	const playlists = await spotifyClient.getCurrentUserPlaylists()
 
 	return (
 		<aside

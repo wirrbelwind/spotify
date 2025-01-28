@@ -1,9 +1,13 @@
 import { TrackList } from "@/entities/track"
-import { spotifyClient } from "@/shared/api"
+import { spotifyClient } from "@/shared/api/spotify-client"
 import Image from "next/image"
 
 export const RecommendationsPage = async () => {
-	const recs = await spotifyClient.recommendations()
+	const recs = await spotifyClient.getRecommendations({
+		seedArtists: "4NHQUGzhtTLFvgF5SZesLK",
+		seedGenres: "classical,country",
+		seedTracks: "0c6xIDDpzE81m2q797ordA"
+	})
 
 	return (
 		<div>

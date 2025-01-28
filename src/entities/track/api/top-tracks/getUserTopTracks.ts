@@ -10,7 +10,7 @@ export const getUserTopTracks = async (quantity: number) => {
 		throw new Error('Exceeded limit. Quantity must be in range of 1-50')
 	}
 
-	const response = await spotifyClient.userTopTracks({quantity})
+	const response = await spotifyClient.getCurrentUserTopTracks({ quantity })
 
 	return response
 }

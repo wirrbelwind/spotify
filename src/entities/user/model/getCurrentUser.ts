@@ -20,7 +20,7 @@ export const getCurrentUser = async () => {
 
 	//request user profile
 	try {
-		const userResponse = await spotifyClient.user()
+		const userResponse = await spotifyClient.getCurrentUserProfile()
 
 		return userResponse
 	} catch {
