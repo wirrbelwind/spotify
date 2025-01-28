@@ -24,7 +24,7 @@ interface GetTokensByCodeArgs {
 }
 
 export const getTokensByCode = async ({ code, base64Credentials }: GetTokensByCodeArgs) => {
-	const url = '/recommendations'
+	const url = '/api/token'
 
 	const response = await spotifyAxios.post(url, {
 		grant_type: 'authorization_code',
