@@ -38,18 +38,20 @@ const getParser = () => {
 }
 
 interface GetRecommendationsArgs {
-
+	seedArtists: string
+	seedGenres: string
+	seedTracks: string
 }
 
-export const getRecommendations = async (args: GetRecommendationsArgs) => {
+export const getRecommendations = async ({ seedArtists, seedGenres, seedTracks }: GetRecommendationsArgs) => {
 	const url = '/recommendations'
 
 	const response = await spotifyAxios.get(url, {
 		baseURL: DATA_API_URL,
 		params: {
-			seed_artists: "4NHQUGzhtTLFvgF5SZesLK",
-			seed_genres: "classical,country",
-			seed_tracks: "0c6xIDDpzE81m2q797ordA"
+			seed_artists: seedArtists,
+			seed_genres: seedGenres,
+			seed_tracks: seedTracks
 		}
 	})
 
