@@ -8,6 +8,7 @@ import { ColumnType, ListItem, ListItemWithPlaylistData, PlaylistColumnType } fr
 import { Spinner } from "@nextui-org/spinner";
 import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
 import { startAudio } from "@/entities/player";
+import { useLike } from "../../api/like";
 
 interface TrackListPropsBase {
 	fromPlaylist?: boolean
@@ -57,6 +58,8 @@ export const TrackList: FC<TrackListProps> = ({
 	const uriList = useMemo(() => {
 		return items?.map(item => item.uri)
 	}, [items])
+
+	const like = useLike()
 
 	return (
 		<Table
@@ -124,6 +127,7 @@ export const TrackList: FC<TrackListProps> = ({
 												allTracks={items}
 												likes={likes.data}
 												withPlaylistData={fromPlaylist}
+												
 											/>
 										</TableCell>
 									)

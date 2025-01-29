@@ -1,7 +1,6 @@
 'use client'
 
 import { getUserTopTracksOptions, TrackList } from "@/entities/track"
-import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { useQuery } from "@tanstack/react-query"
 
 export const TrackListWrapper = () => {
