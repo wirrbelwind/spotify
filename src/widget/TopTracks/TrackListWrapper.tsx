@@ -14,7 +14,7 @@ export const TrackListWrapper = () => {
 				wrapper: 'mt-2'
 			}}
 			columns={[
-				'order',
+				'play',
 				'avatar',
 				'name',
 				'album',

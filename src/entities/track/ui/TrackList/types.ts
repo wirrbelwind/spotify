@@ -2,7 +2,7 @@ import { PlaylistTrack } from "@/shared/api/spotify-client/schemas/playlist-trac
 import { Track } from "@/shared/api/spotify-client/schemas/track"
 import { UseQueryResult } from "@tanstack/react-query"
 
-export type ColumnType = 'order' | 'avatar' | 'name' | 'album' | 'liked' | 'duration'
+export type ColumnType = 'play' | 'avatar' | 'name' | 'album' | 'liked' | 'duration'
 export type PlaylistColumnType = 'added-at' | 'added-by'
 
 export interface ListItem {

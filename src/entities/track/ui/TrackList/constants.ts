@@ -3,7 +3,7 @@ import { AvatarCell } from "./cells/AvatarCell";
 import { DurationCell } from "./cells/DurationCell";
 import { LikedCell } from "./cells/LikedCell";
 import { NameCell } from "./cells/NameCell";
-import { OrderCell } from "./cells/OrderCell";
+import { PlayCell } from "./cells/PlayCell";
 import { DurationHeader } from "./column-headers/DurationHeader";
 import { TextHeader } from "./column-headers/TextHeader";
 import { CellProps, ColumnType, PlaylistColumnType } from "./types";
@@ -11,7 +11,7 @@ import { CellProps, ColumnType, PlaylistColumnType } from "./types";
 
 export const allColumnsDefinitions: { key: ColumnType | PlaylistColumnType, label: string }[] = [
 	{
-		key: "order",
+		key: "play",
 		label: "#",
 	},
 	{
@@ -50,7 +50,7 @@ export const headersMap: Record<ColumnType | PlaylistColumnType, React.FC<{
 		label: string;
 	}
 }>> = {
-	'order': TextHeader,
+	'play': TextHeader,
 	'avatar': TextHeader,
 	'name': TextHeader,
 	'album': TextHeader,
@@ -61,7 +61,7 @@ export const headersMap: Record<ColumnType | PlaylistColumnType, React.FC<{
 }
 
 export const cellsMap: Record<ColumnType | PlaylistColumnType, React.FC<CellProps>> = {
-	'order': OrderCell,
+	'play': PlayCell,
 	'avatar': AvatarCell,
 	'name': NameCell,
 	'album': AlbumCell,

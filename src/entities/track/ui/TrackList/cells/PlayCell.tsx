@@ -7,7 +7,7 @@ import { CellProps } from "../types"
 import { startAudio } from "@/entities/player"
 import { EqualizerIcon } from "@/shared/ui/EqualizerIcon"
 
-export const OrderCell: React.FC<CellProps> = ({ track, allTracks, trackIndex, }) => {
+export const PlayCell: React.FC<CellProps> = ({ track, allTracks, trackIndex, }) => {
 	
 	const controller = usePlayerController()
 	const player = usePlayerState()
