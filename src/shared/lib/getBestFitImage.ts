@@ -1,8 +1,8 @@
 interface GetBestFitImageArgs {
 	images: {
 		url: string
-		width: number
-		height: number
+		width?: number | null
+		height?: number | null
 	}[]
 
 	preferredSize: {

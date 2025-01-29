@@ -6,10 +6,10 @@ import { NameCell } from "./cells/NameCell";
 import { OrderCell } from "./cells/OrderCell";
 import { DurationHeader } from "./column-headers/DurationHeader";
 import { TextHeader } from "./column-headers/TextHeader";
-import { CellProps, ColumnType } from "./types";
+import { CellProps, ColumnType, PlaylistColumnType } from "./types";
 
 
-export const allColumnsDefinitions: { key: ColumnType, label: string }[] = [
+export const allColumnsDefinitions: { key: ColumnType | PlaylistColumnType, label: string }[] = [
 	{
 		key: "order",
 		label: "#",
@@ -34,11 +34,19 @@ export const allColumnsDefinitions: { key: ColumnType, label: string }[] = [
 		key: "duration",
 		label: "DURATION",
 	},
+	{
+		key: 'added-at',
+		label: 'Added at',
+	},
+	{
+		key: 'added-by',
+		label: 'Added by'
+	}
 ];
 
-export const headersMap: Record<ColumnType, React.FC<{
+export const headersMap: Record<ColumnType | PlaylistColumnType, React.FC<{
 	column: {
-		key: ColumnType;
+		key: ColumnType | PlaylistColumnType;
 		label: string;
 	}
 }>> = {
@@ -47,14 +55,18 @@ export const headersMap: Record<ColumnType, React.FC<{
 	'name': TextHeader,
 	'album': TextHeader,
 	'liked': TextHeader,
-	'duration': DurationHeader
+	'duration': DurationHeader,
+	"added-at": TextHeader,
+	"added-by": TextHeader
 }
 
-export const cellsMap: Record<ColumnType, React.FC<CellProps>> = {
+export const cellsMap: Record<ColumnType | PlaylistColumnType, React.FC<CellProps>> = {
 	'order': OrderCell,
 	'avatar': AvatarCell,
 	'name': NameCell,
 	'album': AlbumCell,
 	'liked': LikedCell,
-	'duration': DurationCell
+	'duration': DurationCell,
+	'added-at': NameCell,
+	'added-by': NameCell,
 }

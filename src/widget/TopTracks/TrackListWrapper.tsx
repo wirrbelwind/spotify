@@ -1,6 +1,7 @@
 'use client'
 
 import { getUserTopTracksOptions, TrackList } from "@/entities/track"
+import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { useQuery } from "@tanstack/react-query"
 
 export const TrackListWrapper = () => {
@@ -21,11 +22,18 @@ export const TrackListWrapper = () => {
 				'duration'
 			]}
 			fromPlaylist={false}
-			tracks={{
-				data: trackList.data,
-				isError: trackList.isError,
-				isLoading: trackList.isLoading
-			}}
+			items={trackList.data?.items.map(item => ({
+				uri: item.uri,
+				album: {
+					name: item.album.name,
+					images: item.album.images
+				},
+				artists: item.artists.map(artist => ({ name: artist.name, url: artist.href })),
+				durationMs: item.duration_ms,
+				id: item.id,
+				name: item.name,
+
+			}))}
 		/>
 	)
 }

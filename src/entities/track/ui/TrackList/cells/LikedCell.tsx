@@ -7,11 +7,8 @@ import { Spinner } from "@nextui-org/spinner"
 export const LikedCell: React.FC<CellProps> = ({ likes, trackIndex }) => {
 	const isLiked = likes?.[trackIndex]
 
-	// console.log(likes)
-
 	return (
 		<Button>
-			
 			{
 				!likes && (
 					<Spinner />

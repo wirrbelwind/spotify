@@ -5,6 +5,7 @@ import { currentUserSchema } from "../schemas/current-user"
 import { trackSchema } from "../schemas/track"
 import { albumSchema } from "../schemas/album"
 import { pageWith } from "../schemas/page"
+import { simplifiedArtistSchema } from "../schemas/simplified-artist"
 
 const getParser = () => {
 	const album = albumSchema.omit({
@@ -16,13 +17,18 @@ const getParser = () => {
 	})
 
 	const track = trackSchema.merge(z.object({
-		album
+		album,
+		artists: simplifiedArtistSchema.array(),
 	}))
 
 	const pageWithTracks = pageWith(track)
 
 	return pageWithTracks
 }
+
+const parser = getParser()
+
+export type CurrentUserTopTracks = z.output<typeof parser>
 
 interface GetCurrentUserTopTracks {
 	quantity: number
@@ -40,7 +46,7 @@ export const getCurrentUserTopTracks = async ({quantity}: GetCurrentUserTopTrack
 	})
 
 	const json = response.data
-	const user = getParser().parse(json)
+	const userTopTracks = parser.parse(json)
 
-	return user
+	return userTopTracks
 }

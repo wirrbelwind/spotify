@@ -4,41 +4,41 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableP
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useMemo, useRef, useState } from "react";
 import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
-import { ColumnType } from "./types";
+import { ColumnType, ListItem, ListItemWithPlaylistData, PlaylistColumnType } from "./types";
 import { Spinner } from "@nextui-org/spinner";
 import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
-import { PagePlaylistTracks, PageTracks } from "@/shared/api/spotify-client/schemas/pages";
 
-/**
- * @type client component
- */
+interface TrackListPropsBase {
+	fromPlaylist?: boolean
 
-type TrackListProps = {
+	hideHeader?: boolean
+	classNames?: TableProps['classNames']
+}
+interface TrackListPropsCommon extends TrackListPropsBase {
 	fromPlaylist: false
 	columns: ColumnType[]
-	hideHeader?: boolean
-	classNames?: TableProps['classNames']
-	tracks: {
-		data?: PageTracks
-		isLoading: boolean
-		isError: boolean
-	}
-} | {
-	fromPlaylist: true
-	columns: ColumnType[]
-	hideHeader?: boolean
-	classNames?: TableProps['classNames']
-	tracks: {
-		data?: PagePlaylistTracks
-		isLoading: boolean
-		isError: boolean
-	}
+	items?: ListItem[]
 }
 
-export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames, tracks, fromPlaylist }) => {
+// with playlist data
+interface TrackListPropsWithPlaylistData extends TrackListPropsBase {
+	fromPlaylist: true
+	columns: Array<ColumnType | PlaylistColumnType>
+	items: ListItemWithPlaylistData[]
+}
+
+type TrackListProps = TrackListPropsCommon | TrackListPropsWithPlaylistData
+
+export const TrackList: FC<TrackListProps> = ({
+	columns,
+	hideHeader,
+	classNames,
+	fromPlaylist,
+	items
+}) => {
 	const player = usePlayerState()
 
-	const columnsDefinition = useMemo(
+	const columnsToShow = useMemo(
 		() => allColumnsDefinitions
 			.filter(columnDef => columns.includes(columnDef.key)),
 		[columns]
@@ -46,11 +46,11 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 
 	const [selectedTracks, setSelectedTracks] = useState<string[]>([])
 
-	const isLikesColumn = Boolean(columnsDefinition.find(item => item.key === 'liked'))
+	const isLikesColumn = Boolean(columnsToShow.find(item => item.key === 'liked'))
 
 	const likes = useQuery(getCheckLikedTracksOptions({
-		enabled: isLikesColumn,
-		idList: tracks.data?.items.map(item => item.id)
+		enabled: isLikesColumn && Boolean(items),
+		idList: items?.map(item => item.id)
 	}))
 
 	return (
@@ -58,7 +58,7 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 			hideHeader={hideHeader}
 			classNames={classNames}
 		>
-			<TableHeader columns={columnsDefinition}>
+			<TableHeader columns={columnsToShow}>
 				{(column) => {
 					const HeaderComponent = headersMap[column.key]
 
@@ -71,12 +71,11 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 			</TableHeader>
 
 			<TableBody
-				isLoading={tracks.isLoading}
+				isLoading={false}
 				loadingContent={<Spinner />}
 			>
 				{
-
-					tracks.data?.items.map((track, trackIndex) => (
+					items?.map((track, trackIndex) => (
 						<TableRow
 							key={track.id}
 							className={`
@@ -102,16 +101,18 @@ export const TrackList: FC<TrackListProps> = ({ columns, hideHeader, classNames,
 							}}
 						>
 							{
-								columnsDefinition.map(column => {
+								columnsToShow.map(column => {
 									const CellComponent = cellsMap[column.key]
 
 									return (
 										<TableCell key={`${track.id}:${column.key}`}>
+											{/* @ts-expect-error */}
 											<CellComponent
 												trackIndex={trackIndex}
 												track={track}
-												allTracks={tracks.data?.items}
+												allTracks={items}
 												likes={likes.data}
+												withPlaylistData={fromPlaylist}
 											/>
 										</TableCell>
 									)

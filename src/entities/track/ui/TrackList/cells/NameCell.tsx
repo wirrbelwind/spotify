@@ -3,10 +3,11 @@ import React from "react"
 import { CellProps } from "../types"
 import { LinksTextList } from "@/shared/ui/LinksTextList"
 
-export const NameCell: React.FC<CellProps> = ({ track }) => {
+export const NameCell: React.FC<CellProps> = ({ track, withPlaylistData }) => {
+
 	const artists = track.artists.map(artist => ({
 		label: artist.name,
-		url: artist.href
+		url: artist.url
 	}))
 
 	return (
