@@ -7,6 +7,7 @@ import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType, ListItem, ListItemWithPlaylistData, PlaylistColumnType } from "./types";
 import { Spinner } from "@nextui-org/spinner";
 import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
+import { startAudio } from "@/entities/player";
 
 interface TrackListPropsBase {
 	fromPlaylist?: boolean
@@ -53,6 +54,10 @@ export const TrackList: FC<TrackListProps> = ({
 		idList: items?.map(item => item.id)
 	}))
 
+	const uriList = useMemo(() => {
+		return items?.map(item => item.uri)
+	}, [items])
+
 	return (
 		<Table
 			hideHeader={hideHeader}
@@ -98,6 +103,12 @@ export const TrackList: FC<TrackListProps> = ({
 								else {
 									setSelectedTracks([track.id])
 								}
+							}}
+							onDoubleClick={() => {
+								startAudio({
+									audioUris: uriList,
+									offset: track.uri
+								})
 							}}
 						>
 							{
