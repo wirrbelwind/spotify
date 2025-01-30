@@ -5,6 +5,7 @@ import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { PlaylistTemplate } from "@/shared/ui/PlaylistTemplate"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 import { TrackListWrapper } from "./TrackListWrapper"
+import { Header } from "./Header"
 
 interface PlaylistPageProps {
 	params: Promise<{
@@ -20,7 +21,7 @@ export default async function PlaylistPage({ params }: PlaylistPageProps) {
 	queryClient.prefetchQuery(getPlaylistOptions(playlistId))
 
 	return (
-		<main className="">
+		<main className="pt-6">
 			<HydrationBoundary state={dehydrate(queryClient)}>
 				{/* <PlaylistTemplate
 			// name={playlist.data.name}
@@ -29,6 +30,7 @@ export default async function PlaylistPage({ params }: PlaylistPageProps) {
 			isNativePlayList={true}
 
 		/> */}
+				<Header playlistId={playlistId} />
 				<TrackListWrapper playlistId={playlistId} />
 			</HydrationBoundary>
 		</main>
