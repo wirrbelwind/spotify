@@ -1,3 +1,4 @@
+import { AddedBy } from "./cells/AddedBy";
 import { AlbumCell } from "./cells/AlbumCell";
 import { AvatarCell } from "./cells/AvatarCell";
 import { DurationCell } from "./cells/DurationCell";
@@ -68,5 +69,5 @@ export const cellsMap: Record<ColumnType | PlaylistColumnType, React.FC<CellProp
 	'liked': LikedCell,
 	'duration': DurationCell,
 	'added-at': NameCell,
-	'added-by': NameCell,
+	'added-by': AddedBy,
 }

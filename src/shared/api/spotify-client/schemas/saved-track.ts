@@ -2,7 +2,7 @@ import { z } from "zod";
 import { trackSchema } from "./track";
 
 export const savedTrack = z.object({
-	added_at: z.string().date(),
+	added_at: z.string(),
 	// track: trackSchema
 })
 

@@ -127,7 +127,6 @@ export const TrackList: FC<TrackListProps> = ({
 												allTracks={items}
 												likes={likes.data}
 												withPlaylistData={fromPlaylist}
-												
 											/>
 										</TableCell>
 									)

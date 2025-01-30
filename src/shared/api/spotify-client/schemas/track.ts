@@ -17,7 +17,14 @@ export const trackSchema = createEntity('track', {
 	external_ids: externalIdsSchema,
 	external_urls: externalUrlsSchema,
 	href: z.string().url(),
-	is_playable: z.boolean(),
+	is_playable: z.boolean().optional().transform(value => {
+		if(value === true || value === undefined) {
+			return true
+		}
+		else {
+			return false
+		}
+	}),
 	linked_from: z.unknown(),
 	restrictions: restrictionsSchema.optional(),
 	name: z.string().nonempty(),

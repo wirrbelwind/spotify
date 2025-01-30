@@ -1,3 +1,4 @@
+'use server'
 import { z } from "zod"
 import { spotifyAxios } from "../axios-instance"
 import { DATA_API_URL } from "../constants"
@@ -37,7 +38,7 @@ const getParser = () => {
 	}))
 
 	// page of tracks and episodes
-	const trackAddedBy = anotherUserSchema.omit({ images: true })
+	const trackAddedBy = anotherUserSchema.omit({ images: true, display_name: true, followers: true, })
 
 	const pageItem = playlistTrackSchema.merge(z.object({
 		added_by: trackAddedBy.nullable(),
@@ -46,22 +47,23 @@ const getParser = () => {
 			episode
 		])
 	}))
-	.transform(data => ({
-		track: data.track,
-		meta: {
-			playlist: {
-				addedAt: data.added_at,
-				addedBy: data.added_by,
-				isLocal: data.is_local
-			}
-		}
-	}))
+	// .transform(data => ({
+	// 	track: data.track,
+	// 	meta: {
+	// 		playlist: {
+	// 			addedAt: data.added_at,
+	// 			addedBy: data.added_by,
+	// 			isLocal: data.is_local
+	// 		}
+	// 	}
+	// }))
 
 	return playlistSchema.merge(z.object({
 		owner: anotherUserSchema.omit({
-			images: true
+			images: true,
+			followers: true
 		}),
-		tracks: trackSchema
+		tracks: pageWith(pageItem)
 	}))
 }
 
@@ -81,7 +83,9 @@ export const getPlaylist = async (args: GetPlaylistArgs) => {
 	})
 
 	const json = response.data
+	console.log('----------')
 	const user = getParser().parse(json)
+	console.log('----------')
 
 	return user
 }

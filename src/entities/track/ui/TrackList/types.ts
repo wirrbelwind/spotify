@@ -11,7 +11,7 @@ export interface ListItem {
 	name: string
 	artists: Array<{
 		name: string,
-		url: string
+		url: string | null
 	}>
 	album: {
 		name: string

@@ -20,15 +20,17 @@ export default async function PlaylistPage({ params }: PlaylistPageProps) {
 	queryClient.prefetchQuery(getPlaylistOptions(playlistId))
 
 	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			{/* <PlaylistTemplate
+		<main className="">
+			<HydrationBoundary state={dehydrate(queryClient)}>
+				{/* <PlaylistTemplate
 			// name={playlist.data.name}
 			// image={getBestFitImage({images: playlist.data.images, preferredSize: {height: 144, width: 144}})}
 			// playlistId={playlistId}
 			isNativePlayList={true}
 
 		/> */}
-			<TrackListWrapper />
-		</HydrationBoundary>
+				<TrackListWrapper playlistId={playlistId} />
+			</HydrationBoundary>
+		</main>
 	)
 }

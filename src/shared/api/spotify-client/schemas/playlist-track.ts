@@ -4,7 +4,7 @@ import { episodeSchema } from "./episode";
 import { anotherUserSchema } from "./another-user";
 
 export const playlistTrackSchema = z.object({
-	added_at: z.string().date().nullable(),
+	added_at: z.string().nullable(),
 	// added_by: anotherUserSchema.nullable(),
 	is_local: z.boolean(),
 	// track: trackSchema,

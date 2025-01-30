@@ -25,7 +25,7 @@ export const LibrarySidebar: FC<LibrarySidebarProps> = async (props) => {
 						className="hover:bg-slate-400 h-56 p-2 group rounded-md relative"
 					>
 						<Link
-							href={`/playlist/${playlist.id}`}
+							href={`/dashboard/playlist/${playlist.id}`}
 							className="w-full h-full absolute top-0 bottom-0 left-0 right-0 z-20"
 						></Link>
 						<div className="relative overflow-hidden">
