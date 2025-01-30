@@ -20,7 +20,7 @@ export const episodeSchema = createEntity('episode', {
 	language: z.string().describe("Deprecated"),
 	languages: z.string().array(),
 	name: z.string().nonempty(),
-	release_date: z.string().date(),
+	release_date: z.string(),
 	release_date_precision: z.union([
 		z.literal('year'),
 		z.literal('month'),

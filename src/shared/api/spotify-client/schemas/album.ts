@@ -22,7 +22,7 @@ export const albumSchema = createEntity('album', {
 	href: z.string().url(),
 	images: imageSchema.array(),
 	name: z.string().nonempty(),
-	release_date: z.string().date(),
+	release_date: z.string(),
 	release_date_precision: z.union([
 		z.literal("year"),
 		z.literal("month"),
