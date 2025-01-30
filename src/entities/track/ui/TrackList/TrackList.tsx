@@ -15,6 +15,7 @@ interface TrackListPropsBase {
 
 	hideHeader?: boolean
 	classNames?: TableProps['classNames']
+	initialLoading?: boolean
 }
 interface TrackListPropsCommon extends TrackListPropsBase {
 	fromPlaylist: false
@@ -36,7 +37,8 @@ export const TrackList: FC<TrackListProps> = ({
 	hideHeader,
 	classNames,
 	fromPlaylist,
-	items
+	items,
+	initialLoading
 }) => {
 	const player = usePlayerState()
 
@@ -79,7 +81,7 @@ export const TrackList: FC<TrackListProps> = ({
 			</TableHeader>
 
 			<TableBody
-				isLoading={false}
+				isLoading={initialLoading}
 				loadingContent={<Spinner />}
 			>
 				{

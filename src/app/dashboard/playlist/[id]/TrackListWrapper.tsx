@@ -15,6 +15,7 @@ export const TrackListWrapper: FC<TrackListWrapperProps> = ({ playlistId }) => {
 	return (
 		<>
 			<TrackList
+			initialLoading={playlist.isLoading}
 				fromPlaylist={true}
 				columns={["play", "avatar", "name", "album", "duration"]}
 				items={playlist.data?.tracks.items.map(item => {
