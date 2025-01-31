@@ -115,6 +115,8 @@ export const TrackList: FC<TrackListProps> = ({
 									offset: track.uri
 								})
 							}}
+							data-context-menu-entity-type="track"
+							data-context-menu-entity-uri={track.uri}
 						>
 							{
 								columnsToShow.map(column => {
