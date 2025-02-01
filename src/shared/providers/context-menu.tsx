@@ -1,9 +1,10 @@
 'use client'
-import { Button } from "@nextui-org/button"
-import React, { PropsWithChildren, useEffect, useState } from "react"
+import React, { createContext, PropsWithChildren, useEffect, useState } from "react"
 import { createPortal } from "react-dom"
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { Dropdown, DropdownMenu, DropdownItem } from "@nextui-org/react";
 import { useOutsideClick } from "../lib/useOutsideClick";
+
+const Context = createContext(null)
 
 export const ContextMenuProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const [visible, setVisible] = useState(false)
@@ -26,7 +27,11 @@ export const ContextMenuProvider: React.FC<PropsWithChildren> = ({ children }) =
 				return false
 			}
 
-			
+			const entity = {
+				type: elementWithEntityData.dataset.contextMenuEntityType,
+				uri: elementWithEntityData.dataset.contextMenuEntityUri,
+				id: elementWithEntityData.dataset.contextMenuEntityId,
+			}
 
 			// show menu
 			menuRef.current.style.top = `${event.clientY}px`
@@ -44,10 +49,14 @@ export const ContextMenuProvider: React.FC<PropsWithChildren> = ({ children }) =
 		}
 	}, [])
 
-
+	const [target, setTarget] = useState<null | object>(null)
 
 	return (
-		<React.Fragment>
+		<Context.Provider value={{
+			target,
+			setTarget,
+			
+		}}>
 			{children}
 
 			{createPortal(
@@ -70,6 +79,6 @@ export const ContextMenuProvider: React.FC<PropsWithChildren> = ({ children }) =
 				</div>),
 				document.body
 			)}
-		</React.Fragment>
+		</Context.Provider>
 	)
 }
