@@ -13,7 +13,6 @@ export const TrackListWrapper: FC<TrackListWrapperProps> = ({ playlistId }) => {
 	const playlist = useQuery(getPlaylistOptions(playlistId))
 
 	return (
-		<>
 			<TrackList
 			initialLoading={playlist.isLoading}
 				fromPlaylist={true}
@@ -59,7 +58,5 @@ export const TrackListWrapper: FC<TrackListWrapperProps> = ({ playlistId }) => {
 					}
 				})}
 			/>
-			<p>{playlistId}</p>
-		</>
 	)
 }
