@@ -7,6 +7,8 @@ export const getPlaylistOptions = (id: string) => {
 		queryFn: async () => {
 			const response = await spotifyClient.getPlaylist({ id })
 			return response
-		}
+		},
+		// TODO: this doesn't work. Each refreshing of page shows spinner for few seconds
+		staleTime: 1000 * 60 * 60
 	})
 }
