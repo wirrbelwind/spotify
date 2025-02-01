@@ -5,6 +5,8 @@ import { Player } from "@/entities/player/ui/Player";
 import Link from "next/link";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { LibrarySidebar } from "@/widget/LibrarySidebar";
+import { DashboardHeader } from "@/widget/DashboardHeader";
+import { userOptions } from "@/entities/user/model/userOptions";
 
 export const metadata = {
   title: "Spotify",
@@ -13,6 +15,8 @@ export const metadata = {
 export default async function DashboardLayout({ children }: { children: any }) {
 
   const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery(userOptions())
 
   return (
     <main className="
@@ -25,11 +29,9 @@ export default async function DashboardLayout({ children }: { children: any }) {
         <LibrarySidebar />
 
         <main className="basis-full">
-          <div className="flex gap-4">
-            <Link href="/">Home</Link>
-            <Link href="/me">Profile</Link>
-            <Link href="/me/library">Library</Link>
-          </div>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <DashboardHeader />
+          </HydrationBoundary>
           {children}
         </main>
       </div>

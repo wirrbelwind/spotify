@@ -24,7 +24,7 @@ interface GetBestFitImageReturn {
 }
 
 export const getBestFitImage = ({ images, preferredSize }: GetBestFitImageArgs) => {
-	if (!images.length) {
+	if (!images || !images.length) {
 		return null
 	}
 

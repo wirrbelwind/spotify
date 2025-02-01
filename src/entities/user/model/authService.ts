@@ -55,7 +55,7 @@ export const authService = async () => {
 						cookie.set(COOKIE_KEYS.REFRESH_TOKEN, value)
 						return
 					}
-					if (typeof value === null) {
+					if (value === null) {
 						cookie.delete(COOKIE_KEYS.REFRESH_TOKEN)
 						return
 					}
