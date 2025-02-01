@@ -45,10 +45,15 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 						}
 					</p>
 					<p className="text-6xl font-bold">
-					{playlist.data?.name}
+						{playlist.data?.name}
 					</p>
 					<p className="text-gray-400">{playlist.data?.description}</p>
 					{playlist.data?.collaborative && <p>Collaborative</p>}
+					<p className="font-bold">
+						<a href={`/dashboard/artist/${playlist.data.owner.id}`}>{playlist.data.owner.display_name}</a>
+						<span> • </span>
+						<span>{playlist.data.tracks.total} songs</span>
+					</p>
 				</div>
 			</>}
 		</div>

@@ -15,7 +15,7 @@ import { recommendationsSchema } from "../schemas/recommendations"
 import { tokensSchema } from "../schemas/tokens"
 
 const getParser = () => {
-	return tokensSchema	
+	return tokensSchema.omit({ refresh_token: true })
 }
 
 interface RefreshTokensArgs {
@@ -38,6 +38,6 @@ export const refreshTokens = async ({ refreshToken }: RefreshTokensArgs) => {
 	})
 
 	const json = response.data
-
+	console.log(json)
 	return getParser().parse(json)
 }
