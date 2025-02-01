@@ -32,7 +32,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				className=""
 			>
 				<Image
-					src="icons/shuffle.svg"
+					src="/icons/shuffle.svg"
 					alt="Shuffle playback"
 					width={35}
 					height={35}
@@ -47,7 +47,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ elementsProps }) =
 				className=""
 			>
 				<Image
-					src="icons//play-skip-back.svg"
+					src="/icons/play-skip-back.svg"
 					alt="Playback skip backward"
 					width={35}
 					height={35}
