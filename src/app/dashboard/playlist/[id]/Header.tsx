@@ -2,10 +2,21 @@
 
 import { getPlaylistOptions } from "@/entities/track/api/playlist/getPlaylistOptions"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
+import { Button } from "@nextui-org/button"
 import { Spinner } from "@nextui-org/spinner"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import { FC, useMemo } from "react"
+import {
+	Modal,
+	ModalContent,
+	ModalHeader,
+	ModalBody,
+	ModalFooter,
+	useDisclosure,
+	Input,
+	Textarea
+} from "@nextui-org/react";
 
 interface HeaderProps {
 	playlistId: string
@@ -25,19 +36,35 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 		})
 	}, [playlist.data])
 
+	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
 	return (
 		<div className="flex gap-4 items-center py-8 px-4">
 			{playlist.isLoading && !playlist.data && (
 				<Spinner />
 			)}
 			{playlist.isSuccess && <>
-				<Image
-					src={image?.url ?? ''}
-					alt="Playlist's avatar"
-					width={160}
-					height={160}
-					className="object-cover w-40 h-40"
-				/>
+				<div className="w-40 h-40 relative shrink-0 group/edit">
+					<Image
+						src={image?.url ?? ''}
+						alt="Playlist's avatar"
+						width={160}
+						height={160}
+						className="object-cover w-full h-full"
+					/>
+					<Button
+						className="absolute top-0 left-0 w-full h-full bg-gray-500 flex flex-col gap-4 border-none opacity-0"
+						onPress={onOpen}
+					>
+						<Image
+							src="/icons/pencil.svg"
+							alt="edit"
+							width={50}
+							height={50}
+						/>
+						<p className="text-xl">Choose photo</p>
+					</Button>
+				</div>
 				<div className="flex gap-2 flex-col">
 					<p>
 						{
@@ -56,6 +83,43 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 					</p>
 				</div>
 			</>}
+
+			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+				<ModalContent>
+					{(onClose) => (
+						<>
+							<ModalHeader>Edit details</ModalHeader>
+							<ModalBody>
+								<div className="grid grid-flow-col grid-rows-3 ">
+									<Image
+										src={image?.url}
+										alt=""
+										width={160}
+										height={160}
+										className="row-span-3"
+									/>
+
+									<Input
+										placeholder="Add a name"
+										defaultValue={playlist.data?.name}
+										className="col-span-2"
+									/>
+									<Textarea
+										placeholder="Add an optional description"
+										defaultValue={playlist.data?.description}
+										className="col-span-2 row-span-2"
+									/>
+								</div>
+							</ModalBody>
+							<ModalFooter>
+								<Button color="primary" onPress={onClose}>
+									Save
+								</Button>
+							</ModalFooter>
+						</>
+					)}
+				</ModalContent>
+			</Modal>
 		</div>
 	)
 }
