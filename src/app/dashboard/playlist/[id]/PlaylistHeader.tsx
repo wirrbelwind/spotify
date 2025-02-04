@@ -16,12 +16,14 @@ import {
 	useDisclosure
 } from "@heroui/modal";
 import { Input, Textarea } from "@heroui/input"
+import { spotifyClient } from "@/shared/api/spotify-client"
+import { userOptions } from "@/entities/user/model/userOptions"
 
 interface HeaderProps {
 	playlistId: string
 }
 
-export const Header: FC<HeaderProps> = ({ playlistId }) => {
+export const PlaylistHeader: FC<HeaderProps> = ({ playlistId }) => {
 	const playlist = useQuery(getPlaylistOptions(playlistId))
 
 	const image = useMemo(() => {
@@ -36,6 +38,12 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 	}, [playlist.data])
 
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+	
+	const user = useQuery(userOptions())
+
+	const isEditable = useMemo(() => {
+		return playlist.data?.owner.id === user.data?.id
+	}, [])
 
 	return (
 		<div className="flex gap-4 items-center py-8 px-4">
@@ -51,7 +59,9 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 						height={160}
 						className="object-cover w-full h-full"
 					/>
-					<Button
+					{
+						isEditable && (
+							<Button
 						className="absolute top-0 left-0 w-full h-full bg-gray-500 flex flex-col gap-4 border-none opacity-0"
 						onPress={onOpen}
 					>
@@ -63,6 +73,8 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 						/>
 						<p className="text-xl">Choose photo</p>
 					</Button>
+						)
+					}
 				</div>
 				<div className="flex gap-2 flex-col">
 					<p>
@@ -83,7 +95,8 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 				</div>
 			</>}
 
-			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+			{
+				isEditable && <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
 				<ModalContent>
 					{(onClose) => (
 						<>
@@ -95,7 +108,7 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 										alt=""
 										width={160}
 										height={160}
-										className="row-span-3"
+										className="row-span-3 w-40 h-40 object-cover"
 									/>
 
 									<Input
@@ -119,6 +132,7 @@ export const Header: FC<HeaderProps> = ({ playlistId }) => {
 					)}
 				</ModalContent>
 			</Modal>
+			}
 		</div>
 	)
 }

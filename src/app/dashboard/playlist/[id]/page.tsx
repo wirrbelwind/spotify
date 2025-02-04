@@ -5,7 +5,7 @@ import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { PlaylistTemplate } from "@/shared/ui/PlaylistTemplate"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 import { TrackListWrapper } from "./TrackListWrapper"
-import { Header } from "./Header"
+import { PlaylistHeader } from "./PlaylistHeader"
 
 interface PlaylistPageProps {
 	params: Promise<{
@@ -30,7 +30,7 @@ export default async function PlaylistPage({ params }: PlaylistPageProps) {
 			isNativePlayList={true}
 
 		/> */}
-				<Header playlistId={playlistId} />
+				<PlaylistHeader playlistId={playlistId} />
 				<TrackListWrapper playlistId={playlistId} />
 			</HydrationBoundary>
 		</main>
