@@ -21,7 +21,7 @@ export default async function PlaylistPage({ params }: PlaylistPageProps) {
 	await queryClient.prefetchQuery(getPlaylistOptions(playlistId))
 
 	return (
-		<main className="pt-6">
+		<main className="pt-6 h-full overflow-y-scroll">
 			<HydrationBoundary state={dehydrate(queryClient)}>
 				{/* <PlaylistTemplate
 			// name={playlist.data.name}

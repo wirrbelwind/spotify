@@ -28,7 +28,7 @@ export default async function DashboardLayout({ children }: { children: any }) {
       <div className="basis-full overflow-y-hidden px-4 py-2 flex gap-6 items-start">
         <LibrarySidebar />
 
-        <main className="basis-full">
+        <main className="h-full">
           <HydrationBoundary state={dehydrate(queryClient)}>
             <DashboardHeader />
           </HydrationBoundary>
