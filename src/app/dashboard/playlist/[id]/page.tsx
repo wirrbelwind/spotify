@@ -18,7 +18,7 @@ export default async function PlaylistPage({ params }: PlaylistPageProps) {
 
 	const queryClient = new QueryClient()
 
-	queryClient.prefetchQuery(getPlaylistOptions(playlistId))
+	await queryClient.prefetchQuery(getPlaylistOptions(playlistId))
 
 	return (
 		<main className="pt-6">
