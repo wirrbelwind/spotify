@@ -11,9 +11,6 @@ export const metadata = {
 };
 
 export default async function DashboardLayout({ children }: { children: any }) {
-
-  const queryClient = new QueryClient()
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
