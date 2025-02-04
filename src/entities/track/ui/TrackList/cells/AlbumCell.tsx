@@ -1,7 +1,6 @@
 import NextLink from "next/link"
-import { Link } from "@heroui/react"
 import { CellProps } from "../types"
-
+import { Link } from "@heroui/link"
 
 export const AlbumCell: React.FC<CellProps> = ({ track, withPlaylistData }) => {
 	return (

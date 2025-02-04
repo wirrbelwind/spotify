@@ -1,9 +1,13 @@
 'use client'
 
-import { Avatar, Button, Chip, Input, Select, SelectItem, SelectSection, Slider } from "@heroui/react"
 import Image from "next/image"
 import { startTransition, useState } from "react"
 import { allChips } from "./constants"
+import { Avatar } from "@heroui/avatar"
+import { Button } from "@heroui/button"
+import { Chip } from "@heroui/chip"
+import { Input } from "@heroui/input"
+import { Select,SelectItem, SelectSection } from "@heroui/select"
 
 export const Header = () => {
 	const [selectedChips, setSelectedChips] = useState<string[]>([])
@@ -83,10 +87,6 @@ export const Header = () => {
 						</SelectItem>
 						<SelectItem textValue={"Grid"} startContent={'3'}>
 							Grid
-						</SelectItem>
-
-						<SelectItem textValue={"Slider"} startContent={'4'} isReadOnly>
-							<Slider />
 						</SelectItem>
 
 					</SelectSection>

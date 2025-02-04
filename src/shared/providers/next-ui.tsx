@@ -1,9 +1,8 @@
 'use client'
-import { HeroUIProvider as HeroUIProviderLibrary } from "@heroui/react"
+import { HeroUIProvider as HeroUIProviderLibrary } from "@heroui/system"
+import { FC, PropsWithChildren } from "react"
 
-import React, { PropsWithChildren } from "react"
-
-export const HeroUIProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const HeroUIProvider: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<HeroUIProviderLibrary>
 			{children}

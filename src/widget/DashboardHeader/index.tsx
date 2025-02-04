@@ -12,9 +12,9 @@ import {
 	DropdownMenu,
 	DropdownSection,
 	DropdownItem,
-	Divider
-} from "@heroui/react";
+} from "@heroui/dropdown";
 import Link from "next/link"
+import { useDivider } from "@heroui/divider"
 
 export const DashboardHeader = () => {
 	const user = useQuery(userOptions())

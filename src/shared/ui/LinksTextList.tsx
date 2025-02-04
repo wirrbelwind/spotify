@@ -1,6 +1,6 @@
-import { Link, LinkProps } from "@heroui/react"
+import { Link, LinkProps } from "@heroui/link"
 import LinkNext from "next/link"
-import React, { HTMLAttributes } from "react"
+import React from "react"
 
 export interface LinksTextListProps {
 	links: Array<{

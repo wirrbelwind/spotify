@@ -13,10 +13,9 @@ import {
 	ModalHeader,
 	ModalBody,
 	ModalFooter,
-	useDisclosure,
-	Input,
-	Textarea
-} from "@heroui/react";
+	useDisclosure
+} from "@heroui/modal";
+import { Input, Textarea } from "@heroui/input"
 
 interface HeaderProps {
 	playlistId: string
