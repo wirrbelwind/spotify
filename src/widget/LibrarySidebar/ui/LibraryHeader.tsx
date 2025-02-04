@@ -2,14 +2,14 @@
 
 import Image from "next/image"
 import { startTransition, useState } from "react"
-import { allChips } from "./constants"
+import { allChips } from "../constants"
 import { Avatar } from "@heroui/avatar"
 import { Button } from "@heroui/button"
 import { Chip } from "@heroui/chip"
 import { Input } from "@heroui/input"
 import { Select,SelectItem, SelectSection } from "@heroui/select"
 
-export const Header = () => {
+export const LibraryHeader = () => {
 	const [selectedChips, setSelectedChips] = useState<string[]>([])
 
 	const [inputTouched, setInputTouched] = useState(false)
