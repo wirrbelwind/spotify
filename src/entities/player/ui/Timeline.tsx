@@ -2,7 +2,7 @@
 
 import { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useRef, useState } from "react"
 import { millisecondsToTime } from "@/shared/lib/millisecondsToTime"
-import { Slider } from "@nextui-org/slider"
+import { Slider } from "@heroui/slider"
 import { usePlayerController } from "@/shared/providers/spotify-player"
 import { usePlayerState } from "../model/usePlayerState"
 import { debounce } from "@/shared/lib/debounce"

@@ -1,5 +1,5 @@
 import NextLink from "next/link"
-import { Link } from "@nextui-org/react"
+import { Link } from "@heroui/react"
 import { CellProps } from "../types"
 
 

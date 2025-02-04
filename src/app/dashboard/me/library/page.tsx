@@ -1,5 +1,5 @@
 import { Player } from "@/entities/player/ui/Player";
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 import Link from "next/link";
 import { authService } from '@/entities/user';
 

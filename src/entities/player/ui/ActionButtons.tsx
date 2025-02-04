@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "@nextui-org/button"
+import { Button } from "@heroui/button"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 import Image from "next/image"
 import { usePlayerState } from "../model/usePlayerState"

@@ -2,7 +2,7 @@
 
 import { userOptions } from "@/entities/user/model/userOptions"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
-import { Button } from "@nextui-org/button"
+import { Button } from "@heroui/button"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import { useMemo } from "react"
@@ -13,7 +13,7 @@ import {
 	DropdownSection,
 	DropdownItem,
 	Divider
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Link from "next/link"
 
 export const DashboardHeader = () => {

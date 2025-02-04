@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from "@nextui-org/button"
+import { Button } from "@heroui/button"
 import { CellProps } from "../types"
-import { Spinner } from "@nextui-org/spinner"
+import { Spinner } from "@heroui/spinner"
 import { useLike } from "@/entities/track/api/like"
 
 export const LikedCell: React.FC<CellProps> = ({ likes, trackIndex, track }) => {

@@ -2,8 +2,8 @@
 
 import { getPlaylistOptions } from "@/entities/track/api/playlist/getPlaylistOptions"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
-import { Button } from "@nextui-org/button"
-import { Spinner } from "@nextui-org/spinner"
+import { Button } from "@heroui/button"
+import { Spinner } from "@heroui/spinner"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import { FC, useMemo } from "react"
@@ -16,7 +16,7 @@ import {
 	useDisclosure,
 	Input,
 	Textarea
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 interface HeaderProps {
 	playlistId: string

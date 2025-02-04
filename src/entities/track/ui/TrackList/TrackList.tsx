@@ -1,11 +1,11 @@
 'use client'
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableProps } from "@nextui-org/table";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableProps } from "@heroui/table";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useMemo, useRef, useState } from "react";
 import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType, ListItem, ListItemWithPlaylistData, PlaylistColumnType } from "./types";
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
 import { startAudio } from "@/entities/player";
 import { useLike } from "../../api/like";
@@ -64,11 +64,11 @@ export const TrackList: FC<TrackListProps> = ({
 	const like = useLike()
 
 	return (
-		<Table
+        (<Table
 			hideHeader={hideHeader}
 			classNames={classNames}
 		>
-			<TableHeader columns={columnsToShow}>
+            <TableHeader columns={columnsToShow}>
 				{(column) => {
 					const HeaderComponent = headersMap[column.key]
 
@@ -79,14 +79,13 @@ export const TrackList: FC<TrackListProps> = ({
 					)
 				}}
 			</TableHeader>
-
-			<TableBody
+            <TableBody
 				isLoading={initialLoading}
 				loadingContent={<Spinner />}
 			>
 				{
 					items?.map((track, trackIndex) => (
-						<TableRow
+						(<TableRow
 							key={track.id}
 							className={`
 							hover:bg-gray-400
@@ -118,7 +117,7 @@ export const TrackList: FC<TrackListProps> = ({
 							data-context-menu-entity-type="track"
 							data-context-menu-entity-uri={track.uri}
 						>
-							{
+                            {
 								columnsToShow.map(column => {
 									const CellComponent = cellsMap[column.key]
 
@@ -136,11 +135,11 @@ export const TrackList: FC<TrackListProps> = ({
 									)
 								})
 							}
-						</TableRow>
+                        </TableRow>)
 						// Conditional expression below provides type safety for <Table />
 					)) ?? []
 				}
 			</TableBody>
-		</Table>
-	);
+        </Table>)
+    );
 }

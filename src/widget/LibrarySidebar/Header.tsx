@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, Button, Chip, Input, Select, SelectItem, SelectSection, Slider } from "@nextui-org/react"
+import { Avatar, Button, Chip, Input, Select, SelectItem, SelectSection, Slider } from "@heroui/react"
 import Image from "next/image"
 import { startTransition, useState } from "react"
 import { allChips } from "./constants"

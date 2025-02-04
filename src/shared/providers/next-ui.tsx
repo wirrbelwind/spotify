@@ -1,12 +1,12 @@
 'use client'
-import { NextUIProvider as NextUIProviderLibrary } from '@nextui-org/react'
+import { HeroUIProvider as HeroUIProviderLibrary } from "@heroui/react"
 
 import React, { PropsWithChildren } from "react"
 
-export const NextUIProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const HeroUIProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	return (
-		<NextUIProviderLibrary>
+		<HeroUIProviderLibrary>
 			{children}
-		</NextUIProviderLibrary>
+		</HeroUIProviderLibrary>
 	)
 }

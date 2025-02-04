@@ -5,7 +5,7 @@ import { getPlaylistOptions } from "@/entities/track/api/playlist/getPlaylistOpt
 import { PlaylistTrack } from "@/shared/api/spotify-client/schemas/playlist-track";
 import { Track } from "@/shared/api/spotify-client/schemas/track";
 import { getBestFitImage } from "@/shared/lib/getBestFitImage";
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { FC } from "react";

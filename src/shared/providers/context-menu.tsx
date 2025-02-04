@@ -1,7 +1,7 @@
 'use client'
 import React, { createContext, PropsWithChildren, useEffect, useState } from "react"
 import { createPortal } from "react-dom"
-import { Dropdown, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { Dropdown, DropdownMenu, DropdownItem } from "@heroui/react";
 import { useOutsideClick } from "../lib/useOutsideClick";
 
 const Context = createContext(null)

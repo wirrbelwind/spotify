@@ -1,5 +1,5 @@
 import NextImage from "next/image"
-import { Image } from "@nextui-org/image"
+import { Image } from "@heroui/image"
 import React from "react"
 import { Nullable } from "@/shared/lib/Nullable"
 import { LinksTextList } from "@/shared/ui/LinksTextList"

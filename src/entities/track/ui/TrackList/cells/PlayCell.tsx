@@ -1,7 +1,7 @@
 'use client'
 import { usePlayerState } from "@/entities/player/model/usePlayerState"
 import { usePlayerController } from "@/shared/providers/spotify-player"
-import { Button } from "@nextui-org/button"
+import { Button } from "@heroui/button"
 import Image from "next/image"
 import { CellProps } from "../types"
 import { startAudio } from "@/entities/player"
