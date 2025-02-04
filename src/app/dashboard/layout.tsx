@@ -4,7 +4,7 @@ import { AllProviders } from "@/shared/providers/AllProviders";
 import { Player } from "@/entities/player/ui/Player";
 import Link from "next/link";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { LibrarySidebar } from "@/widget/LibrarySidebar";
+import { Library } from "@/widget/Library";
 import { DashboardHeader } from "@/widget/DashboardHeader";
 import { userOptions } from "@/entities/user/model/userOptions";
 
@@ -26,7 +26,7 @@ export default async function DashboardLayout({ children }: { children: any }) {
     flex-col
     ">
       <div className="basis-full overflow-y-hidden px-4 py-2 flex gap-6 items-start">
-        <LibrarySidebar />
+        <Library />
 
         <main className="h-full">
           <HydrationBoundary state={dehydrate(queryClient)}>
