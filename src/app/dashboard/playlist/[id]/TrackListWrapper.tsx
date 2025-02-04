@@ -17,7 +17,7 @@ export const TrackListWrapper: FC<TrackListWrapperProps> = ({ playlistId }) => {
 		<p>prev: {playlist.data?.tracks.previous}</p>
 		<p>next: {playlist.data?.tracks.next}</p>
 
-			<TrackList
+		<TrackList
 			initialLoading={playlist.isLoading}
 				fromPlaylist={true}
 				columns={["play", "avatar", "name", "album", "duration"]}
@@ -62,5 +62,7 @@ export const TrackListWrapper: FC<TrackListWrapperProps> = ({ playlistId }) => {
 					}
 				})}
 			/>
+			
+			</>
 	)
 }
