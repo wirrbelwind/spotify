@@ -1,5 +1,5 @@
 import { fetchTokensByCode } from "./http-request";
 
-export const getCurrentUsersProfile = {
+export const getTokensByCode = {
     fetch: fetchTokensByCode,
 }
