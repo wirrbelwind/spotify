@@ -1,7 +1,7 @@
 'use server'
 import { cookies } from "next/headers"
 import { COOKIE_KEYS } from "../constants"
-import { spotifyClient } from "@/shared/api/spotify-client"
+import { spotifyApi } from "@/shared/api/spotify-client"
 
 export const shuffle = async (state: boolean) => {
 	const cookie = await cookies()
@@ -12,5 +12,5 @@ export const shuffle = async (state: boolean) => {
 		throw new Error('Cookie has no device id. Use server action rememberDevice')
 	}
 
-	await spotifyClient.player.shuffle({ state, deviceId })
+	await spotifyApi.player.shuffle.fetch({ state, deviceId })
 }

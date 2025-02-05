@@ -1,7 +1,7 @@
 import { fetchCurrentUsersPlaylists } from "./http-request";
 import { queryOptions } from "./hook";
 
-export const getCurrentUsersPlaylist = {
+export const getCurrentUsersPlaylists = {
     fetch: fetchCurrentUsersPlaylists,
     queryOptions: queryOptions
 }

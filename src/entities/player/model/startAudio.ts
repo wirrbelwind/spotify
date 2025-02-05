@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers"
 import { COOKIE_KEYS } from "../constants"
-import { spotifyClient } from "@/shared/api/spotify-client"
+import { spotifyApi } from "@/shared/api/spotify-client"
 
 interface StartAudioArgs {
 	contextUri?: string
@@ -19,7 +19,7 @@ export const startAudio = async ({ audioUris, contextUri, offset }: StartAudioAr
 		throw new Error('Cookie has no device id. Use server action rememberDevice')
 	}
 
-	await spotifyClient.player.play({
+	await spotifyApi.player.startPlayback.fetch({
 		audioUris, contextUri, offset, deviceId
 	})
 }

@@ -1,4 +1,4 @@
-import { spotifyClient } from "@/shared/api/spotify-client";
+import { spotifyApi } from "@/shared/api/spotify-client";
 import Image from "next/image";
 import Link from "next/link";
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
@@ -10,7 +10,7 @@ interface LibrarySidebarProps extends DetailedHTMLProps<HTMLAttributes<HTMLEleme
 }
 
 export const Library: FC<LibrarySidebarProps> = async (props) => {
-	const playlists = await spotifyClient.getCurrentUserPlaylists()
+	const playlists = await spotifyApi.getCurrentUsersPlaylists.fetch()
 
 	return (
 		<aside

@@ -1,12 +1,12 @@
 import { TrackList } from "@/entities/track"
-import { spotifyClient } from "@/shared/api/spotify-client"
+import { spotifyApi } from "@/shared/api/spotify-client"
 import Image from "next/image"
 
 export const RecommendationsPage = async () => {
-	const recs = await spotifyClient.getRecommendations({
-		seedArtists: "4NHQUGzhtTLFvgF5SZesLK",
-		seedGenres: "classical,country",
-		seedTracks: "0c6xIDDpzE81m2q797ordA"
+	const recs = await spotifyApi.getRecommendations.fetch({
+		seedArtists: ["4NHQUGzhtTLFvgF5SZesLK"],
+		seedGenres: ["classical,country"],
+		seedTracks: ["0c6xIDDpzE81m2q797ordA"]
 	})
 
 	return (
@@ -33,7 +33,7 @@ export const RecommendationsPage = async () => {
 					isLoading: false
 				}}
 				columns={[
-					'order',
+					'play',
 					'avatar',
 					'name',
 					'album',

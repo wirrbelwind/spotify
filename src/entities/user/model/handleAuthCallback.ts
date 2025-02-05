@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { authService } from "./authService"
-import { spotifyClient } from "@/shared/api/spotify-client"
+import { spotifyApi } from "@/shared/api/spotify-client"
 
 export const handleAuthCallback = async (request: Request) => {
 	const auth = await authService()
@@ -33,7 +33,7 @@ export const handleAuthCallback = async (request: Request) => {
 	const base64Credentials = btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)
 
 	try {
-		const tokens = await spotifyClient.getTokensByCode({
+		const tokens = await spotifyApi.auth.getTokensByCode.fetch({
 			code: codeParam,
 			base64Credentials
 		})
