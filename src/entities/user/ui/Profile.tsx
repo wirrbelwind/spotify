@@ -1,5 +1,4 @@
 import { Avatar } from "@heroui/avatar"
-import { getCurrentUser } from "../model/getCurrentUser"
 import { spotifyApi } from "@/shared/api/spotify-client"
 
 export const Profile = async () => {
