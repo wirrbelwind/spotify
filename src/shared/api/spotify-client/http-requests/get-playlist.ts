@@ -47,16 +47,6 @@ const getParser = () => {
 			episode
 		])
 	}))
-	// .transform(data => ({
-	// 	track: data.track,
-	// 	meta: {
-	// 		playlist: {
-	// 			addedAt: data.added_at,
-	// 			addedBy: data.added_by,
-	// 			isLocal: data.is_local
-	// 		}
-	// 	}
-	// }))
 
 	return playlistSchema.merge(z.object({
 		owner: anotherUserSchema.omit({

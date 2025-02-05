@@ -1,8 +1,7 @@
 import { spotifyAxios } from "../axios-instance"
 import { DATA_API_URL } from "../constants"
-import { currentUserSchema } from "../schemas/current-user"
+import { getParser } from "../sections/users/get-current-users-profile/parser"
 
-const getParser = () => currentUserSchema
 
 export const getCurrentUserProfile = async () => {
 	const url = '/me'

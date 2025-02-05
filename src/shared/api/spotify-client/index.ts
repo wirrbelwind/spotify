@@ -10,18 +10,22 @@ import { shuffle } from "./http-requests/player/shuffle";
 import { refreshTokens } from "./http-requests/refresh-tokens";
 import { saveTracksForCurrentUser } from "./http-requests/save-tracks-for-current-user";
 
-export const spotifyClient = {
-	checkUsersSavedTracks,
-	getCurrentUserPlaylists,
-	getCurrentUserProfile,
-	getCurrentUserTopTracks,
-	getPlaylist,
-	getRecommendations,
-	getTokensByCode,
-	refreshTokens,
-	saveTracksForCurrentUser,
-	player: {
-		play,
-		shuffle
-	}
-}
+export * as spotifyApi from './sections'
+// export const spotifyClient = {
+// 	checkUsersSavedTracks,
+// 	getCurrentUserPlaylists,
+// 	getCurrentUserProfile,
+// 	getCurrentUserTopTracks,
+// 	getPlaylist,
+// 	getRecommendations,
+// 	getTokensByCode,
+// 	refreshTokens,
+// 	saveTracksForCurrentUser,
+// 	player: {
+// 		play,
+// 		shuffle
+// 	}
+// spotifyApi.getCurrentUserProfile.fetch()
+// spotifyApi.getCurrentUserProfile.useQuery()
+// useQuery(spotifyApi.getCurrentUserProfile.options())
+// }

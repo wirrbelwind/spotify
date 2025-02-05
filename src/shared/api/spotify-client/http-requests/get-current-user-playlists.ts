@@ -1,7 +1,6 @@
 import { z } from "zod"
 import { spotifyAxios } from "../axios-instance"
 import { DATA_API_URL } from "../constants"
-import { currentUserSchema } from "../schemas/current-user"
 import { anotherUserSchema } from "../schemas/another-user"
 import { simplifiedPlaylistSchema } from "../schemas/simplified-playlist"
 import { pageWith } from "../schemas/page"
@@ -23,7 +22,6 @@ const getParser = () => {
 }
 
 export const getCurrentUserPlaylists = async () => {
-	// define request url
 	const url = '/me/playlists'
 
 	const response = await spotifyAxios.get(url, {
