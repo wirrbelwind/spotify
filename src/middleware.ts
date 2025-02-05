@@ -3,17 +3,17 @@ import type { MiddlewareConfig, NextRequest } from 'next/server'
 import { authService, getCurrentUser } from './entities/user'
 
 export async function middleware(request: NextRequest) {
-	const user = await getCurrentUser()
+	// const user = await getCurrentUser()
 
-	if (user) {
-		NextResponse.next()
-	}
-	else {
-		const auth = await authService()
-		auth.process.targetPageAfterLogin = request.url
+	// if (user) {
+	// 	NextResponse.next()
+	// }
+	// else {
+	// 	const auth = await authService()
+	// 	auth.process.targetPageAfterLogin = request.url
 
-		return NextResponse.redirect('http://localhost:3000/auth')
-	}
+	// 	return NextResponse.redirect('http://localhost:3000/auth')
+	// }
 }
 
 export const config: MiddlewareConfig = {
