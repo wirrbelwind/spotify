@@ -1,10 +1,5 @@
-import React from "react";
 import '../global-styles.css'
 import { AllProviders } from "@/shared/providers/AllProviders";
-import { Player } from "@/entities/player/ui/Player";
-import Link from "next/link";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { LibrarySidebar } from "@/widget/Library";
 
 export const metadata = {
   title: "Spotify",
