@@ -7,9 +7,9 @@ import { usePlayerState } from "../model/usePlayerState"
 import { CurrentTrackInfo } from "./CurrentTrackInfo"
 import { FALLBACK_TRACK_IMAGE_URL, TRACK_IMAGE_HEIGHT, TRACK_IMAGE_WIDTH } from "../config"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
-import { LinksTextListProps } from "@/ui/LinksTextList"
 import { getIdFromUri } from "@/shared/lib/getIdFromUri"
 import { Volume } from "./Volume"
+import { LinksTextListProps } from "@/shared/ui/LinksTextList"
 
 export const Player = () => {
 	const player = usePlayerState()
@@ -91,7 +91,6 @@ export const Player = () => {
 			<div>
 				<Volume />
 			</div>
-			{/* {JSON.stringify(player.data)} */}
 		</div>
 	)
 }
