@@ -6,7 +6,6 @@ import Link from "next/link";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Library } from "@/widget/Library";
 import { DashboardHeader } from "@/widget/DashboardHeader";
-import { userOptions } from "@/entities/user/model/userOptions";
 import { spotifyApi } from "@/shared/api/spotify-client";
 
 export const metadata = {

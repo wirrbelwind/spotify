@@ -1,4 +1,5 @@
 'use server'
+import { AxiosError } from "axios"
 import { spotifyAxios } from "../../axios-instance"
 import { DATA_API_URL } from "../../constants"
 import { getParser } from "./parser"
@@ -20,13 +21,12 @@ export const fetchSearch = async ({
     limit,
     offset
 }: FetchUsersSavedTracksArgs) => {
-    
+
     const url = '/search'
-    
     const response = await spotifyAxios.get(url, {
         params: {
             q: query,
-            type: types,
+            type: types.join(','),
             market,
             limit,
             offset,
@@ -36,6 +36,10 @@ export const fetchSearch = async ({
     })
 
     const json = response.data
+
+    console.log('-----------------')
+    console.log(json)
+    console.log('-----------------')
 
     return getParser().parse(json)
 }

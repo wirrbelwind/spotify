@@ -1,14 +1,28 @@
 'use client'
+import { debounce } from "@/shared/lib/debounce"
 import { Button } from "@heroui/button"
 import { Divider } from "@heroui/divider"
 import { Input } from "@heroui/input"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { ChangeEvent, ChangeEventHandler, useCallback } from "react"
 
 interface SearchBarProps {
 }
 
 export const SearchBar = ({}: SearchBarProps) => {
+    const router = useRouter()
+
+    const onSearchChange = useCallback(
+		debounce(
+			(event: ChangeEvent<HTMLInputElement>) => {
+				const query = event.target.value
+                router.push(`/dashboard/search?q=${query}`)
+			}
+			, 1000)
+		, [])
+
     return (
         <div className="w-96">
             <Input 
@@ -26,6 +40,7 @@ export const SearchBar = ({}: SearchBarProps) => {
                     />
                 </Button>
             }
+            
             endContent={
                 <>
                 <Divider 
@@ -44,6 +59,8 @@ export const SearchBar = ({}: SearchBarProps) => {
                 </Link>
                 </>
             }
+
+            onChange={onSearchChange}
             />
         </div>
     )
