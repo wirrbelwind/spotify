@@ -15,6 +15,7 @@ export const albumSchema = createEntity('album', {
 		z.literal("album"),
 		z.literal("single"),
 		z.literal("compilation"),
+		z.literal("ep"),
 	]),
 	total_tracks: z.number().nonnegative(),
 	available_markets: z.string().regex(COUNTRY_ISO_ALPHA_2).array(),
