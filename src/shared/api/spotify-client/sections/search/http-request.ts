@@ -3,23 +3,23 @@ import { spotifyAxios } from "../../axios-instance"
 import { DATA_API_URL } from "../../constants"
 import { getParser } from "./parser"
 
-type SearchType = "album" | "artist" | "playlist" | "track" | "show" | "episode" | "audiobook"
+export type SearchType = 'album' | 'artist' | 'audiobook' | 'episode' | 'playlist' | 'show' | 'track'
 
-interface FetchUsersSavedTracksArgs<T> {
+interface FetchUsersSavedTracksArgs {
     query: string
-    types: T[]
+    types: SearchType[]
     market?: string
     limit?: number
     offset?: number
 }
 
-export const fetchSearch = async <T extends SearchType>({
+export const fetchSearch = async ({
     query,
     types,
     market,
     limit,
     offset
-}: FetchUsersSavedTracksArgs<T>) => {
+}: FetchUsersSavedTracksArgs) => {
     
     const url = '/search'
     
@@ -37,13 +37,5 @@ export const fetchSearch = async <T extends SearchType>({
 
     const json = response.data
 
-
-    const obj: Record<T, boolean> = {
-    }
-    
-    types.forEach(value => {
-        obj[value] = true
-    })
-
-    return obj
+    return getParser().parse(json)
 }

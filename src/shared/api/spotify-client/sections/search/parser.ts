@@ -11,8 +11,6 @@ import { showSchema } from "../../schemas/show";
 import { episodeSchema } from "../../schemas/episode";
 import { simplifiedAudiobookSchema } from "../../schemas/simplifiedAudiobook";
 
-export type SearchType = 'album' | 'artist' | 'audiobook' | 'episode' | 'playlist' | 'show' | 'track'
-export type ApiSearchType = 'album' | 'artist' | 'audiobook' | 'episode' | 'playlist' | 'show' | 'track'
 
 export const getParser = () => {
     // tracks
@@ -55,37 +53,13 @@ export const getParser = () => {
         })
     }))
    
-    // const searchTypesMap: Record<SearchType, ParserName> = {
-    //     album: 'albums',
-    //     artist: 'artists',
-    //     audiobook: 'audiobooks',
-    //     episode: 'episodes',
-    //     playlist: 'playlists',
-    //     show: 'shows',
-    //     track: 'tracks'
-    // }
-
-    return {
-        parse<T extends SearchType>(json: any, ...types: T[]) {
-            const generalParser = z.object({
-                tracks: pageWith(track),
-                artists: pageWith(artist),
-                albums: pageWith(album),
-                playlists: pageWith(playlist),
-                shows: pageWith(showSchema),
-                episodes: pageWith(episodeSchema),
-                audiobooks: pageWith(simplifiedAudiobookSchema)
-            })
-
-            const pickData = types.reduce((acc, value) => {
-                acc[value] = true
-
-                return acc
-            }, {} as Record<T, true>)
-
-            const parser = generalParser.pick(pickData)             
-
-            return parser.parse(json)
-        }
-    }
+    return z.object({
+        tracks: pageWith(track).optional(),
+        artists: pageWith(artist).optional(),
+        albums: pageWith(album).optional(),
+        playlists: pageWith(playlist).optional(),
+        shows: pageWith(showSchema).optional(),
+        episodes: pageWith(episodeSchema).optional(),
+        audiobooks: pageWith(simplifiedAudiobookSchema).optional()
+    })
 }
