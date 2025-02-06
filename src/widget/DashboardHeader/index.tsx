@@ -17,12 +17,14 @@ import Link from "next/link"
 import { useDivider } from "@heroui/divider"
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { AccountDropdown } from "@/features/account-dropdown"
+import { SearchBar } from "@/features/search-bar"
 
 export const DashboardHeader = () => {
 	
 
 	return (
-		<div className="flex justify-end">
+		<div className="flex justify-between">
+			<SearchBar/>
 			<AccountDropdown/>
 		</div>
 	)
