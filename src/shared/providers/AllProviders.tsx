@@ -5,7 +5,7 @@ import { HeroUIProvider } from './next-ui';
 import { TanstackQueryProvider } from './tanstack-query';
 import { SpotifyPlayerProvider } from './spotify-player';
 import { authService } from '@/entities/user';
-import { ContextMenuProvider } from './context-menu';
+// import { ContextMenuProvider } from './context-menu';
 
 export const AllProviders: React.FC<PropsWithChildren> = async ({ children }) => {
 	const auth = await authService()
@@ -14,9 +14,9 @@ export const AllProviders: React.FC<PropsWithChildren> = async ({ children }) =>
 		<HeroUIProvider>
 			<TanstackQueryProvider>
 				<SpotifyPlayerProvider accessToken={auth.tokens.accessToken}>
-					<ContextMenuProvider>
+					{/* <ContextMenuProvider> */}
 						{children}
-					</ContextMenuProvider>
+					{/* </ContextMenuProvider> */}
 				</SpotifyPlayerProvider>
 			</TanstackQueryProvider>
 		</HeroUIProvider>
