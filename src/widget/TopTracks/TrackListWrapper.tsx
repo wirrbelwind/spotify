@@ -1,11 +1,13 @@
 'use client'
 
-import { getUserTopTracksOptions, TrackList } from "@/entities/track"
+import { TrackList } from "@/entities/track"
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { useQuery } from "@tanstack/react-query"
 
 export const TrackListWrapper = () => {
-	const trackList = useQuery(getUserTopTracksOptions(5))
+	const trackList = useQuery(
+		spotifyApi.getCurrentUsersTopTracks.queryOptions()
+	)
 
 	return (
 		<TrackList

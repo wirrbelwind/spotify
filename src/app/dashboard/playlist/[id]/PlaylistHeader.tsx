@@ -1,6 +1,5 @@
 'use client'
 
-import { getPlaylistOptions } from "@/entities/track/api/playlist/getPlaylistOptions"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { Button } from "@heroui/button"
 import { Spinner } from "@heroui/spinner"
@@ -17,13 +16,16 @@ import {
 } from "@heroui/modal";
 import { Input, Textarea } from "@heroui/input"
 import { userOptions } from "@/entities/user/model/userOptions"
+import { spotifyApi } from "@/shared/api/spotify-client"
 
 interface HeaderProps {
 	playlistId: string
 }
 
 export const PlaylistHeader: FC<HeaderProps> = ({ playlistId }) => {
-	const playlist = useQuery(getPlaylistOptions(playlistId))
+	const playlist = useQuery(
+		spotifyApi.getPlaylist.queryOptions({id: playlistId})
+	)
 
 	const image = useMemo(() => {
 		if (!playlist.isSuccess) {
@@ -38,7 +40,7 @@ export const PlaylistHeader: FC<HeaderProps> = ({ playlistId }) => {
 
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	
-	const user = useQuery(userOptions())
+	const user = useQuery(spotifyApi.getCurrentUsersProfile.queryOptions())
 
 	const isEditable = useMemo(() => {
 		return playlist.data?.owner.id === user.data?.id

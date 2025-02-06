@@ -1,7 +1,7 @@
 'use client'
 
 import { TrackList } from "@/entities/track"
-import { getPlaylistOptions } from "@/entities/track/api/playlist/getPlaylistOptions"
+import { spotifyApi } from "@/shared/api/spotify-client"
 import { useQuery } from "@tanstack/react-query"
 import { FC } from "react"
 
@@ -10,7 +10,9 @@ interface TrackListWrapperProps {
 }
 
 export const TrackListWrapper: FC<TrackListWrapperProps> = ({ playlistId }) => {
-	const playlist = useQuery(getPlaylistOptions(playlistId))
+	const playlist = useQuery(
+		spotifyApi.getPlaylist.queryOptions({id: playlistId})
+	)
 
 	return (
 		<>

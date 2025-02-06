@@ -7,6 +7,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { Library } from "@/widget/Library";
 import { DashboardHeader } from "@/widget/DashboardHeader";
 import { userOptions } from "@/entities/user/model/userOptions";
+import { spotifyApi } from "@/shared/api/spotify-client";
 
 export const metadata = {
   title: "Spotify",
@@ -16,7 +17,9 @@ export default async function DashboardLayout({ children }: { children: any }) {
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(userOptions())
+  await queryClient.prefetchQuery(
+    spotifyApi.getCurrentUsersProfile.queryOptions()
+  )
 
   return (
     <main className="
@@ -28,7 +31,7 @@ export default async function DashboardLayout({ children }: { children: any }) {
       <div className="basis-full overflow-y-hidden px-4 py-2 flex gap-6 items-start">
         <Library />
 
-        <main className="h-full">
+        <main className="h-full basis-full">
           <HydrationBoundary state={dehydrate(queryClient)}>
             <DashboardHeader />
           </HydrationBoundary>

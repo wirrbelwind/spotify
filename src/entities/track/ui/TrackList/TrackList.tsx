@@ -6,9 +6,8 @@ import React, { FC, useMemo, useRef, useState } from "react";
 import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType, ListItem, ListItemWithPlaylistData, PlaylistColumnType } from "./types";
 import { Spinner } from "@heroui/spinner";
-import { getCheckLikedTracksOptions } from "../../api/check-like/getCheckLikedTracksOptions";
 import { startAudio } from "@/entities/player";
-import { useLike } from "../../api/like";
+import { spotifyApi } from "@/shared/api/spotify-client";
 
 interface TrackListPropsBase {
 	fromPlaylist?: boolean
@@ -52,16 +51,22 @@ export const TrackList: FC<TrackListProps> = ({
 
 	const isLikesColumn = Boolean(columnsToShow.find(item => item.key === 'liked'))
 
-	const likes = useQuery(getCheckLikedTracksOptions({
-		enabled: isLikesColumn && Boolean(items),
-		idList: items?.map(item => item.id)
+	// const likes = useQuery(getCheckLikedTracksOptions({
+	// 	enabled: isLikesColumn && Boolean(items),
+	// 	idList: items?.map(item => item.id)
+	// }))
+	const likes = useQuery(spotifyApi.checkUsersSavedTracks.queryOptions({
+		idList: items?.map(item => item.id),
+		override: () => ({
+			enabled: isLikesColumn && Boolean(items),
+		})
 	}))
 
 	const uriList = useMemo(() => {
 		return items?.map(item => item.uri)
 	}, [items])
 
-	const like = useLike()
+	// const like = useLike()
 
 	return (
         (<Table

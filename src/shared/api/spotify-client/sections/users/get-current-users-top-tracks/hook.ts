@@ -5,19 +5,22 @@ import {
  } from "@tanstack/react-query"
 import { fetchCurrentUserTopTracks } from "./http-request"
 
-export const queryOptions = (args: {
+export const queryOptions = ({
+    quantity,
+    override
+}: {
     override?: () => DefinedInitialDataOptions
     quantity: number
-}) => {
+} = {quantity: 5}) => {
     return queryOptionsLib({
         queryKey: ['current-user', 'top', 'tracks', 'get'],
-        queryFn: () => fetchCurrentUserTopTracks({quantity: args.quantity}),
-        ...args?.override
+        queryFn: () => fetchCurrentUserTopTracks({quantity: quantity}),
+        ...override
     })
 }
 
-export const useCurrentUserTopTracks = () => {
-    const DEFAULT_QUANTITY = 5
+// export const useCurrentUserTopTracks = () => {
+//     const DEFAULT_QUANTITY = 5
 
-    return useQuery(queryOptions({quantity: DEFAULT_QUANTITY}))
-}
+//     return useQuery(queryOptions({quantity: DEFAULT_QUANTITY}))
+// }

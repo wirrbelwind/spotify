@@ -5,7 +5,7 @@ import {
 import { fetchUsersSavedTracks } from "./http-request"
 
 export const queryOptions = (args: {
-    override?: () => DefinedInitialDataOptions
+    override?: () => Partial<DefinedInitialDataOptions>
     idList: string[]
 }) => {
     return queryOptionsLib({

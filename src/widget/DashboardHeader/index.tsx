@@ -15,9 +15,12 @@ import {
 } from "@heroui/dropdown";
 import Link from "next/link"
 import { useDivider } from "@heroui/divider"
+import { spotifyApi } from "@/shared/api/spotify-client"
 
 export const DashboardHeader = () => {
-	const user = useQuery(userOptions())
+	const user = useQuery(
+		 spotifyApi.getCurrentUsersProfile.queryOptions()
+	)
 
 	const image = useMemo(() => {
 		return getBestFitImage({
