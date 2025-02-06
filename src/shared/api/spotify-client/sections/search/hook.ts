@@ -28,6 +28,6 @@ export const queryOptions = ({
             limit,
             offset
         }),
-        ...override
+        ...override?.()
     })
 }
