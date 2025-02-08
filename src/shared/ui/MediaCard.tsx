@@ -26,7 +26,7 @@ export const MediaCard = ({
 }: MediaCardProps) => {
     return (
         <div
-        className="hover:bg-slate-400 h-56 p-2 group rounded-md relative"
+        className="hover:bg-slate-400 p-2 group rounded-md relative"
     >
         {
             url && (
@@ -67,7 +67,7 @@ export const MediaCard = ({
 
         {
             subtitle && (
-                <p className="mt-3 truncate">
+                <p className="mt-3 truncate text-small">
                     {
                         typeof subtitle === 'string' ? subtitle : subtitle()
                     }
