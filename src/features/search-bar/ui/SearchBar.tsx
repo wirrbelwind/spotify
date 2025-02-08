@@ -29,7 +29,6 @@ export const SearchBar = ({ }: SearchBarProps) => {
 
     return (
         <div className="w-96">
-            {searchType}
             <Input
                 startContent={
                     <Button
