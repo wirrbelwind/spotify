@@ -3,7 +3,6 @@
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { Spinner } from "@heroui/spinner"
 import { useQuery } from "@tanstack/react-query"
-import { TrackStrip } from "./TrackStrip"
 import { TrackList } from "@/entities/track"
 import { MediaCard } from "@/shared/ui/MediaCard"
 import { LinksTextList } from "@/shared/ui/LinksTextList"
