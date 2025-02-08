@@ -16,18 +16,8 @@ export const SearchBar = ({ }: SearchBarProps) => {
     const params = useSearchParams()
     const searchType = params.get('type')
 
-    // const onSearchChange = useCallback(
-    //     debounce(
-    //         (event: ChangeEvent<HTMLInputElement>) => {
-    //             const query = event.target.value
-    //             alert(JSON.stringify(searchType))
-    //             const url = `/dashboard/search?q=${query}&searchType=${searchType ?? 'all'}`
-    //             router.push(url)
-    //         }
-    //         , 1000)
-    //     , [searchType])
-
-    const onSearchChange = debounce(
+    const onSearchChange = useCallback(
+        debounce(
             (event: ChangeEvent<HTMLInputElement>) => {
                 const query = event.target.value
                 alert(JSON.stringify(searchType))
@@ -35,6 +25,7 @@ export const SearchBar = ({ }: SearchBarProps) => {
                 router.push(url)
             }
             , 1000)
+        , [searchType])
 
     return (
         <div className="w-96">
