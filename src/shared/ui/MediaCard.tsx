@@ -7,6 +7,7 @@ interface MediaCardProps {
     id: string
     url?: string
     imageUrl?: string
+    isRoundImage?: boolean
     title: () => JSX.Element
     subtitle?: () => JSX.Element
     playbackUri?: string
@@ -16,6 +17,7 @@ export const MediaCard = ({
     id,
     url,
     imageUrl,
+    isRoundImage,
     title,
     subtitle,
     playbackUri
@@ -37,7 +39,13 @@ export const MediaCard = ({
                 alt=""
                 width={160}
                 height={160}
-                className="object-cover w-40 h-40 z-10"
+                className={`
+                    object-cover 
+                    w-40 
+                    h-40 
+                    z-10
+                    ${isRoundImage && 'rounded-full'}
+                    `}
             />
 
             {
