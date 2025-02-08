@@ -10,10 +10,12 @@ import { SearchFilters } from "./SearchFilters"
 
 interface SearchResultsProps {
     query: string
+    searchType?: string
 }
 
 export const SearchResults = ({
     query,
+    searchType
 }: SearchResultsProps) => {
     const search = useQuery(
         spotifyApi.search.queryOptions({

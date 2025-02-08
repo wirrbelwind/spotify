@@ -8,11 +8,14 @@ interface SearchPageProps {
          * Query
          */
 		q: string
+		"type"?: string
 	}>
 }
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-    const query = (await searchParams).q
+	const params = await searchParams
+    const query = params.q
+	const searchType = params.type
 
 	const queryClient = new QueryClient()
 
@@ -21,7 +24,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 	// )
 	return (
 		// <main className="pt-6 h-full overflow-y-scroll">
-            <SearchResults query={query} />
+            <SearchResults 
+				query={query}
+				searchType={searchType}
+			/>
 		// </main>
 	)
 }

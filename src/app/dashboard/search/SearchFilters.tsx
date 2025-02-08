@@ -20,7 +20,7 @@ export const SearchFilters = () => {
         [searchParams]
       )
     
-    const [selectedType, setSelectedType] = useState(searchParams.get('searchType'))
+    const [selectedType, setSelectedType] = useState(searchParams.get('type'))
 
     useEffect(() => {
         // const newParams = createQueryString('searchType',selectedType)
@@ -52,7 +52,7 @@ export const SearchFilters = () => {
 									}
 									else {
 										setSelectedType(typeName)
-                                        const newParams = createQueryString('searchType',typeName)
+                                        const newParams = createQueryString('type',typeName)
         router.push(`/dashboard/search?${newParams}`)
 									}
 								}}
