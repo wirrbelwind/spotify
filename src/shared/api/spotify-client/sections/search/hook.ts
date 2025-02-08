@@ -6,7 +6,6 @@ import {
 import { fetchSearch, SearchType } from "./http-request"
 
 export const queryOptions = ({
-    override,
     query,
     types,
     market,

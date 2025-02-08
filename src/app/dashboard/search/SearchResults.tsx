@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { TrackList } from "@/entities/track"
 import { MediaCard } from "@/shared/ui/MediaCard"
 import { LinksTextList } from "@/shared/ui/LinksTextList"
+import { SearchFilters } from "./SearchFilters"
 
 interface SearchResultsProps {
     query: string
@@ -19,7 +20,7 @@ export const SearchResults = ({
             query,
             types: [
                 'album',
-                // 'track',
+                'track',
                 'artist',
                 'audiobook',
                 'episode',
@@ -61,6 +62,7 @@ export const SearchResults = ({
                     </div>
                 )
             }
+
             {
                 search.isSuccess && search.data.albums && (
                     <div>
@@ -68,8 +70,8 @@ export const SearchResults = ({
                         <div className="grid grid-cols-6 gap-2">
                             {search.data.albums.items.map(album => (
                                 <MediaCard
-                                key={album.id}
-                                id={album.id}
+                                    key={album.id}
+                                    id={album.id}
                                     title={album.name}
                                     imageUrl={album.images[0].url}
                                     playbackUri={album.uri}
@@ -94,19 +96,3 @@ export const SearchResults = ({
         </div>
     )
 }
-// id: string
-// 	uri: string
-// 	name: string
-// 	artists: Array<{
-// 		name: string,
-// 		url: string | null
-// 	}>
-// 	album: {
-// 		name: string
-// 		images: Array<{
-// 			url: string;
-// 			height: number | null;
-// 			width: number | null;
-// 		}>
-// 	}
-// 	durationMs: number

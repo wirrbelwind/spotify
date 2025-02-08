@@ -5,7 +5,7 @@ import { Divider } from "@heroui/divider"
 import { Input } from "@heroui/input"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { ChangeEvent, ChangeEventHandler, useCallback } from "react"
 
 interface SearchBarProps {
@@ -13,12 +13,16 @@ interface SearchBarProps {
 
 export const SearchBar = ({}: SearchBarProps) => {
     const router = useRouter()
+    const params = useSearchParams()
+    const searchType = params.get('searchType')
 
     const onSearchChange = useCallback(
 		debounce(
 			(event: ChangeEvent<HTMLInputElement>) => {
 				const query = event.target.value
-                router.push(`/dashboard/search?q=${query}`)
+
+                const url = `/dashboard/search?q=${query}&searchType=${searchType ?? 'all'}`
+                router.push(url)
 			}
 			, 1000)
 		, [])

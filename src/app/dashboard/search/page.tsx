@@ -20,8 +20,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 	// 	spotifyApi.getPlaylist.queryOptions({id: playlistId})
 	// )
 	return (
-		<main className="pt-6 h-full overflow-y-scroll">
+		// <main className="pt-6 h-full overflow-y-scroll">
             <SearchResults query={query} />
-		</main>
+		// </main>
 	)
 }
