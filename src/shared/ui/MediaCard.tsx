@@ -1,15 +1,17 @@
 import { PlayButton } from "@/widget/Library/ui/PlayButton"
 import Image from "next/image"
 import Link from "next/link"
-import React, { FC } from "react"
+import React from "react"
+
+type MediaCardSlot = string | (() => JSX.Element)
 
 interface MediaCardProps {
     id: string
     url?: string
     imageUrl?: string
     isRoundImage?: boolean
-    title: () => JSX.Element
-    subtitle?: () => JSX.Element
+    title: MediaCardSlot
+    subtitle?: MediaCardSlot
     playbackUri?: string
 }
 
@@ -22,7 +24,8 @@ export const MediaCard = ({
     subtitle,
     playbackUri
 }: MediaCardProps) => {
-    <div
+    return (
+        <div
         className="hover:bg-slate-400 h-56 p-2 group rounded-md relative"
     >
         {
@@ -57,15 +60,20 @@ export const MediaCard = ({
         </div>
 
         <p className="mt-3 truncate">
-            {title()}
+            {
+                typeof title === 'string' ? title : title()
+            }
         </p>
 
         {
             subtitle && (
                 <p className="mt-3 truncate">
-                    {subtitle()}
+                    {
+                        typeof subtitle === 'string' ? subtitle : subtitle()
+                    }
                 </p>
             )
         }
     </div>
+    )
 }
