@@ -1,4 +1,4 @@
-import { z, ZodType } from "zod"
+import { z, ZodArray, ZodType } from "zod"
 
 export const pageSchema = z.object({
 	href: z.string().url(),
@@ -11,6 +11,7 @@ export const pageSchema = z.object({
 
 export const pageWith = <T extends ZodType>(item: T) => {
 	return pageSchema.extend({
-		items: item.nullable().array().transform(items => items.filter(item => item))
+		// items: item.array()
+		items: item.nullable().array().transform(items => items.filter(item => Boolean(item))) as ZodArray<T, "many">
 	})
 }

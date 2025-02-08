@@ -38,7 +38,7 @@ export const fetchSearch = async ({
     const json = response.data
 
     console.log('-----------------')
-    console.log(json)
+    console.log(json.playlists.items[17])
     console.log('-----------------')
 
     return getParser().parse(json)

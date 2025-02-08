@@ -5,7 +5,7 @@ type EntityType = 'artist' | 'album' | 'user' | 'track' | 'audio_features' | 'pl
 
 export const createEntity = <T extends ZodRawShape, E extends EntityType>(entity: E, data: T) => {
 	return z.object({
-		id: z.string().regex(SPOTIFY_ID),
+		id: z.string(),
 		type: z.literal(entity)
 	})
 		.extend(data)

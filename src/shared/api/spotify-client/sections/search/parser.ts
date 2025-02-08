@@ -45,7 +45,8 @@ export const getParser = () => {
     // playlists
     const playlist = simplifiedPlaylistSchema.merge(z.object({
         owner: anotherUserSchema.omit({
-            images: true
+            images: true,
+            followers: true
         }),
         tracks: z.object({
             href: z.string().url(),
