@@ -15,15 +15,13 @@ export const TracksResults = ({ query }: ResultsProps) => {
     )
 
     return (
-        <div>
+        <div className="mt-4">
             {
                 search.isSuccess && search.data.tracks && (
                     <div>
-                        <p>Tracks</p>
                         <TrackList
                             columns={["play", "avatar", "name", "duration"]}
                             fromPlaylist={false}
-                            hideHeader
                             items={search.data.tracks?.items.map(track => ({
                                 id: track.id,
                                 uri: track.uri,
