@@ -57,9 +57,9 @@ export const TrackList: FC<TrackListProps> = ({
 	// }))
 	const likes = useQuery(spotifyApi.checkUsersSavedTracks.queryOptions({
 		idList: items?.map(item => item.id),
-		override: () => ({
+		override: {
 			enabled: isLikesColumn && Boolean(items),
-		})
+		}
 	}))
 
 	const uriList = useMemo(() => {
