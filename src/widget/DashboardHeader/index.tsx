@@ -16,7 +16,7 @@ import {
 import { useDivider } from "@heroui/divider"
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { AccountDropdown } from "@/features/account-dropdown"
-import { SearchBar } from "@/features/search-bar"
+import { SearchBar } from "@/features/search/input"
 import { Link } from "@heroui/link"
 
 export const DashboardHeader = () => {
