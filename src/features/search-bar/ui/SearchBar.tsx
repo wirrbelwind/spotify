@@ -73,6 +73,6 @@ export const SearchBar = ({ }: SearchBarProps) => {
                 defaultValue={params.get('q') ?? ''}
             // onSubmit={onSearchSubmit}
             />
-        </form>
+        </div>
     )
 }

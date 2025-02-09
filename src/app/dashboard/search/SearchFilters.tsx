@@ -7,6 +7,7 @@ import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import { Tooltip } from "@heroui/tooltip";
+import { FilterItem } from "./FilterItem"
 
 export const SearchFilters = () => {
     const searchParams = useSearchParams()
@@ -38,18 +39,13 @@ export const SearchFilters = () => {
                     'episode',
                     'playlist',
                     'show'
-                ].map(typeName => typeName === 'audiobook' ? (
-                    <Chip
-                        key={typeName}
-                        className={`
-								${selectedType === typeName && 'bg-green-600'}
-								cursor-pointer
-                                flex 
-                                gap-2
-                                items-center
-							`}
-                        isDisabled={!isAudiobooksAllowed}
-                        onClick={() => {
+                ].map(typeName => (
+                    <FilterItem  
+                        filterType={typeName}
+                        isDisabled={typeName === 'audiobook' && !isAudiobooksAllowed}
+                        tooltip={typeName === 'audiobook' && !isAudiobooksAllowed ? "Disabled in your country" : undefined}
+                        selectedType={selectedType}
+                        onSelect={() => {
                             if (selectedType === typeName) {
                                 return
                             }
@@ -59,38 +55,20 @@ export const SearchFilters = () => {
                                 router.push(`/dashboard/search?${newParams}`)
                             }
                         }}
-                    >
-                        <Image
-                            alt=""
-                            width={16}
-                            height={16}
-                            className="w-4 h-4"
-                            src="/icons/lock.svg"
-                        />
-                        <span>{typeName}</span>
-                    </Chip>
-                ) : (
-                    <Chip
-                        key={typeName}
-                        className={`
-								${selectedType === typeName && 'bg-green-600'}
-								cursor-pointer
-							`}
-                        onClick={() => {
-                            if (selectedType === typeName) {
-                                return
-                            }
-                            else {
-                                setSelectedType(typeName)
-                                const newParams = createQueryString('type', typeName)
-                                router.push(`/dashboard/search?${newParams}`)
-                            }
-                        }}
-                    >
-                        {typeName}
-                    </Chip>
+                    />
                 ))
             }
         </div>
     )
 }
+
+// onClick={() => {
+    // if (selectedType === filterType) {
+    //     return
+    // }
+    // else {
+    //     setSelectedType(typeName)
+    //     const newParams = createQueryString('type', typeName)
+    //     router.push(`/dashboard/search?${newParams}`)
+    // }
+// }}
