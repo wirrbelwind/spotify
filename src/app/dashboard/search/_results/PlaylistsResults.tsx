@@ -23,7 +23,7 @@ export const PlaylistsResults:FC<ResultsProps> = ({query}) => {
                     <MediaCard
                         id={playlist.id}
                         title={playlist.name}
-                        subtitle={playlist.owner.display_name}
+                        subtitle={playlist.owner.display_name ?? undefined}
                         imageUrl={getBestFitImage({
                             images: playlist.images,
                             preferredSize: {width: 150, height: 150}
