@@ -59,6 +59,7 @@ export const SearchFilters = () => {
                     'show'
                 ].map(typeName => (
                     <FilterItem  
+                        key={typeName}
                         filterType={typeName}
                         isDisabled={typeName === 'audiobook' && !isAudiobooksAllowed}
                         tooltip={
