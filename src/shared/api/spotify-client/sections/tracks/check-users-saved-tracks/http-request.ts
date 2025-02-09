@@ -18,7 +18,6 @@ export const fetchUsersSavedTracks = async (args: FetchUsersSavedTracksArgs) => 
     })
 
     const json = response.data
-
     const likes = getParser().parse(json)
     return likes
 }

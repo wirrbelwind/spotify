@@ -1,11 +1,12 @@
 import { 
     queryOptions as queryOptionsLib,
-    DefinedInitialDataOptions
+    DefinedInitialDataOptions,
+    UseQueryOptions
  } from "@tanstack/react-query"
 import { fetchUsersSavedTracks } from "./http-request"
 
 export const queryOptions = (args: {
-    override?: () => Partial<DefinedInitialDataOptions>
+    override?: Partial<UseQueryOptions>
     idList: string[]
 }) => {
     return queryOptionsLib({

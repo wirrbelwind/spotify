@@ -1,7 +1,8 @@
 import {
     queryOptions as queryOptionsLib,
     DefinedInitialDataOptions,
-    QueryOptions
+    QueryOptions,
+    UseQueryOptions
  } from "@tanstack/react-query"
 import { fetchSearch, SearchType } from "./http-request"
 
@@ -10,15 +11,17 @@ export const queryOptions = ({
     types,
     market,
     limit,
-    offset
+    offset,
+    override
 }: {
     query: string
     types: SearchType[]
     market?: string
     limit?: number
     offset?: number
+    override?: Partial<UseQueryOptions>
 }) => {
-    return queryOptionsLib({
+    const options = queryOptionsLib({
         enabled: Boolean(query),
         queryKey: ['search', query, types],
         queryFn: () => fetchSearch({
@@ -26,7 +29,11 @@ export const queryOptions = ({
             types,
             market,
             limit,
-            offset
+            offset,
         }),
     })
+    return {
+        ...options,
+        ...override
+    } as typeof options
 }
