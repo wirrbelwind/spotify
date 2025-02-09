@@ -1,13 +1,10 @@
 'use client'
 
 import { useAudioBooksAccess } from "@/entities/user"
-import { spotifyApi } from "@/shared/api/spotify-client"
-import { Chip } from "@heroui/chip"
-import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useCallback, useEffect, useState } from "react"
-import { Tooltip } from "@heroui/tooltip";
+import { useCallback, useState } from "react"
 import { FilterItem } from "./FilterItem"
+import { AUDIOBOOKS_DISABLED_TEXT } from "../config"
 
 export const SearchFilters = () => {
     const searchParams = useSearchParams()
@@ -43,7 +40,13 @@ export const SearchFilters = () => {
                     <FilterItem  
                         filterType={typeName}
                         isDisabled={typeName === 'audiobook' && !isAudiobooksAllowed}
-                        tooltip={typeName === 'audiobook' && !isAudiobooksAllowed ? "Disabled in your country" : undefined}
+                        tooltip={
+                            (typeName === 'audiobook' && !isAudiobooksAllowed)
+                            ? 
+                            AUDIOBOOKS_DISABLED_TEXT 
+                            : 
+                            undefined
+                        }
                         selectedType={selectedType}
                         onSelect={() => {
                             if (selectedType === typeName) {

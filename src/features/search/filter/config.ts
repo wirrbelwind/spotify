@@ -1,0 +1,1 @@
+export const AUDIOBOOKS_DISABLED_TEXT = `Not available in your area. Spotify only gives access to users in the US, UK, Canada, Ireland, New Zealand and Australia`

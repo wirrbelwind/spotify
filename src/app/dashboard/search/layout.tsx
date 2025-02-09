@@ -1,6 +1,6 @@
+import { SearchFilters } from '@/features/search/filter';
 import '../../../global-styles.css'
 import { AllProviders } from "@/shared/providers/AllProviders";
-import { SearchFilters } from './SearchFilters';
 
 export default async function SearchLayout({ children }: { children: any }) {
     return (
