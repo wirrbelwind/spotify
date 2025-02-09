@@ -766,7 +766,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/tooltip@npm:2.2.8":
+"@heroui/tooltip@npm:2.2.8, @heroui/tooltip@npm:^2.2.8":
   version: 2.2.8
   resolution: "@heroui/tooltip@npm:2.2.8"
   dependencies:
@@ -5385,6 +5385,7 @@ __metadata:
     "@heroui/system": "npm:2.4.7"
     "@heroui/table": "npm:2.2.9"
     "@heroui/theme": "npm:2.4.6"
+    "@heroui/tooltip": "npm:^2.2.8"
     "@heroui/use-theme": "npm:^2.1.2"
     "@tanstack/react-query": "npm:^5.62.15"
     "@types/node": "npm:20.14.8"
