@@ -4,6 +4,8 @@ import Link from "next/link";
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import { LibraryHeader } from "./LibraryHeader";
 import { PlayButton } from "./PlayButton";
+import { MediaCard } from "@/shared/ui/MediaCard";
+import { getBestFitImage } from "@/shared/lib/getBestFitImage";
 
 interface LibrarySidebarProps extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
 
@@ -21,28 +23,17 @@ export const Library: FC<LibrarySidebarProps> = async (props) => {
 
 			<div className="grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-4">
 				{playlists?.items.map(playlist => (
-					<div
-						key={playlist.id}
-						className="hover:bg-slate-400 h-56 p-2 group rounded-md relative"
-					>
-						<Link
-							href={`/dashboard/playlist/${playlist.id}`}
-							className="w-full h-full absolute top-0 bottom-0 left-0 right-0 z-20"
-						></Link>
-						<div className="relative overflow-hidden">
-							<Image
-								src={playlist.images[0].url}
-								alt=""
-								width={160}
-								height={160}
-								className="object-cover w-40 h-40 z-10"
-							/>
-
-							<PlayButton uri={playlist.uri} />
-						</div>
-
-						<p className="mt-3 truncate">{playlist.name}</p>
-					</div>
+					<MediaCard
+						id={playlist.id}
+						title={playlist.name}
+						imageUrl={getBestFitImage({
+							images: playlist.images,
+							preferredSize: {width: 150, height: 150}
+						})?.url ?? ''}
+						playbackUri={playlist.uri}
+						url={`/dashboard/playlist/${playlist.id}`}
+						subtitle={playlist.owner.display_name ?? undefined}
+					/>
 				))}
 			</div>
 		</aside>
