@@ -60,7 +60,7 @@ const player = usePlayerState()
 
 			<div className="">
 				<p className="truncate">
-					{name ?? 'No track name'}
+					{player.data?.track_window.current_track.name ?? 'No track name'}
 				</p>
 
 				<p>
