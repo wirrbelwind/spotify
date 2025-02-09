@@ -6,13 +6,14 @@ import { Input } from "@heroui/input"
 import Image from "next/image"
 import Link from "next/link"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
-import { ChangeEvent, ChangeEventHandler, useCallback, useMemo } from "react"
+import { ChangeEvent, ChangeEventHandler, FormEventHandler, useCallback, useMemo } from "react"
+import { redirectToSearch } from "../model/redirectToSearch"
 
 interface SearchBarProps {
 }
 
 export const SearchBar = ({ }: SearchBarProps) => {
-    const router = useRouter()
+    // const router = useRouter()
     const params = useSearchParams()
     const searchType = params.get('type')
 
@@ -20,16 +21,20 @@ export const SearchBar = ({ }: SearchBarProps) => {
         debounce(
             (event: ChangeEvent<HTMLInputElement>) => {
                 const query = event.target.value
-                alert(JSON.stringify(searchType))
-                const url = `/dashboard/search?q=${query}&type=${searchType ?? 'all'}`
-                router.push(url)
+
+                if(query) {
+                    redirectToSearch(query, searchType)
+                }
             }
             , 1000)
         , [searchType])
 
     return (
-        <div className="w-96">
+        <div 
+            className="w-96"
+        >
             <Input
+                name="query"
                 startContent={
                     <Button
                         variant="light"
@@ -66,7 +71,8 @@ export const SearchBar = ({ }: SearchBarProps) => {
 
                 onChange={onSearchChange}
                 defaultValue={params.get('q') ?? ''}
+            // onSubmit={onSearchSubmit}
             />
-        </div>
+        </form>
     )
 }
