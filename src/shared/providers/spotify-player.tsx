@@ -50,9 +50,22 @@ export const SpotifyPlayerProvider: React.FC<SpotifyPlayerProviderProps> = ({ ch
 		};
 
 		return () => {
+			alert(123)
 			controller.current?.disconnect()
 		}
 	}, [accessToken])
+
+	useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            controller.current?.disconnect()
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
 
 	if(!accessToken) {
 		return children
