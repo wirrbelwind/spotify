@@ -1,70 +1,23 @@
 'use client'
-
 import { spotifyApi } from "@/shared/api/spotify-client"
-import { Spinner } from "@heroui/spinner"
+import { ResultsProps } from "./ResultsProps"
 import { useQuery } from "@tanstack/react-query"
-import { TrackList } from "@/entities/track"
 import { MediaCard } from "@/shared/ui/MediaCard"
 import { LinksTextList } from "@/shared/ui/LinksTextList"
-import { SearchFilters } from "./SearchFilters"
+import { Spinner } from "@heroui/spinner"
 
-interface SearchResultsProps {
-    query: string
-    searchType?: string
-}
-
-export const SearchResults = ({
-    query,
-    searchType
-}: SearchResultsProps) => {
+export const AlbumsResults = ({ query }: ResultsProps) => {
     const search = useQuery(
         spotifyApi.search.queryOptions({
             query,
             types: [
                 'album',
-                'track',
-                'artist',
-                'audiobook',
-                'episode',
-                'playlist',
-                'show'
             ]
         })
     )
 
     return (
         <div>
-            {search.isLoading && (
-                <Spinner />
-            )}
-            {search.isError && JSON.stringify(search.error)}
-            {
-                search.isSuccess && search.data.tracks && (
-                    <div>
-                        <p>Tracks</p>
-                        <TrackList
-                            columns={["play", "avatar", "name", "duration"]}
-                            fromPlaylist={false}
-                            hideHeader
-                            items={search.data.tracks?.items.map(track => ({
-                                id: track.id,
-                                uri: track.uri,
-                                durationMs: track.duration_ms,
-                                name: track.name,
-                                album: {
-                                    images: track.album.images,
-                                    name: track.album.name,
-                                },
-                                artists: track.artists.map(artist => ({
-                                    name: artist.name,
-                                    url: artist.href
-                                }))
-                            }))}
-                        />
-                    </div>
-                )
-            }
-
             {
                 search.isSuccess && search.data.albums && (
                     <div>
@@ -94,6 +47,12 @@ export const SearchResults = ({
                         </div>
                     </div>
                 )
+            }
+            {
+                search.isError && JSON.stringify(search.error)
+            }
+            {
+                search.isLoading && <Spinner/>
             }
         </div>
     )
