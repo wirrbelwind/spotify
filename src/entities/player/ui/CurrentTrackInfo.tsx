@@ -1,31 +1,59 @@
+'use client'
 import NextImage from "next/image"
 import { Image } from "@heroui/image"
-import React from "react"
+import React, { useMemo } from "react"
 import { Nullable } from "@/shared/lib/Nullable"
-import { LinksTextList } from "@/shared/ui/LinksTextList"
+import { LinksTextList, LinksTextListProps } from "@/shared/ui/LinksTextList"
+import { usePlayerState } from "../model/usePlayerState"
+import { FALLBACK_TRACK_IMAGE_URL, TRACK_IMAGE_HEIGHT, TRACK_IMAGE_WIDTH } from "../config"
+import { getBestFitImage } from "@/shared/lib/getBestFitImage"
+import { getIdFromUri } from "@/shared/lib/getIdFromUri"
 
-interface PlayerCurrentTrackProps {
-	name: string
-	image: {
-		url: string
-		width: number
-		height: number
-	}
-	artists?: Nullable<{
-		label: string
-		url: string
-	}[]>
-}
+export const CurrentTrackInfo = () => {
+const player = usePlayerState()
 
-export const CurrentTrackInfo: React.FC<PlayerCurrentTrackProps> = ({ artists, name, image }) => {
+	const trackImageUrl = useMemo(() => {
+		const imageList = player.data?.track_window.current_track.album.images
+			.filter(image => image.height && image.width)
+
+		if (!imageList || !imageList.length) {
+			return FALLBACK_TRACK_IMAGE_URL
+		}
+
+		const image = getBestFitImage({
+			images: imageList,
+			preferredSize: {
+				width: TRACK_IMAGE_WIDTH,
+				height: TRACK_IMAGE_HEIGHT
+			}
+		})
+
+		if (!image) {
+			return FALLBACK_TRACK_IMAGE_URL
+		}
+
+		return image.url
+	}, [player.data?.track_window.current_track])
+
+	const artistLinks: LinksTextListProps['links'] | null = useMemo(() => {
+		if (!player.data?.track_window.current_track.artists.length) {
+			return null
+		}
+
+		return player.data?.track_window.current_track.artists.map(artist => ({
+			label: artist.name,
+			url: `/artist/${getIdFromUri(artist.uri)}`
+		}))
+
+	}, [player.data?.track_window.current_track])
 
 	return (
 		<div className="flex gap-2">
 			<Image
 				as={NextImage}
-				src={image.url}
-				width={image.width}
-				height={image.height}
+				src={trackImageUrl}
+				width={TRACK_IMAGE_WIDTH}
+				height={TRACK_IMAGE_HEIGHT}
 				className="w-14 h-14"
 				alt=""
 			/>
@@ -36,8 +64,8 @@ export const CurrentTrackInfo: React.FC<PlayerCurrentTrackProps> = ({ artists, n
 				</p>
 
 				<p>
-					{artists ?
-						(<LinksTextList links={artists} />)
+					{artistLinks ?
+						(<LinksTextList links={artistLinks} />)
 						:
 						'No artists'
 					}
