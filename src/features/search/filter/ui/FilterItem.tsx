@@ -1,14 +1,14 @@
-import { Chip } from "@heroui/chip";
+import { Chip, ChipProps } from "@heroui/chip";
 import { Tooltip } from "@heroui/tooltip";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, HTMLAttributes } from "react";
 
-interface FilterItemProps {
+interface FilterItemProps extends ChipProps {
     isDisabled?: boolean
     tooltip?: string
     filterType: string
     selectedType: string | null
-    onSelect: () => void
+    // onSelect: () => void
 }
 
 export const FilterItem: FC<FilterItemProps> = ({
@@ -16,7 +16,7 @@ export const FilterItem: FC<FilterItemProps> = ({
     isDisabled,
     selectedType,
     tooltip,
-    onSelect
+    ...chipProps
 }) => {
 
     const item = (
@@ -25,8 +25,9 @@ export const FilterItem: FC<FilterItemProps> = ({
                 cursor-pointer
                 ${selectedType === filterType && 'bg-green-600'}
             `}
-            onClick={onSelect}
+            // onClick={onSelect}
             isDisabled={isDisabled}
+            {...chipProps}
         >
             {
                 isDisabled ? (<div className="flex gap-2 items-center">

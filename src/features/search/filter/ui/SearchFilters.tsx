@@ -2,7 +2,7 @@
 
 import { useAudioBooksAccess } from "@/entities/user"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useCallback, useState } from "react"
+import { MouseEventHandler, useCallback, useState } from "react"
 import { FilterItem } from "./FilterItem"
 import { AUDIOBOOKS_DISABLED_TEXT } from "../config"
 
@@ -24,8 +24,29 @@ export const SearchFilters = () => {
 
     const isAudiobooksAllowed = useAudioBooksAccess()
 
+    const handleSelectType: MouseEventHandler<HTMLDivElement> = useCallback((event) => {
+        const target = event.target as HTMLElement
+        const typeName = target.closest('[data-filter-type]')?.getAttribute('data-filter-type')
+
+        if(!typeName) {
+            throw new Error(`Data attribute [data-filter-type] wasn't provided to element. It should be provided for correct work of delegated event.`)
+        }
+
+        if (selectedType === typeName) {
+            return
+        }
+        else {
+            setSelectedType(typeName)
+            const newParams = createQueryString('type', typeName)
+            router.push(`/dashboard/search?${newParams}`)
+        }
+    }, [selectedType])
+
     return (
-        <div className="flex gap-4 sticky top-0 z-10 bg-black">
+        <div 
+        className="flex gap-4 sticky top-0 z-10 bg-black"
+        onClick={handleSelectType}
+        >
             {
                 [
                     'all',
@@ -48,30 +69,10 @@ export const SearchFilters = () => {
                             undefined
                         }
                         selectedType={selectedType}
-                        onSelect={() => {
-                            if (selectedType === typeName) {
-                                return
-                            }
-                            else {
-                                setSelectedType(typeName)
-                                const newParams = createQueryString('type', typeName)
-                                router.push(`/dashboard/search?${newParams}`)
-                            }
-                        }}
+                        data-filter-type={typeName}
                     />
                 ))
             }
         </div>
     )
 }
-
-// onClick={() => {
-    // if (selectedType === filterType) {
-    //     return
-    // }
-    // else {
-    //     setSelectedType(typeName)
-    //     const newParams = createQueryString('type', typeName)
-    //     router.push(`/dashboard/search?${newParams}`)
-    // }
-// }}
