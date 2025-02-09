@@ -4,11 +4,11 @@ import { spotifyAxios } from "../../axios-instance"
 import { DATA_API_URL } from "../../constants"
 import { getParser } from "./parser"
 
-export type SearchType = 'album' | 'artist' | 'audiobook' | 'episode' | 'playlist' | 'show' | 'track'
+export type SearchTypeApi = 'album' | 'artist' | 'audiobook' | 'episode' | 'playlist' | 'show' | 'track'
 
 interface FetchUsersSavedTracksArgs {
     query: string
-    types: SearchType[]
+    types: SearchTypeApi[]
     market?: string
     limit?: number
     offset?: number
@@ -36,10 +36,5 @@ export const fetchSearch = async ({
     })
 
     const json = response.data
-
-    console.log('-----------------')
-    console.log(json)
-    console.log('-----------------')
-
     return getParser().parse(json)
 }

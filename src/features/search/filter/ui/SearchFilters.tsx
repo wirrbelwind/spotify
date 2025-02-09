@@ -4,7 +4,7 @@ import { useAudioBooksAccess } from "@/entities/user"
 import { useRouter, useSearchParams } from "next/navigation"
 import { MouseEventHandler, useCallback, useState } from "react"
 import { FilterItem } from "./FilterItem"
-import { AUDIOBOOKS_DISABLED_TEXT } from "../config"
+import { allFilterTypes, AUDIOBOOKS_DISABLED_TEXT } from "../config"
 
 export const SearchFilters = () => {
     const searchParams = useSearchParams()
@@ -48,29 +48,21 @@ export const SearchFilters = () => {
         onClick={handleSelectType}
         >
             {
-                [
-                    'all',
-                    'album',
-                    'track',
-                    'artist',
-                    'audiobook',
-                    'episode',
-                    'playlist',
-                    'show'
-                ].map(typeName => (
+                allFilterTypes.map(filter => (
                     <FilterItem  
-                        key={typeName}
-                        filterType={typeName}
-                        isDisabled={typeName === 'audiobook' && !isAudiobooksAllowed}
+                        key={filter.value}
+                        value={filter.value}
+                        label={filter.label}
+                        isDisabled={filter.value === 'audiobook' && !isAudiobooksAllowed}
                         tooltip={
-                            (typeName === 'audiobook' && !isAudiobooksAllowed)
+                            (filter.value === 'audiobook' && !isAudiobooksAllowed)
                             ? 
                             AUDIOBOOKS_DISABLED_TEXT 
                             : 
                             undefined
                         }
                         selectedType={selectedType}
-                        data-filter-type={typeName}
+                        data-filter-type={filter.value}
                     />
                 ))
             }

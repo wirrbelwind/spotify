@@ -1,4 +1,4 @@
-import { SearchType as SearchTypeApi } from "@/shared/api/spotify-client/sections/search";
+
 import { AlbumsResults } from "./AlbumsResults";
 import { TracksResults } from "./TracksResults";
 import { FC } from "react";
@@ -8,7 +8,6 @@ import { AudiobooksResults } from "./AudiobooksResults";
 import { EpisodesResults } from "./EpisodesResults";
 import { PlaylistsResults } from "./PlaylistsResults";
 
-export type SearchType = SearchTypeApi | 'all'
 
 export const ResultsMap: Record<SearchType, FC<ResultsProps>> = {
     track: TracksResults,

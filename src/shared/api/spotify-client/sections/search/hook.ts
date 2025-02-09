@@ -4,7 +4,7 @@ import {
     QueryOptions,
     UseQueryOptions
  } from "@tanstack/react-query"
-import { fetchSearch, SearchType } from "./http-request"
+import { fetchSearch, SearchTypeApi } from "./http-request"
 
 export const queryOptions = ({
     query,
@@ -15,7 +15,7 @@ export const queryOptions = ({
     override
 }: {
     query: string
-    types: SearchType[]
+    types: SearchTypeApi[]
     market?: string
     limit?: number
     offset?: number

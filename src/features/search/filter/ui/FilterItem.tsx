@@ -6,16 +6,17 @@ import { FC, HTMLAttributes } from "react";
 interface FilterItemProps extends ChipProps {
     isDisabled?: boolean
     tooltip?: string
-    filterType: string
     selectedType: string | null
-    // onSelect: () => void
+    value: string
+    label: string
 }
 
 export const FilterItem: FC<FilterItemProps> = ({
-    filterType,
     isDisabled,
     selectedType,
     tooltip,
+    value,
+    label,
     ...chipProps
 }) => {
 
@@ -23,7 +24,7 @@ export const FilterItem: FC<FilterItemProps> = ({
         <Chip
             className={`
                 cursor-pointer
-                ${selectedType === filterType && 'bg-green-600'}
+                ${selectedType === value && 'bg-green-600'}
             `}
             // onClick={onSelect}
             isDisabled={isDisabled}
@@ -38,9 +39,9 @@ export const FilterItem: FC<FilterItemProps> = ({
                         className="w-4 h-4"
                         src="/icons/lock.svg"
                     />
-                    <span>{filterType}</span>
+                    <span>{label}</span>
                 </div>) : (
-                    filterType
+                    label
                 )
             }
         </Chip>
