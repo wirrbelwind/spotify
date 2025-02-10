@@ -1,6 +1,6 @@
 'use client'
 import { spotifyApi } from "@/shared/api/spotify-client"
-import { ResultsProps } from "./ResultsProps"
+import { ResultsProps } from "../model/ResultsProps"
 import { useQuery } from "@tanstack/react-query"
 import { MediaCard } from "@/shared/ui/MediaCard"
 import { LinksTextList } from "@/shared/ui/LinksTextList"

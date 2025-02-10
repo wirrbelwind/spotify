@@ -1,9 +1,10 @@
+import { SearchTypeApi } from "@/shared/api/spotify-client/sections/search"
+
 export const AUDIOBOOKS_DISABLED_TEXT = `Not available in your area. Spotify only gives access to users in the US, UK, Canada, Ireland, New Zealand and Australia`
 
-export type SearchType = "album" | "artist" | "audiobook" | "episode" | "playlist" | "show" | "track" | 'all'
 
 export const allFilterTypes: Array<{
-    value: SearchType
+    value: SearchTypeApi | 'all'
     label: string
 }> = [
     {

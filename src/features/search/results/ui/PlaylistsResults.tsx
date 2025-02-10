@@ -1,6 +1,6 @@
 'use client'
 import { FC } from "react";
-import { ResultsProps } from "./ResultsProps";
+import { ResultsProps } from "../model/ResultsProps";
 import { useQuery } from "@tanstack/react-query";
 import { spotifyApi } from "@/shared/api/spotify-client";
 import { MediaCard } from "@/shared/ui/MediaCard";

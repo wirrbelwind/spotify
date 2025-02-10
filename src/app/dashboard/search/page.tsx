@@ -1,6 +1,7 @@
+import { resultsMap } from "@/features/search/results"
 import { spotifyApi } from "@/shared/api/spotify-client"
+import { SearchType } from "@/shared/api/spotify-client/sections/search"
 import { QueryClient } from "@tanstack/react-query"
-import { ResultsMap, SearchType } from "./_results"
 
 interface SearchPageProps {
 	searchParams : Promise<{
@@ -19,13 +20,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
 	const queryClient = new QueryClient()
 
-	// await queryClient.prefetchQuery(
-	// 	spotifyApi.getPlaylist.queryOptions({id: playlistId})
-	// )
-	const ResultsComponent = ResultsMap[searchType]
+	const ResultsComponent = resultsMap[searchType]
 	return (
-		// <main className="pt-6 h-full overflow-y-scroll">
 		<ResultsComponent query={query} />
-		// </main>
 	)
 }

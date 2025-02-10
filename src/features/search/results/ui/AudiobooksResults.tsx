@@ -1,6 +1,6 @@
 'use client'
 import { FC, useMemo } from "react";
-import { ResultsProps } from "./ResultsProps";
+import { ResultsProps } from "../model/ResultsProps";
 import { spotifyApi } from "@/shared/api/spotify-client";
 import { useQuery } from "@tanstack/react-query";
 import { checkAccessToAudiobooks, useAudioBooksAccess } from "@/entities/user";
