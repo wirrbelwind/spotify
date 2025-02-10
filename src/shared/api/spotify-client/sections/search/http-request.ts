@@ -3,12 +3,12 @@ import { AxiosError } from "axios"
 import { spotifyAxios } from "../../axios-instance"
 import { DATA_API_URL } from "../../constants"
 import { getParser } from "./parser"
+import { SearchType } from "./types"
+import { allSearchTypesList } from "./constants"
 
-export type SearchTypeApi = 'album' | 'artist' | 'audiobook' | 'episode' | 'playlist' | 'show' | 'track'
-
-interface FetchUsersSavedTracksArgs {
+interface FetchSearchArgs {
     query: string
-    types: SearchTypeApi[]
+    types: SearchType
     market?: string
     limit?: number
     offset?: number
@@ -20,13 +20,13 @@ export const fetchSearch = async ({
     market,
     limit,
     offset
-}: FetchUsersSavedTracksArgs) => {
+}: FetchSearchArgs) => {
 
     const url = '/search'
     const response = await spotifyAxios.get(url, {
         params: {
             q: query,
-            type: types.join(','),
+            type: types === 'all' ? allSearchTypesList.join(',') : types.join(','),
             market,
             limit,
             offset,

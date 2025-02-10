@@ -10,4 +10,5 @@ export { getCurrentUsersTopTracks } from "./users/get-current-users-top-tracks";
 export * as player from './player'
 export * as auth from './auth'
 export { search } from "./search";
+export { getAlbum } from "./albums/get-album";
 export { getNewReleases } from "./albums/get-new-releases";
