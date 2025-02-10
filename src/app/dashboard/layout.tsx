@@ -1,5 +1,5 @@
 import React from "react";
-import '../../global-styles.css'
+import 'shared/global-styles.css'
 import { AllProviders } from "@/shared/providers/AllProviders";
 import { Player } from "@/entities/player/ui/Player";
 import Link from "next/link";
