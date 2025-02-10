@@ -15,7 +15,6 @@ import {
 	useDisclosure
 } from "@heroui/modal";
 import { Input, Textarea } from "@heroui/input"
-import { userOptions } from "@/entities/user/model/userOptions"
 import { spotifyApi } from "@/shared/api/spotify-client"
 
 interface HeaderProps {

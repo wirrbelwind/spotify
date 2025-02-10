@@ -12,7 +12,5 @@ export const getParser = () => {
         tracks: pageWith(simplifiedTrackSchema)
     }))
 
-    return z.object({
-        albums: pageWith(album)
-    })
+    return album
 }

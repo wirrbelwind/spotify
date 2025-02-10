@@ -7,11 +7,11 @@ export interface LinksTextListProps {
 		label: string
 		url: string
 	}>
-
+	divider?: string
 	linkProps?: LinkProps
 }
 
-export const LinksTextList: React.FC<LinksTextListProps> = ({ links, linkProps }) => {
+export const LinksTextList: React.FC<LinksTextListProps> = ({ links, linkProps,divider }) => {
 	return (
 		<>
 			{links.map((link, index) => (<>
@@ -25,7 +25,7 @@ export const LinksTextList: React.FC<LinksTextListProps> = ({ links, linkProps }
 				</Link>
 
 				{/* Render comma symbol if link is not last */}
-				{index !== links.length - 1 && ', '}
+				{index !== links.length - 1 && (divider ?? ', ')}
 			</>))}
 		</>
 	)
