@@ -1,4 +1,4 @@
-import 'shared/global-styles.css'
+import './global-styles.css'
 import { AllProviders } from "@/shared/providers/AllProviders";
 
 export const metadata = {
