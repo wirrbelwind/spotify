@@ -3,11 +3,14 @@ import { Button } from "@heroui/button"
 
 export default async function AuthPage() {
 	return (
-		<form action={signIn}>
+		<form
+			className="flex items-center justify-center h-dvh"
+			action={signIn}
+		>
 			<Button
 				type="submit"
 			>
-				login
+				Sign In
 			</Button>
 		</form>
 	)
