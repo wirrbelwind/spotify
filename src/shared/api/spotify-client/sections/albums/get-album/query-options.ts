@@ -7,7 +7,7 @@ export const queryOptions = ({id,market,override}: {
     override?: Partial<UseQueryOptions>
 }) => {
     const options = queryOptionsLib({
-        queryKey: ['album', ],
+        queryKey: ['album', id],
         queryFn: () => fetchAlbum({
             id, market
         })
