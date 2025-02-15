@@ -8,6 +8,10 @@ import { usePlayerState } from "../model/usePlayerState"
 import { FALLBACK_TRACK_IMAGE_URL, TRACK_IMAGE_HEIGHT, TRACK_IMAGE_WIDTH } from "../config"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { getIdFromUri } from "@/shared/lib/getIdFromUri"
+import { Link as HeroLink } from "@heroui/link"
+import NextLink from "next/link"
+
+// import Link from "next/link"
 
 export const CurrentTrackInfo = () => {
 const player = usePlayerState()
@@ -60,7 +64,9 @@ const player = usePlayerState()
 
 			<div className="">
 				<p className="truncate">
-					{player.data?.track_window.current_track.name ?? 'No track name'}
+					<HeroLink as={NextLink} href={`/dashboard/album/${getIdFromUri(player.data.track_window.current_track.album.uri)}`}>
+					{player.data.track_window.current_track.name}
+					</HeroLink>
 				</p>
 
 				<p>
