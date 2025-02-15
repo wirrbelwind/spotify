@@ -51,6 +51,12 @@ const player = usePlayerState()
 
 	}, [player.data?.track_window.current_track])
 
+	
+
+	if (!player.data?.track_window.current_track) {
+		throw new Error('NO current track')
+	}
+
 	return (
 		<div className="flex gap-2">
 			<Image
