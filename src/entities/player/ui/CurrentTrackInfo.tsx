@@ -14,7 +14,7 @@ import NextLink from "next/link"
 // import Link from "next/link"
 
 export const CurrentTrackInfo = () => {
-const player = usePlayerState()
+	const player = usePlayerState()
 
 	const trackImageUrl = useMemo(() => {
 		const imageList = player.data?.track_window.current_track.album.images
