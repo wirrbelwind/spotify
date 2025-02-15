@@ -7,7 +7,7 @@ export const metadata = {
 
 export default async function DashboardLayout({ children }: { children: any }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <link rel="shortcut icon" href="/icons/favicon.svg" />
         <meta
