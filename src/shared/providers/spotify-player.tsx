@@ -50,7 +50,6 @@ export const SpotifyPlayerProvider: React.FC<SpotifyPlayerProviderProps> = ({ ch
 		};
 
 		return () => {
-			alert(123)
 			controller.current?.disconnect()
 		}
 	}, [accessToken])
