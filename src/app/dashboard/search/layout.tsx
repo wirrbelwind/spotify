@@ -1,5 +1,5 @@
 import { SearchFilters } from '@/features/search/filter';
-import 'shared/global-styles.css'
+import '../../global-styles.css'
 
 export default async function SearchLayout({ children }: { children: any }) {
     return (
