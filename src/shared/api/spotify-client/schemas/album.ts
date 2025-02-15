@@ -33,7 +33,7 @@ export const albumSchema = createEntity('album', {
 	uri: z.string().regex(SPOTIFY_URI),
 	// artists: simplifiedArtistSchema.array(),
 	// tracks: pageWith(simplifiedTrackSchema),
-	copyrights: copyrightSchema,
+	copyrights: copyrightSchema.array(),
 	external_ids: externalIdsSchema,
 	genres: z.string().array().max(0),
 	label: z.string().nonempty(),
