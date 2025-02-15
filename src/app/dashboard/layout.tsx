@@ -23,7 +23,6 @@ export default async function DashboardLayout({ children }: { children: any }) {
   return (
     <main className="
     h-dvh 
-    overflow-hidden
     flex
     flex-col
     ">
