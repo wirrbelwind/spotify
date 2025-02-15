@@ -9,7 +9,7 @@ import { authService } from '@/entities/user';
 
 export const AllProviders: React.FC<PropsWithChildren> = async ({ children }) => {
 	const auth = await authService()
-
+	
 	return (
 		<HeroUIProvider>
 			<TanstackQueryProvider>
