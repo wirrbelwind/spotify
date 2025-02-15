@@ -26,7 +26,7 @@ export const AlbumHero = ({ albumId }: AlbumHeroProps) => {
 
         return getBestFitImage({
             images: album.data.images,
-            preferredSize: { width: 150, height: 150 }
+            preferredSize: { width: 300, height: 300 }
         })?.url ?? "/icons/album-placeholder.svg"
     }, [album.data?.images])
 
@@ -43,10 +43,10 @@ export const AlbumHero = ({ albumId }: AlbumHeroProps) => {
                         src={avatarUrl}
                         width={160}
                         height={160}
-                        className="object-cover w-full h-full"
+                        className="object-cover w-40 h-40"
                     />
                     <div>
-                        <p>{album.data.album_type}</p>
+                        <p>{album.data.album_type.toUpperCase()}</p>
                         <p>{album.data.name}</p>
                         <p>
                             <LinksTextList
@@ -56,8 +56,11 @@ export const AlbumHero = ({ albumId }: AlbumHeroProps) => {
                                 }))}
                                 divider=" • "
                             />
-                            <span>{new Date(album.data.release_date).getFullYear()}</span>
-                            <span>{album.data.total_tracks}</span>
+                            <p>
+                                <span>{new Date(album.data.release_date).getFullYear()}</span>
+                                <span className="mx-2">•</span>
+                                <span>{album.data.total_tracks} tracks</span>
+                            </p>
                         </p>
                     </div>
                 </div>
