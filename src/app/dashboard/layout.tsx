@@ -14,12 +14,6 @@ export const metadata = {
 
 export default async function DashboardLayout({ children }: { children: any }) {
 
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery(
-    spotifyApi.getCurrentUsersProfile.queryOptions()
-  )
-
   return (
     <main className="
     h-dvh 
@@ -30,9 +24,7 @@ export default async function DashboardLayout({ children }: { children: any }) {
         <Library />
 
         <main className="h-full basis-full">
-          <HydrationBoundary state={dehydrate(queryClient)}>
             <DashboardHeader />
-          </HydrationBoundary>
           {children}
         </main>
       </div>
