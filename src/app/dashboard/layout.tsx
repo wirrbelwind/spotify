@@ -30,9 +30,7 @@ export default async function DashboardLayout({ children }: { children: any }) {
       </div>
 
       <div className="basis-20 overflow-hidden">
-        <HydrationBoundary state={dehydrate(queryClient)}>
           <Player />
-        </HydrationBoundary>
       </div>
 
     </main>
