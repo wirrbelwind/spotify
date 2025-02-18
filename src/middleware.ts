@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { MiddlewareConfig, NextRequest } from 'next/server'
 import { authService, checkAuth } from './entities/user'
+import { spotifyApi } from './shared/api/spotify-client'
 
 // export async function middleware(request: NextRequest) {
 //   function isPrivateRoute() {
@@ -42,6 +43,10 @@ export async function middleware(request: NextRequest) {
   const isUserAuthorized = await checkAuth()
 
   if(isUserAuthorized) {
+	const user = await spotifyApi.getCurrentUsersProfile.fetch()
+	if(request.url.includes(`/user/${user.id}`)) {
+		return NextResponse.redirect('http://localhost:3000/dashboard/me')
+	}
     NextResponse.next()
   }
   else {
@@ -61,3 +66,4 @@ export const config: MiddlewareConfig = {
 		'/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|sitemap.xml|robots.txt|auth|icons).*)',
 	],
 }
+
