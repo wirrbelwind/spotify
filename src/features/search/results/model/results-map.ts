@@ -7,6 +7,7 @@ import { ArtistsResults } from "../ui/ArtistsResults";
 import { AudiobooksResults } from "../ui/AudiobooksResults";
 import { EpisodesResults } from "../ui/EpisodesResults";
 import { PlaylistsResults } from "../ui/PlaylistsResults";
+import { SearchType } from "@/shared/api/spotify-client/sections/search";
 
 
 export const resultsMap: Record<SearchType, FC<ResultsProps>> = {
