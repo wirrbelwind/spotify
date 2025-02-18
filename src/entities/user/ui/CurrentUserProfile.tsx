@@ -5,7 +5,7 @@ import { spotifyApi } from "@/shared/api/spotify-client"
 import { Button } from "@heroui/button"
 import { useQueryClient } from "@tanstack/react-query"
 
-export const Profile = () => {
+export const CurrentUserProfile = () => {
 	const user = spotifyApi.getCurrentUsersProfile.useQuery()
 
 	const client = useQueryClient()

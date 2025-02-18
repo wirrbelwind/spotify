@@ -1,9 +1,9 @@
 import React from "react";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { Profile } from "@/entities/user/ui/Profile";
 import { TopTracks } from "@/widget/TopTracks";
 import { spotifyApi } from "@/shared/api/spotify-client";
 import { makeQueryClient } from "@/shared/lib/makeQueryClient";
+import { CurrentUserProfile } from "@/entities/user";
 
 export default async function HomePage() {
 	const queryClientTopTracks = makeQueryClient()
@@ -27,7 +27,7 @@ export default async function HomePage() {
 
 		<div>
 			<HydrationBoundary state={dehydrate(queryClientUser)}>
-				<Profile />
+				<CurrentUserProfile />
 			</HydrationBoundary>
 
 			<HydrationBoundary state={dehydrate(queryClientTopTracks)}>
