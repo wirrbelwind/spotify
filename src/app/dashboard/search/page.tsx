@@ -18,8 +18,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     const query = params.q
 	const searchType = params.type
 
-	const queryClient = new QueryClient()
-
 	const ResultsComponent = resultsMap[searchType]
 	return (
 		<ResultsComponent query={query} />
