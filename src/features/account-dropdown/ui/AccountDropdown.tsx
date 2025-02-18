@@ -64,12 +64,14 @@ export const AccountDropdown = () => {
 					<DropdownItem
 						key="settings"
 						href="/dashboard/settings"
+						as={Link}
 					>
 						Settings
 					</DropdownItem>
 					<DropdownItem
 						key="log-out"
 						href="/api/auth/logout"
+						as={Link}
 					>
 						Log out
 					</DropdownItem>
