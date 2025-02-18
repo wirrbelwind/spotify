@@ -65,7 +65,7 @@ export const SearchBar = ({ }: SearchBarProps) => {
                                 className="w-8 h-8"
                                 src="/icons/albums.svg"
                             />
-                        </Li>
+                        </Link>
                     </>
                 }
 
