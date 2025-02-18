@@ -9,25 +9,26 @@ import {
 	Dropdown,
 	DropdownTrigger,
 	DropdownMenu,
-	DropdownSection,
 	DropdownItem,
 } from "@heroui/dropdown";
 import Link from "next/link"
-import { useDivider } from "@heroui/divider"
 import { spotifyApi } from "@/shared/api/spotify-client"
-
 
 export const AccountDropdown = () => {
     const user = useQuery(
         spotifyApi.getCurrentUsersProfile.queryOptions()
    )
 
-   const image = useMemo(() => {
+   const imageSrc = useMemo(() => {
+	if(!user.isSuccess) {
+		return 'nothing'
+	}
+
        return getBestFitImage({
            images: user.data?.images,
            preferredSize: { width: 50, height: 50 }
        })?.url ?? ''
-   }, [user.data])
+   }, [user.isSuccess, user.data])
 
     return (
         <Dropdown>
@@ -37,7 +38,7 @@ export const AccountDropdown = () => {
 						className="p-1 rounded-full"
 					>
 						<Image
-							src={image}
+							src={imageSrc}
 							alt="current user avatar"
 							width={50}
 							height={50}
@@ -58,6 +59,7 @@ export const AccountDropdown = () => {
 					<DropdownItem
 						key="profile"
 						href="/dashboard/me"
+						as={Link}
 					>
 						Profile
 					</DropdownItem>
