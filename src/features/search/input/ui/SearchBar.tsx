@@ -4,10 +4,10 @@ import { Button } from "@heroui/button"
 import { Divider } from "@heroui/divider"
 import { Input } from "@heroui/input"
 import Image from "next/image"
-import Link from "next/link"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { ChangeEvent, ChangeEventHandler, FormEventHandler, useCallback, useMemo } from "react"
 import { redirectToSearch } from "../model/redirectToSearch"
+import { Link } from "@/shared/ui/Link"
 
 interface SearchBarProps {
 }
@@ -65,7 +65,7 @@ export const SearchBar = ({ }: SearchBarProps) => {
                                 className="w-8 h-8"
                                 src="/icons/albums.svg"
                             />
-                        </Link>
+                        </Li>
                     </>
                 }
 

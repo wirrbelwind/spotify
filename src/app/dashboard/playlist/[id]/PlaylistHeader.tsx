@@ -16,7 +16,7 @@ import {
 } from "@heroui/modal";
 import { Input, Textarea } from "@heroui/input"
 import { spotifyApi } from "@/shared/api/spotify-client"
-import Link from "next/link"
+import { Link } from "@/shared/ui/Link"
 
 interface HeaderProps {
 	playlistId: string

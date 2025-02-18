@@ -14,8 +14,8 @@ import { useDivider } from "@heroui/divider"
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { AccountDropdown } from "@/features/account-dropdown"
 import { SearchBar } from "@/features/search/input"
-import { Link } from "@heroui/link"
 import { makeQueryClient } from "@/shared/lib/makeQueryClient"
+import { Link } from "@/shared/ui/Link"
 
 export const DashboardHeader = async () => {
 	const queryClientUser = makeQueryClient()

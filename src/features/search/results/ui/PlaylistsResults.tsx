@@ -5,8 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { spotifyApi } from "@/shared/api/spotify-client";
 import { MediaCard } from "@/shared/ui/MediaCard";
 import { getBestFitImage } from "@/shared/lib/getBestFitImage";
-import { Link as UiLink } from "@heroui/link";
-import NextLink from "next/link";
+import { Link } from "@/shared/ui/Link";
 
 export const PlaylistsResults:FC<ResultsProps> = ({query}) => {
     const search = useQuery(
@@ -27,12 +26,11 @@ export const PlaylistsResults:FC<ResultsProps> = ({query}) => {
                         title={playlist.name}
                         subtitle={
                             playlist.owner ?
-                            () => (<UiLink 
-                                as={NextLink} 
+                            () => (<Link 
                                 href={`/dashboard/user/${playlist.owner.id}`}
                                 >
                                     {playlist.owner.display_name}
-                                    </UiLink>)
+                                    </Link>)
                             :
                             undefined
                         }

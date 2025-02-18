@@ -2,6 +2,7 @@ import { PlayButton } from "@/widget/Library/ui/PlayButton"
 import { Link as UiLink } from "@heroui/link"
 import Image from "next/image"
 import NextLink from "next/link"
+import { Link } from "./Link"
 
 type MediaCardSlot = string | (() => JSX.Element)
 
@@ -25,8 +26,7 @@ export const MediaCard = ({
     playbackUri
 }: MediaCardProps) => {
     return (
-        <UiLink
-        as={NextLink}
+        <Link
         href={url ?? '#'}
         
         className="hover:bg-slate-400 p-2 group rounded-md relative block"
@@ -69,6 +69,6 @@ export const MediaCard = ({
                 </p>
             )
         }
-    </UiLink>
+    </Link>
     )
 }

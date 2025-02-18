@@ -1,8 +1,8 @@
 'use client'
 
+import { Link } from "@/shared/ui/Link"
 import { Switch } from "@heroui/switch"
 import { useTheme } from "@heroui/use-theme"
-import Link from "next/link"
 import { useState } from "react"
 
 export const ToggleTheme = () => {
