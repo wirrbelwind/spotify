@@ -3,11 +3,18 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { Profile } from "@/entities/user/ui/Profile";
 import { TopTracks } from "@/widget/TopTracks";
 import { spotifyApi } from "@/shared/api/spotify-client";
+import { makeQueryClient } from "@/shared/lib/makeQueryClient";
 
 export default async function HomePage() {
-	const queryClient = new QueryClient()
+	const queryClientTopTracks = makeQueryClient()
 
-	queryClient.prefetchQuery(
+	queryClientTopTracks.prefetchQuery(
+		spotifyApi.getCurrentUsersTopTracks.queryOptions()
+	)
+
+	const queryClientUser = makeQueryClient()
+
+	queryClientUser.prefetchQuery(
 		spotifyApi.getCurrentUsersTopTracks.queryOptions()
 	)
 
@@ -17,12 +24,16 @@ export default async function HomePage() {
 	// const topArtistList = (await spotifyApi.get<PageObject<ArtistObject>>('https://api.spotify.com/v1/me/top/artists?limit=5')).data
 
 	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<div>
+
+		<div>
+			<HydrationBoundary state={dehydrate(queryClientUser)}>
 				<Profile />
+			</HydrationBoundary>
+
+			<HydrationBoundary state={dehydrate(queryClientTopTracks)}>
 				<TopTracks />
-			</div>
-		</HydrationBoundary>
+			</HydrationBoundary>
+		</div>
 	);
 }
 
