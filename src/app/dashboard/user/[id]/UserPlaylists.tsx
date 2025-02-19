@@ -19,7 +19,7 @@ export const UserPlaylists = async ({ userId }: UserPlaylistsProps) => {
 
     return (
         <div>
-            <p className="text-4xl">Playlists of {}</p>
+            <p className="text-4xl mb-4">Playlists of {user.display_name}</p>
             <div className="flex gap-2 flex-wrap">
 
                 {
