@@ -4,18 +4,18 @@ import { spotifyAxios } from "../../../axios-instance"
 import { DATA_API_URL } from "../../../constants"
 import { getParser } from "./parser"
 
-interface GetCurrentUserTopTracks {
+interface FetchCurrentUserTopArtists {
     timeRange?: 'medium_term' | 'short_term' | 'long_term'
     limit?: number
     offset?: number
 }
 
-export const fetchCurrentUserTopTracks = async ({
+export const fetchCurrentUserTopArtists = async ({
+    timeRange,
     limit,
-    offset,
-    timeRange
-}: GetCurrentUserTopTracks) => {
-    const url = '/me/top/tracks'
+    offset
+}: FetchCurrentUserTopArtists) => {
+    const url = '/me/top/artists'
 
     const response = await spotifyAxios.get(url, {
         baseURL: DATA_API_URL,

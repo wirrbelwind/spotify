@@ -1,4 +1,3 @@
-
 export { getTokensByCode } from "./auth/get-tokens-by-code";
 export { refreshTokens } from "./auth/refresh-tokens";
 export { getCurrentUsersPlaylists } from "./playlists/get-current-users-playlists";
@@ -14,3 +13,4 @@ export * as auth from './auth'
 export { search } from "./search";
 export { getAlbum } from "./albums/get-album";
 export { getNewReleases } from "./albums/get-new-releases";
+export { getCurrentUsersTopArtists } from "./users/get-current-users-top-artists";
