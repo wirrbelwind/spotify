@@ -23,7 +23,7 @@ export default async function DashboardLayout({ children }: { children: any }) {
       <div className="basis-full overflow-y-hidden px-4 py-2 flex gap-6 items-start">
         <Library />
 
-        <main className="h-full basis-full">
+        <main className="h-full basis-full overflow-y-scroll">
             <DashboardHeader />
           {children}
         </main>
