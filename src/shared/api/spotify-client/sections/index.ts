@@ -1,3 +1,4 @@
+
 export { getTokensByCode } from "./auth/get-tokens-by-code";
 export { refreshTokens } from "./auth/refresh-tokens";
 export { getCurrentUsersPlaylists } from "./playlists/get-current-users-playlists";
@@ -7,7 +8,6 @@ export { getRecommendations } from "./tracks/get-recommendations";
 export { saveTracksForCurrentUser } from "./tracks/save-tracks-for-current-user";
 export { getCurrentUsersProfile } from "./users/get-current-users-profile";
 export { getUsersProfile } from "./users/get-users-profile";
-export { getCurrentUsersTopItems } from "./users/get-current-users-top-items";
 export { getCurrentUsersTopTracks } from "./users/get-current-users-top-tracks";
 export * as player from './player'
 export * as auth from './auth'
