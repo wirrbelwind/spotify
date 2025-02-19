@@ -5,6 +5,7 @@ import { spotifyApi } from "@/shared/api/spotify-client";
 import { makeQueryClient } from "@/shared/lib/makeQueryClient";
 import { CurrentUserBanner } from "@/entities/user";
 import { TopArtists } from "@/widget/TopArtists";
+import { Divider } from "@heroui/divider";
 
 export default async function HomePage() {
 	const queryClientTopTracks = makeQueryClient()
@@ -35,6 +36,7 @@ export default async function HomePage() {
 				<TopTracks />
 			</HydrationBoundary>
 
+			<Divider className="my-5 opacity-0" />
 			<TopArtists />
 		</div>
 	);
