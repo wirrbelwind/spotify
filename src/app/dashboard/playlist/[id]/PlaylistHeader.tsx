@@ -17,6 +17,7 @@ import {
 import { Input, Textarea } from "@heroui/input"
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { Link } from "@/shared/ui/Link"
+import { routeUrl } from "@/shared/lib/route-url"
 
 interface HeaderProps {
 	playlistId: string
@@ -89,7 +90,7 @@ export const PlaylistHeader: FC<HeaderProps> = ({ playlistId }) => {
 					<p className="text-gray-400">{playlist.data?.description}</p>
 					{playlist.data?.collaborative && <p>Collaborative</p>}
 					<p className="font-bold">
-						<Link href={`/dashboard/user/${playlist.data.owner.id}`}>{playlist.data.owner.display_name}</Link>
+						<Link href={routeUrl.user(playlist.data.owner.id)}>{playlist.data.owner.display_name}</Link>
 						<span> • </span>
 						<span>{playlist.data.tracks.total} songs</span>
 					</p>

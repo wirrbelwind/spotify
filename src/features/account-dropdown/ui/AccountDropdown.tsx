@@ -13,6 +13,7 @@ import {
 } from "@heroui/dropdown";
 import Link from "next/link"
 import { spotifyApi } from "@/shared/api/spotify-client"
+import { routeUrl } from "@/shared/lib/route-url"
 
 export const AccountDropdown = () => {
     const user = useQuery(
@@ -58,14 +59,14 @@ export const AccountDropdown = () => {
 					</DropdownItem>
 					<DropdownItem
 						key="profile"
-						href="/dashboard/me"
+						href={routeUrl.profile()}
 						as={Link}
 					>
 						Profile
 					</DropdownItem>
 					<DropdownItem
 						key="settings"
-						href="/dashboard/settings"
+						href={routeUrl.settings()}
 						as={Link}
 					>
 						Settings

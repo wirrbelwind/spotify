@@ -1,8 +1,6 @@
-import { PlayButton } from "@/widget/Library/ui/PlayButton"
-import { Link as UiLink } from "@heroui/link"
 import Image from "next/image"
-import NextLink from "next/link"
 import { Link } from "./Link"
+import { StartPlaybackButton } from "./StartPlaybackButton"
 
 type MediaCardSlot = string | (() => JSX.Element)
 
@@ -48,7 +46,7 @@ export const MediaCard = ({
 
             {
                 playbackUri && (
-                    <PlayButton uri={playbackUri} />
+                    <StartPlaybackButton uri={playbackUri} />
                 )
             }
 

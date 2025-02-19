@@ -11,6 +11,7 @@ import { getIdFromUri } from "@/shared/lib/getIdFromUri"
 import { Link as HeroLink } from "@heroui/link"
 import NextLink from "next/link"
 import { Link } from "@/shared/ui/Link"
+import { routeUrl } from "@/shared/lib/route-url"
 
 // import Link from "next/link"
 
@@ -72,7 +73,11 @@ export const CurrentTrackInfo = () => {
 
 			<div className="">
 				<p className="truncate">
-					<Link href={`/dashboard/album/${getIdFromUri(player.data.track_window.current_track.album.uri)}`}>
+					<Link href={
+						routeUrl.album(
+							getIdFromUri(player.data.track_window.current_track.album.uri)
+						)
+					}>
 					{player.data.track_window.current_track.name}
 					</Link>
 				</p>

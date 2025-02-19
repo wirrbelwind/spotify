@@ -5,6 +5,7 @@ import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import { LibraryHeader } from "./LibraryHeader";
 import { MediaCard } from "@/shared/ui/MediaCard";
 import { getBestFitImage } from "@/shared/lib/getBestFitImage";
+import { routeUrl } from "@/shared/lib/route-url";
 
 interface LibrarySidebarProps extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
 
@@ -31,7 +32,7 @@ export const Library: FC<LibrarySidebarProps> = async (props) => {
 							preferredSize: {width: 150, height: 150}
 						})?.url ?? ''}
 						playbackUri={playlist.uri}
-						url={`/dashboard/playlist/${playlist.id}`}
+						url={routeUrl.playlist(playlist.id)}
 						subtitle={playlist.owner.display_name ?? undefined}
 					/>
 				))}

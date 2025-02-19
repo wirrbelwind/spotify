@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import type { MiddlewareConfig, NextRequest } from 'next/server'
 import { authService, checkAuth } from './entities/user'
 import { spotifyApi } from './shared/api/spotify-client'
+import { routeUrl } from './shared/lib/route-url'
 
 export async function middleware(request: NextRequest) {
   const isUserAuthorized = await checkAuth()
@@ -9,12 +10,16 @@ export async function middleware(request: NextRequest) {
   if(isUserAuthorized) {
 	const user = await spotifyApi.getCurrentUsersProfile.fetch()
 	if(request.url.includes(`/user/${user.id}`)) {
-		return NextResponse.redirect('http://localhost:3000/dashboard/me')
+		return NextResponse.redirect(
+			routeUrl.profile()
+		)
 	}
     NextResponse.next()
   }
   else {
-    return NextResponse.redirect('http://localhost:3000/auth')
+    return NextResponse.redirect(
+		routeUrl.auth()
+	)
   }
 }
 

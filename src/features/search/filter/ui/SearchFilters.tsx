@@ -5,22 +5,14 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { MouseEventHandler, useCallback, useState } from "react"
 import { FilterItem } from "./FilterItem"
 import { allFilterTypes, AUDIOBOOKS_DISABLED_TEXT } from "../config"
+import { routeUrl } from "@/shared/lib/route-url"
+import { SearchType } from "@/shared/api/spotify-client/sections/search"
 
 export const SearchFilters = () => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams.toString())
-            params.set(name, value)
-
-            return params.toString()
-        },
-        [searchParams]
-    )
-
-    const [selectedType, setSelectedType] = useState(searchParams.get('type'))
+    const [selectedType, setSelectedType] = useState<SearchType>(searchParams.get('type'))
 
     const isAudiobooksAllowed = useAudioBooksAccess()
 
@@ -37,8 +29,14 @@ export const SearchFilters = () => {
         }
         else {
             setSelectedType(typeName)
-            const newParams = createQueryString('type', typeName)
-            router.push(`/dashboard/search?${newParams}`)
+            const query = searchParams.get('q')
+            if(!query) {
+                throw new Error('Query is not specified')
+            }
+
+            router.push(
+                routeUrl.search(query, typeName)
+            )
         }
     }, [selectedType])
 

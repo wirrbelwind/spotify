@@ -6,6 +6,7 @@ import { spotifyApi } from "@/shared/api/spotify-client";
 import { MediaCard } from "@/shared/ui/MediaCard";
 import { getBestFitImage } from "@/shared/lib/getBestFitImage";
 import { Link } from "@/shared/ui/Link";
+import { routeUrl } from "@/shared/lib/route-url";
 
 export const PlaylistsResults:FC<ResultsProps> = ({query}) => {
     const search = useQuery(
@@ -27,7 +28,7 @@ export const PlaylistsResults:FC<ResultsProps> = ({query}) => {
                         subtitle={
                             playlist.owner ?
                             () => (<Link 
-                                href={`/dashboard/user/${playlist.owner.id}`}
+                                href={routeUrl.user(playlist.owner.id)}
                                 >
                                     {playlist.owner.display_name}
                                     </Link>)
@@ -39,7 +40,7 @@ export const PlaylistsResults:FC<ResultsProps> = ({query}) => {
                             preferredSize: {width: 150, height: 150}
                         })?.url ?? ''}
                         playbackUri={playlist.uri}
-                        url={`/dashboard/playlist/${playlist.id}`}
+                        url={routeUrl.playlist(playlist.id)}
                     />
                 ))
             }
