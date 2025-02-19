@@ -2,7 +2,7 @@ import {
     queryOptions as queryOptionsLib,
     UseQueryOptions
 } from "@tanstack/react-query"
-import { FetchUsersTopItems, fetchCurrentUsersTopItems } from "./http-request"
+import { FetchUsersTopItems, fetchUsersTopItems } from "./http-request"
 
 export const queryOptions = ({
     override,
@@ -15,7 +15,7 @@ export const queryOptions = ({
 }) => {
     return queryOptionsLib({
         queryKey: ['current-user', 'get'],
-        queryFn: () => fetchCurrentUsersTopItems({
+        queryFn: () => fetchUsersTopItems({
             limit,
             type,
             offset,

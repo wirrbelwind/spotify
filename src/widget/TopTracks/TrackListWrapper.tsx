@@ -6,11 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 
 export const TrackListWrapper = () => {
 	const trackList = useQuery(
-		spotifyApi.getCurrentUsersTopItems.queryOptions({
-			type: 'tracks',
-			limit: 5,
-			timeRange: 'long_term'
-		})
+		spotifyApi.getCurrentUsersTopTracks.queryOptions()
 	)
 
 	return (
