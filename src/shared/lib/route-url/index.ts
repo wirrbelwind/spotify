@@ -12,5 +12,7 @@ export const routeUrl = {
     const params = new URLSearchParams({ q: query, searchType });
     return `/dashboard/search?${params.toString()}`;
   },
-  auth: () => "/auth",
+  auth: () => {
+    return `${process.env.NEXT_PUBLIC_APP_URL}/auth`
+  },
 }
