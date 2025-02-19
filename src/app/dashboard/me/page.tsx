@@ -4,6 +4,7 @@ import { TopTracks } from "@/widget/TopTracks";
 import { spotifyApi } from "@/shared/api/spotify-client";
 import { makeQueryClient } from "@/shared/lib/makeQueryClient";
 import { CurrentUserBanner } from "@/entities/user";
+import { TopArtists } from "@/widget/TopArtists";
 
 export default async function HomePage() {
 	const queryClientTopTracks = makeQueryClient()
@@ -33,6 +34,8 @@ export default async function HomePage() {
 			<HydrationBoundary state={dehydrate(queryClientTopTracks)}>
 				<TopTracks />
 			</HydrationBoundary>
+
+			<TopArtists />
 		</div>
 	);
 }
