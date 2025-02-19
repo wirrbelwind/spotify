@@ -55,7 +55,8 @@ export const CurrentTrackInfo = () => {
 	
 
 	if (!player.data?.track_window.current_track) {
-		throw new Error('NO current track')
+		// throw new Error('NO current track')
+		return null
 	}
 
 	return (
