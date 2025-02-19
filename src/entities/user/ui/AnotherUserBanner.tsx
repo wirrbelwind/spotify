@@ -6,7 +6,7 @@ interface AnotherUserProfileProps {
     userId: string
 }
 
-export const AnotherUserProfile = async ({ userId }: AnotherUserProfileProps) => {
+export const AnotherUserBanner = async ({ userId }: AnotherUserProfileProps) => {
     const user = await spotifyApi.getUsersProfile.fetch({ userId })
 
     const avatarUrl = getBestFitImage({ 
@@ -15,10 +15,12 @@ export const AnotherUserProfile = async ({ userId }: AnotherUserProfileProps) =>
     })?.url ?? '/icons/user.svg'
 
     return (
-        <ProfileBannerBase
+       <div>
+         <ProfileBannerBase
             name={user.display_name ?? 'Placeholder name'}
             imageUrl={avatarUrl}
             followersAmount={user.followers.total}
         />
+       </div>
     )
 }

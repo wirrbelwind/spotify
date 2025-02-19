@@ -8,7 +8,7 @@ import { ProfileBannerBase } from "./ProfileBannerBase"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { useMemo } from "react"
 
-export const CurrentUserProfile = () => {
+export const CurrentUserBanner = () => {
 	const user = spotifyApi.getCurrentUsersProfile.useQuery()
 
 	const avatarUrl = useMemo(() => {

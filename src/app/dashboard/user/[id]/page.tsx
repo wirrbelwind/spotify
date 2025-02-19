@@ -1,4 +1,4 @@
-import { AnotherUserProfile } from "@/entities/user";
+import { AnotherUserBanner } from "@/entities/user";
 
 
 
@@ -13,7 +13,7 @@ export default async function UserPage({params}: UserPageProps) {
 
     return (
         <div>
-            <AnotherUserProfile userId={id}/>
+            <AnotherUserBanner userId={id}/>
         </div>
     )
 }
