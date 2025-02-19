@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import { LibraryHeader } from "./LibraryHeader";
-import { PlayButton } from "./PlayButton";
 import { MediaCard } from "@/shared/ui/MediaCard";
 import { getBestFitImage } from "@/shared/lib/getBestFitImage";
 

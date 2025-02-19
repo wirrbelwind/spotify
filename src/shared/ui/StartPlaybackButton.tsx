@@ -5,11 +5,11 @@ import { usePlayerController } from "@/shared/providers/spotify-player"
 import { Button } from "@heroui/button"
 import Image from "next/image"
 
-interface PlayButtonProps {
+interface StartPlaybackButtonProps {
 	uri: string
 }
 
-export const PlayButton: React.FC<PlayButtonProps> = ({ uri }) => {
+export const StartPlaybackButton: React.FC<StartPlaybackButtonProps> = ({ uri }) => {
 	const player = usePlayerState()
 	const controller = usePlayerController()
 
