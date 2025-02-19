@@ -5,7 +5,6 @@ import { DATA_API_URL } from "../../../constants"
 import { getArtistsParser, getTracksParser } from "./parser"
 
 export interface FetchUsersTopItems {
-    id: string
     "type": 'artists' | 'tracks'
     /**
      * @default 'medium_term'

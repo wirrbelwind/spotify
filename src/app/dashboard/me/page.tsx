@@ -9,13 +9,17 @@ export default async function HomePage() {
 	const queryClientTopTracks = makeQueryClient()
 
 	queryClientTopTracks.prefetchQuery(
-		spotifyApi.getCurrentUsersTopTracks.queryOptions()
+		spotifyApi.getCurrentUsersTopItems.queryOptions({
+			type: 'tracks',
+			limit: 5,
+			timeRange: 'long_term'
+		})
 	)
 
 	const queryClientUser = makeQueryClient()
 
 	queryClientUser.prefetchQuery(
-		spotifyApi.getCurrentUsersTopTracks.queryOptions()
+		spotifyApi.getCurrentUsersProfile.queryOptions()
 	)
 
 	// const topResponse = await spotifyApi.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
