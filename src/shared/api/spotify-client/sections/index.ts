@@ -15,3 +15,4 @@ export { getAlbum } from "./albums/get-album";
 export { getNewReleases } from "./albums/get-new-releases";
 export { getCurrentUsersTopArtists } from "./users/get-current-users-top-artists";
 export { getUsersPlaylists } from "./playlists/get-users-playlists";
+export { getPlaylistItems } from "./playlists/get-playlist-items";
