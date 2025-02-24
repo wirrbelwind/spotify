@@ -2,12 +2,13 @@
 import { usePlayerState } from "@/entities/player/model/usePlayerState";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, TableProps } from "@heroui/table";
 import { useQuery } from "@tanstack/react-query";
-import React, { FC, useMemo, useRef, useState } from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { allColumnsDefinitions, cellsMap, headersMap } from "./constants";
 import { ColumnType, ListItem, ListItemWithPlaylistData, PlaylistColumnType } from "./types";
 import { Spinner } from "@heroui/spinner";
 import { startAudio } from "@/entities/player";
 import { spotifyApi } from "@/shared/api/spotify-client";
+import { useOnVisible } from "@/shared/lib/useOnVisible";
 
 interface TrackListPropsBase {
 	fromPlaylist?: boolean
@@ -15,6 +16,7 @@ interface TrackListPropsBase {
 	hideHeader?: boolean
 	classNames?: TableProps['classNames']
 	initialLoading?: boolean
+	onScrollDown: () => void
 }
 interface TrackListPropsCommon extends TrackListPropsBase {
 	fromPlaylist: false
@@ -37,7 +39,9 @@ export const TrackList: FC<TrackListProps> = ({
 	classNames,
 	fromPlaylist,
 	items,
-	initialLoading
+	initialLoading,
+	onScrollDown
+
 }) => {
 	const player = usePlayerState()
 
@@ -67,13 +71,16 @@ export const TrackList: FC<TrackListProps> = ({
 	}, [items])
 
 	// const like = useLike()
+	const ref = useOnVisible(
+		onScrollDown,
+	)
 
-	return (
-        (<Table
+	return (<div className="relative">
+		<Table
 			hideHeader={hideHeader}
 			classNames={classNames}
 		>
-            <TableHeader columns={columnsToShow}>
+			<TableHeader columns={columnsToShow}>
 				{(column) => {
 					const HeaderComponent = headersMap[column.key]
 
@@ -84,67 +91,75 @@ export const TrackList: FC<TrackListProps> = ({
 					)
 				}}
 			</TableHeader>
-            <TableBody
+			<TableBody
 				isLoading={initialLoading}
 				loadingContent={<Spinner />}
 			>
 				{
-					items?.map((track, trackIndex) => (
-						(<TableRow
-							key={track.id}
-							className={`
-							hover:bg-gray-400
-							group/track
-							${player.data?.track_window.current_track.id === track.id && 'text-green-600'}
-							cursor-pointer
-							${selectedTracks.includes(track.id) && 'bg-gray-500'}
-							max-h-14
-							`}
-							onClick={(event) => {
-								if (event.shiftKey) {
-									if (selectedTracks.includes(track.id)) {
-										setSelectedTracks(prev => prev.filter(item => item !== track.id))
+					items?.map((track, trackIndex) => {
+						console.log(track.name)
+						return (
+							(<TableRow
+								key={track.id}
+								className={`
+								hover:bg-gray-400
+								group/track
+								${player.data?.track_window.current_track.id === track.id && 'text-green-600'}
+								cursor-pointer
+								${selectedTracks.includes(track.id) && 'bg-gray-500'}
+								max-h-14
+								`}
+								onClick={(event) => {
+									if (event.shiftKey) {
+										if (selectedTracks.includes(track.id)) {
+											setSelectedTracks(prev => prev.filter(item => item !== track.id))
+										}
+										else {
+											setSelectedTracks(prev => [...prev, track.id])
+										}
 									}
 									else {
-										setSelectedTracks(prev => [...prev, track.id])
+										setSelectedTracks([track.id])
 									}
+								}}
+								onDoubleClick={() => {
+									startAudio({
+										audioUris: uriList,
+										offset: track.uri
+									})
+								}}
+								data-context-menu-entity-type="track"
+								data-context-menu-entity-uri={track.uri}
+							>
+								{
+									columnsToShow.map(column => {
+										const CellComponent = cellsMap[column.key]
+	
+										return (
+											<TableCell key={`${track.id}:${column.key}`}>
+												{/* @ts-expect-error */}
+												<CellComponent
+													trackIndex={trackIndex}
+													track={track}
+													allTracks={items}
+													likes={likes.data}
+													withPlaylistData={fromPlaylist}
+												/>
+											</TableCell>
+										)
+									})
 								}
-								else {
-									setSelectedTracks([track.id])
-								}
-							}}
-							onDoubleClick={() => {
-								startAudio({
-									audioUris: uriList,
-									offset: track.uri
-								})
-							}}
-							data-context-menu-entity-type="track"
-							data-context-menu-entity-uri={track.uri}
-						>
-                            {
-								columnsToShow.map(column => {
-									const CellComponent = cellsMap[column.key]
-
-									return (
-										<TableCell key={`${track.id}:${column.key}`}>
-											{/* @ts-expect-error */}
-											<CellComponent
-												trackIndex={trackIndex}
-												track={track}
-												allTracks={items}
-												likes={likes.data}
-												withPlaylistData={fromPlaylist}
-											/>
-										</TableCell>
-									)
-								})
-							}
-                        </TableRow>)
-						// Conditional expression below provides type safety for <Table />
-					)) ?? []
+							</TableRow>) ?? []
+						)
+					})
 				}
 			</TableBody>
-        </Table>)
-    );
+		</Table>
+		<div
+			ref={ref}
+			className="absolute bottom-72"
+		>
+			SCROLLED
+		</div>
+	</div>);
 }
