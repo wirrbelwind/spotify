@@ -1,3 +1,4 @@
+import { Divider } from "@heroui/divider"
 import { ArtistActions } from "./ArtistActions"
 import { ArtistHero } from "./ArtistHero"
 import { ArtistTracks } from "./ArtistTracks"
@@ -15,7 +16,9 @@ export default async function ArtistPage(props: ArtistPageProps) {
     return (
         <div>
             <ArtistHero artistId={artistId}/>
+            <Divider className="my-4 opacity-0"/>
             <ArtistActions artistId={artistId}/>
+            <Divider className="my-4 opacity-0"/>
             <ArtistTracks artistId={artistId}/>
         </div>
     )
