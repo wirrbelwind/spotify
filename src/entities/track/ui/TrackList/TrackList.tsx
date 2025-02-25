@@ -16,7 +16,7 @@ interface TrackListPropsBase {
 	hideHeader?: boolean
 	classNames?: TableProps['classNames']
 	initialLoading?: boolean
-	onScrollDown: () => void
+	onScrollDown?: () => void
 }
 interface TrackListPropsCommon extends TrackListPropsBase {
 	fromPlaylist: false
@@ -134,7 +134,7 @@ export const TrackList: FC<TrackListProps> = ({
 								{
 									columnsToShow.map(column => {
 										const CellComponent = cellsMap[column.key]
-	
+
 										return (
 											<TableCell key={`${track.id}:${column.key}`}>
 												{/* @ts-expect-error */}
@@ -155,11 +155,16 @@ export const TrackList: FC<TrackListProps> = ({
 				}
 			</TableBody>
 		</Table>
-		<div
-			ref={ref}
-			className="absolute bottom-72"
-		>
-			SCROLLED
-		</div>
+		
+		{
+			onScrollDown && (
+				<div
+					ref={ref}
+					className="absolute bottom-72"
+				>
+					SCROLLED
+				</div>
+			)
+		}
 	</div>);
 }
