@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { Link } from "./Link"
-import { StartPlaybackButton } from "./StartPlaybackButton"
+import { StartPlaybackButton } from "@/features/playback/start-playback"
 
 type MediaCardSlot = string | (() => JSX.Element)
 
@@ -46,7 +46,7 @@ export const MediaCard = ({
 
             {
                 playbackUri && (
-                    <StartPlaybackButton uri={playbackUri} />
+                    <StartPlaybackButton uri={playbackUri} showOnHover/>
                 )
             }
 
