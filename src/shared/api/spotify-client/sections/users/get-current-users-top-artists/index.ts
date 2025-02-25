@@ -1,5 +1,5 @@
 import { fetchCurrentUserTopArtists } from "./http-request";
-import { queryOptions } from "./hook";
+import { queryOptions } from "./query";
 
 export const getCurrentUsersTopArtists = {
     fetch: fetchCurrentUserTopArtists,
