@@ -18,3 +18,4 @@ export { getUsersPlaylists } from "./playlists/get-users-playlists";
 export { getPlaylistItems } from "./playlists/get-playlist-items";
 export { getArtist } from "./artists/get-artist";
 export { getArtistTopTracks } from "./artists/get-artist-top-tracks";
+export { getArtistsRelatedToArtist } from "./artists/get-artists-related-to-artist";
