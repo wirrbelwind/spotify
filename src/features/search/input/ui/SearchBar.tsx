@@ -15,19 +15,19 @@ interface SearchBarProps {
 export const SearchBar = ({ }: SearchBarProps) => {
     // const router = useRouter()
     const params = useSearchParams()
-    const searchType = params.get('type')
 
     const onSearchChange = useCallback(
         debounce(
             (event: ChangeEvent<HTMLInputElement>) => {
+        const searchType = params.get('type')
                 const query = event.target.value
 
                 if(query) {
-                    redirectToSearch(query, searchType)
+                    redirectToSearch(query, searchType ?? 'all')
                 }
             }
             , 1000)
-        , [searchType])
+        , [params])
 
     return (
         <div 
