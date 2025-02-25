@@ -1,5 +1,6 @@
 import { ArtistActions } from "./ArtistActions"
 import { ArtistHero } from "./ArtistHero"
+import { ArtistTracks } from "./ArtistTracks"
 
 interface ArtistPageProps {
     params: Promise<{
@@ -15,6 +16,7 @@ export default async function ArtistPage(props: ArtistPageProps) {
         <div>
             <ArtistHero artistId={artistId}/>
             <ArtistActions artistId={artistId}/>
+            <ArtistTracks artistId={artistId}/>
         </div>
     )
 }
