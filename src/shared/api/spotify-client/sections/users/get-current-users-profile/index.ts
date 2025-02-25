@@ -1,5 +1,5 @@
 import { fetchCurrentUserProfile } from "./http-request";
-import { queryOptions, useCurrentUserProfile } from "./hook";
+import { queryOptions, useCurrentUserProfile } from "./query";
 
 export const getCurrentUsersProfile = {
     fetch: fetchCurrentUserProfile,

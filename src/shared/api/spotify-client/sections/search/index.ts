@@ -1,5 +1,5 @@
 import { fetchSearch } from "./http-request";
-import { queryOptions } from "./hook";
+import { queryOptions } from "./query";
 export type {SearchTypeApi,SearchType} from './types'
 
 export const search = {

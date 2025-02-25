@@ -1,5 +1,5 @@
 import { fetchUserProfile } from "./http-request";
-import { queryOptions } from "./hook";
+import { queryOptions } from "./query";
 
 export const getUsersProfile = {
     fetch: fetchUserProfile,

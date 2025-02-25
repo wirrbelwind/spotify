@@ -1,5 +1,5 @@
 import { fetchUsersSavedTracks } from "./http-request";
-import { queryOptions } from "./hook";
+import { queryOptions } from "./query";
 
 export const checkUsersSavedTracks = {
     fetch: fetchUsersSavedTracks,
