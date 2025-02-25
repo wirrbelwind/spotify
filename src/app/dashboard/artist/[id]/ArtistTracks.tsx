@@ -33,7 +33,6 @@ export const ArtistTracks = ({artistId}: ArtistTracksProps) => {
                     url: ''
                 }))
             }))}
-            onScrollDown={() => console.log(123)}
         />
     )
 }
