@@ -1,3 +1,6 @@
+import { ArtistActions } from "./ArtistActions"
+import { ArtistHero } from "./ArtistHero"
+
 interface ArtistPageProps {
     params: Promise<{
 		id: string
@@ -10,7 +13,8 @@ export default async function ArtistPage(props: ArtistPageProps) {
 
     return (
         <div>
-            {artistId}
+            <ArtistHero artistId={artistId}/>
+            <ArtistActions artistId={artistId}/>
         </div>
     )
 }
