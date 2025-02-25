@@ -2,6 +2,7 @@
 
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
+import { routeUrl } from "@/shared/lib/route-url"
 import { LinksTextList } from "@/shared/ui/LinksTextList"
 import { Spinner } from "@heroui/spinner"
 import { useQuery } from "@tanstack/react-query"
@@ -52,7 +53,7 @@ export const AlbumHero = ({ albumId }: AlbumHeroProps) => {
                             <LinksTextList
                                 links={album.data.artists.map(artist => ({
                                     label: artist.name,
-                                    url: artist.href
+                                    url: routeUrl.artist(artist.id)
                                 }))}
                                 divider=" • "
                             />
