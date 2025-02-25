@@ -17,3 +17,4 @@ export { getCurrentUsersTopArtists } from "./users/get-current-users-top-artists
 export { getUsersPlaylists } from "./playlists/get-users-playlists";
 export { getPlaylistItems } from "./playlists/get-playlist-items";
 export { getArtist } from "./artists/get-artist";
+export { fetGetArtistTopTracks } from "./artists/get-artist-top-tracks/http-request";
