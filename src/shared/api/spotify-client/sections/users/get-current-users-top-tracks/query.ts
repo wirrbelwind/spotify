@@ -11,10 +11,10 @@ export const queryOptions = ({
 }: {
     override?: () => DefinedInitialDataOptions
     quantity: number
-} = {quantity: 5}) => {
+}) => {
     return queryOptionsLib({
         queryKey: ['current-user', 'top', 'tracks', 'get'],
-        queryFn: () => fetchCurrentUserTopTracks({quantity: quantity}),
+        queryFn: () => fetchCurrentUserTopTracks({limit: quantity}),
         ...override
     })
 }
