@@ -1,0 +1,2 @@
+export const TRACKS_LENGTH_COLLAPSED = 5
+export const TRACKS_LENGTH_EXPANDED = 20

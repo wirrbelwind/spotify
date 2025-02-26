@@ -1,3 +1,4 @@
+import { Button } from "@heroui/button"
 import { TrackListWrapper } from "./TrackListWrapper"
 
 export const TopTracks = () => {
@@ -7,6 +8,7 @@ export const TopTracks = () => {
 			<p className="mt-2">Only visible for you</p>
 
 			<TrackListWrapper />
+
 		</section>
 	)
 }

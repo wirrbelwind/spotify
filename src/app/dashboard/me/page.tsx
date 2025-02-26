@@ -1,23 +1,23 @@
 import React from "react";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { TopTracks } from "@/widget/TopTracks";
 import { spotifyApi } from "@/shared/api/spotify-client";
 import { makeQueryClient } from "@/shared/lib/makeQueryClient";
 import { CurrentUserBanner } from "@/entities/user";
 import { TopArtists } from "@/widget/TopArtists";
 import { Divider } from "@heroui/divider";
+import {  TRACKS_QUANTITY, TopTracks} from "@/widget/TopTracks";
 
 export default async function HomePage() {
 	const queryClientTopTracks = makeQueryClient()
 
 	queryClientTopTracks.prefetchQuery(
-		spotifyApi.getCurrentUsersTopTracks.queryOptions()
+		spotifyApi.getCurrentUsersTopTracks.queryOptions({quantity: TRACKS_QUANTITY})
 	)
 
 	const queryClientUser = makeQueryClient()
 
 	queryClientUser.prefetchQuery(
-		spotifyApi.getCurrentUsersTopTracks.queryOptions()
+		spotifyApi.getCurrentUsersProfile.queryOptions()
 	)
 
 	// const topResponse = await spotifyApi.get<PageObject<TrackObject>>('https://api.spotify.com/v1/me/top/tracks?limit=10')
