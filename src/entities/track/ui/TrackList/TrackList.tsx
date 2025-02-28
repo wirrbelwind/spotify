@@ -17,6 +17,8 @@ interface TrackListPropsBase {
 	classNames?: TableProps['classNames']
 	initialLoading?: boolean
 	onScrollDown?: () => void
+
+	contextUri?: string
 }
 interface TrackListPropsCommon extends TrackListPropsBase {
 	fromPlaylist: false
@@ -40,8 +42,8 @@ export const TrackList: FC<TrackListProps> = ({
 	fromPlaylist,
 	items,
 	initialLoading,
-	onScrollDown
-
+	onScrollDown,
+	contextUri
 }) => {
 	const player = usePlayerState()
 
@@ -124,8 +126,9 @@ export const TrackList: FC<TrackListProps> = ({
 								}}
 								onDoubleClick={() => {
 									startAudio({
-										audioUris: uriList,
-										offset: track.uri
+										audioUris: contextUri ? undefined : uriList,
+										offset: track.uri,
+										contextUri: contextUri ?? undefined
 									})
 								}}
 								data-context-menu-entity-type="track"

@@ -82,6 +82,7 @@ export const PlaylistTracks: FC<TrackListWrapperProps> = ({ playlistId }) => {
 				fromPlaylist={true}
 				columns={["play", "avatar", "name", "album", "duration"]}
 				items={tracks}
+				contextUri={details.data?.uri}
 			/>
 			
 			</>
