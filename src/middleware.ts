@@ -5,22 +5,28 @@ import { routeUrl } from './shared/lib/route-url'
 import { authenticationActions } from './entities/user'
 
 export async function middleware(request: NextRequest) {
-  const authTokensValid = await authenticationActions.checkTokens()
+	try {
+		
+		const authTokensValid = await authenticationActions.checkTokens()
 
-  if(authTokensValid) {
-	const user = await spotifyApi.getCurrentUsersProfile.fetch()
-	if(request.url.includes(`/user/${user.id}`)) {
-		return NextResponse.redirect(
-			routeUrl.profile()
-		)
+		if(authTokensValid) {
+		  const user = await spotifyApi.getCurrentUsersProfile.fetch()
+		  if(request.url.includes(`/user/${user.id}`)) {
+			  return NextResponse.redirect(
+				  routeUrl.profile()
+			  )
+		  }
+		  NextResponse.next()
+		}
+		else {
+		  return NextResponse.redirect(
+			  routeUrl.auth()
+		  )
+		}
 	}
-    NextResponse.next()
-  }
-  else {
-    return NextResponse.redirect(
-		routeUrl.auth()
-	)
-  }
+	catch(error) {
+		console.log(error)
+	}
 }
 
 export const config: MiddlewareConfig = {
