@@ -17,9 +17,7 @@ export const Player = () => {
 	return (
 		<div className="px-4 py-2 grid grid-rows-1 grid-cols-[1fr_3fr_1fr] items-center">
 			<div>
-			{
-				player.data?.track_window.current_track && (<CurrentTrackInfo />)
-			}
+				<CurrentTrackInfo />
 			</div>
 
 			<div className="">
