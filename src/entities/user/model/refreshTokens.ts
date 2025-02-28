@@ -1,6 +1,5 @@
 'use server'
 import { authenticationActions } from "./authentication"
-import { authService } from "./authService"
 import { spotifyApi } from "@/shared/api/spotify-client"
 
 export const refreshTokens = async () => {
