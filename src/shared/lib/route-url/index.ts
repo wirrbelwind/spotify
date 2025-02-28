@@ -15,4 +15,6 @@ export const routeUrl = {
   auth: () => {
     return `${process.env.NEXT_PUBLIC_APP_URL}/auth`
   },
+  show: (id: string) => `/dashboard/show/${id}`,
+  episode: (id: string) => `/dashboard/episode/${id}`
 }
