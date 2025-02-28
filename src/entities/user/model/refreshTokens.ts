@@ -1,22 +1,22 @@
 'use server'
+import { authenticationActions } from "./authentication"
 import { authService } from "./authService"
 import { spotifyApi } from "@/shared/api/spotify-client"
 
 export const refreshTokens = async () => {
-	const auth = await authService()
-
-	if (!auth.tokens.refreshToken) {
+	const refreshToken = await authenticationActions.getRefreshToken()
+	if (!refreshToken) {
 		throw new Error('cookies has no refresh token data')
 	}
 
-	const tokens = await spotifyApi.refreshTokens.fetch({
-		refreshToken: auth.tokens.refreshToken
+	const tokensResponse = await spotifyApi.refreshTokens.fetch({
+		refreshToken
 	})
 
-	const accessTokenExpiresAt = Date.now() + tokens.expires_in
+	const accessTokenExpiresAt = Date.now() + tokensResponse.expires_in
 
-	auth.tokens.accessToken = tokens.access_token
-	auth.tokens.accessTokenExpiresAt = accessTokenExpiresAt
+	authenticationActions.setAccessToken(tokensResponse.access_token)
+	authenticationActions.setAccessTokenExpiration(accessTokenExpiresAt)
 
-	return tokens
+	return tokensResponse
 }

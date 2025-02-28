@@ -3,9 +3,9 @@
 import { redirect } from "next/navigation"
 import { authService } from "./authService"
 import { spotifyApi } from "@/shared/api/spotify-client"
+import { authenticationActions } from "./authentication"
 
 export const handleAuthCallback = async (request: Request) => {
-	const auth = await authService()
 	const params = new URL(request.url).searchParams
 
 	const stateFromParams = params.get('state')
@@ -14,7 +14,7 @@ export const handleAuthCallback = async (request: Request) => {
 		throw new Error('parameter code is null')
 	}
 
-	if (auth.process.state !== stateFromParams) {
+	if (await authenticationActions.getAuthenticationState() !== stateFromParams) {
 		throw new Error('states are not the same')
 	}
 
@@ -33,25 +33,22 @@ export const handleAuthCallback = async (request: Request) => {
 	const base64Credentials = btoa(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`)
 
 	try {
-		const tokens = await spotifyApi.auth.getTokensByCode.fetch({
+		const tokensResponse = await spotifyApi.auth.getTokensByCode.fetch({
 			code: codeParam,
 			base64Credentials
 		})
 
-		console.log('tokens', tokens)
-
-		auth.tokens.accessTokenExpiresAt = Date.now() + tokens.expires_in * 1000
-		auth.tokens.accessToken = tokens.access_token
-		auth.tokens.refreshToken = tokens.refresh_token
+		authenticationActions.setAccessTokenExpiration(Date.now() + tokensResponse.expires_in * 1000)
+		authenticationActions.setAccessToken(tokensResponse.access_token) 
+		authenticationActions.setRefreshToken(tokensResponse.refresh_token)
 	}
 	catch (error) {
 		throw error
 	}
 
-
-	if (auth.process.targetPageAfterLogin) {
-		redirect(auth.process.targetPageAfterLogin)
-		auth.process.targetPageAfterLogin = null
+	const pageToRedirect = await authenticationActions.getAttemptedPage()
+	if (pageToRedirect) {
+		redirect(pageToRedirect)
 	}
 	else {
 		redirect('/')

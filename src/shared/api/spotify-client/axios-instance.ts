@@ -1,8 +1,9 @@
 
 import axios, { AxiosError } from "axios";
 import { refreshTokens } from '@/entities/user/model/refreshTokens';
-import { authService } from '@/entities/user';
+// import { authService } from '@/entities/user';
 import { AUTH_API_URL } from './constants';
+import { authenticationActions } from "@/entities/user";
 
 export const spotifyAxios = axios.create()
 
@@ -13,19 +14,18 @@ spotifyAxios.interceptors.request.use(async config => {
 		return config
 	}
 
-	const auth = await authService()
-
-	if (!auth.tokens.isValidTokenData) {
-		throw new Error(`no tokens | request ${auth.tokens.accessToken} ${auth.tokens.refreshToken} ${auth.tokens.accessTokenExpiresAt}`)
+	if (!await authenticationActions.checkTokens()) {
+		throw new Error(`no tokens`)
 	}
 
 	const now = Date.now()
 
-	if (auth.tokens.accessTokenExpiresAt! <= now) {
-		const tokens = await refreshTokens()
+	const accessTokenExpiration = await authenticationActions.getAccessTokenExpiration()
+	if (accessTokenExpiration ! <= now) {
+		await refreshTokens()
 	}
 
-	config.headers.Authorization = `Bearer ${auth.tokens.accessToken}`
+	config.headers.Authorization = `Bearer ${authenticationActions.getAccessToken()}`
 
 	return config
 })
