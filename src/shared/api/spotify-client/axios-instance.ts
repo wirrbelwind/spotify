@@ -25,7 +25,7 @@ spotifyAxios.interceptors.request.use(async config => {
 		await refreshTokens()
 	}
 
-	config.headers.Authorization = `Bearer ${authenticationActions.getAccessToken()}`
+	config.headers.Authorization = `Bearer ${await authenticationActions.getAccessToken()}`
 
 	return config
 })
