@@ -18,6 +18,7 @@ import { Input, Textarea } from "@heroui/input"
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { Link } from "@/shared/ui/Link"
 import { routeUrl } from "@/shared/lib/route-url"
+import { StartPlaybackButton } from "@/features/playback/start-playback"
 
 interface HeaderProps {
 	playlistId: string
@@ -94,6 +95,8 @@ export const PlaylistHeader: FC<HeaderProps> = ({ playlistId }) => {
 						<span> • </span>
 						<span>{playlist.data.tracks.total} songs</span>
 					</p>
+
+					<StartPlaybackButton  uri={playlist.data.uri}/>
 				</div>
 			</>}
 
