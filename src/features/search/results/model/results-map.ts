@@ -8,6 +8,7 @@ import { AudiobooksResults } from "../ui/AudiobooksResults";
 import { EpisodesResults } from "../ui/EpisodesResults";
 import { PlaylistsResults } from "../ui/PlaylistsResults";
 import { SearchType } from "@/shared/api/spotify-client/sections/search";
+import { AllResults } from "../ui/AllResults";
 
 
 export const resultsMap: Record<SearchType, FC<ResultsProps>> = {
@@ -18,5 +19,5 @@ export const resultsMap: Record<SearchType, FC<ResultsProps>> = {
     episode: EpisodesResults,
     playlist: PlaylistsResults,
     show: AlbumsResults,
-    all: AlbumsResults
+    all: AllResults
 }
