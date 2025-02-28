@@ -7,7 +7,7 @@ interface RefreshTokensArgs {
 	refreshToken: string
 }
 
-export const fetchRefreshTokens = async ({ refreshToken }: RefreshTokensArgs) => {
+export async function fetchRefreshTokens ({ refreshToken }: RefreshTokensArgs) {
 	const url = '/recommendations'
 
 	const response = await spotifyAxios.post('/api/token', {
