@@ -1,4 +1,3 @@
-'use server'
 import { spotifyAxios } from "../../../axios-instance"
 import { AUTH_API_URL, DATA_API_URL } from "../../../constants"
 import { getParser } from "./parser"

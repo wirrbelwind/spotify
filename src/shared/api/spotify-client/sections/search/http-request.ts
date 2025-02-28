@@ -1,4 +1,3 @@
-'use server'
 import { AxiosError } from "axios"
 import { spotifyAxios } from "../../axios-instance"
 import { DATA_API_URL } from "../../constants"
