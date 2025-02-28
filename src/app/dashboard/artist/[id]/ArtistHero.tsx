@@ -28,7 +28,7 @@ export const ArtistHero = async ({ artistId }: ArtistHeroProps) => {
                 <p className="text-4xl">
                     {artist.name}
                 </p>
-                <p>{artist.followers.total} listeners</p>
+                <p>{artist.followers.total.toLocaleString()} listeners</p>
                 <p>
                 <span>Genres: </span>
                 <span>{artist.genres.join(', ')}</span>
