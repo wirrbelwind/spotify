@@ -1,19 +1,13 @@
 'use client'
-import NextImage from "next/image"
-import { Image } from "@heroui/image"
 import React, { useMemo } from "react"
-import { Nullable } from "@/shared/lib/Nullable"
 import { LinksTextList, LinksTextListProps } from "@/shared/ui/LinksTextList"
 import { usePlayerState } from "../model/usePlayerState"
 import { FALLBACK_TRACK_IMAGE_URL, TRACK_IMAGE_HEIGHT, TRACK_IMAGE_WIDTH } from "../config"
 import { getBestFitImage } from "@/shared/lib/getBestFitImage"
 import { getIdFromUri } from "@/shared/lib/getIdFromUri"
-import { Link as HeroLink } from "@heroui/link"
-import NextLink from "next/link"
 import { Link } from "@/shared/ui/Link"
 import { routeUrl } from "@/shared/lib/route-url"
-
-// import Link from "next/link"
+import { Image } from "@/shared/ui/Image"
 
 export const CurrentTrackInfo = () => {
 	const player = usePlayerState()
@@ -48,7 +42,10 @@ export const CurrentTrackInfo = () => {
 
 		return player.data?.track_window.current_track.artists.map(artist => ({
 			label: artist.name,
-			url: `/artist/${getIdFromUri(artist.uri)}`
+			// url: `/artist/${getIdFromUri(artist.uri)}`
+			url: routeUrl.artist(
+				getIdFromUri(artist.uri)
+			)
 		}))
 
 	}, [player.data?.track_window.current_track])
@@ -57,13 +54,12 @@ export const CurrentTrackInfo = () => {
 
 	if (!player.data?.track_window.current_track) {
 		// throw new Error('NO current track')
-		return null
+		return (<p>!{JSON.stringify(player.data)}!</p>)
 	}
 
 	return (
 		<div className="flex gap-2">
 			<Image
-				as={NextImage}
 				src={trackImageUrl}
 				width={TRACK_IMAGE_WIDTH}
 				height={TRACK_IMAGE_HEIGHT}
