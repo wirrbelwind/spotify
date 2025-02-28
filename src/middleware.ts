@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
 		  const user = await spotifyApi.getCurrentUsersProfile.fetch()
 		  if(request.url.includes(`/user/${user.id}`)) {
 			  return NextResponse.redirect(
-				  routeUrl.profile()
+				  `http://localhost:3000${routeUrl.profile()}`
 			  )
 		  }
 		  NextResponse.next()
