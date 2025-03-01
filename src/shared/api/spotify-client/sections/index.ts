@@ -3,7 +3,6 @@ export { refreshTokens } from "./auth/refresh-tokens";
 export { getCurrentUsersPlaylists } from "./playlists/get-current-users-playlists";
 export { getPlaylist } from "./playlists/get-playlist";
 export { checkUsersSavedTracks } from "./tracks/check-users-saved-tracks";
-export { getRecommendations } from "./tracks/get-recommendations";
 export { saveTracksForCurrentUser } from "./tracks/save-tracks-for-current-user";
 export { getCurrentUsersProfile } from "./users/get-current-users-profile";
 export { getUsersProfile } from "./users/get-users-profile";
