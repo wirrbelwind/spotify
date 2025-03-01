@@ -31,7 +31,7 @@ export const MediaCard = ({
     >
         <div className="relative overflow-hidden">
             <Image
-                src={imageUrl ?? ''}
+                src={imageUrl ?? '/icons/microphone.svg'}
                 alt=""
                 width={160}
                 height={160}
