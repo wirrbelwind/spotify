@@ -64,7 +64,7 @@ export const TrackListWrapper = () => {
 			onPress={showMore.isOpen ? showMore.onClose : showMore.onOpen}
 			variant="ghost"
 		>
-			{showMore.isOpen ? 'Less' : 'More'}
+			{showMore.isOpen ? 'Collapse' : 'Expand'}
 		</Button>
 	</>)
 }
