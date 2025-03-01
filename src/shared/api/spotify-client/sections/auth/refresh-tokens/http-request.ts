@@ -8,9 +8,9 @@ interface RefreshTokensArgs {
 }
 
 export async function fetchRefreshTokens ({ refreshToken }: RefreshTokensArgs) {
-	const url = '/recommendations'
+	const url = '/api/token'
 
-	const response = await spotifyAxios.post('/api/token', {
+	const response = await spotifyAxios.post(url, {
 		grant_type: 'refresh_token',
 		refresh_token: refreshToken,
 		client_id: process.env.SPOTIFY_CLIENT_ID
@@ -23,6 +23,5 @@ export async function fetchRefreshTokens ({ refreshToken }: RefreshTokensArgs) {
 	})
 
 	const json = response.data
-	console.log(json)
 	return getParser().parse(json)
 }
