@@ -8,7 +8,7 @@ interface FetchTokensByCodeArgs {
     base64Credentials: string
 }
 
-export const fetchTokensByCode = async ({ code, base64Credentials }: FetchTokensByCodeArgs) => {
+export async function fetchTokensByCode  ({ code, base64Credentials }: FetchTokensByCodeArgs) {
     const url = '/api/token'
 
     const response = await spotifyAxios.post(url, {

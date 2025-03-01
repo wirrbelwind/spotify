@@ -7,7 +7,7 @@ interface FetchUsersSavedTracksArgs {
     idList: string[]
 }
 
-export const fetchUsersSavedTracks = async (args: FetchUsersSavedTracksArgs) => {
+export async function fetchUsersSavedTracks (args: FetchUsersSavedTracksArgs) {
     const url = '/me/tracks/contains'
     
     const response = await spotifyAxios.get(url, {
