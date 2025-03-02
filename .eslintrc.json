@@ -3,16 +3,11 @@
     "next/core-web-vitals",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["prettier", "unused-imports"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error", { "semi": false }],
     "indent": ["error", 2],
     "quotes": ["error", "single"],
-    "semi": ["error", "never"],
-    "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": [
-      "warn",
-      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
-    ]
+    "semi": ["error", "never"]
   }
 }
