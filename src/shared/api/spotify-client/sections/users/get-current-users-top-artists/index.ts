@@ -1,7 +1,7 @@
-import { fetchCurrentUserTopArtists } from './http-request'
-import { queryOptions } from './query'
+import { fetchCurrentUserTopArtists } from "./http-request";
+import { queryOptions } from "./query";
 
 export const getCurrentUsersTopArtists = {
-  fetch: fetchCurrentUserTopArtists,
-  queryOptions: queryOptions,
+    fetch: fetchCurrentUserTopArtists,
+    queryOptions: queryOptions
 }

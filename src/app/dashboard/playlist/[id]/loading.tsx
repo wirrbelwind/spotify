@@ -1,5 +1,7 @@
-import { Spinner } from '@heroui/spinner'
+import { Spinner } from "@heroui/spinner";
 
 export default function Loading() {
-  return <Spinner />
-}
+    return (
+        <Spinner />
+    )
+  }

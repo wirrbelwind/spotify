@@ -1,8 +1,8 @@
-import { fetchCurrentUserProfile } from './http-request'
-import { queryOptions, useCurrentUserProfile } from './query'
+import { fetchCurrentUserProfile } from "./http-request";
+import { queryOptions, useCurrentUserProfile } from "./query";
 
 export const getCurrentUsersProfile = {
-  fetch: fetchCurrentUserProfile,
-  useQuery: useCurrentUserProfile,
-  queryOptions: queryOptions,
+    fetch: fetchCurrentUserProfile,
+    useQuery: useCurrentUserProfile,
+    queryOptions: queryOptions
 }

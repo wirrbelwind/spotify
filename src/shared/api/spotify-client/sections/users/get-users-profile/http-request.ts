@@ -1,22 +1,22 @@
 'use server'
 
-import { spotifyAxios } from '../../../axios-instance'
-import { DATA_API_URL } from '../../../constants'
-import { getParser } from './parser'
+import { spotifyAxios } from "../../../axios-instance"
+import { DATA_API_URL } from "../../../constants"
+import { getParser } from "./parser"
 
 interface FetchUserProfileArgs {
-  userId: string
+    userId: string
 }
 
-export async function fetchUserProfile({ userId }: FetchUserProfileArgs) {
-  const url = `/users/${userId}`
+export async function fetchUserProfile ({userId}: FetchUserProfileArgs) {
+    const url = `/users/${userId}`
 
-  const response = await spotifyAxios.get(url, {
-    baseURL: DATA_API_URL,
-  })
+    const response = await spotifyAxios.get(url, {
+        baseURL: DATA_API_URL,
+    })
 
-  const json = response.data
-  const user = getParser().parse(json)
-
-  return user
+    const json = response.data
+    const user = getParser().parse(json)
+    
+    return user
 }

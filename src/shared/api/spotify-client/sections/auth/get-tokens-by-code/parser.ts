@@ -1,5 +1,5 @@
-import { tokensSchema } from '../../../schemas/tokens'
+import { tokensSchema } from "../../../schemas/tokens"
 
 export const getParser = () => {
-  return tokensSchema
+    return tokensSchema
 }

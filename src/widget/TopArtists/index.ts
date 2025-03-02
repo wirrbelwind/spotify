@@ -1,1 +1,1 @@
-export { TopArtists } from './ui/TopArtists'
+export { TopArtists } from "./ui/TopArtists";

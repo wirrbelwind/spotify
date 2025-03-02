@@ -1,7 +1,7 @@
-import { fetchCurrentUserTopTracks } from './http-request'
-import { queryOptions } from './query'
+import { fetchCurrentUserTopTracks } from "./http-request";
+import { queryOptions } from "./query";
 
 export const getCurrentUsersTopTracks = {
-  fetch: fetchCurrentUserTopTracks,
-  queryOptions: queryOptions,
+    fetch: fetchCurrentUserTopTracks,
+    queryOptions: queryOptions
 }

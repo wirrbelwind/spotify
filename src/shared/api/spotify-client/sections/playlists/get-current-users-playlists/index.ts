@@ -1,7 +1,7 @@
-import { fetchCurrentUsersPlaylists } from './http-request'
-import { queryOptions } from './query'
+import { fetchCurrentUsersPlaylists } from "./http-request";
+import { queryOptions } from "./query";
 
 export const getCurrentUsersPlaylists = {
-  fetch: fetchCurrentUsersPlaylists,
-  queryOptions: queryOptions,
+    fetch: fetchCurrentUsersPlaylists,
+    queryOptions: queryOptions
 }

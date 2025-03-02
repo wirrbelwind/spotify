@@ -1,6 +1,6 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const followersSchema = z.object({
-  href: z.string().url().nullable(),
-  total: z.number().int().nonnegative(),
+	href: z.string().url().nullable(),
+	total: z.number().int().nonnegative()
 })

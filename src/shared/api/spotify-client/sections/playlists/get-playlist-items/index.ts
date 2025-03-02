@@ -1,7 +1,7 @@
-import { fetchPlaylistItems } from './http-request'
-import { queryOptions } from './query'
+import { fetchPlaylistItems } from "./http-request";
+import { queryOptions } from "./query";
 
 export const getPlaylistItems = {
-  fetch: fetchPlaylistItems,
-  queryOptions: queryOptions,
+    fetch: fetchPlaylistItems,
+    queryOptions: queryOptions
 }

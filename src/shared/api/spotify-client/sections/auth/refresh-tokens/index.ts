@@ -1,5 +1,5 @@
-import { fetchRefreshTokens } from './http-request'
+import { fetchRefreshTokens } from "./http-request";
 
 export const refreshTokens = {
-  fetch: fetchRefreshTokens,
+    fetch: fetchRefreshTokens,
 }
