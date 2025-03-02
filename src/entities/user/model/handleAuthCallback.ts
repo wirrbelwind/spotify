@@ -5,7 +5,7 @@ import { authService } from "./authService"
 import { spotifyApi } from "@/shared/api/spotify-client"
 import { authenticationActions } from "./authentication"
 
-export const handleAuthCallback = async (request: Request) => {
+export async function handleAuthCallback (request: Request) {
 	const params = new URL(request.url).searchParams
 
 	const stateFromParams = params.get('state')

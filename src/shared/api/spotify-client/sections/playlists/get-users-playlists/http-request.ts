@@ -9,11 +9,11 @@ export interface FetchUsersPlaylistsArgs {
 	offset?: number
 }
 
-export const fetchUsersPlaylists = async ({
+export async function fetchUsersPlaylists ({
 	userId,
 	limit,
 	offset
-}: FetchUsersPlaylistsArgs) => {
+}: FetchUsersPlaylistsArgs) {
 	const url = `/users/${userId}/playlists`
 
 	const response = await spotifyAxios.get(url, {

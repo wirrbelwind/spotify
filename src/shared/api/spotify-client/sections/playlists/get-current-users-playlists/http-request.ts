@@ -4,7 +4,7 @@ import { DATA_API_URL } from "../../../constants"
 import { getParser } from "./parser"
 
 
-export const fetchCurrentUsersPlaylists = async () => {
+export async function fetchCurrentUsersPlaylists () {
 	const url = '/me/playlists'
 
 	const response = await spotifyAxios.get(url, {

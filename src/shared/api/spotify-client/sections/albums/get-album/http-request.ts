@@ -8,7 +8,7 @@ interface FetchAlbum {
     market?: string
 }
 
-export const fetchAlbum = async ({ id,market }: FetchAlbum) => {
+export async function fetchAlbum ({ id,market }: FetchAlbum) {
     const url = `albums/${id}`
 
     const response = await spotifyAxios.get(url, {

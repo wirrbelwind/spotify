@@ -14,13 +14,13 @@ interface FetchSearchArgs {
     offset?: number
 }
 
-export const fetchSearch = async ({
+export async function fetchSearch ({
     query,
     types,
     market,
     limit,
     offset
-}: FetchSearchArgs) => {
+}: FetchSearchArgs) {
 
     const url = '/search'
     const response = await spotifyAxios.get(url, {

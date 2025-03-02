@@ -2,7 +2,7 @@
 import { cookies } from "next/headers"
 import { COOKIE_KEYS } from "../config"
 
-export const authService = async () => {
+export async function authService () {
 	const cookie = await cookies()
 
 	return {

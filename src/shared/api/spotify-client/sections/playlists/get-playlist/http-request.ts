@@ -8,7 +8,7 @@ interface GetPlaylistArgs {
 	id: string
 }
 
-export const fetchPlaylist = async (args: GetPlaylistArgs) => {
+export async function fetchPlaylist (args: GetPlaylistArgs) {
 	// define request url
 	const url = `/playlists/${args.id}`
 

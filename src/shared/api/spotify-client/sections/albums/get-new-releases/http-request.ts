@@ -8,7 +8,7 @@ interface FetchNewReleases {
     offset?: number
 }
 
-export const fetchNewReleases = async ({ limit, offset }: FetchNewReleases) => {
+export async function fetchNewReleases ({ limit, offset }: FetchNewReleases) {
     const url = 'browse/new-releases'
 
     const response = await spotifyAxios.get(url, {

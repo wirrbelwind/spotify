@@ -8,7 +8,7 @@ interface FetchUserProfileArgs {
     userId: string
 }
 
-export const fetchUserProfile = async ({userId}: FetchUserProfileArgs) => {
+export async function fetchUserProfile ({userId}: FetchUserProfileArgs) {
     const url = `/users/${userId}`
 
     const response = await spotifyAxios.get(url, {

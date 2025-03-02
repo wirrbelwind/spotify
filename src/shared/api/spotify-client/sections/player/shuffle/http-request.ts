@@ -8,10 +8,10 @@ interface ShuffleArgs {
 	deviceId: string
 }
 
-export const fetchShuffle = async ({
+export async function fetchShuffle ({
 	deviceId,
 	state
-}: ShuffleArgs) => {
+}: ShuffleArgs) {
 	await spotifyAxios.put(
 		'/me/player/shuffle',
 		{},

@@ -4,7 +4,7 @@ import { getAccessToken } from "./access-token/getAccessToken"
 import { getAccessTokenExpiration } from "./access-token/getAccessTokenExpiration"
 import { getRefreshToken } from "./refresh-token/getRefreshToken"
 
-export const checkTokens = async () => {
+export async function checkTokens () {
     if (await getAccessToken()
         &&
         await getAccessTokenExpiration()

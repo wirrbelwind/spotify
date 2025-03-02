@@ -3,7 +3,7 @@ import { cookies } from "next/headers"
 import { COOKIE_KEYS } from "../constants"
 import { spotifyApi } from "@/shared/api/spotify-client"
 
-export const shuffle = async (state: boolean) => {
+export async function shuffle(state: boolean) {
 	const cookie = await cookies()
 
 	const deviceId = cookie.get(COOKIE_KEYS.DEVICE_ID)?.value

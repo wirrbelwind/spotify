@@ -10,7 +10,7 @@ interface StartAudioArgs {
 	offset?: string | number
 }
 
-export const startAudio = async ({ audioUris, contextUri, offset }: StartAudioArgs) => {
+export async function startAudio ({ audioUris, contextUri, offset }: StartAudioArgs) {
 	const cookie = await cookies()
 
 	const deviceId = cookie.get(COOKIE_KEYS.DEVICE_ID)?.value

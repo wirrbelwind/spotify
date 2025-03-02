@@ -7,7 +7,7 @@ export interface FetchGetArtistArgs {
     artistId: string
 }
 
-export const fetGetArtist = async ({artistId}: FetchGetArtistArgs) => {
+export async function fetchGetArtist ({artistId}: FetchGetArtistArgs) {
     const url = `/artists/${artistId}`
     
     const response = await spotifyAxios.get(url, {

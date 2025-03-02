@@ -5,7 +5,7 @@ import { authService } from "./authService"
 import { ACCESS_SCOPES } from "../config"
 import { authenticationActions } from "./authentication"
 
-export const signIn = async () => {
+export async function signIn () {
 	const authenticationState = Math.random().toString()
 
 	await authenticationActions.setAuthenticationState(

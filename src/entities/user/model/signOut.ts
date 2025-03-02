@@ -1,9 +1,8 @@
 'use server'
 
 import { authenticationActions } from "./authentication"
-import { authService } from "./authService"
 
-export const signOut = async () => {
+export async function signOut () {
 	authenticationActions.setAccessToken('')
 	authenticationActions.setAccessTokenExpiration('')
 	authenticationActions.setRefreshToken('')

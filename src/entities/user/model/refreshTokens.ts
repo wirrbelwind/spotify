@@ -2,7 +2,7 @@
 import { authenticationActions } from "./authentication"
 import { spotifyApi } from "@/shared/api/spotify-client"
 
-export const refreshTokens = async () => {
+export async function refreshTokens () {
 	const refreshToken = await authenticationActions.getRefreshToken()
 	if (!refreshToken) {
 		throw new Error('cookies has no refresh token data')

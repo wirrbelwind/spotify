@@ -9,7 +9,7 @@ interface GetPlaylistItemsArgs {
 	fields?: string
 }
 
-export const fetchPlaylistItems = async (args: GetPlaylistItemsArgs) => {
+export async function fetchPlaylistItems (args: GetPlaylistItemsArgs) {
 	// define request url
 	const url = `/playlists/${args.id}/tracks`
 

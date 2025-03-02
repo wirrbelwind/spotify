@@ -6,7 +6,7 @@ interface SaveTracksForCurrentUserArgs {
     ids: string[]
 }
 
-export const fetchSaveTracksForCurrentUser = async ({ ids }: SaveTracksForCurrentUserArgs) => {
+export async function fetchSaveTracksForCurrentUser ({ ids }: SaveTracksForCurrentUserArgs) {
     const url = '/me/tracks'
 
     const response = await spotifyAxios.put(url, {
