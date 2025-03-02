@@ -1,11 +1,11 @@
-import { SearchTypeApi } from "./types";
+import { SearchTypeApi } from './types'
 
 export const allSearchTypesList: SearchTypeApi[] = [
-    'album',
-    "artist",
-    "audiobook",
-    "episode",
-    "playlist",
-    "show",
-    "track"
+  'album',
+  'artist',
+  'audiobook',
+  'episode',
+  'playlist',
+  'show',
+  'track',
 ]

@@ -1,22 +1,18 @@
-import { 
-    useQuery,
-    queryOptions as queryOptionsLib,
-    DefinedInitialDataOptions
- } from "@tanstack/react-query"
-import { fetchCurrentUserTopTracks } from "./http-request"
+import { queryOptions as queryOptionsLib, DefinedInitialDataOptions } from '@tanstack/react-query'
+import { fetchCurrentUserTopTracks } from './http-request'
 
 export const queryOptions = ({
-    quantity,
-    override
+  quantity,
+  override,
 }: {
-    override?: () => DefinedInitialDataOptions
-    quantity: number
+  override?: () => DefinedInitialDataOptions
+  quantity: number
 }) => {
-    return queryOptionsLib({
-        queryKey: ['current-user', 'top', 'tracks', 'get'],
-        queryFn: () => fetchCurrentUserTopTracks({limit: quantity}),
-        ...override
-    })
+  return queryOptionsLib({
+    queryKey: ['current-user', 'top', 'tracks', 'get'],
+    queryFn: () => fetchCurrentUserTopTracks({ limit: quantity }),
+    ...override,
+  })
 }
 
 // export const useCurrentUserTopTracks = () => {

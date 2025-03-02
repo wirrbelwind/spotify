@@ -1,41 +1,36 @@
-import { Avatar } from "@heroui/avatar"
+import { Avatar } from '@heroui/avatar'
 
 interface ProfileBannerBaseProps {
-    imageUrl: string
-    name: string
-    followersAmount: number
+  imageUrl: string
+  name: string
+  followersAmount: number
 }
 
-export const ProfileBannerBase = ({
-    name,
-    imageUrl,
-    followersAmount
-}: ProfileBannerBaseProps) => {
-
-    return (
-        <div className={`
+export const ProfileBannerBase = ({ name, imageUrl, followersAmount }: ProfileBannerBaseProps) => {
+  return (
+    <div className={`
 				flex
 				items-center
 				py-10
 				px-5
 				relative
-				`}>
-            <Avatar
-                src={imageUrl}
-                name={name}
-                className="w-44 h-44 text-large"
-            />
-            <div className="ml-7">
-                <p className="font-bold text-5xl">
+				`}
+      <Avatar
+        src={imageUrl}
+        name={name}
+        className="w-44 h-44 text-large"
+      />
+      <div className="ml-7">
+        <p className="font-bold text-5xl">
 
-                    {name}
-                </p>
-                <p className="mt-3">
-                    {followersAmount} followers
-                </p>
-            </div>
+          {name}
+        </p>
+        <p className="mt-3">
+          {followersAmount} followers
+        </p>
+      </div>
 
-            {/* <Button onPress={() => {
+      {/* <Button onPress={() => {
 						client.setQueryData(
 							spotifyApi.getCurrentUsersProfile.queryOptions().queryKey,
 							data => {
@@ -68,6 +63,6 @@ export const ProfileBannerBase = ({
 						// 	queryKey: spotifyApi.getCurrentUsersProfile.queryOptions().queryKey
 						// })
 					}}>Mock user name</Button> */}
-        </div>
-    )
+    </div>
+  )
 }

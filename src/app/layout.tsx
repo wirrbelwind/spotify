@@ -1,9 +1,9 @@
 import './global-styles.css'
-import { AllProviders } from "@/shared/providers/AllProviders";
+import { AllProviders } from '@/shared/providers/AllProviders'
 
 export const metadata = {
-  title: "Spotify",
-};
+  title: 'Spotify',
+}
 
 export default async function DashboardLayout({ children }: { children: any }) {
   return (
@@ -16,10 +16,8 @@ export default async function DashboardLayout({ children }: { children: any }) {
         />
       </head>
       <body className="dark text-foreground bg-background">
-        <AllProviders>
-         {children}
-        </AllProviders>
+        <AllProviders>{children}</AllProviders>
       </body>
     </html>
-  );
+  )
 }

@@ -1,21 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react'
 
 export const useOnVisible = (callback?: () => void) => {
-  const ref = useRef(null);
+  const ref = useRef(null)
 
   useEffect(() => {
-    if (!ref.current || !callback) return;
+    if (!ref.current || !callback) return
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        callback();
+        callback()
       }
-    });
+    })
 
-    observer.observe(ref.current);
+    observer.observe(ref.current)
 
-    return () => observer.disconnect();
-  }, [callback]);
+    return () => observer.disconnect()
+  }, [callback])
 
-  return ref;
-};
+  return ref
+}

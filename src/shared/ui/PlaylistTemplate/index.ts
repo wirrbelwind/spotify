@@ -1,1 +1,1 @@
-export { PlaylistTemplate } from "./PlaylistTemplate";
+export { PlaylistTemplate } from './PlaylistTemplate'

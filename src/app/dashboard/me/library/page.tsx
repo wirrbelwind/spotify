@@ -1,14 +1,7 @@
-import { Player } from "@/entities/player/ui/Player";
-import { Image } from "@heroui/image";
-import Link from "next/link";
-import { authService } from '@/entities/user';
-
 export default async function LibraryPage() {
-
-	return (
-		<div>
-
-			{/* <div
+  return (
+    <div>
+      {/* <div
 				className={`
 					grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-4
 					`}
@@ -41,8 +34,6 @@ export default async function LibraryPage() {
 					</div>
 				))}
 			</div> */}
-		</div>
-	)
-
+    </div>
+  )
 }
-

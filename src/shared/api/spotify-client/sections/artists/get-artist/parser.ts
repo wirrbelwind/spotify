@@ -1,4 +1,3 @@
-import { z } from "zod";
-import { artist } from "../../../schemas/artist";
+import { artist } from '../../../schemas/artist'
 
 export const getParser = () => artist

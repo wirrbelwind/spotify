@@ -1,1 +1,1 @@
-export { AccountDropdown } from "./ui/AccountDropdown";
+export { AccountDropdown } from './ui/AccountDropdown'

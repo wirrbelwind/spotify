@@ -1,5 +1,5 @@
-import { fetchStartPlayback } from "./http-request";
+import { fetchStartPlayback } from './http-request'
 
 export const startPlayback = {
-    fetch: fetchStartPlayback,
+  fetch: fetchStartPlayback,
 }

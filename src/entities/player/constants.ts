@@ -1,5 +1,5 @@
 export const COOKIE_KEYS = {
-	DEVICE_ID: 'spotify-api:device-id'
+  DEVICE_ID: 'spotify-api:device-id',
 } as const
 
 export const INITIAL_VOLUME = 0.5
