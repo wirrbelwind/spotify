@@ -10,11 +10,11 @@ interface FetchCurrentUserTopArtists {
     offset?: number
 }
 
-export const fetchCurrentUserTopArtists = async ({
+export async function fetchCurrentUserTopArtists ({
     timeRange,
     limit,
     offset
-}: FetchCurrentUserTopArtists) => {
+}: FetchCurrentUserTopArtists) {
     const url = '/me/top/artists'
 
     const response = await spotifyAxios.get(url, {

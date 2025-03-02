@@ -10,12 +10,12 @@ interface PlayArgs {
 	deviceId: string
 }
 
-export const fetchStartPlayback = async ({
+export async function fetchStartPlayback({
 	contextUri,
 	audioUris,
 	offset,
 	deviceId
-}: PlayArgs) => {
+}: PlayArgs) {
 	const url = '/me/player/play'
 
 	let resolvedOffset: undefined | { position: number } | { uri: string };
