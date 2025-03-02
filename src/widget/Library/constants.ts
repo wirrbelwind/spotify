@@ -1,6 +1,1 @@
-export const allChips = [
-		'playlists',
-		'podcasts',
-		'albums',
-		'artists',
-	]
+export const allChips = ['playlists', 'podcasts', 'albums', 'artists']

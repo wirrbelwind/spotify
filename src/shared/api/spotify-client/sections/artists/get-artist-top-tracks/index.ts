@@ -1,7 +1,7 @@
-import { fetchGetArtistTopTracks } from "./http-request";
-import { queryOptions } from "./query";
+import { fetchGetArtistTopTracks } from './http-request'
+import { queryOptions } from './query'
 
 export const getArtistTopTracks = {
-    fetch: fetchGetArtistTopTracks,
-    queryOptions: queryOptions
+  fetch: fetchGetArtistTopTracks,
+  queryOptions: queryOptions,
 }

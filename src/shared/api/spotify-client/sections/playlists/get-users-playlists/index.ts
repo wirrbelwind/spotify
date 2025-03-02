@@ -1,7 +1,7 @@
-import { fetchUsersPlaylists } from "./http-request";
-import { queryOptions } from "./query";
+import { fetchUsersPlaylists } from './http-request'
+import { queryOptions } from './query'
 
 export const getUsersPlaylists = {
-    fetch: fetchUsersPlaylists,
-    queryOptions: queryOptions
+  fetch: fetchUsersPlaylists,
+  queryOptions: queryOptions,
 }

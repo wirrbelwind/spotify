@@ -1,3 +1,3 @@
 export interface ResultsProps {
-    query: string
+  query: string
 }

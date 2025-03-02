@@ -1,1 +1,1 @@
-export { resultsMap } from "./model/results-map";
+export { resultsMap } from './model/results-map'

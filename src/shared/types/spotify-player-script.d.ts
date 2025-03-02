@@ -1,3 +1,3 @@
 interface Window {
-    onSpotifyWebPlaybackSDKReady?: () => Promise<void>;
-  }
+  onSpotifyWebPlaybackSDKReady?: () => Promise<void>
+}

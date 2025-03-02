@@ -10,24 +10,24 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'i.scdn.co',
-        pathname: '/image/**'
+        pathname: '/image/**',
       },
       {
         protocol: 'https',
         hostname: 'image-cdn-ak.spotifycdn.com',
-        pathname: '/image/**'
+        pathname: '/image/**',
       },
       {
         protocol: 'https',
         hostname: 'mosaic.scdn.co',
-        pathname: '/**'
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'image-cdn-fa.spotifycdn.com',
-        pathname: '/image/**'
+        pathname: '/image/**',
       },
-    ]
+    ],
   },
   logging: {
     fetches: {
@@ -40,16 +40,16 @@ const nextConfig = {
       use: [
         options.defaultLoaders.babel,
         {
-          loader: "@svgr/webpack",
+          loader: '@svgr/webpack',
           options: {
             icon: true,
           },
         },
       ],
-    });
+    })
 
-    return config;
-  }
-};
+    return config
+  },
+}
 
-export default nextConfig;
+export default nextConfig
